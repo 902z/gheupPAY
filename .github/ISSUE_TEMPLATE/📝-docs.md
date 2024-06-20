@@ -2,7 +2,7 @@
 name: "\U0001F4DD docs"
 about: 문서 수정
 title: ''
-labels: ''
+labels: '📝 docs'
 assignees: ''
 
 ---
