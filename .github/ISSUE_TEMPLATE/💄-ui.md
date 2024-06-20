@@ -2,7 +2,7 @@
 name: "\U0001F484 ui"
 about: ui 구현
 title: ''
-labels: ''
+labels: '💄 ui'
 assignees: ''
 
 ---
