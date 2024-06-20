@@ -2,7 +2,7 @@
 name: "\U0001F4E6 chore"
 about: 빌드 및 패키지 작업
 title: ''
-labels: ''
+labels: '📦 chore'
 assignees: ''
 
 ---
