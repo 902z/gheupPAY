@@ -2,7 +2,7 @@
 name: "♻️ refactor"
 about: 코드 리팩토링
 title: ''
-labels: ''
+labels: '♻️ refactor'
 assignees: ''
 
 ---
