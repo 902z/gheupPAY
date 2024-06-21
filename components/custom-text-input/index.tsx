@@ -30,13 +30,13 @@ interface CustomTextInputPropType {
  * @param {boolean} displayRequiredMarker label 옆에 * 필수 입력 표시
  */
 
-const CustomTextInput = ({
+function CustomTextInput({
   name,
   label,
   placeholder,
   register,
   displayRequiredMarker = false,
-}: CustomTextInputPropType) => {
+}: CustomTextInputPropType) {
   return (
     <div className="flex w-full flex-col gap-2">
       <label htmlFor={name} className="text-base font-normal leading-[26px] text-black">
@@ -55,6 +55,6 @@ const CustomTextInput = ({
       />
     </div>
   );
-};
+}
 
 export default CustomTextInput;
