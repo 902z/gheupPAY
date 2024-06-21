@@ -8,6 +8,9 @@ const config: Config = {
   ],
   theme: {
     extend: {
+      fontFamily: {
+        bold: ["SpoqaHanSansNeo-Bold"],
+      },
       colors: {
         black: "#111322",
         gray: {

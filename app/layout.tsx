@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import "@/styles/globals.css";
-import "@/styles/reset.css";
 
 export const metadata: Metadata = {
   title: "급PAY",
