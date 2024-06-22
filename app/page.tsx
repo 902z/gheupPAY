@@ -1,5 +1,3 @@
-import Button from "./components/button";
-
 export default function Home() {
   return (
     <>
@@ -12,9 +10,6 @@ export default function Home() {
         <p className="text-l">l: 20px</p>
         <p className="text-xl">xl: 28px</p>
       </div>
-      <Button className="w-[80px]" color="orange">
-        버튼
-      </Button>
     </>
   );
 }
