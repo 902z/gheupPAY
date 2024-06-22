@@ -79,9 +79,9 @@ function Dropdown({ label, name, options, register, setValue, getValues, placeho
 
   return (
     <div ref={dropdownRef}>
-      <label htmlFor={name} className="mb-2">
-        {label}
-      </label>
+      <div className="mb-2">
+        <label htmlFor={name}>{label}</label>
+      </div>
       <div className="relative">
         <input
           className={`h-[58px] w-full rounded-[6px] border border-gray-30 pl-5 text-left focus:outline-none ${getValues(name) === undefined ? "text-gray-40" : "text-black"} `}
