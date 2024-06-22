@@ -6,9 +6,30 @@ body {
   text-decoration: none;
 }
 
-//크롬, 사파리 브라우저 등에서 input 에 자동 완성 기능으로 텍스트를 선택하면 
-//원치 않는 배경색으로 변경이 되어서 아래 코드 추가
 input:-webkit-autofill {
   -webkit-box-shadow: 0 0 0px 1000px white inset;
   -webkit-text-fill-color: #111322;
+}
+
+@font-face {
+  font-family: "SpoqaHanSansNeo-Regular";
+  src: url("../public/fonts/SpoqaHanSansNeo-Regular.ttf") format("woff");
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "SpoqaHanSansNeo-Bold";
+  src: url("../public/fonts/SpoqaHanSansNeo-Bold.ttf") format("woff");
+  font-weight: 700;
+  font-style: normal;
+}
+
+@layer base {
+  body,
+  input,
+  button,
+  textarea {
+    font-family: "SpoqaHanSansNeo-Regular";
+  }
 }
