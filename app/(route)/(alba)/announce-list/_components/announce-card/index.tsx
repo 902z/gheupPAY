@@ -6,32 +6,32 @@ import arrowUpRed40 from "@/public/icons/arrow-up-red-40.png";
 
 export default function AnnounceCard() {
   return (
-    <div className="h-[261px] w-[171px] rounded-[12px] border border-gray-20 bg-white p-3 md:h-[349px] md:w-[313px]">
+    <article className="h-[261px] w-[171px] rounded-[12px] border border-gray-20 bg-white p-3 md:h-[349px] md:w-[313px]">
       <div className="h-[82px] w-[147px] rounded-[12px] md:h-[160px] md:w-[280px]">이미지</div>
-      <p className="py-2 font-bold md:text-l">식당이름</p>
+      <data className="py-2 font-bold md:text-l">식당이름</data>
       <div className="flex items-start gap-1">
-        <div className="h-4 w-4">
+        <picture className="h-4 w-4">
           <Image src={clock} alt="시간" />
-        </div>
-        <p className="text-s text-gray-50 md:text-m">
+        </picture>
+        <time className="text-s text-gray-50 md:text-m">
           2023-01-02 <br className="md:hidden" /> 15:00~18:00 (3시간)
-        </p>
+        </time>
       </div>
       <div className="flex items-center gap-1">
-        <div className="h-4 w-4">
+        <picture className="h-4 w-4">
           <Image src={mapPin} alt="장소" />
-        </div>
-        <p className="py-2 text-s text-gray-50 md:text-m">서울시 강남구</p>
+        </picture>
+        <data className="py-2 text-s text-gray-50 md:text-m">서울시 강남구</data>
       </div>
       <div className="flex flex-col md:flex-row md:gap-4 md:py-4">
-        <p className="pt-1 font-bold text-ml md:text-xl">10,000원</p>
+        <data className="pt-1 font-bold text-ml md:text-xl">10,000원</data>
         <div className="flex items-center text-s text-primary">
           기존 시급보다 50%
-          <div className="h-4 w-4">
+          <picture className="h-4 w-4">
             <Image src={arrowUpRed40} alt="up" />
-          </div>
+          </picture>
         </div>
       </div>
-    </div>
+    </article>
   );
 }
