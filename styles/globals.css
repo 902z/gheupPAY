@@ -2,5 +2,25 @@
 @tailwind components;
 @tailwind utilities;
 
-body {
+@font-face {
+  font-family: "SpoqaHanSansNeo-Regular";
+  src: url("../public/fonts/SpoqaHanSansNeo-Regular.ttf") format("woff");
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "SpoqaHanSansNeo-Bold";
+  src: url("../public/fonts/SpoqaHanSansNeo-Bold.ttf") format("woff");
+  font-weight: 700;
+  font-style: normal;
+}
+
+@layer base {
+  body,
+  input,
+  button,
+  textarea {
+    font-family: "SpoqaHanSansNeo-Regular";
+  }
 }
