@@ -16,7 +16,8 @@ const config: Config = {
         m: "14px",
         base: "16px",
         l: "20px",
-        xl: "28px",
+        xl: "24px",
+        "2xl": "28px",
       },
       colors: {
         black: "#111322",
