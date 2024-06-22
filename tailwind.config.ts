@@ -8,7 +8,19 @@ const config: Config = {
   ],
   theme: {
     extend: {
+      fontFamily: {
+        bold: ["SpoqaHanSansNeo-Bold"],
+      },
+      fontSize: {
+        s: "12px ",
+        m: "14px",
+        base: "16px",
+        l: "20px",
+        xl: "24px",
+        "2xl": "28px",
+      },
       colors: {
+        primary: "#EA3C12",
         black: "#111322",
         gray: {
           50: "#7D7986",
