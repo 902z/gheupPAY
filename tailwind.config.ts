@@ -11,6 +11,13 @@ const config: Config = {
       fontFamily: {
         bold: ["SpoqaHanSansNeo-Bold"],
       },
+      fontSize: {
+        s: "12px ",
+        m: "14px",
+        base: "16px",
+        l: "20px",
+        xl: "28px",
+      },
       colors: {
         black: "#111322",
         gray: {
