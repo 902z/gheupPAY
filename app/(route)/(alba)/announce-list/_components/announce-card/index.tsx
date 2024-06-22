@@ -24,13 +24,13 @@ export default function AnnounceCard() {
         <p className="py-2 text-s text-gray-50 md:text-m">서울시 강남구</p>
       </div>
       <div className="flex flex-col md:flex-row md:gap-4 md:py-4">
-        <p className="text-ml pt-1 font-bold md:text-xl">10,000원</p>
-        <p className="text-primary flex items-center text-s">
+        <p className="pt-1 font-bold text-ml md:text-xl">10,000원</p>
+        <div className="flex items-center text-s text-primary">
           기존 시급보다 50%
           <div className="h-4 w-4">
             <Image src={arrowUpRed40} alt="up" />
           </div>
-        </p>
+        </div>
       </div>
     </div>
   );

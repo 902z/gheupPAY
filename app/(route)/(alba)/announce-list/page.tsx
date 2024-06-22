@@ -1,5 +1,5 @@
 import React from "react";
-import AnnounceCard from "./_components/AnnounceCard";
+import AnnounceCard from "./_components/announce-card";
 
 export default function page() {
   return (
