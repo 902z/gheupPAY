@@ -2,6 +2,15 @@
 @tailwind components;
 @tailwind utilities;
 
+body {
+  text-decoration: none;
+}
+
+input:-webkit-autofill {
+  -webkit-box-shadow: 0 0 0px 1000px white inset;
+  -webkit-text-fill-color: #111322;
+}
+
 @font-face {
   font-family: "SpoqaHanSansNeo-Regular";
   src: url("../public/fonts/SpoqaHanSansNeo-Regular.ttf") format("woff");
