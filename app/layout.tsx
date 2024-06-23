@@ -7,6 +7,9 @@ export const metadata: Metadata = {
     template: "급페이 | %s",
     default: "급페이",
   },
+  icons: {
+    icon: "/icons/favicon.png",
+  },
 };
 
 export default function RootLayout({
