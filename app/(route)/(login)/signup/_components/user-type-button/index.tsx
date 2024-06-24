@@ -2,7 +2,7 @@ import Image from "next/image";
 import { motion } from "framer-motion";
 import check from "@/public/icons/check.png";
 import uncheck from "@/public/icons/uncheck.png";
-import { UserType } from "@/constants/user-type";
+import { UserType } from "@/app/_constants/user-type";
 interface UseTypeButtonPropType {
   children: string;
   currentType: UserType;

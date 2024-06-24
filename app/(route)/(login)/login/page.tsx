@@ -1,5 +1,5 @@
 "use client";
-import CustomTextInput from "@/app/components/custom-text-input";
+import CustomTextInput from "@/app/_components/custom-text-input";
 import { useForm } from "react-hook-form";
 import Link from "next/link";
 import { yupResolver } from "@hookform/resolvers/yup";

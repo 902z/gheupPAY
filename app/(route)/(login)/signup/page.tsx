@@ -1,10 +1,10 @@
 "use client";
-import CustomTextInput from "@/app/components/custom-text-input";
+import CustomTextInput from "@/app/_components/custom-text-input";
 import { useForm } from "react-hook-form";
 import Link from "next/link";
 import UserTypeSelect from "./_components/user-type-select";
 import { useState } from "react";
-import { USER_TYPE, UserType } from "@/constants/user-type";
+import { USER_TYPE, UserType } from "@/app/_constants/user-type";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { signUpSchema } from "../_utils/schema";
 

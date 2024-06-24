@@ -1,5 +1,5 @@
 import * as yup from "yup";
-import { loginErrorMessages } from "@/constants/error-message";
+import { loginErrorMessages } from "@/app/_constants/error-message";
 
 export const loginSchema = yup.object().shape({
   email: yup
