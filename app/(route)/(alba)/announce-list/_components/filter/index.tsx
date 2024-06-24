@@ -1,11 +1,11 @@
 "use client";
 
-import React, {useState} from "react";
-import Image from 'next/image';
+import React, { useState } from "react";
+import Image from "next/image";
 
 import close from "@/public/icons/close.png";
-import closeRed40 from "@/public/icons/close-red-40.png"
-import { ADDRESS } from '@/constants/address';
+import closeRed40 from "@/public/icons/close-red-40.png";
+import { ADDRESS } from "@/constants/address";
 
 export default function Filter() {
   const [selectedAddresses, setSelectedAddresses] = useState<string[]>([]);
@@ -17,40 +17,50 @@ export default function Filter() {
       return prev;
     });
   };
-  
+
   const handleRemoveAddressClick = (address: string) => {
     setSelectedAddresses((prev) => prev.filter((item) => item !== address));
   };
-  
+
   return (
     <>
-      <div className="ml-[20px] w-[390px] border border-gray-20 rounded-[10px] shadow px-[20px] py-[24px]">
+      <div className="ml-[20px] w-[390px] rounded-[10px] border border-gray-20 px-[20px] py-[24px] shadow">
         <div className="mb-[24px] flex justify-between font-bold text-l">
           <h2>상세 필터</h2>
-          <Image className='cursor-pointer w-[24px] h-[24px]' src={close} alt="닫기" width={24} />
+          <Image className="h-[24px] w-[24px] cursor-pointer" src={close} alt="닫기" width={24} />
         </div>
         <div className="w-[350px] border-b pb-[24px]">
           <h3>위치</h3>
-          <ul className="my-[12px] grid h-[258px] w-[350px] grid-cols-2 overflow-x-hidden overflow-scroll rounded-[6px] border border-gray-20 px-[20px] px-[28px] text-m ">
+          <ul className="my-[12px] grid h-[258px] w-[350px] grid-cols-2 overflow-scroll overflow-x-hidden rounded-[6px] border border-gray-20 px-[20px] px-[28px] text-m">
             {ADDRESS.map((address) => (
-              <li
-                className="mt-[20px] w-[94px] cursor-pointer"
-                key={address}
-                onClick={() => handleAddressClick(address)}
-              >
-                {address}
+              <li>
+                <data
+                  className="mt-[20px] w-[94px] cursor-pointer"
+                  key={address}
+                  onClick={() => handleAddressClick(address)}
+                >
+                  {address}
+                </data>
               </li>
             ))}
           </ul>
           <div>
             <ul className="flex flex-wrap gap-[8px]">
               {selectedAddresses.map((address) => (
-                <li
-                  className="flex justify-between gap-[4px] rounded-[20px] bg-red-10 px-[10px] px-[7px] py-[6px] text-m text-red-40"
-                  key={address}
-                >
-                  {address}
-                  <Image className='cursor-pointer w-[16px] h-[16px] mt-[2px]' src={closeRed40} alt="닫기" width={24}  onClick={() => handleRemoveAddressClick(address)}/>
+                <li>
+                  <data
+                    className="flex justify-between gap-[4px] rounded-[20px] bg-red-10 px-[10px] px-[7px] py-[6px] text-m text-red-40"
+                    key={address}
+                  >
+                    {address}
+                    <Image
+                      className="mt-[2px] h-[16px] w-[16px] cursor-pointer"
+                      src={closeRed40}
+                      alt="닫기"
+                      width={24}
+                      onClick={() => handleRemoveAddressClick(address)}
+                    />
+                  </data>
                 </li>
               ))}
             </ul>
