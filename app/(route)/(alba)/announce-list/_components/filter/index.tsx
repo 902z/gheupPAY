@@ -1,35 +1,11 @@
 "use client";
 
-import React from "react";
-import { useState } from "react";
+import React, {useState} from "react";
+import Image from 'next/image';
 
-const addressList = [
-  "서울시 종로구",
-  "서울시 중구",
-  "서울시 용산구",
-  "서울시 성동구",
-  "서울시 광진구",
-  "서울시 동대문구",
-  "서울시 중랑구",
-  "서울시 성북구",
-  "서울시 강북구",
-  "서울시 도봉구",
-  "서울시 노원구",
-  "서울시 은평구",
-  "서울시 서대문구",
-  "서울시 마포구",
-  "서울시 양천구",
-  "서울시 강서구",
-  "서울시 구로구",
-  "서울시 금천구",
-  "서울시 영등포구",
-  "서울시 동작구",
-  "서울시 관악구",
-  "서울시 서초구",
-  "서울시 강남구",
-  "서울시 송파구",
-  "서울시 강동구",
-].sort();
+import close from "@/public/icons/close.png";
+import closeRed40 from "@/public/icons/close-red-40.png"
+import { ADDRESS } from '@/constants/address';
 
 export default function Filter() {
   const [selectedAddresses, setSelectedAddresses] = useState<string[]>([]);
@@ -43,42 +19,42 @@ export default function Filter() {
   };
   return (
     <>
-      <div className="ml-[20px] w-[390px] border border-black px-[20px] py-[24px]">
+      <div className="ml-[20px] w-[390px] border border-gray-20 rounded-[10px] shadow px-[20px] py-[24px]">
         <div className="mb-[24px] flex justify-between font-bold text-l">
           <h2>상세 필터</h2>
-          <div className="cursor-pointer">×</div>
+          <Image className='cursor-pointer w-[24px] h-[24px]' src={close} alt="닫기" width={24} />
         </div>
         <div className="w-[350px] border-b pb-[24px]">
           <h3>위치</h3>
-          <div className="my-[12px] grid h-[258px] w-[350px] grid-cols-2 overflow-scroll rounded-[6px] border border-gray-20 px-[20px] px-[28px] text-m">
-            {addressList.map((address) => (
-              <div
+          <ul className="my-[12px] grid h-[258px] w-[350px] grid-cols-2 overflow-x-hidden overflow-scroll rounded-[6px] border border-gray-20 px-[20px] px-[28px] text-m ">
+            {ADDRESS.map((address) => (
+              <li
                 className="mt-[20px] w-[94px] cursor-pointer"
                 key={address}
                 onClick={() => handleAddressClick(address)}
               >
                 {address}
-              </div>
+              </li>
             ))}
-          </div>
+          </ul>
           <div>
-            <div className="flex flex-wrap gap-[8px]">
+            <ul className="flex flex-wrap gap-[8px]">
               {selectedAddresses.map((address) => (
-                <div
+                <li
                   className="flex justify-between gap-[4px] rounded-[20px] bg-red-10 px-[10px] px-[7px] py-[6px] text-m text-red-40"
                   key={address}
                 >
                   {address}
-                  <div className="cursor-pointer">×</div>
-                </div>
+                  <Image className='cursor-pointer w-[16px] h-[16px] mt-[2px]' src={closeRed40} alt="닫기" width={24} />
+                </li>
               ))}
-            </div>
+            </ul>
           </div>
         </div>
         <div className="mt-[24px] h-[92px] w-[350px]">
           <p className="mb-[8px]">시작일</p>
           <input
-            className="h-[58px] w-[350px] rounded-[6px] border border-gray-30 px-[20px] py-[16px]"
+            className="h-[58px] w-[350px] rounded-[6px] border border-gray-30 px-[20px] py-[16px] focus:outline-primary"
             placeholder="입력"
           ></input>
         </div>
@@ -86,7 +62,7 @@ export default function Filter() {
           <p className="mb-[8px] mt-[24px]">금액</p>
           <div className="relative flex">
             <input
-              className="h-[58px] w-[169px] rounded-[6px] border border-gray-30 px-[20px] py-[16px]"
+              className="h-[58px] w-[169px] rounded-[6px] border border-gray-30 px-[20px] py-[16px] focus:outline-primary"
               placeholder="입력"
             ></input>
             <p className="mx-[12px] my-[16px]">이상부터</p>
@@ -94,8 +70,8 @@ export default function Filter() {
           </div>
         </div>
         {/* 공통 컴포넌트- 버튼 넣을 자리 */}
-        <div className="mt-[56px] flex h-[48px] gap-[8px] border">
-          <div className="h-[48px] w-[82px] rounded-[6px] border-2 border-red-40 pt-[12px] text-center font-bold text-red-40">
+        <div className="mt-[56px] flex h-[48px] gap-[8px]">
+          <div className="h-[48px] w-[82px] rounded-[6px] border-[1px] border-red-40 pt-[12px] text-center font-bold text-red-40">
             초기화
           </div>
           <div className="h-[48px] w-[260px] rounded-[6px] border bg-red-40 pt-[14px] text-center font-bold text-white">
