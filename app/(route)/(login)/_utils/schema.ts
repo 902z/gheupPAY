@@ -1,5 +1,5 @@
 import * as yup from "yup";
-import { loginErrorMessages } from "@/app/_constants/error-message";
+import { loginErrorMessages } from "@/app/_constants/validation-text";
 import { USER_TYPE } from "@/app/_constants/user-type";
 
 export const loginSchema = yup.object().shape({
