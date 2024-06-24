@@ -19,7 +19,11 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="ko">
-      <body>{children}</body>
+      <body>
+        <main className="min-h-screen w-full px-3 pt-[102px] md:px-8 md:pt-[70px] lg:mx-auto lg:max-w-[964px] lg:px-0">
+          {children}
+        </main>
+      </body>
     </html>
   );
 }
