@@ -8,9 +8,9 @@ type ButtonProps = {
 } & React.ButtonHTMLAttributes<HTMLButtonElement>;
 
 const STYLE = {
-  white: "bg-white text-primary disabled:border-none disabled:text-white border border-primary",
+  white: "border border-primary bg-white text-primary disabled:border-none disabled:text-white",
   orange:
-    "bg-primary text-white active:border active:border-primary active:bg-white active:text-primary disabled:border-none disabled:text-white border border-primary",
+    "border border-primary bg-primary text-white active:border active:border-primary active:bg-white active:text-primary disabled:border-none disabled:text-white",
 };
 
 const BUTTON = "w-full rounded-md py-2 disabled:bg-gray-40 md:py-[10px] lg:py-[14px] text-center";
