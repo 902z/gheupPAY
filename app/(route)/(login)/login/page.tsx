@@ -18,11 +18,11 @@ function Login() {
     formState: { errors, isValid },
   } = useForm<FormValues>({
     resolver,
-    mode: "onChange",
+    mode: "onSubmit",
   });
 
   const handleForm = handleSubmit(async (data: FormValues) => {
-    console.log(data);
+    // console.log(data);
   });
 
   return (
