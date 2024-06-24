@@ -4,6 +4,7 @@ import { useForm } from "react-hook-form";
 import Link from "next/link";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { loginSchema } from "../_utils/schema";
+import Button from "@/app/_components/button";
 
 interface FormValues {
   email: string;
@@ -43,12 +44,9 @@ function Login() {
           errorMessage={errors.password?.message}
         />
 
-        <button
-          type="submit"
-          className="flex h-[48px] w-full items-center justify-center rounded-md bg-[#EA3C12] text-white"
-        >
+        <Button color="orange" type="submit" className="h-[48px]">
           로그인 하기
-        </button>
+        </Button>
       </form>
       <nav>
         <span className="text-base font-normal leading-5 text-instruction">회원이 아니신가요? </span>

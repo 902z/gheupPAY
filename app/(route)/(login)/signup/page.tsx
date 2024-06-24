@@ -6,6 +6,7 @@ import UserTypeSelect from "./_components/user-type-select";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { signUpSchema } from "../_utils/schema";
 import { UserType } from "@/app/_constants/user-type";
+import Button from "@/app/_components/button";
 
 interface FormValues {
   email: string;
@@ -57,9 +58,9 @@ function SignUP() {
 
         <UserTypeSelect register={register("type")} />
 
-        <button className="flex h-[48px] w-full items-center justify-center rounded-md bg-[#EA3C12] text-white">
-          로그인 하기
-        </button>
+        <Button color="orange" type="submit" className="h-[48px]">
+          가입하기
+        </Button>
       </form>
 
       <nav>
