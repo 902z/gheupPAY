@@ -13,7 +13,7 @@ interface UseTypeButtonPropType extends InputHTMLAttributes<HTMLInputElement> {
 
 function UserTypeRadio({ register, children, value, ...rest }: UseTypeButtonPropType) {
   return (
-    <div className="relative flex">
+    <div className="relative flex w-full">
       <input id={value} className="peer hidden" type="radio" value={value} {...rest} {...register} />
 
       <Image
@@ -31,7 +31,7 @@ function UserTypeRadio({ register, children, value, ...rest }: UseTypeButtonProp
         height={20}
       />
       <label
-        className="flex h-[50px] w-[167px] cursor-pointer items-center rounded-[30px] border border-solid border-gray-30 pl-[70px] text-m font-normal leading-[22px] peer-checked:border-primary"
+        className="flex h-[50px] w-full max-w-[167px] cursor-pointer items-center rounded-[30px] border border-solid border-gray-30 pl-[70px] text-m font-normal leading-[22px] peer-checked:border-primary"
         htmlFor={value}
       >
         {children}
