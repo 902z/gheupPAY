@@ -2,9 +2,8 @@ import Image from "next/image";
 import React from "react";
 import clock from "@/public/icons/clock.png";
 import mapPin from "@/public/icons/map-pin.png";
-import arrowUpRed40 from "@/public/icons/arrow-up-red-40.png";
-import { calculateWagePercentage } from "@/_util/calculate-wage-percentage ";
-import LabelHourlyRate from "@/app/components/label-hourly-rate";
+import LabelHourlyRate from "@/app/_components/label-hourly-rate";
+import { calculateWagePercentage } from "@/app/_util/calculate-wage-percentage ";
 
 export default function AnnounceCard() {
   const priceExample = 15000;
