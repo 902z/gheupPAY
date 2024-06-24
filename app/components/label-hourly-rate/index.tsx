@@ -3,13 +3,13 @@ import React from "react";
 import arrowUpRed40 from "@/public/icons/arrow-up-red-40.png";
 import arrowUpWhite from "@/public/icons/arrow-up-white.png";
 
-export default function LabelHourlyRate({ percent }: { percent: number }) {
-  const getColorByPercentage = (percent: number) => {
-    if (percent >= 50) return "md:bg-red-40";
-    if (percent >= 30) return "md:bg-red-30";
-    if (percent >= 0) return "md:bg-red-20";
-  };
+const getColorByPercentage = (percent: number) => {
+  if (percent >= 50) return "md:bg-red-40";
+  if (percent >= 30) return "md:bg-red-30";
+  if (percent >= 0) return "md:bg-red-20";
+};
 
+export default function LabelHourlyRate({ percent }: { percent: number }) {
   const bgColor = getColorByPercentage(percent);
 
   return (
