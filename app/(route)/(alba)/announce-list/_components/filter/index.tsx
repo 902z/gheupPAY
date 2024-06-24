@@ -17,6 +17,11 @@ export default function Filter() {
       return prev;
     });
   };
+  
+  const handleRemoveAddressClick = (address: string) => {
+    setSelectedAddresses((prev) => prev.filter((item) => item !== address));
+  };
+  
   return (
     <>
       <div className="ml-[20px] w-[390px] border border-gray-20 rounded-[10px] shadow px-[20px] py-[24px]">
@@ -45,7 +50,7 @@ export default function Filter() {
                   key={address}
                 >
                   {address}
-                  <Image className='cursor-pointer w-[16px] h-[16px] mt-[2px]' src={closeRed40} alt="닫기" width={24} />
+                  <Image className='cursor-pointer w-[16px] h-[16px] mt-[2px]' src={closeRed40} alt="닫기" width={24}  onClick={() => handleRemoveAddressClick(address)}/>
                 </li>
               ))}
             </ul>
