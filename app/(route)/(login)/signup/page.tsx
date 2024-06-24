@@ -3,15 +3,15 @@ import CustomTextInput from "@/app/_components/custom-text-input";
 import { useForm } from "react-hook-form";
 import Link from "next/link";
 import UserTypeSelect from "./_components/user-type-select";
-import { useState } from "react";
-import { USER_TYPE, UserType } from "@/app/_constants/user-type";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { signUpSchema } from "../_utils/schema";
+import { UserType } from "@/app/_constants/user-type";
 
 interface FormValues {
   email: string;
   password: string;
   passwordConfirm: string;
+  type: UserType;
 }
 
 function SignUP() {
@@ -22,18 +22,11 @@ function SignUP() {
     formState: { errors, isValid },
   } = useForm<FormValues>({
     resolver,
-    mode: "onChange",
+    mode: "onSubmit",
   });
 
-  const [type, SetType] = useState<UserType>(USER_TYPE.EMPLOYEE);
-
-  const handleSelectType = (nextType: UserType) => {
-    SetType(nextType);
-  };
-
   const handleForm = handleSubmit(async (data: FormValues) => {
-    const postData = { email: data.email, password: data.password, type };
-    console.log(postData);
+    // console.log(data);
   });
 
   return (
@@ -62,7 +55,7 @@ function SignUP() {
           errorMessage={errors.passwordConfirm?.message}
         />
 
-        <UserTypeSelect currentType={type} handleSelect={handleSelectType} />
+        <UserTypeSelect register={register("type")} />
 
         <button className="flex h-[48px] w-full items-center justify-center rounded-md bg-[#EA3C12] text-white">
           로그인 하기

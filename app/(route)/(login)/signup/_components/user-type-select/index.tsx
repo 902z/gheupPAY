@@ -1,39 +1,25 @@
-import { USER_TYPE, UserType } from "@/app/_constants/user-type";
-import UserTypeButton from "../user-type-button";
+import { USER_TYPE } from "@/app/_constants/user-type";
 import UserTypeRadio from "../user-type-radio";
+import { UseFormRegisterReturn } from "react-hook-form";
 
 interface UserTypeSelectPropType {
-  currentType: UserType;
-  handleSelect: (type: UserType) => void;
+  register: UseFormRegisterReturn;
 }
-function UserTypeSelect({ currentType, handleSelect }: UserTypeSelectPropType) {
+
+function UserTypeSelect({ register }: UserTypeSelectPropType) {
   const { EMPLOYEE, EMPLOYER } = USER_TYPE;
   return (
-    <div className="flex w-full flex-col gap-2">
-      <label className="text-start text-base font-normal leading-[26px] text-black">회원 유형</label>
+    <fieldset>
+      <legend className="mb-2 text-start text-base font-normal leading-[26px] text-black">회원 유형</legend>
       <div className="flex gap-4">
-        {/* <UserTypeButton
-          value={EMPLOYEE}
-          currentType={currentType}
-          onClick={() => {
-            handleSelect(EMPLOYEE);
-          }}
-        >
+        <UserTypeRadio register={register} value={EMPLOYEE} defaultChecked>
           알바님
-        </UserTypeButton>
-        <UserTypeButton
-          value={EMPLOYER}
-          currentType={currentType}
-          onClick={() => {
-            handleSelect(EMPLOYER);
-          }}
-        >
+        </UserTypeRadio>
+        <UserTypeRadio register={register} value={EMPLOYER}>
           사장님
-        </UserTypeButton> */}
-        <UserTypeRadio>알바님</UserTypeRadio>
-        <UserTypeRadio>사장님</UserTypeRadio>
+        </UserTypeRadio>
       </div>
-    </div>
+    </fieldset>
   );
 }
 

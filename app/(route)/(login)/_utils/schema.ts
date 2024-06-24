@@ -1,5 +1,6 @@
 import * as yup from "yup";
 import { loginErrorMessages } from "@/app/_constants/error-message";
+import { USER_TYPE } from "@/app/_constants/user-type";
 
 export const loginSchema = yup.object().shape({
   email: yup
@@ -18,4 +19,5 @@ export const signUpSchema = yup.object().shape({
     .string()
     .required(loginErrorMessages.CONFIRM_PASSWORD_REQUIRED)
     .oneOf([yup.ref("password")], loginErrorMessages.PASSWORDS_MUST_MATCH),
+  type: yup.string().oneOf([USER_TYPE.EMPLOYEE, USER_TYPE.EMPLOYER]).required(),
 });
