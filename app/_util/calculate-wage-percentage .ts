@@ -1,4 +1,4 @@
-import { MINIMUN_HOURLY_WAGE } from "@/_constants/MINIMUN_HOURLY_WAGE";
+import { MINIMUN_HOURLY_WAGE } from "../_constants/MINIMUN_HOURLY_WAGE";
 
 /**
  * 주어진 시급이 최저시급 대비 몇 퍼센트인지를 계산합니다.
