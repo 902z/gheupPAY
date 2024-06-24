@@ -21,7 +21,6 @@ export default async function getNotices({
     });
 
     const res = await instance.get(`/notices?${params.toString()}`);
-    console.log(res.data.items);
     return res.data.items;
   } catch (error) {
     console.error("getNotices 함수에서 오류 발생:", error);
