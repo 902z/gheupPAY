@@ -2,11 +2,11 @@
 import CustomTextInput from "@/app/components/custom-text-input";
 import { useForm } from "react-hook-form";
 import Link from "next/link";
-import UserTypeSelect from "./components/user-type-select";
+import UserTypeSelect from "./_components/user-type-select";
 import { useState } from "react";
-import { userType, UserType } from "@/constants/user-type";
+import { USER_TYPE, UserType } from "@/constants/user-type";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { signUpSchema } from "../utils/schema";
+import { signUpSchema } from "../_utils/schema";
 
 interface FormValues {
   email: string;
@@ -25,7 +25,7 @@ function SignUP() {
     mode: "onChange",
   });
 
-  const [type, SetType] = useState<UserType>(userType.EMPLOYEE);
+  const [type, SetType] = useState<UserType>(USER_TYPE.EMPLOYEE);
 
   const handleSelectType = (nextType: UserType) => {
     SetType(nextType);

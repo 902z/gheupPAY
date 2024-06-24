@@ -1,13 +1,12 @@
-import { userType, UserType } from "@/constants/user-type";
+import { USER_TYPE, UserType } from "@/constants/user-type";
 import UserTypeButton from "../user-type-button";
-import { motion } from 'framer-motion';
 
 interface UserTypeSelectPropType {
   currentType: UserType;
   handleSelect: (type: UserType) => void;
 }
 function UserTypeSelect({ currentType, handleSelect }: UserTypeSelectPropType) {
-  const { EMPLOYEE, EMPLOYER } = userType;
+  const { EMPLOYEE, EMPLOYER } = USER_TYPE;
   return (
     <div className="flex w-full flex-col gap-2">
       <label className="text-start text-base font-normal leading-[26px] text-black">회원 유형</label>

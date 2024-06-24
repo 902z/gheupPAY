@@ -3,7 +3,7 @@ import CustomTextInput from "@/app/components/custom-text-input";
 import { useForm } from "react-hook-form";
 import Link from "next/link";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { loginSchema } from "../utils/schema";
+import { loginSchema } from "../_utils/schema";
 
 interface FormValues {
   email: string;
@@ -43,7 +43,10 @@ function Login() {
           errorMessage={errors.password?.message}
         />
 
-        <button className="flex h-[48px] w-full items-center justify-center rounded-md bg-[#EA3C12] text-white">
+        <button
+          type="submit"
+          className="flex h-[48px] w-full items-center justify-center rounded-md bg-[#EA3C12] text-white"
+        >
           로그인 하기
         </button>
       </form>
