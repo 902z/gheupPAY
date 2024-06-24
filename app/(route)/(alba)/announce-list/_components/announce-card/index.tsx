@@ -28,12 +28,9 @@ export default function AnnounceCard() {
         <data className="py-2 text-s text-gray-50 md:text-m">서울시 강남구</data>
       </div>
       <div className="flex flex-col md:flex-row md:gap-4 md:py-4">
-        <data className="text-ml pt-1 font-bold md:text-xl">10,000원</data>
+        <data className="pt-1 font-bold text-ml md:text-xl">10,000원</data>
         <div className="flex items-center text-s text-primary">
           <LabelHourlyRate percent={calculateWagePercentage(priceExample)} />
-          <div className="h-4 w-4">
-            <Image src={arrowUpRed40} alt="up" />
-          </div>
         </div>
       </div>
     </article>
