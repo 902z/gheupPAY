@@ -2,7 +2,7 @@ import instance from "../_lib/axios";
 
 export default async function getNotices({
   offset = 0,
-  limit = 10,
+  limit = 3,
   // address = "",
   // keyword = "",
   // startsAtGte = "",
