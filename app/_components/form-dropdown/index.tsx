@@ -110,7 +110,7 @@ function FormDropdown({ label, name, options, register, setValue, getValues, pla
         />
       </div>
       <ul
-        className={`absolute left-0 z-10 mt-2 w-full rounded-[6px] border border-gray-30 bg-white text-m shadow-md ${isOpen ? "block" : "hidden"}`}
+        className={`absolute left-0 z-10 mt-2 max-h-[230px] w-full overflow-y-auto rounded-[6px] border border-gray-30 bg-white p-0 text-m shadow-md ${isOpen ? "block" : "hidden"}`}
       >
         {options.map((item, index) => (
           <li className="h-[46px] cursor-pointer text-center leading-[46px]" onClick={handleItemClick} key={index}>
