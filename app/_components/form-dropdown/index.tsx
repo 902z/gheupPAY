@@ -88,7 +88,7 @@ function FormDropdown({ label, name, options, register, setValue, getValues, pla
       </div>
       <div className="relative">
         <input
-          className={`hover: h-[58px] w-full cursor-pointer rounded-[6px] border border-gray-30 pl-5 text-left focus:outline-none ${getValues(name) === undefined ? "text-gray-40" : "text-black"} `}
+          className={`hover: hover: h-[58px] w-full cursor-pointer rounded-[6px] border border-gray-30 pl-5 text-left hover:bg-gray-10 focus:outline-none ${getValues(name) === undefined ? "text-gray-40" : "text-black"} `}
           id={name}
           {...register(name, {
             required: DROPDOWN_REQUIRED_TEXT,
