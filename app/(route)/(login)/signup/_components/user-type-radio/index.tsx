@@ -15,23 +15,22 @@ function UserTypeRadio({ register, children, value, ...rest }: UseTypeButtonProp
   return (
     <div className="relative flex w-full">
       <input id={value} className="peer hidden" type="radio" value={value} {...rest} {...register} />
-
       <Image
         src={check}
         alt="check"
-        className="absolute left-[41px] top-[15px] hidden peer-checked:block"
+        className="absolute left-[41px] top-[15px] hidden cursor-pointer peer-checked:block"
         width={20}
         height={20}
       />
       <Image
         src={uncheck}
         alt="uncheck"
-        className="absolute left-[41px] top-[15px] block peer-checked:hidden"
+        className="absolute left-[41px] top-[15px] block cursor-pointer peer-checked:hidden"
         width={20}
         height={20}
       />
       <label
-        className="flex h-[50px] w-full max-w-[167px] cursor-pointer items-center rounded-[30px] border border-solid border-gray-30 pl-[70px] text-m font-normal leading-[22px] peer-checked:border-primary"
+        className="relative flex h-[50px] w-full max-w-[167px] cursor-pointer items-center rounded-[30px] border border-solid border-gray-30 pl-[70px] text-m font-normal leading-[22px] peer-checked:border-primary"
         htmlFor={value}
       >
         {children}
