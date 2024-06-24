@@ -45,46 +45,48 @@ export default function AnnounceCard({ notices }: AnnounceCardProps) {
             const hourlyWage = calculateWagePercentage(notice.item.hourlyPay);
             const date = dateFormat(notice.item.startsAt);
             return (
-              <div
-                key={notice.item.id}
-                className="h-[261px] w-[171px] rounded-[12px] border border-gray-20 bg-white p-3 md:h-[349px] md:w-[313px]"
-              >
-                <div className="relative mb-2 h-[82px] w-[147px] rounded-[12px] md:h-[160px] md:w-[280px]">
-                  <Image
-                    alt=""
-                    src={notice.item.shop.item.imageUrl}
-                    fill={true}
-                    layout="fill"
-                    objectFit="cover"
-                    className="rounded-[12px]"
-                  />
-                </div>
-                <data className="font-bold md:text-l">
-                  {notice.item.shop.item.name}
-                </data>
-                <div className="flex items-start gap-1">
-                  <Image src={clock} alt="시간" width={20} height={20} />
-                  <time className="text-s text-gray-50 md:text-m">
-                    {date} <br className="md:hidden" />{" "}
-                    {calculateTimeRange(
-                      notice.item.startsAt,
-                      notice.item.workhour,
-                    )}{" "}
-                    ({notice.item.workhour}시간)
-                  </time>
-                </div>
-                <div className="flex items-center gap-1">
-                  <Image src={mapPin} alt="장소" width={20} height={20} />
-                  <data className="py-2 text-s text-gray-50 md:text-m">
-                    {notice.item.shop.item.address1}
+              <div className="cursor-pointer duration-100 hover:scale-[1.05] focus:scale-[0.95]">
+                <div
+                  key={notice.item.id}
+                  className="h-[261px] w-[171px] rounded-[12px] border border-gray-20 bg-white p-3 md:h-[349px] md:w-[313px]"
+                >
+                  <div className="relative mb-2 h-[82px] w-[147px] rounded-[12px] md:h-[160px] md:w-[280px]">
+                    <Image
+                      alt=""
+                      src={notice.item.shop.item.imageUrl}
+                      fill={true}
+                      layout="fill"
+                      objectFit="cover"
+                      className="rounded-[12px]"
+                    />
+                  </div>
+                  <data className="font-bold md:text-l">
+                    {notice.item.shop.item.name}
                   </data>
-                </div>
-                <div className="flex flex-col md:flex-row md:gap-4 md:py-4">
-                  <data className="pt-1 font-bold text-ml md:text-xl">
-                    {formattedNumber(notice.item.hourlyPay)}
-                  </data>
-                  <div className="flex items-center text-s text-primary">
-                    <LabelHourlyRate percent={hourlyWage} />
+                  <div className="flex items-start gap-1">
+                    <Image src={clock} alt="시간" width={20} height={20} />
+                    <time className="text-s text-gray-50 md:text-m">
+                      {date} <br className="md:hidden" />{" "}
+                      {calculateTimeRange(
+                        notice.item.startsAt,
+                        notice.item.workhour,
+                      )}{" "}
+                      ({notice.item.workhour}시간)
+                    </time>
+                  </div>
+                  <div className="flex items-center gap-1">
+                    <Image src={mapPin} alt="장소" width={20} height={20} />
+                    <data className="py-2 text-s text-gray-50 md:text-m">
+                      {notice.item.shop.item.address1}
+                    </data>
+                  </div>
+                  <div className="flex flex-col md:flex-row md:gap-4 md:py-4">
+                    <data className="pt-1 font-bold text-ml md:text-xl">
+                      {formattedNumber(notice.item.hourlyPay)}
+                    </data>
+                    <div className="flex items-center text-s text-primary">
+                      <LabelHourlyRate percent={hourlyWage} />
+                    </div>
                   </div>
                 </div>
               </div>
