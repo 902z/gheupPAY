@@ -33,3 +33,12 @@ input:-webkit-autofill {
     font-family: "SpoqaHanSansNeo-Regular";
   }
 }
+
+::-webkit-scrollbar {
+  width:4px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: gray;
+  border-radius: 5px;
+}

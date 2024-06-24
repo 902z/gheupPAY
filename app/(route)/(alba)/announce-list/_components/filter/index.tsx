@@ -31,9 +31,9 @@ export default function Filter() {
         </div>
         <div className="w-[350px] border-b pb-[24px]">
           <h3>위치</h3>
-          <ul className="my-[12px] grid h-[258px] w-[350px] grid-cols-2 overflow-scroll overflow-x-hidden rounded-[6px] border border-gray-20 px-[20px] px-[28px] text-m">
+          <ul className="my-[12px] grid h-[258px] w-[350px] grid-cols-2 overflow-scroll overflow-x-hidden rounded-[6px] border border-gray-20 px-[28px] pb-[20px] text-m">
             {ADDRESS.map((address) => (
-              <li>
+              <li className="grid grid-cols-2 text-m">
                 <data
                   className="mt-[20px] w-[94px] cursor-pointer"
                   key={address}
