@@ -1,3 +1,4 @@
+"use client";
 import Image from "next/image";
 import React from "react";
 import clock from "@/public/icons/clock.png";
@@ -7,6 +8,7 @@ import { calculateWagePercentage } from "@/app/_util/calculate-wage-percentage "
 import { dateFormat } from "@/app/_util/date-format";
 import { calculateTimeRange } from "@/app/_util/calculate-time-range";
 import formattedNumber from "@/app/_util/number-format";
+import { motion } from "framer-motion";
 
 type NoticesData = {
   item: {
@@ -45,7 +47,11 @@ export default function AnnounceCard({ notices }: AnnounceCardProps) {
             const hourlyWage = calculateWagePercentage(notice.item.hourlyPay);
             const date = dateFormat(notice.item.startsAt);
             return (
-              <div className="cursor-pointer duration-100 hover:scale-[1.05] focus:scale-[0.95]">
+              <motion.div
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                className="cursor-pointer"
+              >
                 <div
                   key={notice.item.id}
                   className="h-[261px] w-[171px] rounded-[12px] border border-gray-20 bg-white p-3 md:h-[349px] md:w-[313px]"
@@ -89,7 +95,7 @@ export default function AnnounceCard({ notices }: AnnounceCardProps) {
                     </div>
                   </div>
                 </div>
-              </div>
+              </motion.div>
             );
           })}
       </div>
