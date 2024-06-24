@@ -30,7 +30,7 @@ const BUTTON = "w-full rounded-md py-2 disabled:bg-gray-40 md:py-[10px] lg:py-[1
  */
 export default function Button({ children, className, color = "orange", type = "button", ...rest }: ButtonProps) {
   return (
-    <button type="button" className={`${BUTTON} ${STYLE[color]} ${className}`} {...rest}>
+    <button type={type} className={`${BUTTON} ${STYLE[color]} ${className}`} {...rest}>
       {children}
     </button>
   );

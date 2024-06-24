@@ -20,7 +20,7 @@ function SignUP() {
   const {
     handleSubmit,
     register,
-    formState: { errors, isValid },
+    formState: { errors },
   } = useForm<FormValues>({
     resolver,
     mode: "onSubmit",
