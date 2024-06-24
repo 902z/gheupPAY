@@ -3,6 +3,7 @@
  * @param {string} startsAt - ISO 8601 형식의 시작 시간 문자열입니다.
  * @param {number} workhour - 작업 시간(시간 단위)입니다.
  * @returns {string} HH:mm~HH:mm 형식으로 포맷된 시간 범위 문자열을 반환합니다.
+ * @author 김보미
  */
 export const calculateTimeRange = (startsAt: string, workhour: number) => {
   const startDate = new Date(startsAt);
