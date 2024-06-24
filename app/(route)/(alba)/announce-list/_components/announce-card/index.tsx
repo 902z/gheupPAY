@@ -6,6 +6,7 @@ import LabelHourlyRate from "@/app/_components/label-hourly-rate";
 import { calculateWagePercentage } from "@/app/_util/calculate-wage-percentage ";
 import { dateFormat } from "@/app/_util/date-format";
 import { calculateTimeRange } from "@/app/_util/calculate-time-range";
+import formattedNumber from "@/app/_util/number-format";
 
 type NoticesData = {
   item: {
@@ -80,7 +81,7 @@ export default function AnnounceCard({ notices }: AnnounceCardProps) {
                 </div>
                 <div className="flex flex-col md:flex-row md:gap-4 md:py-4">
                   <data className="pt-1 font-bold text-ml md:text-xl">
-                    {notice.item.hourlyPay}
+                    {formattedNumber(notice.item.hourlyPay)}
                   </data>
                   <div className="flex items-center text-s text-primary">
                     <LabelHourlyRate percent={hourlyWage} />
