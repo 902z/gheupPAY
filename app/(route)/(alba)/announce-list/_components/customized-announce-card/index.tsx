@@ -45,7 +45,7 @@ export default function CustomizedAnnounceCard({ notices }: AnnounceCardProps) {
     <>
       <div className="flex">
         <Swiper
-          slidesOffsetAfter={100}
+          slidesOffsetAfter={300}
           pagination={{
             clickable: true,
           }}
@@ -88,7 +88,7 @@ export default function CustomizedAnnounceCard({ notices }: AnnounceCardProps) {
                           className="rounded-[12px]"
                         />
                       </div>
-                      <div className="px-3">
+                      <div className="px-1">
                         <data className="font-bold md:text-l">
                           {notice.item.shop.item.name}
                         </data>
@@ -121,7 +121,7 @@ export default function CustomizedAnnounceCard({ notices }: AnnounceCardProps) {
                         </div>
                         <div className="flex flex-col md:flex-row md:gap-4 md:py-4">
                           <data className="pt-1 font-bold text-ml md:text-xl">
-                            {formattedNumber(notice.item.hourlyPay)}
+                            {formattedNumber(notice.item.hourlyPay)}원
                           </data>
                           <div className="flex items-center text-s text-primary">
                             <LabelHourlyRate percent={hourlyWage} />
