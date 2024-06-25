@@ -34,12 +34,12 @@ export default function Header() {
   };
 
   return (
-    <>
+    <header className="fixed left-0 right-0 top-0 grid h-[102px] md:flex md:h-[70px]">
       {user.type !== null ? (
         <HeaderLogin onClick={handleLogout} type={user.type} />
       ) : (
         <HeaderNotLogin onClick={handleEmployer} />
       )}
-    </>
+    </header>
   );
 }

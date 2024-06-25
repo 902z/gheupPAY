@@ -7,12 +7,12 @@ import { useState, useEffect } from "react";
  * 
  * @example
  * "use client";
-import useUserStore from "@/stores/user-store";
+import createUserStore from "@/stores/user-store";
 import { useStore } from "zustand";
 
 export default function Test2() {
-  const userId = useStore(useUserStore, (state) => state.userId);
-  const logout = useStore(useUserStore, (state) => state.logout);
+  const userId = useStore(createUserStore, (state) => state.userId);
+  const logout = useStore(createUserStore, (state) => state.logout);
   const LogoutButton = () => {
     return <button onClick={logout}>{userId}</button>;
   };
@@ -24,11 +24,11 @@ export default function Test2() {
 @example
 "use client";
 
-import useUserStore from "@/stores/user-store";
-import { useStore } from "../_hooks/useStore";
+import createUserStore from "@/stores/create-store";
+import { useStore } from "../_hooks/use-store";
 
 export default function Test() {
-  const store = useStore(useUserStore, (state) => state);
+  const store = useStore(createUserStore, (state) => state);
   if (!store) return null;
   const { userId, login, logout, type } = store;
 
@@ -56,7 +56,10 @@ export default function Test() {
  * @param callback {(state: T) => unknown} store에서 가져올 값
  * @returns 원하는 state
  */
-export const useStore = <T, F>(store: (callback: (state: T) => unknown) => unknown, callback: (state: T) => F) => {
+export const useStore = <T, F>(
+  store: (callback: (state: T) => unknown) => unknown,
+  callback: (state: T) => F,
+) => {
   const result = store(callback) as F;
   const [data, setData] = useState<F>();
 

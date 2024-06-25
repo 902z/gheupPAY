@@ -1,10 +1,10 @@
 "use client";
 
-import useUserStore from "@/stores/user-store";
-import { useStore } from "../_hooks/useStore";
+import createUserStore from "@/stores/create-store";
+import { useStore } from "../_hooks/use-store";
 
 export default function Test() {
-  const store = useStore(useUserStore, (state) => state);
+  const store = useStore(createUserStore, (state) => state);
   if (!store) return null;
   const { userId, login, logout, type } = store;
 

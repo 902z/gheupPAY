@@ -13,7 +13,7 @@ type UserActions = {
 
 export type UserStore = UserState & UserActions;
 
-const useUserStore = create<UserStore>()(
+const createUserStore = create<UserStore>()(
   persist(
     (set, get) => ({
       userId: null,
@@ -25,4 +25,4 @@ const useUserStore = create<UserStore>()(
   ),
 );
 
-export default useUserStore;
+export default createUserStore;
