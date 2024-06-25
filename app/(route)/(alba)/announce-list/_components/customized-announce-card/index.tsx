@@ -120,7 +120,7 @@ export default function CustomizedAnnounceCard({ notices }: AnnounceCardProps) {
                           </data>
                         </div>
                         <div className="flex flex-col md:flex-row md:gap-4 md:py-4">
-                          <data className="pt-1 font-bold text-ml md:text-xl">
+                          <data className="pt-1 font-bold text-ml md:text-l">
                             {formattedNumber(notice.item.hourlyPay)}원
                           </data>
                           <div className="flex items-center text-s text-primary">
