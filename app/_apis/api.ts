@@ -1,9 +1,47 @@
-import axios from "axios";
-const GHEUP_PAY_BASE_URL = process.env.NEXT_PUBLIC_GHEUP_PAY_BASE_URL;
+import instance from "../_lib/axios";
 
-const axiosInstance = axios.create({
-  baseURL: GHEUP_PAY_BASE_URL,
-  timeout: 20000,
-});
+// 맞춤 공고
+export async function getCustomizedNotices({
+  offset = 0,
+  limit = 5,
+  // startsAtGte = ""
+}) {
+  try {
+    const params = new URLSearchParams({
+      offset: offset.toString(),
+      limit: limit.toString(),
+      // startsAtGte,
+    });
 
-export default axiosInstance;
+    const res = await instance.get(`/notices?${params.toString()}`);
+    return res.data.items;
+  } catch (error) {
+    console.error("getNotices 함수에서 오류 발생:", error);
+    throw error;
+  }
+}
+
+// 전체 공고
+export async function getAllNotices({
+  offset = 0,
+  limit = 30,
+  keyword = "",
+  hourlyPayGte = 0,
+  sort = "time",
+}) {
+  try {
+    const params = new URLSearchParams({
+      offset: offset.toString(),
+      limit: limit.toString(),
+      keyword,
+      hourlyPayGte: hourlyPayGte.toString(),
+      sort,
+    });
+
+    const res = await instance.get(`/notices?${params.toString()}`);
+    return res.data.items;
+  } catch (error) {
+    console.error("getAllNotices 함수에서 오류 발생:", error);
+    throw error;
+  }
+}

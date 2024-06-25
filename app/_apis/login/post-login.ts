@@ -1,4 +1,4 @@
-import axiosInstance from "../api";
+import axiosInstance from "../instances";
 import { UserType } from "../../_constants/user-type";
 import { isAxiosError } from "axios";
 import { API_ERROR_MESSAGE } from "../../_constants/error-message";

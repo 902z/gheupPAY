@@ -1,6 +1,6 @@
 import { API_ERROR_MESSAGE } from "../../_constants/error-message";
 import { UserType } from "../../_constants/user-type";
-import axiosInstance from "../api";
+import axiosInstance from "../instances";
 import { isAxiosError } from "axios";
 
 interface Params {
