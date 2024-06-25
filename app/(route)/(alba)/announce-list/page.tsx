@@ -1,10 +1,12 @@
 import React from "react";
-import AnnounceCard from "./_components/announce-card";
-import getNotices from "@/app/_apis/api";
+import CustomizedAnnounceCard from "./_components/customized-announce-card";
+import { getAllNotices, getCustomizedNotices } from "@/app/_apis/api";
+import AllAnnounceCard from "./_components/all-announce-card";
 // import Filter from "./_components/filter";
 
 export default async function page() {
-  const data = await getNotices({});
+  const customizedNotices = await getCustomizedNotices({});
+  const allNotices = await getAllNotices({});
 
   return (
     <div className="mt-[102px] w-full md:mt-[70px] lg:mx-auto">
@@ -13,7 +15,7 @@ export default async function page() {
           <h2 className="pb-4 font-bold text-l md:pb-12 md:text-2xl">
             맞춤 공고
           </h2>
-          <AnnounceCard notices={data} />
+          <CustomizedAnnounceCard notices={customizedNotices} />
         </div>
       </div>
       <div className="mx-auto flex w-full flex-col px-2 md:justify-center lg:max-w-[964px]">
@@ -21,6 +23,7 @@ export default async function page() {
           전체 공고
         </h2>
         {/* <Filter></Filter> */}
+        <AllAnnounceCard notices={allNotices} />
       </div>
     </div>
   );
