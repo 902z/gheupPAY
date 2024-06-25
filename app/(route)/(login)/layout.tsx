@@ -7,12 +7,16 @@ export const metadata: Metadata = {
   title: "Login",
 };
 
-export default function LoginLayout({ children }: { children: React.ReactNode }) {
+export default function LoginLayout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
   return (
     <div className="base-container flex justify-center pb-4">
       <section className="flex w-full max-w-[374px] flex-col items-center pl-3 pr-3 text-center">
         <Link href="/" className="mb-10">
-          <Image src={logo} alt="급pay 로고" />
+          <Image src={logo} alt="급pay 로고" priority />
         </Link>
         {children}
       </section>

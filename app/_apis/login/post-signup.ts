@@ -21,11 +21,17 @@ export type PostSignUp = (params: Params) => Promise<boolean>;
 
 const postSignUp: PostSignUp = async ({ email, password, type }) => {
   try {
-    const response = await axiosInstance.post<Response>("/users", {
-      email,
-      password,
-      type,
-    });
+    const response = await axiosInstance.post<Response>(
+      "/users",
+      {
+        email,
+        password,
+        type,
+      },
+      {
+        authorization: false,
+      },
+    );
     return response.status === 201;
   } catch (error) {
     if (isAxiosError(error)) {
