@@ -15,6 +15,7 @@ const config: Config = {
         s: "12px ",
         m: "14px",
         base: "16px",
+        ml: "18px",
         l: "20px",
         xl: "24px",
         "2xl": "28px",
@@ -45,6 +46,8 @@ const config: Config = {
           10: "#D4F7D4",
         },
         kakao: "#FEE500",
+        link: "#5534DA",
+        instruction:"#333236"
       },
     },
   },
