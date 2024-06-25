@@ -114,7 +114,7 @@ function FormDropdown({ label, name, options, register, setValue, getValues, pla
       >
         {options.map((item, index) => (
           <li
-            className="hover:bg-gray-10f h-[46px] cursor-pointer text-center leading-[46px]"
+            className="hover:bg-gray-10f h-[46px] cursor-pointer text-center leading-[46px] hover:bg-gray-10"
             onClick={handleItemClick}
             key={index}
           >
