@@ -14,11 +14,18 @@ export default function LabelHourlyRate({ percent }: { percent: number }) {
 
   return (
     <div
-      className={`flex items-center bg-white text-s text-primary ${bgColor} md:h-[36px] md:w-[159px] md:justify-center md:rounded-3xl md:text-white`}
+      className={`flex items-center bg-white text-s text-primary ${bgColor} md:h-[36px] md:w-[150px] md:justify-center md:rounded-3xl md:text-white`}
     >
-      <p className="text-center md:font-bold md:text-s">기존 시급보다 {percent}%</p>
+      <p className="text-center md:font-bold md:text-s">
+        기존 시급보다 {percent}%
+      </p>
       <picture>
-        <source srcSet={arrowUpRed40.src} media="(max-width: 768px)" width={16} height={16} />
+        <source
+          srcSet={arrowUpRed40.src}
+          media="(max-width: 768px)"
+          width={16}
+          height={16}
+        />
         <Image src={arrowUpWhite} alt="" width={20} height={20} />
       </picture>
     </div>
