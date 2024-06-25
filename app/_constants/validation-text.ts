@@ -1,3 +1,5 @@
+export const DROPDOWN_REQUIRED_TEXT = "This is required";
+
 export const loginErrorMessages = {
   EMAIL_REQUIRED: "이메일을 입력해주세요.",
   INVALID_EMAIL: "이메일 형식으로 작성해 주세요.",
