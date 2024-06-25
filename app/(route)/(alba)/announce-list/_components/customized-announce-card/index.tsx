@@ -65,7 +65,7 @@ export default function CustomizedAnnounceCard({ notices }: AnnounceCardProps) {
                   >
                     <div
                       key={notice.item.id}
-                      className="h-[261px] w-[171px] rounded-[12px] border border-gray-20 bg-white p-3 md:h-[349px] md:w-[312px]"
+                      className="h-[261px] w-[171px] rounded-[12px] border border-gray-20 bg-white p-3 md:h-[349px] md:w-[305px]"
                     >
                       <div className="relative mb-2 h-[82px] w-[147px] rounded-[12px] md:h-[160px] md:w-[280px]">
                         <Image

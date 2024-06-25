@@ -43,7 +43,7 @@ type AnnounceCardProps = {
 export default function AllAnnounceCard({ notices }: AnnounceCardProps) {
   return (
     <>
-      <div className="lg :grid-cols-3 grid grid-cols-2 gap-4">
+      <div className="lg grid grid-cols-2 gap-4 md:grid-cols-3">
         {notices &&
           notices.map((notice) => {
             const hourlyWage = calculateWagePercentage(notice.item.hourlyPay);
@@ -57,9 +57,9 @@ export default function AllAnnounceCard({ notices }: AnnounceCardProps) {
               >
                 <div
                   key={notice.item.id}
-                  className="h-[261px] w-[171px] rounded-[12px] border border-gray-20 bg-white p-3 md:h-[349px] md:w-[312px]"
+                  className="h-[261px] w-full rounded-[12px] border border-gray-20 bg-white p-3 md:h-[349px] md:w-[305px]"
                 >
-                  <div className="relative mb-2 h-[82px] w-[147px] rounded-[12px] md:h-[160px] md:w-[280px]">
+                  <div className="relative mb-2 h-[82px] w-full rounded-[12px] md:h-[160px] md:w-[280px]">
                     <Image
                       alt=""
                       src={notice.item.shop.item.imageUrl}
