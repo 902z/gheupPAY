@@ -1,0 +1,1 @@
+export const API_ERROR_MESSAGE = "이런 오류가 발생했네요 ㅠ";
