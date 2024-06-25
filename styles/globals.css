@@ -2,6 +2,12 @@
 @tailwind components;
 @tailwind utilities;
 
+@layer utilities {
+  .base-container {
+    @apply min-h-screen w-full px-3 pt-[102px] md:px-8 md:pt-[70px] lg:mx-auto lg:max-w-[964px] lg:px-0;
+  }
+}
+
 body {
   text-decoration: none;
 }
