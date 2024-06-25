@@ -113,7 +113,11 @@ function FormDropdown({ label, name, options, register, setValue, getValues, pla
         className={`absolute left-0 z-10 mt-2 max-h-[230px] w-full overflow-y-auto rounded-[6px] border border-gray-30 bg-white p-0 text-m shadow-md ${isOpen ? "block" : "hidden"}`}
       >
         {options.map((item, index) => (
-          <li className="h-[46px] cursor-pointer text-center leading-[46px]" onClick={handleItemClick} key={index}>
+          <li
+            className="hover:bg-gray-10f h-[46px] cursor-pointer text-center leading-[46px]"
+            onClick={handleItemClick}
+            key={index}
+          >
             {item.label}
             {options.length - 1 !== index && <hr className="bg-gray-20" />}
           </li>
