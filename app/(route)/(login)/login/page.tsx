@@ -6,7 +6,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { loginSchema } from "../_utils/schema";
 import Button from "@/app/_components/button";
 import postLogin from "@/app/_apis/login/post-login";
-import { redirect } from "next/navigation";
+import { redirect, useRouter } from "next/navigation";
 import { USER_TYPE } from "@/app/_constants/user-type";
 import pulse from "@/public/icons/pulse.svg";
 import Image from "next/image";
@@ -20,6 +20,7 @@ interface FormValues {
 }
 
 function Login() {
+  const router = useRouter();
   const resolver = yupResolver(loginSchema);
   const {
     handleSubmit,
@@ -40,9 +41,9 @@ function Login() {
         login(result.item.user.item.id, result.item.user.item.type);
         alert("로그인 성공");
         if (result.item.user.item.type === USER_TYPE.EMPLOYEE) {
-          redirect("/announce-list");
+          router.push("/announce-list");
         } else {
-          redirect("/admin/store-detail");
+          router.push("/admin/store-detail");
         }
       }
     } catch (error) {
@@ -65,7 +66,10 @@ function Login() {
 
   return (
     <>
-      <form onSubmit={handleForm} className="mb-4 flex w-full flex-col items-center gap-7">
+      <form
+        onSubmit={handleForm}
+        className="mb-4 flex w-full flex-col items-center gap-7"
+      >
         <CustomTextInput
           label="이메일"
           placeholder="이메일을 입력하세요"
@@ -90,7 +94,9 @@ function Login() {
         )}
       </form>
       <nav>
-        <span className="text-base font-normal leading-5 text-instruction">회원이 아니신가요? </span>
+        <span className="text-base font-normal leading-5 text-instruction">
+          회원이 아니신가요?{" "}
+        </span>
         <Link href="/signup" className="cursor-pointer text-link underline">
           회원가입하기
         </Link>

@@ -8,7 +8,7 @@ import { signUpSchema } from "../_utils/schema";
 import { UserType } from "@/app/_constants/user-type";
 import Button from "@/app/_components/button";
 import postSignUp from "@/app/_apis/login/post-signup";
-import { redirect } from "next/navigation";
+import { redirect,useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import pulse from "@/public/icons/pulse.svg";
 import Image from "next/image";
@@ -21,6 +21,7 @@ interface FormValues {
 }
 
 function SignUP() {
+  const router = useRouter();
   const resolver = yupResolver(signUpSchema);
   const {
     handleSubmit,
@@ -40,7 +41,7 @@ function SignUP() {
       const result = await postSignUp({ email, password, type });
       if (result) {
         alert("회원가입 성공");
-        redirect("/login");
+        router.push("/login");
       }
     } catch (error) {
       if (error instanceof Error) {
