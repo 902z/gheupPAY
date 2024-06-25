@@ -46,8 +46,8 @@ export default function CustomizedAnnounceCard({ notices }: AnnounceCardProps) {
       <div className="flex">
         <Swiper
           slidesPerView={3}
-          spaceBetween={50}
-          slidesOffsetAfter={100}
+          spaceBetween={35}
+          slidesOffsetAfter={50}
           pagination={{
             clickable: true,
           }}
@@ -65,7 +65,7 @@ export default function CustomizedAnnounceCard({ notices }: AnnounceCardProps) {
                   >
                     <div
                       key={notice.item.id}
-                      className="h-[261px] w-[171px] rounded-[12px] border border-gray-20 bg-white p-3 md:h-[349px] md:w-[305px]"
+                      className="h-[261px] w-[166px] rounded-[12px] border border-gray-20 bg-white p-2 md:h-[349px] md:w-[305px] md:p-3"
                     >
                       <div className="relative mb-2 h-[82px] w-[147px] rounded-[12px] md:h-[160px] md:w-[280px]">
                         <Image
