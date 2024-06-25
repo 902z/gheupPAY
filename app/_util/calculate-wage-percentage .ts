@@ -14,6 +14,6 @@ export const calculateWagePercentage = (hourlyWage: number) => {
     throw new Error("최저시급보다 낮게 금액을 설정할 수 없습니다.");
   }
   return Math.round(
-    ((hourlyWage - MINIMUN_HOURLY_WAGE) / MINIMUN_HOURLY_WAGE) * 100,
+    ((hourlyWage - MINIMUM_HOURLY_WAGE) / MINIMUM_HOURLY_WAGE) * 100,
   );
 };
