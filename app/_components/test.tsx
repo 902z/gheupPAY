@@ -1,18 +1,12 @@
 "use client";
 
-import { useUserStore } from "@/providers/user-store-provider";
-import { useEffect } from "react";
+import useUserStore from "@/stores/user-store";
+import { useStore } from "../_hooks/useStore";
 
 export default function Test() {
-  const [[login, logout, userId, type], userStore] = useUserStore((state) => [
-    state.login,
-    state.logout,
-    state.userId,
-    state.type,
-  ]);
-  useEffect(() => {
-    userStore.persist.rehydrate();
-  }, []);
+  const store = useStore(useUserStore, (state) => state);
+  if (!store) return null;
+  const { userId, login, logout, type } = store;
 
   const handleLogin = () => {
     login("user", "employer");

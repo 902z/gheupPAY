@@ -1,45 +1,28 @@
-import { createStore } from "zustand";
-import { devtools, persist } from "zustand/middleware";
+import { create } from "zustand";
+import { createJSONStorage, persist } from "zustand/middleware";
 
-export type UserState = {
+type UserState = {
   userId: string | null;
   type: "employer" | "employee" | null;
 };
 
-export type UserActions = {
+type UserActions = {
   login: (userId: string | null, type: "employer" | "employee" | null) => void;
   logout: () => void;
 };
 
 export type UserStore = UserState & UserActions;
 
-export const initUserStore = (): UserState => {
-  return {
-    userId: null,
-    type: null,
-  };
-};
+const useUserStore = create<UserStore>()(
+  persist(
+    (set, get) => ({
+      userId: null,
+      type: null,
+      login: (userId, type) => set({ userId, type }),
+      logout: () => set({ userId: null, type: null }),
+    }),
+    { name: "user-store", storage: createJSONStorage(() => localStorage) },
+  ),
+);
 
-export const defaultInitState: UserState = {
-  userId: null,
-  type: null,
-};
-
-export const createUserStore = (initUser: UserState = defaultInitState) => {
-  return createStore<UserStore>()(
-    devtools(
-      persist(
-        (set) =>
-          ({
-            ...initUser,
-            login: (userId: string | null, type: "employer" | "employee" | null) => set({ userId, type }),
-            logout: () => set({ userId: null, type: null }),
-          }) satisfies UserStore,
-        {
-          name: "user",
-          skipHydration: true,
-        },
-      ),
-    ),
-  );
-};
+export default useUserStore;
