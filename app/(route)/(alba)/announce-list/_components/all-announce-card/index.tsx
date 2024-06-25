@@ -43,7 +43,7 @@ type AnnounceCardProps = {
 export default function AllAnnounceCard({ notices }: AnnounceCardProps) {
   return (
     <>
-      <div className="lg grid grid-cols-2 gap-4 md:grid-cols-3">
+      <div className="lg grid grid-cols-2 gap-4 lg:grid-cols-3">
         {notices &&
           notices.map((notice) => {
             const hourlyWage = calculateWagePercentage(notice.item.hourlyPay);
