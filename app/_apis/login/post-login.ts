@@ -35,6 +35,7 @@ const postLogin: PostLogin = async ({ email, password }) => {
       email,
       password,
     });
+    localStorage.setItem("accessToken", data.item.token);
     return data;
   } catch (error) {
     if (isAxiosError(error)) {

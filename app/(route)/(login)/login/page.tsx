@@ -6,12 +6,13 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { loginSchema } from "../_utils/schema";
 import Button from "@/app/_components/button";
 import postLogin from "@/app/_apis/login/post-login";
-import { useRouter } from "next/navigation";
+import { redirect } from "next/navigation";
 import { USER_TYPE } from "@/app/_constants/user-type";
 import pulse from "@/public/icons/pulse.svg";
 import Image from "next/image";
-import { useState } from "react";
-
+import { useEffect, useState } from "react";
+import { useStore } from "zustand";
+import useUserStore from "@/stores/user-store";
 
 interface FormValues {
   email: string;
@@ -19,9 +20,6 @@ interface FormValues {
 }
 
 function Login() {
-
-
-  const router = useRouter();
   const resolver = yupResolver(loginSchema);
   const {
     handleSubmit,
@@ -32,18 +30,19 @@ function Login() {
     mode: "onSubmit",
   });
   const [waiting, setWaiting] = useState(false);
+  const login = useStore(useUserStore, (state) => state.login);
 
   const handleForm = handleSubmit(async (data: FormValues) => {
     try {
       setWaiting(true);
       const result = await postLogin(data);
       if (result) {
-        console.log(result);
+        login(result.item.user.item.id, result.item.user.item.type);
         alert("로그인 성공");
         if (result.item.user.item.type === USER_TYPE.EMPLOYEE) {
-          router.push("/announce-list");
+          redirect("/announce-list");
         } else {
-          router.push("/admin/store-detail");
+          redirect("/admin/store-detail");
         }
       }
     } catch (error) {
@@ -55,6 +54,14 @@ function Login() {
       setWaiting(false);
     }
   });
+
+  useEffect(() => {
+    const accessToken = localStorage.getItem("accessToken");
+    if (accessToken) {
+      alert("이미 로그인 상태입니다.");
+      redirect("/announce-list");
+    }
+  }, []);
 
   return (
     <>

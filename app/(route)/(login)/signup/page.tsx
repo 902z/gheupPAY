@@ -8,8 +8,8 @@ import { signUpSchema } from "../_utils/schema";
 import { UserType } from "@/app/_constants/user-type";
 import Button from "@/app/_components/button";
 import postSignUp from "@/app/_apis/login/post-signup";
-import { useRouter } from "next/navigation";
-import { useState } from "react";
+import { redirect } from "next/navigation";
+import { useEffect, useState } from "react";
 import pulse from "@/public/icons/pulse.svg";
 import Image from "next/image";
 
@@ -21,7 +21,6 @@ interface FormValues {
 }
 
 function SignUP() {
-  const router = useRouter();
   const resolver = yupResolver(signUpSchema);
   const {
     handleSubmit,
@@ -41,7 +40,7 @@ function SignUP() {
       const result = await postSignUp({ email, password, type });
       if (result) {
         alert("회원가입 성공");
-        router.push("/login");
+        redirect("/login");
       }
     } catch (error) {
       if (error instanceof Error) {
@@ -51,6 +50,14 @@ function SignUP() {
       setWaiting(false);
     }
   });
+
+  useEffect(() => {
+    const accessToken = localStorage.getItem("accessToken");
+    if (accessToken) {
+      alert("이미 로그인 상태입니다.");
+      redirect("/announce-list");
+    }
+  }, []);
 
   return (
     <>
