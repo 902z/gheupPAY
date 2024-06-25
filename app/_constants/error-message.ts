@@ -1,1 +1,1 @@
-export const API_ERROR_MESSAGE = "이런 오류가 발생했네요 ㅠ";
+export const API_ERROR_MESSAGE = "죄송합니다. 오류가 발생했어요 ㅠ";

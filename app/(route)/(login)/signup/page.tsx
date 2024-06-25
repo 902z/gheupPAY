@@ -7,7 +7,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { signUpSchema } from "../_utils/schema";
 import { UserType } from "@/app/_constants/user-type";
 import Button from "@/app/_components/button";
-import postSignUp from "@/app/_apis/post-signup";
+import postSignUp from "@/app/_apis/login/post-signup";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import pulse from "@/public/icons/pulse.svg";

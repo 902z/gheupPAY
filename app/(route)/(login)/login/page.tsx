@@ -5,12 +5,13 @@ import Link from "next/link";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { loginSchema } from "../_utils/schema";
 import Button from "@/app/_components/button";
-import postLogin from "@/app/_apis/post-login";
+import postLogin from "@/app/_apis/login/post-login";
 import { useRouter } from "next/navigation";
 import { USER_TYPE } from "@/app/_constants/user-type";
 import pulse from "@/public/icons/pulse.svg";
 import Image from "next/image";
 import { useState } from "react";
+
 
 interface FormValues {
   email: string;
@@ -18,6 +19,8 @@ interface FormValues {
 }
 
 function Login() {
+
+
   const router = useRouter();
   const resolver = yupResolver(loginSchema);
   const {
@@ -45,6 +48,7 @@ function Login() {
       }
     } catch (error) {
       if (error instanceof Error) {
+        console.log(error);
         alert(error.message);
       }
     } finally {

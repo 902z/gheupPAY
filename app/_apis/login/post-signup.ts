@@ -1,27 +1,32 @@
-import { API_ERROR_MESSAGE } from "../_constants/error-message";
-import axiosInstance from "./api";
+import { API_ERROR_MESSAGE } from "../../_constants/error-message";
+import { UserType } from "../../_constants/user-type";
+import axiosInstance from "../api";
 import { isAxiosError } from "axios";
 
-interface Param {
+interface Params {
   email: string;
   password: string;
   type: string;
 }
 
-export type PostSignUp = (param: Param) => Promise<boolean>;
+interface Response {
+  item: {
+    id: string;
+    email: string;
+    type: UserType;
+  };
+  links: string[];
+}
+export type PostSignUp = (params: Params) => Promise<boolean>;
 
 const postSignUp: PostSignUp = async ({ email, password, type }) => {
   try {
-    const response = await axiosInstance.post(`/users`, {
+    const response = await axiosInstance.post<Response>("/users", {
       email,
       password,
       type,
     });
-    if (response.status === 201) {
-      return true;
-    } else {
-      return false;
-    }
+    return response.status === 201;
   } catch (error) {
     if (isAxiosError(error)) {
       if (error.response?.status === 409) {

@@ -1,9 +1,9 @@
-import axiosInstance from "./api";
-import { UserType } from "../_constants/user-type";
+import axiosInstance from "../api";
+import { UserType } from "../../_constants/user-type";
 import { isAxiosError } from "axios";
-import { API_ERROR_MESSAGE } from "../_constants/error-message";
+import { API_ERROR_MESSAGE } from "../../_constants/error-message";
 
-interface Param {
+interface Params {
   email: string;
   password: string;
 }
@@ -27,11 +27,11 @@ interface Response {
   links: [];
 }
 
-export type PostLogin = (param: Param) => Promise<Response>;
+export type PostLogin = (params: Params) => Promise<Response>;
 
 const postLogin: PostLogin = async ({ email, password }) => {
   try {
-    const { data } = await axiosInstance.post<Response>(`/token`, {
+    const { data } = await axiosInstance.post<Response>("/token", {
       email,
       password,
     });
