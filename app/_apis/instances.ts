@@ -11,6 +11,7 @@ declare module "axios" {
 const axiosInstance = axios.create({
   baseURL: GHEUP_PAY_BASE_URL,
   timeout: 20000,
+  authorization: true,
 });
 
 axiosInstance.interceptors.request.use(
