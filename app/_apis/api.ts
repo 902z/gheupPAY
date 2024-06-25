@@ -3,7 +3,7 @@ import instance from "../_lib/axios";
 // 맞춤 공고
 export async function getCustomizedNotices({
   offset = 0,
-  limit = 3,
+  limit = 5,
   // startsAtGte = ""
 }) {
   try {
