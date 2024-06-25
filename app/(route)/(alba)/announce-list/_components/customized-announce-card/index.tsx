@@ -69,8 +69,12 @@ export default function CustomizedAnnounceCard({ notices }: AnnounceCardProps) {
               const hourlyWage = calculateWagePercentage(notice.item.hourlyPay);
               const date = dateFormat(notice.item.startsAt);
               return (
-                <SwiperSlide key={notice.item.id} className="overflow-visible">
+                <SwiperSlide
+                  key={notice.item.id}
+                  className="overflow-visible py-4"
+                >
                   <motion.div
+                    whileHover={{ scale: 1.05 }}
                     whileTap={{ scale: 0.95 }}
                     className="cursor-pointer"
                   >
