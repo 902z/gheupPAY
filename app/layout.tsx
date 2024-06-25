@@ -2,8 +2,14 @@ import type { Metadata } from "next";
 import "@/styles/globals.css";
 
 export const metadata: Metadata = {
-  title: "급PAY",
   description: "급하게 일손이 필요한 자리에 더 많은 시급을 제공해서 아르바이트생을 구할 수 있는 서비스",
+  title: {
+    template: "%s | 급페이",
+    default: "급페이",
+  },
+  icons: {
+    icon: "/icons/favicon.png",
+  },
 };
 
 export default function RootLayout({
@@ -13,7 +19,11 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="ko">
-      <body>{children}</body>
+      <body>
+        <main className="min-h-screen w-full px-3 pt-[102px] md:px-8 md:pt-[70px] lg:mx-auto lg:max-w-[964px] lg:px-0">
+          {children}
+        </main>
+      </body>
     </html>
   );
 }
