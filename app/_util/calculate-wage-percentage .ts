@@ -1,4 +1,4 @@
-import { MINIMUN_HOURLY_WAGE } from "../_constants/MINIMUN_HOURLY_WAGE";
+import { MINIMUM_HOURLY_WAGE } from "../_constants/minimum-hourly-wage";
 
 /**
  * 주어진 시급이 최저시급 대비 몇 퍼센트인지를 계산합니다.
@@ -9,8 +9,8 @@ import { MINIMUN_HOURLY_WAGE } from "../_constants/MINIMUN_HOURLY_WAGE";
  */
 
 export const calculateWagePercentage = (hourlyWage: number) => {
-  if (hourlyWage < MINIMUN_HOURLY_WAGE) {
+  if (hourlyWage < MINIMUM_HOURLY_WAGE) {
     throw new Error("최저시급보다 낮게 금액을 설정할 수 없습니다.");
   }
-  return Math.round(((hourlyWage - MINIMUN_HOURLY_WAGE) / MINIMUN_HOURLY_WAGE) * 100);
+  return Math.round(((hourlyWage - MINIMUM_HOURLY_WAGE) / MINIMUM_HOURLY_WAGE) * 100);
 };

@@ -1,0 +1,1 @@
+export const MINIMUM_HOURLY_WAGE = 9860;
