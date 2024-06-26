@@ -2,7 +2,7 @@ import React from "react";
 import CustomizedAnnounceCard from "./_components/customized-announce-card";
 import { getAllNotices, getCustomizedNotices } from "@/app/_apis/api";
 import AllAnnounceCard from "./_components/all-announce-card";
-// import Filter from "./_components/filter";
+import FilterToggle from "./_components/filter-toggle";
 
 export default async function page() {
   const customizedNotices = await getCustomizedNotices({});
@@ -19,10 +19,12 @@ export default async function page() {
         </div>
       </div>
       <div className="mx-auto flex w-full flex-col px-2 md:justify-center lg:max-w-[964px]">
-        <h2 className="pb-4 font-bold text-l md:pb-12 md:text-2xl">
-          전체 공고
-        </h2>
-        {/* <Filter></Filter> */}
+        <div className='flex justify-between relative'>
+          <h2 className="pb-4 font-bold text-l md:pb-12 md:text-2xl">
+            전체 공고
+          </h2>
+          <FilterToggle />
+        </div>
         <AllAnnounceCard notices={allNotices} />
       </div>
     </div>

@@ -7,7 +7,11 @@ import close from "@/public/icons/close.png";
 import closeRed40 from "@/public/icons/close-red-40.png";
 import { ADDRESS } from "@/constants/address";
 
-export default function Filter() {
+interface FilterProps {
+  onClose: () => void;
+}
+
+export default function Filter({onClose}: FilterProps) {
   const [selectedAddresses, setSelectedAddresses] = useState<string[]>([]);
   const handleAddressClick = (address: string) => {
     setSelectedAddresses((prev) => {
@@ -24,10 +28,10 @@ export default function Filter() {
 
   return (
     <>
-      <div className="ml-[20px] w-[390px] rounded-[10px] border border-gray-20 px-[20px] py-[24px] shadow">
+      <div className="mt-[8px] ml-[20px] w-[390px] rounded-[10px] border border-gray-20 px-[20px] py-[24px] shadow absolute right-0 bg-white z-10">
         <div className="mb-[24px] flex justify-between font-bold text-l">
           <h2>상세 필터</h2>
-          <Image className="h-[24px] w-[24px] cursor-pointer" src={close} alt="닫기" width={24} />
+          <Image className="h-[24px] w-[24px] cursor-pointer" src={close} alt="닫기" width={24} onClick={onClose} />
         </div>
         <div className="w-[350px] border-b pb-[24px]">
           <h3>위치</h3>
@@ -49,7 +53,7 @@ export default function Filter() {
               {selectedAddresses.map((address) => (
                 <li>
                   <data
-                    className="flex justify-between gap-[4px] rounded-[20px] bg-red-10 px-[10px] px-[7px] py-[6px] text-m text-red-40"
+                    className="flex justify-between gap-[4px] rounded-[20px] bg-red-10 px-[10px] py-[6px] text-m text-red-40"
                     key={address}
                   >
                     {address}
