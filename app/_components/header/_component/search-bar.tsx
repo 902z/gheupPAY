@@ -25,7 +25,7 @@ export default function SearchBar({ className }: SearchBarProps) {
       </section>
       <input
         type="search"
-        className="h-9 w-full rounded-[10px] bg-gray-10 px-2 py-[10px] indent-[30px] text-s md:h-10 md:w-[344px] md:px-[10px] lg:w-[450px]"
+        className="h-9 w-full rounded-[10px] bg-gray-10 px-2 py-[10px] indent-[30px] text-s md:h-10 md:max-w-[450px] md:px-[10px] md:text-m"
         placeholder="가게 이름으로 찾아보세요"
         ref={inputRef}
       />
