@@ -1,5 +1,6 @@
 "use client";
-import Modal from "./_components/modal";
+import ConfirmModal from "./_components/modals/confirm-modal";
+import WarningModal from "./_components/modals/warning-modal";
 import useModal from "./_hooks/useModal";
 
 export default function Home() {
@@ -7,12 +8,19 @@ export default function Home() {
 
   return (
     <>
-      <p className="font-bold" onClick={openModal}>
-        모달test
+      {/* <p className="font-bold" onClick={openModal}>
+        confirm-modal
       </p>
-      <Modal isOpen={isOpen} closeModal={closeModal}>
-        <p>악악</p>
-      </Modal>
+      <ConfirmModal isOpen={isOpen} closeModal={closeModal}>
+        확인 모달
+      </ConfirmModal> */}
+
+      <p className="font-bold" onClick={openModal}>
+        warning-modal
+      </p>
+      <WarningModal isOpen={isOpen} closeModal={closeModal}>
+        경고 모달
+      </WarningModal>
     </>
   );
 }
