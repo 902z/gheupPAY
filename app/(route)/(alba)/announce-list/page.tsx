@@ -2,7 +2,7 @@ import React from "react";
 import CustomizedAnnounceCard from "./_components/customized-announce-card";
 import { getAllNotices, getCustomizedNotices } from "@/app/_apis/api";
 import AllAnnounceCard from "./_components/all-announce-card";
-import FilterToggle from "./_components/filter-toggle";
+import FilterButton from "./_components/filter-button";
 
 export default async function page() {
   const customizedNotices = await getCustomizedNotices({});
@@ -23,7 +23,7 @@ export default async function page() {
           <h2 className="pb-4 font-bold text-l md:pb-12 md:text-2xl">
             전체 공고
           </h2>
-          <FilterToggle />
+          <FilterButton />
         </div>
         <AllAnnounceCard notices={allNotices} />
       </div>

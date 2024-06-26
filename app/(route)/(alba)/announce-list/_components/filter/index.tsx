@@ -6,6 +6,7 @@ import Image from "next/image";
 import close from "@/public/icons/close.png";
 import closeRed40 from "@/public/icons/close-red-40.png";
 import { ADDRESS } from "@/constants/address";
+import Button from '@/app/_components/button';
 
 interface FilterProps {
   onClose: () => void;
@@ -24,6 +25,10 @@ export default function Filter({onClose}: FilterProps) {
 
   const handleRemoveAddressClick = (address: string) => {
     setSelectedAddresses((prev) => prev.filter((item) => item !== address));
+  };
+
+  const handleReset = () => {
+    setSelectedAddresses([]);
   };
 
   return (
@@ -88,14 +93,9 @@ export default function Filter({onClose}: FilterProps) {
             <p className="absolute left-[134px] top-[16px]">원</p>
           </div>
         </div>
-        {/* 공통 컴포넌트- 버튼 넣을 자리 */}
-        <div className="mt-[56px] flex h-[48px] gap-[8px]">
-          <div className="h-[48px] w-[82px] rounded-[6px] border-[1px] border-red-40 pt-[12px] text-center font-bold text-red-40">
-            초기화
-          </div>
-          <div className="h-[48px] w-[260px] rounded-[6px] border bg-red-40 pt-[14px] text-center font-bold text-white">
-            적용하기
-          </div>
+        <div className="mt-[56px] flex justify-between h-[48px] gap-[8px]">
+          <Button className="w-20" color="white" onClick={handleReset}>초기화</Button>
+          <Button className="w-64" color="orange">적용하기</Button>
         </div>
       </div>
     </>
