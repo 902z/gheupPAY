@@ -21,6 +21,7 @@ function handleOnInput(
     target.value = target.value.substring(0, maxlength);
   }
 }
+// placeholder 처리할 상태 1개, value 받아서 form에 던질 상태 하나.
 export default function Filter({ onClose }: FilterProps) {
   const [selectedAddresses, setSelectedAddresses] = useState<string[]>([]);
   const [startDate, setStartDate] = useState<string>("");
@@ -55,12 +56,19 @@ export default function Filter({ onClose }: FilterProps) {
     setInputValue(target.value);
   };
 
+  // const value = e.currentTarget.value;
+  //   const date = new Date(value);
+  //   const isoString = date.toISOString();
+  //   setStartDate(isoString);
+  //   console.log(isoString);
+
+  // const handleSubmit = (e:React.FormEvent<HTMLFormElement>)=>{
+  //   // const form ~
+  //   const isoString = startDate.toISOString(); 해야할 것!!!!!!!
+  // }
+
   const handleDateChange = (e: React.FormEvent<HTMLInputElement>) => {
-    const value = e.currentTarget.value;
-    const date = new Date(value);
-    const isoString = date.toISOString();
-    setStartDate(isoString);
-    console.log(isoString);
+    setStartDate(e.currentTarget.value);
   };
 
   return (
@@ -119,11 +127,9 @@ export default function Filter({ onClose }: FilterProps) {
             className="h-[58px] w-[350px] rounded-[6px] border border-gray-30 px-[20px] py-[16px] focus:outline-primary"
             type={isFocused || startDate ? "datetime-local" : "text"}
             placeholder="입력"
+            value={startDate}
             id="meeting-time"
             name="meeting-time"
-            value={
-              startDate ? new Date(startDate).toISOString().slice(0, -1) : ""
-            }
             onChange={handleDateChange}
             onFocus={handleFocus}
             onBlur={handleBlur}
