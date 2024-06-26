@@ -7,7 +7,7 @@ type UserState = {
 };
 
 type UserActions = {
-  login: (userId: string | null, type: "employer" | "employee" | null) => void;
+  login: (userId: string, type: "employer" | "employee") => void;
   logout: () => void;
 };
 
