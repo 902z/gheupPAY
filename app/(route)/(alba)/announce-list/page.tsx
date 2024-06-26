@@ -32,9 +32,12 @@ export default async function page({ searchParams }: SearchParamsProps) {
           전체 공고
         </h2>
         {/* <Filter></Filter> */}
-        <div className="lg grid grid-cols-2 gap-4 lg:grid-cols-3">
-          <AnnounceList notices={allNotices} />
-        </div>
+
+        <AnnounceList
+          notices={allNotices}
+          activePage={page}
+          itemsCountPerPage={limit}
+        />
       </div>
     </div>
   );

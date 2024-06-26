@@ -48,7 +48,7 @@ export default function Pagination({
   );
 
   return (
-    <div className="flex gap-[2px] text-m">
+    <div className="flex justify-center gap-[2px] text-m">
       <Link
         className="flex h-10 w-10 items-center justify-center"
         href={{ pathname: `${pathname}`, query: { page: prevPage } }}
