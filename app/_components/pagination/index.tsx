@@ -3,6 +3,7 @@ import React from "react";
 import Link from "next/link";
 import arrowLeft from "@/public/icons/arrow-left.png";
 import arrowRight from "@/public/icons/arrow-right.png";
+import arrowLeftDisabled from "@/public/icons/arrow-left-disabled.png";
 import Image from "next/image";
 
 type PageNationProps = {
@@ -47,29 +48,43 @@ export default function Pagination({
     (_, i) => startPage + i,
   );
 
+  console.log(totalPage);
+  console.log(endPage);
+
   return (
     <div className="flex justify-center gap-[2px] text-m">
       <Link
-        className="flex h-10 w-10 items-center justify-center"
+        className={`${activePage === 1 ? "pointer-events-none" : ""} flex h-10 w-10 items-center justify-center`}
         href={{ pathname: `${pathname}`, query: { page: prevPage } }}
       >
-        <Image src={arrowLeft} alt="arrow-left" />
+        {activePage === 1 ? (
+          <Image
+            src={arrowLeftDisabled}
+            alt="arrow-left"
+            width={20}
+            height={20}
+          />
+        ) : (
+          <Image src={arrowLeft} alt="arrow-left" width={20} height={20} />
+        )}
       </Link>
       {paginationList.map((page) => (
         <Link
-          className={`${activePage === page ? "bg-red-30 text-white" : ""} flex h-10 w-10 items-center justify-center rounded-sm`}
+          className={` ${activePage === page ? "bg-red-30 text-white" : ""} flex h-10 w-10 items-center justify-center rounded-sm`}
           key={page}
           href={{ pathname: `${pathname}`, query: { page: page } }}
         >
           {page}
         </Link>
       ))}
-      <Link
-        className="flex h-10 w-10 items-center justify-center"
-        href={{ pathname: `${pathname}`, query: { page: nextPage } }}
-      >
-        <Image src={arrowRight} alt="arrow-right" />
-      </Link>
+      {endPage !== totalPage ? (
+        <Link
+          className="flex h-10 w-10 items-center justify-center"
+          href={{ pathname: `${pathname}`, query: { page: nextPage } }}
+        >
+          <Image src={arrowRight} alt="arrow-right" />
+        </Link>
+      ) : null}
     </div>
   );
 }
