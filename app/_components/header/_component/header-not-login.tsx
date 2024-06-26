@@ -1,15 +1,16 @@
-import Image from "next/image";
 import Link from "next/link";
-
-interface HeaderLoginProps {
-  onClick: () => void;
+interface HeaderNotLoginProps {
+  login: (userId: string, type: "employer" | "employee") => void;
 }
 
-export function HeaderNotLogin({ onClick }: HeaderLoginProps) {
+export function HeaderNotLogin({ login }: HeaderNotLoginProps) {
+  const handleClick = () => {
+    login("user", "employer");
+  };
   return (
     <>
       <section>
-        <button onClick={onClick}>로그인</button>
+        <button onClick={handleClick}>로그인</button>
         {/* <Link href="/login">로그인</Link> */}
       </section>
       <section>

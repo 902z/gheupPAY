@@ -1,40 +1,9 @@
-"use client";
-import { useState } from "react";
-import HeaderLogin from "./_component/header-login";
-import { HeaderNotLogin } from "./_component/header-not-login";
 import Image from "next/image";
 import Link from "next/link";
 import SearchBar from "./_component/search-bar";
-
-interface User {
-  userId: string | null;
-  type: "employer" | "employee" | null;
-}
+import HeaderSelector from "./_component/header-selector";
 
 export default function Header() {
-  const [user, setUser] = useState<User>({
-    userId: null,
-    type: null,
-  });
-
-  const handleEmployer = () => {
-    setUser({
-      userId: "test",
-      type: "employer",
-    });
-  };
-  const handleEmployee = () => {
-    setUser({
-      userId: "test",
-      type: "employee",
-    });
-  };
-  const handleLogout = () => {
-    setUser({
-      userId: null,
-      type: null,
-    });
-  };
   return (
     <header className="fixed left-0 right-0 top-0 z-50 bg-white shadow-md">
       <section className="grid h-[102px] grid-cols-2 grid-rows-2 px-5 pb-[10px] pt-[15px] md:flex md:h-[70px] md:px-8 md:py-[15px] lg:mx-auto lg:w-full lg:max-w-[1024px]">
@@ -46,11 +15,7 @@ export default function Header() {
         </Link>
         <SearchBar className="col-span-full md:ml-8 md:mr-[22px] md:flex-1" />
         <nav className="col-start-2 row-start-1 flex items-start gap-4 justify-self-end font-bold text-m md:items-center md:text-base">
-          {user.type !== null ? (
-            <HeaderLogin onClick={handleLogout} type={user.type} />
-          ) : (
-            <HeaderNotLogin onClick={handleEmployer} />
-          )}
+          <HeaderSelector />
         </nav>
       </section>
     </header>
