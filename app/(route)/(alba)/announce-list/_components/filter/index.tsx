@@ -5,7 +5,7 @@ import Image from "next/image";
 
 import close from "@/public/icons/close.png";
 import closeRed40 from "@/public/icons/close-red-40.png";
-import { ADDRESS } from "@/constants/address";
+import { ADDRESS } from "@/app/_constants/address";
 
 export default function Filter() {
   const [selectedAddresses, setSelectedAddresses] = useState<string[]>([]);

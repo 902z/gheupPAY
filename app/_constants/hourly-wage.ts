@@ -1,0 +1,2 @@
+export const MINIMUM_HOURLY_WAGE = 9860;
+export const MAXIMUM_HOURLY_WAGE = 999999;
