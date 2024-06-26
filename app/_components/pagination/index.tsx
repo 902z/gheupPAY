@@ -48,9 +48,6 @@ export default function Pagination({
     (_, i) => startPage + i,
   );
 
-  console.log(totalPage);
-  console.log(endPage);
-
   return (
     <div className="flex justify-center gap-[2px] text-m">
       <Link
