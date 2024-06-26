@@ -1,3 +1,4 @@
+"use client";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { useRef } from "react";
@@ -21,7 +22,7 @@ export default function SearchBar({ className }: SearchBarProps) {
   return (
     <form onSubmit={handleSubmit} className={"relative " + className}>
       <section className="absolute left-[10px] top-[10px] h-4 w-4 md:h-5 md:w-5">
-        <Image src="/icons/search.png" alt="" objectFit="cover" fill />
+        <Image src="/icons/search.png" alt="" fill />
       </section>
       <input
         type="search"
