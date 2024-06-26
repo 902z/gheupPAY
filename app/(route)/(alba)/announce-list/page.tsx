@@ -1,12 +1,21 @@
 import React from "react";
-import CustomizedAnnounce from "./_components/customized-announce";
 import { getAllNotices, getCustomizedNotices } from "@/app/_apis/api";
-import AnnounceCard from "@/app/_components/announce-card";
+import CustomizedAnnounceList from "./_components/customized-announce";
+import AnnounceList from "@/app/_components/announce-card";
 // import Filter from "./_components/filter";
 
-export default async function page() {
+interface SearchParamsProps {
+  searchParams: {
+    page: string;
+  };
+}
+
+export default async function page({ searchParams }: SearchParamsProps) {
   const customizedNotices = await getCustomizedNotices({});
-  const allNotices = await getAllNotices({});
+  const page = parseInt(searchParams.page || "1", 10);
+  const limit = 12;
+  const offset = (page - 1) * limit;
+  const allNotices = await getAllNotices({ offset, limit });
 
   return (
     <div className="mt-[102px] w-full md:mt-[70px] lg:mx-auto">
@@ -15,7 +24,7 @@ export default async function page() {
           <h2 className="pb-4 font-bold text-l md:pb-12 md:text-2xl">
             맞춤 공고
           </h2>
-          <CustomizedAnnounce notices={customizedNotices} />
+          <CustomizedAnnounceList notices={customizedNotices} />
         </div>
       </div>
       <div className="mx-auto flex w-full flex-col px-4 md:justify-center lg:max-w-[964px]">
@@ -24,7 +33,7 @@ export default async function page() {
         </h2>
         {/* <Filter></Filter> */}
         <div className="lg grid grid-cols-2 gap-4 lg:grid-cols-3">
-          <AnnounceCard notices={allNotices} />
+          <AnnounceList notices={allNotices} />
         </div>
       </div>
     </div>
