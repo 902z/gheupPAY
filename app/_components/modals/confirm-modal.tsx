@@ -1,5 +1,6 @@
 import React from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import Button from "../button";
 
 /**
  * ModalProps 타입 정의
@@ -16,7 +17,7 @@ type ModalProps = {
   children: React.ReactNode;
 };
 
-export default function Modal({ isOpen, closeModal, children }: ModalProps) {
+export default function ConfirmModal({ isOpen, closeModal, children }: ModalProps) {
   return (
     <AnimatePresence>
       {isOpen && (
@@ -29,11 +30,20 @@ export default function Modal({ isOpen, closeModal, children }: ModalProps) {
           onClick={closeModal} // 밖에 클릭시 모달 닫음
         >
           {/* stopPropagation: 모달 내부 클릭 시 모달이 닫히는 이슈 해결해줌(모달 내부를 클릭하면 이벤트 전파를 막음) */}
-          <motion.div className="relative rounded-lg bg-white p-4 shadow-lg" onClick={(e) => e.stopPropagation()}>
-            <button onClick={closeModal} className="absolute right-0 top-0 m-3 text-gray-500 hover:text-gray-700">
-              X
-            </button>
-            <div className="pt-8">{children}</div>
+          <motion.div
+            className="relative flex h-[220px] w-full max-w-[327px] flex-col rounded-lg bg-white p-4 shadow-lg md:max-w-[540px]"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <div className="flex items-center justify-center px-8 pt-16">{children}</div>
+            <div className="absolute bottom-0 left-0 right-0 mb-6 flex justify-center md:justify-end md:pr-6">
+              <Button
+                onClick={closeModal}
+                className="flex h-[42px] w-[138px] items-center justify-center rounded-[8px] md:h-[48px] md:w-[120px]"
+                color="orange"
+              >
+                확인
+              </Button>
+            </div>
           </motion.div>
         </motion.div>
       )}
