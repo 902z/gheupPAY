@@ -1,6 +1,6 @@
 import React from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import Button from "../button";
+import Button from "../../button";
 import check from "@/public/icons/check.png";
 import Image from "next/image";
 
@@ -28,7 +28,12 @@ const YES_TYPE = {
   cancel: "취소하기 ",
 };
 
-export default function SelectModal({ isOpen, closeModal, children, yesType }: ModalProps) {
+export default function SelectModal({
+  isOpen,
+  closeModal,
+  children,
+  yesType,
+}: ModalProps) {
   return (
     <AnimatePresence>
       {isOpen && (
@@ -48,7 +53,9 @@ export default function SelectModal({ isOpen, closeModal, children, yesType }: M
             <div className="flex items-center justify-center py-6">
               <Image src={check} alt="선택" width={24} height={24} />
             </div>
-            <div className="flex items-center justify-center px-8 text-ml">{children}</div>
+            <div className="flex items-center justify-center px-8 text-ml">
+              {children}
+            </div>
             <div className="absolute bottom-0 left-0 right-0 mb-6 flex justify-center gap-3">
               <Button
                 onClick={closeModal}

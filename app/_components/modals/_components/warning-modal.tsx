@@ -1,6 +1,6 @@
 import React from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import Button from "../button";
+import Button from "../../button";
 import warning from "@/public/icons/warning.png";
 import Image from "next/image";
 
@@ -19,7 +19,11 @@ type ModalProps = {
   children: React.ReactNode;
 };
 
-export default function WarningModal({ isOpen, closeModal, children }: ModalProps) {
+export default function WarningModal({
+  isOpen,
+  closeModal,
+  children,
+}: ModalProps) {
   return (
     <AnimatePresence>
       {isOpen && (
@@ -39,7 +43,9 @@ export default function WarningModal({ isOpen, closeModal, children }: ModalProp
             <div className="flex items-center justify-center py-6">
               <Image src={warning} alt="경고" width={24} height={24} />
             </div>
-            <div className="flex items-center justify-center px-8 text-ml">{children}</div>
+            <div className="flex items-center justify-center px-8 text-ml">
+              {children}
+            </div>
             <div className="absolute bottom-0 left-0 right-0 mb-6 flex justify-center md:justify-end md:pr-6">
               <Button
                 onClick={closeModal}

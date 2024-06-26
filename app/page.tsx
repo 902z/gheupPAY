@@ -1,34 +1,11 @@
-"use client";
-import ConfirmModal from "./_components/modals/confirm-modal";
-import SelectModal from "./_components/modals/select-modal";
-import WarningModal from "./_components/modals/warning-modal";
-import useModal from "./_hooks/useModal";
+import Modal from "./_components/modals";
 
 export default function Home() {
-  const { isOpen, openModal, closeModal } = useModal();
-
   return (
     <>
-      <p className="font-bold" onClick={openModal}>
-        confirm-modal
-      </p>
-      <ConfirmModal isOpen={isOpen} closeModal={closeModal}>
-        확인 모달
-      </ConfirmModal>
-
-      {/* <p className="font-bold" onClick={openModal}>
-        warning-modal
-      </p>
-      <WarningModal isOpen={isOpen} closeModal={closeModal}>
-        경고 모달
-      </WarningModal> */}
-
-      {/* <p className="font-bold" onClick={openModal}>
-        select-modal
-      </p>
-      <SelectModal yesType="approve" isOpen={isOpen} closeModal={closeModal}>
-        선택 모달
-      </SelectModal> */}
+      <Modal type="confirm">confirm</Modal>
+      <Modal type="warning">warning</Modal>
+      <Modal yesType="yes">select</Modal>
     </>
   );
 }

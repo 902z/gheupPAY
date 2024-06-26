@@ -1,6 +1,6 @@
 import React from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import Button from "../button";
+import Button from "../../button";
 
 /**
  * ModalProps 타입 정의
@@ -17,7 +17,11 @@ type ModalProps = {
   children: React.ReactNode;
 };
 
-export default function ConfirmModal({ isOpen, closeModal, children }: ModalProps) {
+export default function ConfirmModal({
+  isOpen,
+  closeModal,
+  children,
+}: ModalProps) {
   return (
     <AnimatePresence>
       {isOpen && (
@@ -34,7 +38,9 @@ export default function ConfirmModal({ isOpen, closeModal, children }: ModalProp
             className="relative flex h-[220px] w-full max-w-[327px] flex-col rounded-lg bg-white p-4 shadow-lg md:max-w-[540px]"
             onClick={(e) => e.stopPropagation()}
           >
-            <div className="flex items-center justify-center px-8 pt-16 text-ml">{children}</div>
+            <div className="flex items-center justify-center px-8 pt-16 text-ml">
+              {children}
+            </div>
             <div className="absolute bottom-0 left-0 right-0 mb-6 flex justify-center md:justify-end md:pr-6">
               <Button
                 onClick={closeModal}
