@@ -23,14 +23,12 @@ export default function Pagination({
   activePage,
   pathname,
 }: PageNationProps) {
-  const nextPage =
-    Math.ceil(totalItemsCount / itemsCountPerPage) < activePage + 1
-      ? activePage
-      : activePage + 1;
+  const totalPage = Math.ceil(totalItemsCount / itemsCountPerPage);
+
+  const nextPage = totalPage < activePage + 1 ? activePage : activePage + 1;
 
   const prevPage = activePage > 1 ? activePage - 1 : 1;
 
-  const totalPage = Math.ceil(totalItemsCount / itemsCountPerPage);
   const midPoint = Math.floor(pageRangeDisplayed / 2);
 
   const startPage = Math.max(
