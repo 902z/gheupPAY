@@ -38,7 +38,7 @@ export default function ConfirmModal({ isOpen, closeModal, children }: ModalProp
             <div className="absolute bottom-0 left-0 right-0 mb-6 flex justify-center md:justify-end md:pr-6">
               <Button
                 onClick={closeModal}
-                className="flex h-[42px] w-[138px] items-center justify-center rounded-[8px] md:h-[48px] md:w-[120px]"
+                className="flex h-[42px] w-[138px] items-center justify-center rounded-[8px] font-bold md:h-[48px] md:w-[120px]"
                 color="orange"
               >
                 확인
