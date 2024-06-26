@@ -1,16 +1,15 @@
 import Image from "next/image";
 import Link from "next/link";
 
-// 모바일과 나머지 반응형을 따로 구현한 후 css로 처리하였습니다.
 export default function Footer() {
   return (
     <>
-      <footer className="relative left-0 right-0 grid grid-cols-2 grid-rows-2 justify-between gap-y-[34px] bg-gray-10 px-5 pb-4 pt-8 text-gray-50">
-        <p className="flex gap-[30px] text-m font-normal text-gray-50">
+      <footer className="relative left-0 right-0 grid grid-cols-2 grid-rows-2 justify-between gap-y-[28px] bg-gray-10 px-5 pb-4 pt-8 text-gray-50 md:flex md:px-8 md:py-[37.5px]">
+        <p className="flex gap-[30px] text-m font-normal text-gray-50 md:order-2 md:text-base">
           <span className="text-nowrap">Privacy Policy</span>
           <span>FAQ</span>
         </p>
-        <nav className="flex justify-end gap-[10px]">
+        <nav className="flex justify-end gap-[10px] md:order-last md:self-center">
           <Link href="https://mail.google.com/">
             <Image src="/icons/mail.png" alt="mail" width={25} height={25} />
           </Link>
@@ -31,7 +30,7 @@ export default function Footer() {
             />
           </Link>
         </nav>
-        <p className="self-end text-s font-normal text-gray-50">
+        <p className="self-end text-s font-normal text-gray-50 md:order-1 md:self-center md:text-base">
           ©codeit - 2023
         </p>
       </footer>
