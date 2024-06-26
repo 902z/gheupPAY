@@ -1,6 +1,6 @@
 import React from "react";
 import CustomizedAnnounce from "./_components/customized-announce";
-import { getAllNotices, getCustomizedNotices } from "@/app/_apis/api";
+import { getAllNotices, getCustomizedNotices } from "@/app/_apis/announce/api";
 import AnnounceCard from "@/app/_components/announce-card";
 // import Filter from "./_components/filter";
 
