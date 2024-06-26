@@ -10,8 +10,8 @@ export function HeaderNotLogin({ login }: HeaderNotLoginProps) {
   return (
     <>
       <section>
-        <button onClick={handleClick}>로그인</button>
-        {/* <Link href="/login">로그인</Link> */}
+        {/* <button onClick={handleClick}>로그인</button> */}
+        <Link href="/login">로그인</Link>
       </section>
       <section>
         <Link href="/signup">회원가입</Link>
