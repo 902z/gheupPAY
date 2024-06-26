@@ -32,7 +32,7 @@ export default function Footer() {
             </Link>
           </nav>
           <p className="self-end text-s font-normal text-gray-50 md:order-1 md:self-center md:text-base">
-            ©codeit - 2023
+            ©codeit - 2024
           </p>
         </section>
       </footer>
