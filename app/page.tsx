@@ -9,26 +9,26 @@ export default function Home() {
 
   return (
     <>
-      {/* <p className="font-bold" onClick={openModal}>
+      <p className="font-bold" onClick={openModal}>
         confirm-modal
       </p>
       <ConfirmModal isOpen={isOpen} closeModal={closeModal}>
         확인 모달
-      </ConfirmModal> */}
-      {/* 
-      <p className="font-bold" onClick={openModal}>
+      </ConfirmModal>
+
+      {/* <p className="font-bold" onClick={openModal}>
         warning-modal
       </p>
       <WarningModal isOpen={isOpen} closeModal={closeModal}>
         경고 모달
       </WarningModal> */}
 
-      <p className="font-bold" onClick={openModal}>
+      {/* <p className="font-bold" onClick={openModal}>
         select-modal
       </p>
       <SelectModal yesType="approve" isOpen={isOpen} closeModal={closeModal}>
         선택 모달
-      </SelectModal>
+      </SelectModal> */}
     </>
   );
 }
