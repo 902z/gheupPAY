@@ -1,4 +1,4 @@
-export interface NoticesResponse {
+export interface NoticeResponse {
   offset: number;
   limit: number;
   count: number;
