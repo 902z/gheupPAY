@@ -1,7 +1,7 @@
 import React from "react";
 import CustomizedNoticeList from "./_components/customized-notice";
-import AllNoiceList from "@/app/_components/notice-list";
 import { getAllNotices, getCustomizedNotices } from "@/app/_apis/notice";
+import AllNoticeList from "@/app/_components/notice-list";
 
 interface SearchParamsProps {
   searchParams: {
@@ -26,18 +26,14 @@ export default async function page({ searchParams }: SearchParamsProps) {
           <CustomizedNoticeList notices={customizedNotices} />
         </div>
       </div>
-      <div className="mx-auto flex w-full flex-col px-4 md:justify-center lg:max-w-[964px]">
-        <h2 className="pb-4 font-bold text-l md:pb-12 md:text-2xl">
-          전체 공고
-        </h2>
-        {/* <Filter></Filter> */}
 
-        <AllNoiceList
-          notices={allNotices}
-          activePage={page}
-          itemsCountPerPage={limit}
-        />
-      </div>
+      {/* <Filter></Filter> */}
+
+      <AllNoticeList
+        notices={allNotices}
+        activePage={page}
+        itemsCountPerPage={limit}
+      />
     </div>
   );
 }
