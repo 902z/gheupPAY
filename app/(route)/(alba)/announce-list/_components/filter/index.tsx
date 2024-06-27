@@ -12,20 +12,24 @@ interface FilterProps {
   onClose: () => void;
 }
 
-function handleOnInput(
-  event: React.FormEvent<HTMLInputElement>,
-  maxlength: number,
-) {
-  const target = event.currentTarget;
-  if (target.value.length > maxlength) {
-    target.value = target.value.substring(0, maxlength);
-  }
-}
+// function handleOnInput(
+//   event: React.FormEvent<HTMLInputElement>,
+//   maxlength: number,
+// ) {
+//   const target = event.currentTarget;
+//   if (target.value.length > maxlength) {
+//     target.value = target.value.substring(0, maxlength);
+//   }
+// }
+export const numberWithCommas = (number: number) => {
+  return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+};
+
 // placeholder 처리할 상태 1개, value 받아서 form에 던질 상태 하나.
 export default function Filter({ onClose }: FilterProps) {
   const [selectedAddresses, setSelectedAddresses] = useState<string[]>([]);
   const [startDate, setStartDate] = useState<string>("");
-  const [inputValue, setInputValue] = useState("");
+  const [inputValue, setInputValue] = useState<string>("");
   const [isFocused, setIsFocused] = useState<boolean>(false);
 
   const handleFocus = () => setIsFocused(true);
@@ -51,9 +55,15 @@ export default function Filter({ onClose }: FilterProps) {
   };
 
   const handleInputChange = (e: React.FormEvent<HTMLInputElement>) => {
-    const target = e.currentTarget;
-    handleOnInput(e, 6);
-    setInputValue(target.value);
+    const {value} = e.currentTarget;
+    // handleOnInput(e, 6);
+    const stringNumericValue = value.replace(/\D/g, "");
+    const numericValue = Number(stringNumericValue);
+    if (numericValue > 999999) {
+      setInputValue("999,999");
+} else{
+  setInputValue(numberWithCommas(numericValue));
+}
   };
 
   // const value = e.currentTarget.value;
@@ -142,10 +152,8 @@ export default function Filter({ onClose }: FilterProps) {
             <input
               className="h-[58px] w-[169px] rounded-[6px] border border-gray-30 px-[20px] py-[16px] focus:outline-primary"
               placeholder="입력"
-              type="number"
+              type="text"
               value={inputValue}
-              min={9860}
-              max={100000}
               onInput={handleInputChange}
             />
             <p className="mx-[12px] my-[16px]">이상부터</p>
