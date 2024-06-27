@@ -12,8 +12,10 @@ export default async function page() {
 
   return (
     <div className="base-container">
-      <h2 className="pb-4 font-bold text-l md:pb-12 md:text-2xl">내 가게</h2>
+      <h2 className="pb-4 font-bold text-l md:text-2xl">내 가게</h2>
       <MyShopDetailCard shopDetail={shopDetail} />
+
+      <h2 className="pb-4 font-bold text-l md:text-2xl">등록한 공고</h2>
     </div>
   );
 }

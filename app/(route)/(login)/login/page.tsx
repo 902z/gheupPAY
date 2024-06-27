@@ -44,12 +44,14 @@ function Login() {
           errorMessage={errors.password?.message}
         />
 
-        <Button color="orange" type="submit" className="h-[48px]">
+        <Button color="orange" color="submit" className="h-[48px]">
           로그인 하기
         </Button>
       </form>
       <nav>
-        <span className="text-base font-normal leading-5 text-instruction">회원이 아니신가요? </span>
+        <span className="text-base font-normal leading-5 text-instruction">
+          회원이 아니신가요?{" "}
+        </span>
         <Link href="/signup" className="cursor-pointer text-link underline">
           회원가입하기
         </Link>
