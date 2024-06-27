@@ -66,7 +66,7 @@ function CustomTextInput({
         type={type}
         {...register}
         {...rest}
-        className="h-[58px] rounded-md border border-solid border-gray-30 bg-white pl-5 text-base font-normal leading-[26px] text-black placeholder:text-gray-40 focus:outline-primary"
+        className={`h-[58px] rounded-md border border-solid border-gray-30 bg-white pl-5 text-base font-normal leading-[26px] text-black placeholder:text-gray-40 focus:outline-primary`}
       />
       {errorMessage && (
         <span className="pl-2 text-left text-s font-normal leading-4 text-primary">

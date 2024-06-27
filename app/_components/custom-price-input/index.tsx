@@ -14,7 +14,6 @@ import { UseFormRegisterReturn } from "react-hook-form";
 interface CustomTextInputPropType
   extends InputHTMLAttributes<HTMLInputElement> {
   label: string;
-  placeholder: string;
   displayRequiredMarker?: boolean;
   register: UseFormRegisterReturn;
   type?: "text" | "password";
@@ -40,7 +39,6 @@ interface CustomTextInputPropType
   </form>
  * @author ☯️채종민
  * @param {string} label input의 label
- * @param {string} placeholder input의 placeholder
  * @param {UseFormRegister} register useForm register(name) 넣어주기 
  * @param {boolean} displayRequiredMarker label 옆에 * 필수 입력 표시
  * @param {string} errorMessage 입력 오류 시 나올 에러 메시지
@@ -49,7 +47,6 @@ interface CustomTextInputPropType
 
 function CustomPriceInput({
   label,
-  placeholder,
   register,
   displayRequiredMarker = false,
   errorMessage,
@@ -92,7 +89,6 @@ function CustomPriceInput({
       <div className="relative">
         <input
           id={register.name}
-          placeholder={placeholder}
           type="text"
           {...register}
           value={stringValue}

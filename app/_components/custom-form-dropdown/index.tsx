@@ -114,7 +114,7 @@ function CustomFormDropdown({
           )}
         </label>
       </div>
-      <div className="relative">
+      <div className={`relative ${errorMessage && "outline-primary"}`}>
         <input
           className={`hover: hover: h-[58px] w-full cursor-pointer rounded-[6px] border border-gray-30 pl-5 text-left hover:bg-gray-10 focus:outline-none ${getValues() === undefined ? "text-gray-40" : "text-black"} `}
           id={register.name}
