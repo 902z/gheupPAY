@@ -1,19 +1,21 @@
 import Link, { LinkProps } from "next/link";
 import React from "react";
 
-type ButtonProps = {
-  type?: "button" | "submit";
+interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
+  btnType?: "button" | "submit";
   className: string;
-  color?: "orange" | "white";
-} & React.ButtonHTMLAttributes<HTMLButtonElement>;
+  btnColor?: "orange" | "white";
+}
 
 const STYLE = {
-  white: "border border-primary bg-white text-primary disabled:border-none disabled:text-white",
+  white:
+    "border border-primary bg-white text-primary disabled:border-none disabled:text-white",
   orange:
     "border border-primary bg-primary text-white active:border active:border-primary active:bg-white active:text-primary disabled:border-none disabled:text-white",
 };
 
-const BUTTON = "w-full rounded-md py-2 disabled:bg-gray-40 md:py-[10px] lg:py-[14px] text-center";
+const BUTTON =
+  "w-full rounded-md py-2 disabled:bg-gray-40 md:py-[10px] lg:py-[14px] text-center";
 
 /**
  * css를 입힌 버튼 컴포넌트입니다. 버튼의 색상을 결정할 수 있습니다.
@@ -28,9 +30,19 @@ const BUTTON = "w-full rounded-md py-2 disabled:bg-gray-40 md:py-[10px] lg:py-[1
  * <Button className="w-8 text-xl" color="orange">버튼</Button>
  * <Button className="w-6 text-xl" color="white">버튼</Button>
  */
-export default function Button({ children, className, color = "orange", type = "button", ...rest }: ButtonProps) {
+export default function Button({
+  children,
+  className,
+  btnColor = "orange",
+  btnType = "button",
+  ...rest
+}: ButtonProps) {
   return (
-    <button type={type} className={`${BUTTON} ${STYLE[color]} ${className}`} {...rest}>
+    <button
+      color={btnType}
+      className={`${BUTTON} ${STYLE[btnColor]} ${className}`}
+      {...rest}
+    >
       {children}
     </button>
   );
@@ -58,9 +70,19 @@ type LinkButtonProps = {
         버튼
       </LinkButton>
  */
-export function LinkButton({ href, children, className, color = "orange", ...rest }: LinkButtonProps) {
+export function LinkButton({
+  href,
+  children,
+  className,
+  color = "orange",
+  ...rest
+}: LinkButtonProps) {
   return (
-    <Link href={href} className={`block ${BUTTON} ${STYLE[color]} ${className}`} {...rest}>
+    <Link
+      href={href}
+      className={`block ${BUTTON} ${STYLE[color]} ${className}`}
+      {...rest}
+    >
       {children}
     </Link>
   );

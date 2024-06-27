@@ -55,10 +55,10 @@ export default function MyShopDetailCard({ shopDetail }: ShopData) {
             </div>
           </div>
           <div className="flex items-center justify-center gap-4">
-            <Button color="white" className="font-bold">
+            <Button btnColor="white" className="font-bold">
               편집하기
             </Button>
-            <Button color="orange" className="font-bold">
+            <Button btnColor="orange" className="font-bold">
               공고 등록하기
             </Button>
           </div>

@@ -58,7 +58,7 @@ function SignUP() {
 
         <UserTypeSelect register={register("type")} />
 
-        <Button color="orange" color="submit" className="h-[48px]">
+        <Button btnColor="orange" color="submit" className="h-[48px]">
           가입하기
         </Button>
       </form>
