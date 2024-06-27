@@ -1,6 +1,7 @@
 import React from "react";
 import MyShopDetailCard from "../_components/my-store-detail-card";
 import { getShopDetail } from "@/app/_apis/store/api";
+import NoneNotice from "../_components/none-notice";
 
 export const metadata = {
   title: "내 가게 상세",
@@ -15,7 +16,8 @@ export default async function page() {
       <h2 className="pb-4 font-bold text-l md:text-2xl">내 가게</h2>
       <MyShopDetailCard shopDetail={shopDetail} />
 
-      <h2 className="pb-4 font-bold text-l md:text-2xl">등록한 공고</h2>
+      <h2 className="py-8 font-bold text-l md:text-2xl">등록한 공고</h2>
+      <NoneNotice />
     </div>
   );
 }
