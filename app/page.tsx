@@ -1,8 +1,13 @@
 import Link from "next/link";
 import Modal from "./_components/modals";
+import NotificationButton from "./_components/notification";
 export default function Home() {
   return (
     <>
+      <div className="m-40 flex justify-between">
+        <div>ㅎㅎ</div>
+        <NotificationButton>알림</NotificationButton>
+      </div>
       <Modal type="confirm">confirm</Modal>
       <Modal type="warning">warning</Modal>
       <Modal yesType="yes">select</Modal>
