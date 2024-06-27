@@ -1,7 +1,7 @@
 import React from "react";
 import MyShopDetailCard from "../_components/my-store-detail-card";
-import { getShopDetail } from "@/app/_apis/store/api";
 import NoneNotice from "../_components/none-notice";
+import { getShopDetail } from "@/app/_apis/shop";
 
 export const metadata = {
   title: "내 가게 상세",
