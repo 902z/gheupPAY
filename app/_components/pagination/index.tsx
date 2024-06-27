@@ -8,15 +8,15 @@ import Image from "next/image";
 import { usePathname, useSearchParams } from "next/navigation";
 
 type PageNationProps = {
-  onChange?: (page: number) => void;
   pageRangeDisplayed?: number;
   totalItemsCount: number;
   itemsCountPerPage: number;
   activePage: number;
+  focusHash?: string;
 };
 
 export default function Pagination({
-  onChange,
+  focusHash,
   pageRangeDisplayed = 7,
   totalItemsCount,
   itemsCountPerPage,
@@ -28,7 +28,7 @@ export default function Pagination({
   const creatPageURL = (page: number) => {
     const params = new URLSearchParams(searchParams);
     params.set("page", page.toString());
-    return `${pathname}?${params.toString()}`;
+    return `${pathname}?${params.toString()}#${focusHash}`;
   };
 
   const totalPage = Math.ceil(totalItemsCount / itemsCountPerPage);
@@ -58,7 +58,11 @@ export default function Pagination({
     <div className="flex justify-center gap-[2px] text-m">
       <Link
         className={`${activePage === 1 ? "pointer-events-none" : ""} flex h-10 w-10 items-center justify-center`}
-        href={{ pathname: `${pathname}`, query: { page: prevPage } }}
+        href={{
+          pathname: `${pathname}`,
+          query: { page: prevPage },
+          hash: focusHash,
+        }}
       >
         {activePage === 1 ? (
           <Image
@@ -83,7 +87,11 @@ export default function Pagination({
       {endPage !== totalPage ? (
         <Link
           className="flex h-10 w-10 items-center justify-center"
-          href={{ pathname: `${pathname}`, query: { page: nextPage } }}
+          href={{
+            pathname: `${pathname}`,
+            query: { page: nextPage },
+            hash: focusHash,
+          }}
         >
           <Image src={arrowRight} alt="arrow-right" />
         </Link>
