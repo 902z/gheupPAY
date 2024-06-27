@@ -36,11 +36,11 @@ type NoticesData = {
   };
 };
 
-type AnnounceCardProps = {
+type NoticeCardProps = {
   notices: NoticesData[];
 };
 
-export default function AnnounceCard({ notices }: AnnounceCardProps) {
+export default function NoticeCard({ notices }: NoticeCardProps) {
   return (
     <>
       {notices &&

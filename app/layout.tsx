@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
 import "@/styles/globals.css";
+import Header from "./_components/header";
+import Footer from "./_components/footer";
 import Hydration from "./_components/hydration";
 
 export const metadata: Metadata = {
@@ -23,7 +25,9 @@ export default function RootLayout({
     <html lang="ko">
       <body>
         <Hydration />
-        {children}
+        <Header />
+        <main className="min-h-screen">{children}</main>
+        <Footer />
       </body>
     </html>
   );
