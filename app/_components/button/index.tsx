@@ -77,19 +77,7 @@ export function LinkButton({
   color = "orange",
   ...rest
 }: LinkButtonProps) {
-export function LinkButton({
-  href,
-  children,
-  className,
-  color = "orange",
-  ...rest
-}: LinkButtonProps) {
   return (
-    <Link
-      href={href}
-      className={`block ${BUTTON} ${STYLE[color]} ${className}`}
-      {...rest}
-    >
     <Link
       href={href}
       className={`block ${BUTTON} ${STYLE[color]} ${className}`}
