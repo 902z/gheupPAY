@@ -5,7 +5,7 @@ import Image from "next/image";
 
 import close from "@/public/icons/close.png";
 import closeRed40 from "@/public/icons/close-red-40.png";
-import { ADDRESS } from "@/constants/address";
+import { ADDRESS } from "@/app/_constants/address";
 
 export default function Filter() {
   const [selectedAddresses, setSelectedAddresses] = useState<string[]>([]);
@@ -27,7 +27,12 @@ export default function Filter() {
       <div className="ml-[20px] w-[390px] rounded-[10px] border border-gray-20 px-[20px] py-[24px] shadow">
         <div className="mb-[24px] flex justify-between font-bold text-l">
           <h2>상세 필터</h2>
-          <Image className="h-[24px] w-[24px] cursor-pointer" src={close} alt="닫기" width={24} />
+          <Image
+            className="h-[24px] w-[24px] cursor-pointer"
+            src={close}
+            alt="닫기"
+            width={24}
+          />
         </div>
         <div className="w-[350px] border-b pb-[24px]">
           <h3>위치</h3>
