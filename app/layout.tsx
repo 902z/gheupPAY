@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import "@/styles/globals.css";
-import Test from "./_components/test";
+import Hydration from "./_components/hydration";
 
 export const metadata: Metadata = {
   description:
@@ -22,7 +22,7 @@ export default function RootLayout({
   return (
     <html lang="ko">
       <body>
-        <Test />
+        <Hydration />
         {children}
       </body>
     </html>
