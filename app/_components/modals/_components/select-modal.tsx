@@ -56,17 +56,17 @@ export default function SelectModal({
             <div className="flex items-center justify-center px-8 text-ml">
               {children}
             </div>
-            <div className="absolute bottom-0 left-0 right-0 mb-6 flex justify-center gap-3">
+            <div className="absolute bottom-0 left-0 right-0 mb-6 flex justify-center gap-3 px-14 md:px-0">
               <Button
                 onClick={closeModal}
-                className="flex h-[42px] w-[90px] items-center justify-center rounded-[8px] font-bold md:h-[48px] md:w-[120px]"
+                className="flex h-[42px] items-center justify-center rounded-[8px] font-bold md:h-[48px] md:w-[120px]"
                 color="white"
               >
                 아니오
               </Button>
               <Button
                 onClick={closeModal}
-                className="flex h-[42px] w-[90px] items-center justify-center rounded-[8px] font-bold md:h-[48px] md:w-[120px]"
+                className="flex h-[42px] items-center justify-center rounded-[8px] font-bold md:h-[48px] md:w-[120px]"
                 color="orange"
               >
                 {YES_TYPE[yesType]}
