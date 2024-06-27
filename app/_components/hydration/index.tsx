@@ -1,6 +1,6 @@
 "use client";
 
-import useUserStore from "@/stores/user-store";
+import useUserStore from "@/stores/create-store";
 import { useEffect } from "react";
 
 // mount 시 rehydrate를 실행합니다.
