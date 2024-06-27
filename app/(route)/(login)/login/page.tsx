@@ -3,7 +3,7 @@ import CustomTextInput from "@/app/_components/custom-text-input";
 import { useForm } from "react-hook-form";
 import Link from "next/link";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { loginSchema } from "../_utils/schema";
+import { loginSchema } from "../schema";
 import Button from "@/app/_components/button";
 import postLogin from "@/app/_apis/login/post-login";
 import { useRouter } from "next/navigation";

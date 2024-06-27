@@ -44,7 +44,6 @@ const postLogin: PostLogin = async ({ email, password }) => {
     );
     await setCookie("accessToken", data.item.token);
     await setCookie("userId", data.item.user.item.id);
-    await setCookie("type", data.item.user.item.type);
     return data;
   } catch (error) {
     if (isAxiosError(error)) {

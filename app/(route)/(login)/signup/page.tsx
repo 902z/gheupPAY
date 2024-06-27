@@ -4,7 +4,7 @@ import { useForm } from "react-hook-form";
 import Link from "next/link";
 import UserTypeSelect from "./_components/user-type-select";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { signUpSchema } from "../_utils/schema";
+import { signUpSchema } from "../schema";
 import { UserType } from "@/app/_constants/user-type";
 import Button from "@/app/_components/button";
 import postSignUp from "@/app/_apis/login/post-signup";
