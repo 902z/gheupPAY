@@ -36,11 +36,11 @@ type NoticesData = {
   };
 };
 
-type AnnounceCardProps = {
+type NoticeCardProps = {
   notices: NoticesData[];
 };
 
-export default function CustomizedAnnounce({ notices }: AnnounceCardProps) {
+export default function CustomizedNotice({ notices }: NoticeCardProps) {
   return (
     <>
       <div className="flex">
