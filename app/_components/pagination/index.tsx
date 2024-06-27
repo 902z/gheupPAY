@@ -5,6 +5,7 @@ import arrowLeft from "@/public/icons/arrow-left.png";
 import arrowRight from "@/public/icons/arrow-right.png";
 import arrowLeftDisabled from "@/public/icons/arrow-left-disabled.png";
 import Image from "next/image";
+import { usePathname, useSearchParams } from "next/navigation";
 
 type PageNationProps = {
   onChange?: (page: number) => void;
@@ -12,7 +13,6 @@ type PageNationProps = {
   totalItemsCount: number;
   itemsCountPerPage: number;
   activePage: number;
-  pathname: string;
 };
 
 export default function Pagination({
@@ -21,8 +21,16 @@ export default function Pagination({
   totalItemsCount,
   itemsCountPerPage,
   activePage,
-  pathname,
 }: PageNationProps) {
+  const pathname = usePathname();
+  const searchParams = useSearchParams();
+
+  const creatPageURL = (page: number) => {
+    const params = new URLSearchParams(searchParams);
+    params.set("page", page.toString());
+    return `${pathname}?${params.toString()}`;
+  };
+
   const totalPage = Math.ceil(totalItemsCount / itemsCountPerPage);
 
   const nextPage = totalPage < activePage + 1 ? activePage : activePage + 1;
@@ -67,7 +75,7 @@ export default function Pagination({
         <Link
           className={` ${activePage === page ? "bg-red-30 text-white" : ""} flex h-10 w-10 items-center justify-center rounded-sm`}
           key={page}
-          href={{ pathname: `${pathname}`, query: { page: page } }}
+          href={creatPageURL(page)}
         >
           {page}
         </Link>

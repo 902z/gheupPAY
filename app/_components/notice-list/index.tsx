@@ -1,7 +1,5 @@
 "use client";
 import React from "react";
-
-import "swiper/css";
 import Pagination from "@/app/_components/pagination";
 import { NoticeResponse } from "@/app/_apis/notice/response-type.js";
 import NoticeCard from "../notice-card";
@@ -33,7 +31,6 @@ export default function AllNoiceList({
           activePage={activePage}
           totalItemsCount={totalItemsCount}
           itemsCountPerPage={itemsCountPerPage}
-          pathname="/announce-list"
         />
       </div>
     </>
