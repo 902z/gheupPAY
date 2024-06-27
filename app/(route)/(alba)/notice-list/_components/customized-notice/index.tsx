@@ -17,31 +17,17 @@ export default function CustomizedNoticeList({
     <>
       <div className="flex">
         <Swiper
-          slidesOffsetAfter={300}
           pagination={{
             clickable: true,
           }}
-          breakpoints={{
-            375: {
-              slidesPerView: 3,
-              spaceBetween: 30,
-            },
-            767: {
-              slidesPerView: 2,
-              spaceBetween: 50,
-            },
-            1024: {
-              slidesPerView: 4,
-              spaceBetween: 300,
-            },
-          }}
+          spaceBetween={14}
         >
           {noticeList &&
             noticeList.map((cardContents) => {
               return (
                 <SwiperSlide
                   key={cardContents.item.id}
-                  className="overflow-visible py-4"
+                  className="swiper-slide overflow-visible pb-4 pt-4"
                 >
                   <NoticeCard cardContents={cardContents} />
                 </SwiperSlide>

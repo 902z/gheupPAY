@@ -76,7 +76,7 @@ export default function NoticeCard({ cardContents }: NoticeCardProps) {
             </data>
             <div className="flex items-start gap-1">
               <Image src={clock} alt="시간" width={20} height={20} />
-              <time className="text-s text-gray-50 md:text-m">
+              <time className="responsive-text truncate text-s text-gray-50 md:text-m">
                 {date} <br className="md:hidden" />{" "}
                 {calculateTimeRange(
                   cardContents.item.startsAt,

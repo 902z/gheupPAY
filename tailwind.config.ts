@@ -47,7 +47,7 @@ const config: Config = {
         },
         kakao: "#FEE500",
         link: "#5534DA",
-        instruction:"#333236"
+        instruction: "#333236",
       },
     },
   },

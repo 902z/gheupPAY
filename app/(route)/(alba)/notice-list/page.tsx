@@ -12,7 +12,7 @@ interface SearchParamsProps {
 export default async function page({ searchParams }: SearchParamsProps) {
   const customizedNotices = await getCustomizedNotices({});
   const page = parseInt(searchParams.page || "1", 10);
-  const limit = 12;
+  const limit = 6;
   const offset = (page - 1) * limit;
   const allNotices = await getAllNotices({ offset, limit });
 
