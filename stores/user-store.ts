@@ -37,14 +37,16 @@ export type UserStore = UserState & UserActions;
  * @description
  * store를 사용하기 위한 hook입니다.
  * hydration을 위해서 따로 처리가 되어있으니 이제 그냥 사용하시면 됩니다.
+ * 아래 예시는 type과 login을 하나씩 가져와서 사용하는 예시입니다.
  * @example
  * "use client";
 
 import useUserStore from "@/stores/user-store";
 
 export default function Test() {
-  const { login, type } = useUserStore((state) => state);
-
+  const login = useUserStore((state) => state.login);
+  const type = useUserStore((state) => state.type);
+  
   const handleLogin = () => {
     login("employer");
   };
@@ -57,8 +59,8 @@ export default function Test() {
   );
 }
 
-위 예시는 user-store.ts에서 type와 login을 하나씩 가져와서 사용하는 예시입니다.
-
+@description
+아래 예시는 스토어 전체를 가져와서 사용하는 예시입니다.
 @example
 "use client";
 
@@ -88,6 +90,7 @@ export default function Test() {
 
 export default function AnnounceCard({ notices }: AnnounceCardProps) {
   const postNotice = useUserStore((state) => state.postNotice);
+  // postNotice라는 함수를 가져온다.
 
   return (
     <>
@@ -98,12 +101,12 @@ export default function AnnounceCard({ notices }: AnnounceCardProps) {
           return (
             <>
               <button onClick={() => postNotice(notice.item)}>
+              // postNotice를 이용해서 notice를 업데이트한다.
                 포스트 데이터 추가
               </button>
 
-위 예시는 store 전체를 가져와서 사용하는 예시입니다.
-단 주의할 점은 store 전체를 가져왔기 때문에 다른 곳에서 store를 변화시키면
-리턴값에 포함되든 안되든 상관없이 컴포넌트 전체 리렌더링이 일어납니다.
+주의할 점은 store 전체를 가져올 경우 상태 변경시 변경된 상태와 관련된 것이 아니더라도 
+상관없이 컴포넌트 전체 리렌더링이 일어납니다.
 주의해주세요. 하나만 필요하면 하나만 가져오는 걸 권장합니다.
  * @param (state)=>state 혹은 (state)=>state.type 형태로 사용하면 됩니다.
  * @returns 원하는 state
