@@ -71,9 +71,9 @@ type OpenModalProps = {
   </OpenModal>
 
   * @param {boolean} modalType confirm warning select window 중 하나 선택
-  *  select 선탣했으면 selectType 필수 window 선택했으면 windowTitle 필수
+  *  select 선택했으면 selectType 필수 window 선택했으면 windowTitle 필수
   * @param {ReactNode|string} modalContents 모달 안에 들어갈 내용
- * @author ☯️채종민 extends 김보미미
+ * @author ☯️채종민 extends 김보미
  */
 
 export default function OpenModal({
