@@ -1,5 +1,5 @@
 "use client";
-import useModal from "@/app/_hooks/useModal";
+import useModal from "@/app/_hooks/use-modal";
 import ConfirmModal from "./_components/confirm-modal";
 import WarningModal from "./_components/warning-modal";
 import SelectModal from "./_components/select-modal";

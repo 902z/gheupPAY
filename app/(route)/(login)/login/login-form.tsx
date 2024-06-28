@@ -11,8 +11,8 @@ import pulse from "@/public/icons/pulse.svg";
 import Image from "next/image";
 import { useState } from "react";
 import useUserStore from "@/stores/create-store";
-import useCheckLoginStatus from "@/app/_hooks/useCheckLoginStatus";
-import useModal from "@/app/_hooks/useModal";
+import useCheckLoginStatus from "@/app/_hooks/use-check-login-status";
+import useModal from "@/app/_hooks/use-modal";
 import ConfirmModal from "@/app/_components/modals/_components/confirm-modal";
 
 interface FormValues {
