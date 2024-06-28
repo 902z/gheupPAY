@@ -4,12 +4,13 @@
 
 @layer utilities {
   .base-container {
-    @apply min-h-screen w-full bg-gray-5 px-3 pt-[120px] md:px-8 md:pt-[90px] lg:mx-auto lg:max-w-[964px] lg:px-0;
+    @apply min-h-screen w-full px-3 pt-[120px] md:px-8 md:pt-[90px] lg:mx-auto lg:max-w-[964px] lg:px-0;
   }
 }
 
 body {
   text-decoration: none;
+  background-color: #fafafa;
 }
 
 input:-webkit-autofill {
