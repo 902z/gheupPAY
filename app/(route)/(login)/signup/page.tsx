@@ -4,9 +4,15 @@ import { useForm } from "react-hook-form";
 import Link from "next/link";
 import UserTypeSelect from "./_components/user-type-select";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { signUpSchema } from "../_utils/schema";
+import { signUpSchema } from "../schema";
 import { UserType } from "@/app/_constants/user-type";
 import Button from "@/app/_components/button";
+import { postSignUp } from "@/app/_apis/user";
+import { useRouter } from "next/navigation";
+import { useState } from "react";
+import pulse from "@/public/icons/pulse.svg";
+import Image from "next/image";
+import useCheckLoginStatus from "@/app/_hooks/useCheckLoginStatus";
 
 interface FormValues {
   email: string;
@@ -16,6 +22,7 @@ interface FormValues {
 }
 
 function SignUP() {
+  const router = useRouter();
   const resolver = yupResolver(signUpSchema);
   const {
     handleSubmit,
@@ -26,9 +33,27 @@ function SignUP() {
     mode: "onSubmit",
   });
 
+  const [waiting, setWaiting] = useState(false);
+
   const handleForm = handleSubmit(async (data: FormValues) => {
-    // console.log(data);
+    const { email, password, type } = data;
+    try {
+      setWaiting(true);
+      const result = await postSignUp({ email, password, type });
+      if (result) {
+        alert("회원가입 성공");
+        router.replace("/login");
+      }
+    } catch (error) {
+      if (error instanceof Error) {
+        alert(error.message);
+      }
+    } finally {
+      setWaiting(false);
+    }
   });
+
+  useCheckLoginStatus();
 
   return (
     <>
@@ -58,9 +83,19 @@ function SignUP() {
 
         <UserTypeSelect register={register("type")} />
 
-        <Button btnColor="orange" color="submit" className="h-[48px]">
-          가입하기
-        </Button>
+        {waiting ? (
+          <Image
+            src={pulse}
+            alt="처리 중"
+            width={48}
+            height={48}
+            className="mx-auto my-0"
+          />
+        ) : (
+          <Button btnColor="orange" color="submit" className="h-[48px]">
+            가입하기
+          </Button>
+        )}
       </form>
 
       <nav>

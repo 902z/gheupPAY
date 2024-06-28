@@ -1,7 +1,10 @@
+"use client";
+
 import { InputHTMLAttributes } from "react";
 import { UseFormRegisterReturn } from "react-hook-form";
 
-interface CustomTextInputPropType extends InputHTMLAttributes<HTMLInputElement> {
+interface CustomTextInputPropType
+  extends InputHTMLAttributes<HTMLInputElement> {
   label: string;
   placeholder: string;
   displayRequiredMarker?: boolean;
@@ -46,7 +49,10 @@ function CustomTextInput({
 }: CustomTextInputPropType) {
   return (
     <div className="flex w-full flex-col gap-2">
-      <label htmlFor={register.name} className="text-start text-base font-normal leading-[26px] text-black">
+      <label
+        htmlFor={register.name}
+        className="text-start text-base font-normal leading-[26px] text-black"
+      >
         {label}
         {displayRequiredMarker && (
           <abbr className="no-underline" title="필수입력" aria-label="required">
@@ -60,9 +66,13 @@ function CustomTextInput({
         type={type}
         {...register}
         {...rest}
-        className="h-[58px] rounded-md border border-solid border-gray-30 bg-white pl-5 text-base font-normal leading-[26px] text-black placeholder:text-gray-40 focus:outline-primary"
+        className={`h-[58px] rounded-md border border-solid border-gray-30 bg-white pl-5 text-base font-normal leading-[26px] text-black placeholder:text-gray-40 focus:outline-primary`}
       />
-      {errorMessage && <span className="pl-2 text-left text-s font-normal leading-4 text-primary">{errorMessage}</span>}
+      {errorMessage && (
+        <span className="pl-2 text-left text-s font-normal leading-4 text-primary">
+          {errorMessage}
+        </span>
+      )}
     </div>
   );
 }
