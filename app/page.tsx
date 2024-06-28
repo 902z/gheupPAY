@@ -1,9 +1,20 @@
+"use client";
 import Link from "next/link";
 import Modal from "./_components/modals";
+import { FormEvent, useRef } from "react";
+import { getImageUrl } from "./_apis/image";
+
 import OpenModal from "./_components/modals/_components/open-modal";
 import ShopRegisterForm from "./_components/shop-register/";
 
 export default function Home() {
+  const inputRef = useRef<HTMLInputElement>(null);
+  const handleSubmit = async (e: FormEvent) => {
+    e.preventDefault();
+    if (!inputRef.current || !inputRef.current.files) return;
+    console.log(inputRef.current?.files?.[0]);
+    console.log(await getImageUrl(inputRef.current.files[0]));
+  };
   return (
     <>
       <div className="base-container flex flex-col text-center">
@@ -19,6 +30,13 @@ export default function Home() {
         <p className="text-xl">xl: 28px</p>
         <Link href="/admin/shop-register" className="text-link">
           가게 정보 등록 페이지
+        </Link>
+        <form onSubmit={handleSubmit}>
+          <input type="file" ref={inputRef} />
+          <button>전송</button>
+        </form>
+        <Link href="/login" className="text-link">
+          로그인
         </Link>
         <span className="text-red">VS</span>
         <OpenModal
