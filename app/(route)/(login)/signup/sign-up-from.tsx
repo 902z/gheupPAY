@@ -12,6 +12,8 @@ import { useState } from "react";
 import pulse from "@/public/icons/pulse.svg";
 import Image from "next/image";
 import useCheckLoginStatus from "@/app/_hooks/useCheckLoginStatus";
+import useModal from "@/app/_hooks/useModal";
+import ConfirmModal from "@/app/_components/modals/_components/confirm-modal";
 
 interface FormValues {
   email: string;
@@ -20,9 +22,20 @@ interface FormValues {
   type: UserType;
 }
 
-function SignUPForm() {
+function SignUpForm() {
   const router = useRouter();
   const resolver = yupResolver(signUpSchema);
+  const {
+    isOpen: successIsOpen,
+    openModal: successOpenModal,
+    closeModal: successCloseModal,
+  } = useModal();
+  const {
+    isOpen: failIsOpen,
+    openModal: failOpenModal,
+    closeModal: failCloseModal,
+  } = useModal();
+  const [modalMessage, setModalMessage] = useState("");
   const {
     handleSubmit,
     register,
@@ -34,18 +47,23 @@ function SignUPForm() {
 
   const [waiting, setWaiting] = useState(false);
 
+  const handleRedirect = () => {
+    router.replace("/login");
+  };
+
   const handleForm = handleSubmit(async (data: FormValues) => {
     const { email, password, type } = data;
     try {
       setWaiting(true);
       const result = await postSignUp({ email, password, type });
       if (result) {
-        alert("회원가입 성공");
-        router.replace("/login");
+        setModalMessage("가입이 완료되었습니다!");
+        successOpenModal();
       }
     } catch (error) {
       if (error instanceof Error) {
-        alert(error.message);
+        setModalMessage(error.message);
+        failOpenModal();
       }
     } finally {
       setWaiting(false);
@@ -55,47 +73,57 @@ function SignUPForm() {
   useCheckLoginStatus();
 
   return (
-    <form onSubmit={handleForm} className="mb-4 flex w-full flex-col gap-7">
-      <CustomTextInput
-        label="이메일"
-        placeholder="이메일을 입력하세요"
-        register={register("email")}
-        errorMessage={errors.email?.message}
-      />
-
-      <CustomTextInput
-        label="비밀번호"
-        placeholder="비밀번호를 입력하세요"
-        register={register("password")}
-        type="password"
-        errorMessage={errors.password?.message}
-      />
-
-      <CustomTextInput
-        label="비밀번호 확인"
-        placeholder="비밀번호 한 번 더 입력하세요"
-        register={register("passwordConfirm")}
-        type="password"
-        errorMessage={errors.passwordConfirm?.message}
-      />
-
-      <UserTypeSelect register={register("type")} />
-
-      {waiting ? (
-        <Image
-          src={pulse}
-          alt="처리 중"
-          width={48}
-          height={48}
-          className="mx-auto my-0"
+    <>
+      <form onSubmit={handleForm} className="mb-4 flex w-full flex-col gap-7">
+        <CustomTextInput
+          label="이메일"
+          placeholder="이메일을 입력하세요"
+          register={register("email")}
+          errorMessage={errors.email?.message}
         />
-      ) : (
-        <Button btnColor="orange" color="submit" className="h-[48px]">
-          가입하기
-        </Button>
+
+        <CustomTextInput
+          label="비밀번호"
+          placeholder="비밀번호를 입력하세요"
+          register={register("password")}
+          type="password"
+          errorMessage={errors.password?.message}
+        />
+
+        <CustomTextInput
+          label="비밀번호 확인"
+          placeholder="비밀번호 한 번 더 입력하세요"
+          register={register("passwordConfirm")}
+          type="password"
+          errorMessage={errors.passwordConfirm?.message}
+        />
+
+        <UserTypeSelect register={register("type")} />
+
+        {waiting ? (
+          <Image
+            src={pulse}
+            alt="처리 중"
+            width={48}
+            height={48}
+            className="mx-auto my-0"
+          />
+        ) : (
+          <Button btnColor="orange" color="submit" className="h-[48px]">
+            가입하기
+          </Button>
+        )}
+      </form>
+      {failIsOpen && (
+        <ConfirmModal closeModal={failCloseModal}>{modalMessage}</ConfirmModal>
       )}
-    </form>
+      {successIsOpen && (
+        <ConfirmModal onClick={handleRedirect} closeModal={successCloseModal}>
+          {modalMessage}
+        </ConfirmModal>
+      )}
+    </>
   );
 }
 
-export default SignUPForm;
+export default SignUpForm;

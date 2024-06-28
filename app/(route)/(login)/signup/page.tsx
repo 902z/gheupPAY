@@ -1,10 +1,10 @@
 import Link from "next/link";
-import SignUPForm from "./sign-up-from";
+import SignUpForm from "./sign-up-from";
 
 function SignUP() {
   return (
     <>
-      <SignUPForm />
+      <SignUpForm />
       <nav>
         <span className="text-base font-normal leading-5 text-instruction">
           이미 가입 하셨나요?{" "}

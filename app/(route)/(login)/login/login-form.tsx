@@ -12,6 +12,8 @@ import Image from "next/image";
 import { useState } from "react";
 import useUserStore from "@/stores/create-store";
 import useCheckLoginStatus from "@/app/_hooks/useCheckLoginStatus";
+import useModal from "@/app/_hooks/useModal";
+import ConfirmModal from "@/app/_components/modals/_components/confirm-modal";
 
 interface FormValues {
   email: string;
@@ -21,6 +23,7 @@ interface FormValues {
 function LoginForm() {
   const router = useRouter();
   const resolver = yupResolver(loginSchema);
+  const { isOpen, openModal, closeModal } = useModal();
   const {
     handleSubmit,
     register,
@@ -30,6 +33,7 @@ function LoginForm() {
     mode: "onSubmit",
   });
   const [waiting, setWaiting] = useState(false);
+  const [failMessage, setFailMessage] = useState("");
   const login = useUserStore((state) => state.login);
 
   const handleForm = handleSubmit(async (data: FormValues) => {
@@ -38,7 +42,6 @@ function LoginForm() {
       const result = await postLogin(data);
       if (result) {
         login(result.item.user.item.type);
-        alert("로그인 성공");
         if (result.item.user.item.type === USER_TYPE.EMPLOYEE) {
           router.replace("/notice-list");
         } else {
@@ -47,7 +50,8 @@ function LoginForm() {
       }
     } catch (error) {
       if (error instanceof Error) {
-        alert(error.message);
+        setFailMessage(error.message);
+        openModal();
       }
     } finally {
       setWaiting(false);
@@ -56,33 +60,39 @@ function LoginForm() {
   useCheckLoginStatus();
 
   return (
-    <form
-      onSubmit={handleForm}
-      className="mb-4 flex w-full flex-col items-center gap-7"
-    >
-      <CustomTextInput
-        label="이메일"
-        placeholder="이메일을 입력하세요"
-        register={register("email")}
-        errorMessage={errors.email?.message}
-      />
+    <>
+      <form
+        onSubmit={handleForm}
+        className="mb-4 flex w-full flex-col items-center gap-7"
+      >
+        <CustomTextInput
+          label="이메일"
+          placeholder="이메일을 입력하세요"
+          register={register("email")}
+          errorMessage={errors.email?.message}
+        />
 
-      <CustomTextInput
-        label="비밀번호"
-        placeholder="비밀번호를 입력하세요"
-        register={register("password")}
-        type="password"
-        errorMessage={errors.password?.message}
-      />
+        <CustomTextInput
+          label="비밀번호"
+          placeholder="비밀번호를 입력하세요"
+          register={register("password")}
+          type="password"
+          errorMessage={errors.password?.message}
+        />
 
-      {waiting ? (
-        <Image src={pulse} alt="처리 중" width={48} height={48} />
-      ) : (
-        <Button btnColor="orange" color="submit" className="h-[48px]">
-          로그인 하기
-        </Button>
+        {waiting ? (
+          <Image src={pulse} alt="처리 중" width={48} height={48} />
+        ) : (
+          <Button btnColor="orange" color="submit" className="h-[48px]">
+            로그인 하기
+          </Button>
+        )}
+      </form>
+
+      {isOpen && (
+        <ConfirmModal closeModal={closeModal}>{failMessage}</ConfirmModal>
       )}
-    </form>
+    </>
   );
 }
 
