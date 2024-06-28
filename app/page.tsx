@@ -39,6 +39,7 @@ export default function Home() {
         <OpenModal warning modalContents="클나!">
           <button>경고하기</button>
         </OpenModal>
+        왜 프리뷰가 안 뜨지
       </div>
     </>
   );
