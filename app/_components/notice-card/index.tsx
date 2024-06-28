@@ -38,13 +38,21 @@ type NoticesData = {
 
 type NoticeCardProps = {
   notices: NoticesData[];
+  filteredAddresses: string[];
+  wageNumber: number;
 };
 
-export default function NoticeCard({ notices }: NoticeCardProps) {
+export default function NoticeCard({ notices, filteredAddresses, wageNumber }: NoticeCardProps) {
+
+  const filteredNotices = notices.filter(notice =>
+    (filteredAddresses.length === 0 || filteredAddresses.includes(notice.item.shop.item.address1)) &&
+    (!wageNumber || wageNumber <= notice.item.hourlyPay)
+  );
+
   return (
     <>
-      {notices &&
-        notices.map((notice) => {
+      {filteredNotices &&
+        filteredNotices.map((notice) => {
           const hourlyWage = calculateWagePercentage(notice.item.hourlyPay);
           const date = dateFormat(notice.item.startsAt);
           return (

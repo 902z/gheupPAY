@@ -1,8 +1,9 @@
 import React from "react";
 import CustomizedNotice from "./_components/customized-notice";
 import { getAllNotices, getCustomizedNotices } from "@/app/_apis/notice";
-import NoticeCard from "@/app/_components/notice-card";
-import FilterButton from "./_components/filter-button";
+// import NoticeCard from "@/app/_components/notice-card";
+// import FilterButton from "./_components/filter-button";
+import NoticeWithFilter from './_components/notice-with-filter';
 
 export default async function page() {
   const customizedNotices = await getCustomizedNotices({});
@@ -19,15 +20,7 @@ export default async function page() {
         </div>
       </div>
       <div className="mx-auto flex w-full flex-col px-4 md:justify-center lg:max-w-[964px]">
-        <div className="relative flex justify-between">
-          <h2 className="pb-4 font-bold text-l md:pb-12 md:text-2xl">
-            전체 공고
-          </h2>
-          <FilterButton />
-        </div>
-          <div className="lg grid grid-cols-2 gap-4 lg:grid-cols-3">
-            <NoticeCard notices={allNotices} />
-          </div>
+            <NoticeWithFilter allNotices={allNotices}/>
       </div>
     </div>
   );
