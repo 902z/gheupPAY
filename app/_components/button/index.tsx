@@ -1,11 +1,11 @@
 import Link, { LinkProps } from "next/link";
 import React from "react";
 
-type ButtonProps = {
-  type?: "button" | "submit";
+interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
+  btnType?: "button" | "submit";
   className: string;
-  color?: "orange" | "white";
-} & React.ButtonHTMLAttributes<HTMLButtonElement>;
+  btnColor?: "orange" | "white";
+}
 
 const STYLE = {
   white:
@@ -33,14 +33,14 @@ const BUTTON =
 export default function Button({
   children,
   className,
-  color = "orange",
-  type = "button",
+  btnColor = "orange",
+  btnType = "button",
   ...rest
 }: ButtonProps) {
   return (
     <button
-      type={type}
-      className={`${BUTTON} ${STYLE[color]} ${className}`}
+      color={btnType}
+      className={`${BUTTON} ${STYLE[btnColor]} ${className}`}
       {...rest}
     >
       {children}
