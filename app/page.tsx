@@ -2,6 +2,7 @@ import Link from "next/link";
 import Modal from "./_components/modals";
 import OpenModal from "./_components/modals/_components/open-modal";
 import ShopRegisterForm from "./_components/shop-register/";
+import Button, { LinkButton } from "./_components/button";
 
 export default function Home() {
   return (
@@ -39,6 +40,17 @@ export default function Home() {
         <OpenModal confirm modalContents="클나!">
           <button>경고하기</button>
         </OpenModal>
+
+        <Button className="w-8 text-xl" btnColor="white">
+          헤위
+        </Button>
+        <LinkButton
+          href="/admin/shop-register"
+          className="w-6 text-xl"
+          btnColor="orange"
+        >
+          링크
+        </LinkButton>
       </div>
     </>
   );

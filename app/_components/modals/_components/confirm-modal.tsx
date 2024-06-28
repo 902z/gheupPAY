@@ -45,7 +45,7 @@ export default function ConfirmModal({
               <Button
                 onClick={closeModal}
                 className="mx-24 flex h-[42px] items-center justify-center rounded-[8px] font-bold md:mx-0 md:h-[48px] md:w-[120px]"
-                color="orange"
+                btnColor="orange"
               >
                 확인
               </Button>

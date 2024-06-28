@@ -80,7 +80,7 @@ function Login() {
         {waiting ? (
           <Image src={pulse} alt="처리 중" width={48} height={48} />
         ) : (
-          <Button btnColor="orange" color="submit" className="h-[48px]">
+          <Button btnColor="orange" btnType="submit" className="h-[48px]">
             로그인 하기
           </Button>
         )}

@@ -92,7 +92,7 @@ function SignUP() {
             className="mx-auto my-0"
           />
         ) : (
-          <Button btnColor="orange" color="submit" className="h-[48px]">
+          <Button btnColor="orange" btnType="submit" className="h-[48px]">
             가입하기
           </Button>
         )}

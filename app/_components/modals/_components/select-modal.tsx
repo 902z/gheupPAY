@@ -60,14 +60,14 @@ export default function SelectModal({
               <Button
                 onClick={closeModal}
                 className="flex h-[42px] items-center justify-center rounded-[8px] font-bold md:h-[48px] md:w-[120px]"
-                color="white"
+                btnColor="white"
               >
                 아니오
               </Button>
               <Button
                 onClick={closeModal}
                 className="flex h-[42px] items-center justify-center rounded-[8px] font-bold md:h-[48px] md:w-[120px]"
-                color="orange"
+                btnColor="orange"
               >
                 {YES_TYPE[yesType]}
               </Button>
