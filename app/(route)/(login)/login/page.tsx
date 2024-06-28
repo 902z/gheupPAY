@@ -5,14 +5,13 @@ import Link from "next/link";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { loginSchema } from "../schema";
 import Button from "@/app/_components/button";
-import postLogin from "@/app/_apis/login/post-login";
+import { postLogin } from "@/app/_apis/authentication";
 import { useRouter } from "next/navigation";
 import { USER_TYPE } from "@/app/_constants/user-type";
 import pulse from "@/public/icons/pulse.svg";
 import Image from "next/image";
 import { useState } from "react";
-import { useStore } from "zustand";
-import useUserStore from "@/stores/user-store";
+import useUserStore from "@/stores/create-store";
 import useCheckLoginStatus from "@/app/_hooks/useCheckLoginStatus";
 
 interface FormValues {
@@ -32,14 +31,14 @@ function Login() {
     mode: "onSubmit",
   });
   const [waiting, setWaiting] = useState(false);
-  const login = useStore(useUserStore, (state) => state.login);
+  const login = useUserStore((state) => state.login);
 
   const handleForm = handleSubmit(async (data: FormValues) => {
     try {
       setWaiting(true);
       const result = await postLogin(data);
       if (result) {
-        login(result.item.user.item.id, result.item.user.item.type);
+        login(result.item.user.item.type);
         alert("로그인 성공");
         if (result.item.user.item.type === USER_TYPE.EMPLOYEE) {
           router.replace("/announce-list");
@@ -81,7 +80,7 @@ function Login() {
         {waiting ? (
           <Image src={pulse} alt="처리 중" width={48} height={48} />
         ) : (
-          <Button color="orange" type="submit" className="h-[48px]">
+          <Button btnColor="orange" color="submit" className="h-[48px]">
             로그인 하기
           </Button>
         )}

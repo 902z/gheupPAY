@@ -1,9 +1,13 @@
 import Link from "next/link";
-
+import Modal from "./_components/modals";
 export default function Home() {
   return (
     <>
-      <div className="text-center">
+      <Modal type="confirm">confirm</Modal>
+      <Modal type="warning">warning</Modal>
+      <Modal yesType="yes">select</Modal>
+      <div className="base-container text-center">
+        <Link href="/announce-list">리스트 페이지로 이동</Link>
         <h1 className="font-bold">
           폰트를 굵게 하고 싶으면 font-bold를 쓰세요.
         </h1>

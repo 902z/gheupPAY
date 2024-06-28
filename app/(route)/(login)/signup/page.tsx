@@ -7,7 +7,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { signUpSchema } from "../schema";
 import { UserType } from "@/app/_constants/user-type";
 import Button from "@/app/_components/button";
-import postSignUp from "@/app/_apis/login/post-signup";
+import { postSignUp } from "@/app/_apis/user";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import pulse from "@/public/icons/pulse.svg";
@@ -92,7 +92,7 @@ function SignUP() {
             className="mx-auto my-0"
           />
         ) : (
-          <Button color="orange" type="submit" className="h-[48px]">
+          <Button btnColor="orange" color="submit" className="h-[48px]">
             가입하기
           </Button>
         )}
