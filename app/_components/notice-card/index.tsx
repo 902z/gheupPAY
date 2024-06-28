@@ -9,12 +9,15 @@ import LabelHourlyRate from "@/app/_components/label-hourly-rate";
 import { calculateWagePercentage } from "@/app/_util/calculate-wage-percentage ";
 import { dateFormat } from "@/app/_util/date-format";
 import { NoticeCardContents } from "@/app/_apis/type";
+import useUserStore from "@/stores/create-store";
 
 type NoticeCardProps = {
   cardContents: NoticeCardContents;
 };
 
 export default function NoticeCard({ cardContents }: NoticeCardProps) {
+  const postNotice = useUserStore((state) => state.postNotice);
+
   const hourlyWage = calculateWagePercentage(cardContents.item.hourlyPay);
   const date = dateFormat(cardContents.item.startsAt);
   return (
@@ -28,6 +31,7 @@ export default function NoticeCard({ cardContents }: NoticeCardProps) {
         <div
           key={cardContents.item.id}
           className="h-[261px] w-full rounded-[12px] border border-gray-20 bg-white p-3 md:h-[349px] lg:w-[305px]"
+          onClick={() => postNotice(cardContents)}
         >
           <div className="relative mb-2 box-border h-[82px] w-full rounded-[12px] md:h-[160px]">
             <Image
