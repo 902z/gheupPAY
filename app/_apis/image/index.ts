@@ -40,6 +40,13 @@ async function uploadImageToS3(url: string, file: File) {
   }
 }
 
+/**
+ * 이미지 파일을 받아 S3에 업로드하고 이미지 URL을 반환합니다.
+ * @author 이승현
+ * @param file url에 올린 이미지 파일
+ * @returns ImageUrl
+ * @throws Error
+ */
 export async function getImageUrl(file: File) {
   try {
     const data = await createPredefinedURL(file);
