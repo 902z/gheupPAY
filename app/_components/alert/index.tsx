@@ -31,7 +31,7 @@ export default function NotificationButton({
 
   return (
     <section className="relative w-[fit-content]">
-      <section onClick={handleOpen}>{children}</section>
+      <button onClick={handleOpen}>{children}</button>
       {isOpen && <Alarm onClick={handleClose} />}
     </section>
   );

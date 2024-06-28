@@ -1,6 +1,6 @@
 import Link from "next/link";
 import Modal from "./_components/modals";
-import NotificationButton from "./_components/notification";
+import NotificationButton from "./_components/alert";
 export default function Home() {
   return (
     <>

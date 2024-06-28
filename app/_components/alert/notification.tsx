@@ -7,8 +7,8 @@ interface AlarmProps {
 
 export default function Alarm({ onClick }: AlarmProps) {
   return (
-    <section className="fixed inset-0 z-30 rounded-none bg-red-10 px-5 py-10 md:absolute md:inset-auto md:right-0 md:top-[32.5px] md:h-[419px] md:w-[368px] md:rounded-[10px] md:px-5 md:py-6">
-      <section className="h-full">
+    <div className="fixed inset-0 z-30 rounded-none bg-red-10 px-5 py-10 md:absolute md:inset-auto md:right-0 md:top-[32.5px] md:h-[419px] md:w-[368px] md:rounded-[10px] md:px-5 md:py-6">
+      <div className="h-full">
         <header className="mb-4 flex justify-between font-bold text-[20px]">
           알림 {DATA.count}개
           <button className="block md:hidden" onClick={onClick}>
@@ -61,7 +61,7 @@ export default function Alarm({ onClick }: AlarmProps) {
             );
           })}
         </ul>
-      </section>
-    </section>
+      </div>
+    </div>
   );
 }
