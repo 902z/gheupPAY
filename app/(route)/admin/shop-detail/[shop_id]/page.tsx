@@ -1,5 +1,5 @@
 import React from "react";
-import MyShopDetailCard from "../_components/my-store-detail-card";
+import MyShopDetailCard from "../_components/my-shop-detail-card";
 import NoneNotice from "../_components/none-notice";
 import { getShopDetail } from "@/app/_apis/shop";
 

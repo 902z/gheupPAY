@@ -20,3 +20,29 @@ export type ShopData = {
     };
   };
 };
+
+export type noticeDetail = {
+  noticeDetail: {
+    item: {
+      id: number;
+      hourlyPay: number;
+      startsAt: string;
+      workhour: number;
+      description: string;
+      closed: false;
+      shop: {
+        item: {
+          id: string;
+          name: string;
+          category: string;
+          address1: string;
+          address2: string;
+          description: string;
+          imageUrl: string;
+          originalHourlyPay: number;
+        };
+        href: string;
+      };
+    };
+  };
+};
