@@ -1,3 +1,4 @@
+import { deleteCookie } from "@/app/_util/cookie";
 import { create } from "zustand";
 import { createJSONStorage, persist } from "zustand/middleware";
 
@@ -117,7 +118,11 @@ const useUserStore = create<UserStore>()(
       type: null,
       noticesData: [],
       login: (type: "employer" | "employee") => set({ type: type }),
-      logout: () => set({ type: null }),
+      logout: async () => {
+        set({ type: null });
+        await deleteCookie("accessToken");
+        await deleteCookie("userId");
+      },
       postNotice: (notice) => {
         const notices = get().noticesData;
         if (notices.some((n) => n.id === notice.id)) return;
