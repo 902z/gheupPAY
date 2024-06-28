@@ -1,10 +1,10 @@
+import useUserStore from "@/stores/create-store";
 import Image from "next/image";
 import Link from "next/link";
-interface HeaderLoginProps {
-  type: "employer" | "employee" | null;
-  logout: () => void;
-}
-export default function HeaderLogin({ type, logout }: HeaderLoginProps) {
+
+export default function HeaderLogin() {
+  const logout = useUserStore((state) => state.logout);
+  const type = useUserStore((state) => state.type);
   return (
     <>
       <section>
