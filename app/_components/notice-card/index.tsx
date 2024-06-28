@@ -8,38 +8,7 @@ import mapPin from "@/public/icons/map-pin.png";
 import LabelHourlyRate from "@/app/_components/label-hourly-rate";
 import { calculateWagePercentage } from "@/app/_util/calculate-wage-percentage ";
 import { dateFormat } from "@/app/_util/date-format";
-
-type NoticeCardContents = {
-  item: {
-    id: number;
-    hourlyPay: number;
-    startsAt: string;
-    workhour: number;
-    description: string;
-    closed: boolean;
-    shop: {
-      item: {
-        id: string;
-        name: string;
-        category: string;
-        address1: string;
-        address2: string;
-        description: string;
-        imageUrl: string;
-        originalHourlyPay: number;
-      };
-      href: string;
-    };
-  };
-  links: [
-    {
-      rel: "self";
-      description: "공고 정보";
-      method: "GET";
-      href: string;
-    },
-  ];
-};
+import { NoticeCardContents } from "@/app/_apis/type";
 
 type NoticeCardProps = {
   cardContents: NoticeCardContents;

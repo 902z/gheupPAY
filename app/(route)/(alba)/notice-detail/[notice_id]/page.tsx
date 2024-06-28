@@ -15,7 +15,6 @@ export default async function page() {
       <NoticeDetailCard noticeDetail={noticeDetail} />
 
       <h2 className="py-8 font-bold text-l md:text-2xl">최근에 본 공고</h2>
-      {/* <NoneNotice /> */}
     </div>
   );
 }
