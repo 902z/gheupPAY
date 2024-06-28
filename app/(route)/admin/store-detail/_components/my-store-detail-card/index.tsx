@@ -13,9 +13,7 @@ export default function MyShopDetailCard({ shopDetail }: ShopData) {
             alt=""
             src={shopDetail.item.imageUrl}
             fill={true}
-            layout="fill"
-            objectFit="cover"
-            className="rounded-[12px]"
+            className="rounded-[12px] object-cover"
           />
         </div>
         <div className="relative flex-1 px-1 lg:flex lg:flex-col lg:items-stretch lg:py-3">
