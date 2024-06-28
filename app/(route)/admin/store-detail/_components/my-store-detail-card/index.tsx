@@ -2,29 +2,7 @@ import Image from "next/image";
 import React from "react";
 import mapPin from "@/public/icons/map-pin.png";
 import Button from "@/app/_components/button";
-
-type ShopData = {
-  shopDetail: {
-    item: {
-      id: string;
-      name: string;
-      category: string;
-      address1: string;
-      address2: string;
-      description: string;
-      imageUrl: string;
-      originalHourlyPay: number;
-      user: {
-        item: {
-          id: string;
-          email: string;
-          type: string;
-        };
-        href: string;
-      };
-    };
-  };
-};
+import { ShopData } from "@/app/_apis/type";
 
 export default function MyShopDetailCard({ shopDetail }: ShopData) {
   return (
