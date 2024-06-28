@@ -41,9 +41,9 @@ function Login() {
         login(result.item.user.item.type);
         alert("로그인 성공");
         if (result.item.user.item.type === USER_TYPE.EMPLOYEE) {
-          router.replace("/announce-list");
+          router.replace("/notice-list");
         } else {
-          router.replace("/admin/store-detail");
+          router.replace("/admin/shop-detail");
         }
       }
     } catch (error) {
