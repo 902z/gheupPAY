@@ -57,7 +57,7 @@ export default function page() {
             getValues={getValues}
             placeholder="선택"
           />
-          <button type="submit">Submit</button>
+          <button color="submit">Submit</button>
         </form>
       </div>
     </>

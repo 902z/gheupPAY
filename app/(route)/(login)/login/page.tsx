@@ -44,7 +44,7 @@ function Login() {
           errorMessage={errors.password?.message}
         />
 
-        <Button color="orange" type="submit" className="h-[48px]">
+        <Button btnColor="orange" color="submit" className="h-[48px]">
           로그인 하기
         </Button>
       </form>
