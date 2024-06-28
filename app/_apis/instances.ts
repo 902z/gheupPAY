@@ -16,11 +16,9 @@ const axiosInstance = axios.create({
 
 axiosInstance.interceptors.request.use(
   async (config) => {
-    if (
-      !config.authorization ||
-      !config.headers ||
-      config.headers.Authorization
-    ) {
+    const hasConfig =
+      !config.authorization || !config.headers || config.headers.Authorization;
+    if (hasConfig) {
       return config;
     }
     const accessToken = await getCookie("accessToken");
