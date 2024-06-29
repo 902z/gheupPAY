@@ -18,8 +18,10 @@ export default async function page() {
     <div className="base-container">
       <NoticeDetailCard noticeDetail={noticeDetail} />
 
-      <h2 className="py-8 font-bold text-l md:text-2xl">신청자 목록</h2>
-      <AlbaApplicationTable applicationList={applicationList} />
+      <div className="my-12">
+        <h2 className="py-8 font-bold text-l md:text-2xl">신청자 목록</h2>
+        <AlbaApplicationTable applicationList={applicationList} />
+      </div>
     </div>
   );
 }
