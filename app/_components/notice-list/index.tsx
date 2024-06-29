@@ -1,5 +1,5 @@
 "use client";
-import React, { useEffect, useRef } from "react";
+import React, { useEffect } from "react";
 import Pagination from "@/app/_components/pagination";
 import NoticeCard from "../notice-card";
 import { GetNotices } from "../../_apis/type/index";
@@ -41,7 +41,7 @@ export default function AllNoticeList({
         <div className="lg grid grid-cols-2 gap-4 lg:grid-cols-3">
           {noticeList &&
             noticeList.map((cardContents) => {
-              return <NoticeCard cardContents={cardContents} />;
+              return <NoticeCard cardContents={cardContents.item} />;
             })}
         </div>
         <div className="mb-[60px] mt-10">

@@ -26,7 +26,7 @@ export interface GetNotices {
   keyword: string;
   items: {
     item: {
-      id: number;
+      id: string;
       hourlyPay: number;
       startsAt: string;
       workhour: number;

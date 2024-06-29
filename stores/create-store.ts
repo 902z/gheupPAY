@@ -5,7 +5,7 @@ import { createJSONStorage, persist } from "zustand/middleware";
 
 type UserState = {
   type: "employer" | "employee" | null;
-  noticesData: GetNotices["items"];
+  noticesData: GetNotices["items"][0]["item"][];
 };
 
 type UserActions = {
@@ -106,7 +106,7 @@ const useUserStore = create<UserStore>()(
       },
       postNotice: (notice) => {
         const notices = get().noticesData;
-        if (notices.some((n) => n.item.id === notice.item.id)) return;
+        if (notices.some((n) => n.id === notice.id)) return;
         if (notices.length >= 6) {
           set({ noticesData: [notice, ...notices.slice(0, 5)] });
         } else {
