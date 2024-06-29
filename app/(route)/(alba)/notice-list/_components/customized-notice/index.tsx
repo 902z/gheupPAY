@@ -22,7 +22,7 @@ export default function CustomizedNoticeList({
           }}
           spaceBetween={14}
           slidesPerView={"auto"}
-          slidesOffsetAfter={160}
+          slidesOffsetAfter={30}
         >
           {noticeList &&
             noticeList.map((cardContents) => {
