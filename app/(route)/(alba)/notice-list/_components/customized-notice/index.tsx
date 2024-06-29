@@ -21,13 +21,15 @@ export default function CustomizedNoticeList({
             clickable: true,
           }}
           spaceBetween={14}
+          slidesPerView={"auto"}
+          slidesOffsetAfter={160}
         >
           {noticeList &&
             noticeList.map((cardContents) => {
               return (
                 <SwiperSlide
                   key={cardContents.item.id}
-                  className="swiper-slide overflow-visible pb-4 pt-4"
+                  className="swiper-slide overflow-visible px-1 py-4 md:px-2"
                 >
                   <NoticeCard cardContents={cardContents} />
                 </SwiperSlide>
