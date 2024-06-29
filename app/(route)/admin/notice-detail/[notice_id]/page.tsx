@@ -1,6 +1,7 @@
 import React from "react";
 import NoticeDetailCard from "../_components/notice-detail-card";
 import { getShopNoticeDetail } from "@/app/_apis/shop";
+import AlbaApplicationTable from "../_components/alba-application-table";
 export const metadata = {
   title: "공고 상세",
 };
@@ -15,7 +16,7 @@ export default async function page() {
       <NoticeDetailCard noticeDetail={noticeDetail} />
 
       <h2 className="py-8 font-bold text-l md:text-2xl">신청자 목록</h2>
-      {/* <NoneNotice /> */}
+      <AlbaApplicationTable />
     </div>
   );
 }
