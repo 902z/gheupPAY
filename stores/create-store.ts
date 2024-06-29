@@ -5,25 +5,35 @@ import { createJSONStorage, persist } from "zustand/middleware";
 type UserState = {
   type: "employer" | "employee" | null;
   noticesData: {
-    id: number;
-    hourlyPay: number;
-    startsAt: string;
-    workhour: number;
-    description: string;
-    closed: false;
-    shop: {
-      item: {
-        id: string;
-        name: string;
-        category: string;
-        address1: string;
-        address2: string;
-        description: string;
-        imageUrl: string;
-        originalHourlyPay: number;
+    item: {
+      id: number;
+      hourlyPay: number;
+      startsAt: string;
+      workhour: number;
+      description: string;
+      closed: boolean;
+      shop: {
+        item: {
+          id: string;
+          name: string;
+          category: string;
+          address1: string;
+          address2: string;
+          description: string;
+          imageUrl: string;
+          originalHourlyPay: number;
+        };
+        href: string;
       };
-      href: string;
     };
+    links: [
+      {
+        rel: "self";
+        description: "공고 정보";
+        method: "GET";
+        href: string;
+      },
+    ];
   }[];
 };
 
@@ -125,7 +135,7 @@ const useUserStore = create<UserStore>()(
       },
       postNotice: (notice) => {
         const notices = get().noticesData;
-        if (notices.some((n) => n.id === notice.id)) return;
+        if (notices.some((n) => n.item.id === notice.item.id)) return;
         if (notices.length >= 6) {
           set({ noticesData: [notice, ...notices.slice(0, 5)] });
         } else {
