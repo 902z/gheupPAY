@@ -27,13 +27,14 @@ export default function AlbaApplicationTable({
                 <td className="border p-4">{application.item.user.name}</td>
                 <td className="border p-4">{application.item.user.bio}</td>
                 <td className="border p-4">{application.item.user.phone}</td>
-                <td className="border p-4">{application.item.status}</td>
+                <td className="border p-4">
+                  <StatusLabel status={application.item.status} />
+                </td>
               </tr>
             ))}
           </tbody>
         </table>
       </div>
-      <StatusLabel />
     </>
   );
 }
