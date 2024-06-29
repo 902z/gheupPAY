@@ -1,5 +1,4 @@
 import { Metadata } from "next";
-import Link from "next/link";
 import TitleX from "@/app/_components/title-with-x";
 
 export const metadata: Metadata = {
@@ -12,9 +11,8 @@ export default function StoreRegisterLayout({
   children: React.ReactNode;
 }) {
   return (
-    <main className="base-container mt-[60px] w-full max-w-[964px] pb-[60px] md:pb-[80px]">
-      <TitleX>가게 정보</TitleX>
+    <div className="base-container mt-[60px] w-full max-w-[964px] pb-[60px] md:pb-[80px]">
       {children}
-    </main>
+    </div>
   );
 }

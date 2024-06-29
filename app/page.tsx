@@ -1,6 +1,6 @@
+"use client";
 import Link from "next/link";
-import Modal from "./_components/modals";
-import OpenModal from "./_components/modals/_components/open-modal";
+import OpenModal from "./_components/modals/";
 import ShopRegisterForm from "./_components/shop-register/";
 
 export default function Home() {
@@ -36,9 +36,10 @@ export default function Home() {
           <button>확인하기</button>
         </OpenModal>
 
-        <OpenModal confirm modalContents="클나!">
+        <OpenModal warning modalContents="클나!">
           <button>경고하기</button>
         </OpenModal>
+        왜 프리뷰가 안 뜨지
       </div>
     </>
   );
