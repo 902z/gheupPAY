@@ -2,6 +2,7 @@
 import { getShopNoticeDetail } from "@/app/_apis/shop";
 import { GetShopsShopIdNoticesNoticeId } from "@/app/_apis/type";
 import NoticeCard from "@/app/_components/notice-card";
+import { NoticeCardSkeleton } from "@/app/_components/notice-card/skeleton";
 import useUserStore from "@/stores/create-store";
 import { useEffect, useState } from "react";
 
@@ -29,10 +30,13 @@ export default function RecentNotices() {
 
   return (
     <div className="lg grid grid-cols-2 gap-4 lg:grid-cols-3">
-      {recentNotices &&
-        recentNotices.map((recentNotice, index: number) => (
-          <NoticeCard cardContents={recentNotice} key={index} />
-        ))}
+      {recentNotices
+        ? recentNotices.map((recentNotice, index: number) => (
+            <NoticeCard cardContents={recentNotice} key={index} />
+          ))
+        : [1, 2, 3, 4, 5, 6].map((index) => {
+            return <NoticeCardSkeleton key={index} />;
+          })}
     </div>
   );
 }
