@@ -8,13 +8,12 @@ import mapPin from "@/public/icons/map-pin.png";
 import LabelHourlyRate from "@/app/_components/label-hourly-rate";
 import { calculateWagePercentage } from "@/app/_util/calculate-wage-percentage ";
 import { dateFormat } from "@/app/_util/date-format";
-import { useRouter } from "next/navigation";
-import { NoticeCardContents } from "@/app/_apis/type";
+import { GetNotices } from "@/app/_apis/type";
 import useUserStore from "@/stores/create-store";
 import Link from "next/link";
 
 type NoticeCardProps = {
-  cardContents: NoticeCardContents;
+  cardContents: GetNotices["items"][0];
 };
 
 export default function NoticeCard({ cardContents }: NoticeCardProps) {

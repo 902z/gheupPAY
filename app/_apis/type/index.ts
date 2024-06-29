@@ -75,7 +75,7 @@ export interface GetNotices {
   ];
 }
 
-export interface GetShopShopIdNotices {
+export interface GetShopsShopIdNotices {
   offset: number;
   limit: number;
   count: number;
@@ -235,38 +235,106 @@ export interface PutUsersUserId {
   links: Array<object>;
 }
 
-export type ShopData = {
-  shopDetail: {
+export interface PostShops {
+  item: {
+    id: string;
+    name: string;
+    category: string;
+    address1: string;
+    address2: string;
+    description: string;
+    imageUrl: string;
+    originalHourlyPay: number;
+    user: {
+      item: {
+        id: string;
+        email: string;
+        type: "employer" | "employee";
+        name: string; // optional
+        phone: string; // optional
+        address: string; // optional
+        bio: string; // optional
+      };
+      href: string;
+    };
+  };
+  links: Array<object>;
+}
+
+export interface GetShopsShopId {
+  item: {
+    id: string;
+    name: string;
+    category: string;
+    address1: string;
+    address2: string;
+    description: string;
+    imageUrl: string;
+    originalHourlyPay: number;
+    user: {
+      item: {
+        id: string;
+        email: string;
+        type: "employer" | "employee";
+        name: string; // optional
+        phone: string; // optional
+        address: string; // optional
+        bio: string; // optional
+      };
+      href: string;
+    };
+  };
+  links: Array<object>;
+}
+
+export interface PutShopsShopId {
+  item: {
+    id: string;
+    name: string;
+    category: string;
+    address1: string;
+    address2: string;
+    description: string;
+    imageUrl: string;
+    originalHourlyPay: number;
+    user: {
+      item: {
+        id: string;
+        email: string;
+        type: "employer" | "employee";
+        name: string; // optional
+        phone: string; // optional
+        address: string; // optional
+        bio: string; // optional
+      };
+      href: string;
+    };
+  };
+  links: Array<object>;
+}
+
+export interface GetShopsShopIdNoticesNoticeIdApplications {
+  offset: number;
+  limit: number;
+  count: number;
+  hasNext: boolean;
+  items: {
     item: {
       id: string;
-      name: string;
-      category: string;
-      address1: string;
-      address2: string;
-      description: string;
-      imageUrl: string;
-      originalHourlyPay: number;
+      status: "pending" | "accepted" | "rejected" | "canceled";
+      createdAt: string;
       user: {
         item: {
           id: string;
           email: string;
-          type: string;
+          type: "employee" | "employer";
+          name: string;
+          phone: string;
+          address: string;
+          bio: string;
         };
         href: string;
       };
-    };
-  };
-};
-
-export type NoticeDetail = {
-  noticeDetail: {
-    item: {
-      id: number;
-      hourlyPay: number;
-      startsAt: string;
-      workhour: number;
-      description: string;
-      closed: false;
       shop: {
         item: {
           id: string;
@@ -280,18 +348,40 @@ export type NoticeDetail = {
         };
         href: string;
       };
+      notice: {
+        item: {
+          id: string;
+          hourlyPay: number;
+          startsAt: string;
+          workhour: number;
+          description: string;
+          closed: boolean;
+        };
+        href: string;
+      };
     };
-  };
-};
+    links: Array<object>;
+  }[];
+  links: Array<object>;
+}
 
-export type NoticeCardContents = {
+export interface PostShopsShopIdNoticesNoticeIdApplications {
   item: {
-    id: number;
-    hourlyPay: number;
-    startsAt: string;
-    workhour: number;
-    description: string;
-    closed: boolean;
+    id: string;
+    status: "pending" | "accepted" | "rejected" | "canceled";
+    createdAt: string;
+    user: {
+      item: {
+        id: string;
+        email: string;
+        type: "employee" | "employer";
+        name: string;
+        phone: string;
+        address: string;
+        bio: string;
+      };
+      href: string;
+    };
     shop: {
       item: {
         id: string;
@@ -305,13 +395,195 @@ export type NoticeCardContents = {
       };
       href: string;
     };
-  };
-  links: [
-    {
-      rel: "self";
-      description: "공고 정보";
-      method: "GET";
+    notice: {
+      item: {
+        id: string;
+        hourlyPay: number;
+        startsAt: string;
+        workhour: number;
+        description: string;
+        closed: boolean;
+      };
       href: string;
-    },
-  ];
-};
+    };
+  };
+  links: Array<object>;
+}
+
+export interface PutShopsShopIdNoticesNoticeIdApplicationsApplicationId {
+  item: {
+    id: string;
+    status: "pending" | "accepted" | "rejected" | "canceled";
+    createdAt: string;
+    user: {
+      item: {
+        id: string;
+        email: string;
+        type: "employee" | "employer";
+        name: string;
+        phone: string;
+        address: string;
+        bio: string;
+      };
+      href: string;
+    };
+    shop: {
+      item: {
+        id: string;
+        name: string;
+        category: string;
+        address1: string;
+        address2: string;
+        description: string;
+        imageUrl: string;
+        originalHourlyPay: number;
+      };
+      href: string;
+    };
+    notice: {
+      item: {
+        id: string;
+        hourlyPay: number;
+        startsAt: string;
+        workhour: number;
+        description: string;
+        closed: boolean;
+      };
+      href: string;
+    };
+  };
+  links: Array<object>;
+}
+
+export interface GetUsersUserIdApplications {
+  offset: number;
+  limit: number;
+  count: number;
+  hasNext: boolean;
+  items: {
+    item: {
+      id: string;
+      status: "pending" | "accepted" | "rejected" | "canceled";
+      createdAt: string;
+      shop: {
+        item: {
+          id: string;
+          name: string;
+          category: string;
+          address1: string;
+          address2: string;
+          description: string;
+          imageUrl: string;
+          originalHourlyPay: number;
+        };
+        href: string;
+      };
+      notice: {
+        item: {
+          id: string;
+          hourlyPay: number;
+          startsAt: string;
+          workhour: number;
+          description: string;
+          closed: boolean;
+        };
+      };
+    };
+    links: Array<object>;
+  }[];
+  links: Array<object>;
+}
+
+export interface getUsersUserIdAlerts {
+  offset: number;
+  limit: number;
+  count: number; // 전체 개수
+  hasNext: boolean; // 다음 내용 존재 여부
+  items: {
+    item: {
+      id: string;
+      createdAt: string;
+      result: "accepted" | "rejected";
+      read: boolean;
+      application: {
+        item: {
+          id: string;
+          status: "pending" | "accepted" | "rejected";
+        };
+        href: string;
+      };
+      shop: {
+        item: {
+          id: string;
+          name: string;
+          category: string;
+          address1: string;
+          address2: string;
+          description: string;
+          imageUrl: string;
+          originalHourlyPay: number;
+        };
+        href: string;
+      };
+      notice: {
+        item: {
+          id: string;
+          hourlyPay: number;
+          description: string;
+          startsAt: string;
+          workhour: number;
+          closed: boolean;
+        };
+        href: string;
+      };
+      links: Array<object>;
+    };
+  }[];
+  links: Array<object>;
+}
+
+export interface PutUsersUserIdAlertsAlertId {
+  offset: number;
+  limit: number;
+  items: {
+    item: {
+      id: string;
+      createdAt: string;
+      result: "accepted" | "rejected";
+      read: boolean;
+      application: {
+        item: {
+          id: string;
+          status: "pending" | "accepted" | "rejected";
+        };
+        href: string;
+      };
+      shop: {
+        item: {
+          id: string;
+          name: string;
+          category: string;
+          address1: string;
+          address2: string;
+          description: string;
+          imageUrl: string;
+          originalHourlyPay: number;
+        };
+        href: string;
+      };
+      notice: {
+        item: {
+          id: string;
+          hourlyPay: number;
+          description: string;
+          startsAt: string;
+          workhour: number;
+          closed: boolean;
+        };
+        href: string;
+      };
+      links: Array<object>;
+    };
+  }[];
+  links: Array<object>;
+}

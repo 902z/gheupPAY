@@ -1,13 +1,13 @@
 "use client";
 import { getShopNoticeDetail } from "@/app/_apis/shop";
-import { NoticeCardContents } from "@/app/_apis/type";
+import { GetNotices } from "@/app/_apis/type";
 import NoticeCard from "@/app/_components/notice-card";
 import React, { useEffect, useState } from "react";
 
 type noticesDetail = { item: { id: string; shop: { item: { id: string } } } };
 
 export default function RecentNotices() {
-  const [recentNotices, setRecentNotices] = useState<NoticeCardContents[]>([]);
+  const [recentNotices, setRecentNotices] = useState<GetNotices["items"]>([]);
 
   useEffect(() => {
     const fetchNotices = async () => {
@@ -36,9 +36,11 @@ export default function RecentNotices() {
   return (
     <div className="lg grid grid-cols-2 gap-4 lg:grid-cols-3">
       {recentNotices &&
-        recentNotices.map((recentNotice: NoticeCardContents, index: number) => (
-          <NoticeCard cardContents={recentNotice} key={index} />
-        ))}
+        recentNotices.map(
+          (recentNotice: GetNotices["items"][0], index: number) => (
+            <NoticeCard cardContents={recentNotice} key={index} />
+          ),
+        )}
     </div>
   );
 }

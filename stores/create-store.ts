@@ -1,40 +1,11 @@
+import { GetNotices } from "@/app/_apis/type";
 import { deleteCookie } from "@/app/_util/cookie";
 import { create } from "zustand";
 import { createJSONStorage, persist } from "zustand/middleware";
 
 type UserState = {
   type: "employer" | "employee" | null;
-  noticesData: {
-    item: {
-      id: number;
-      hourlyPay: number;
-      startsAt: string;
-      workhour: number;
-      description: string;
-      closed: boolean;
-      shop: {
-        item: {
-          id: string;
-          name: string;
-          category: string;
-          address1: string;
-          address2: string;
-          description: string;
-          imageUrl: string;
-          originalHourlyPay: number;
-        };
-        href: string;
-      };
-    };
-    links: [
-      {
-        rel: "self";
-        description: "공고 정보";
-        method: "GET";
-        href: string;
-      },
-    ];
-  }[];
+  noticesData: GetNotices["items"];
 };
 
 type UserActions = {
