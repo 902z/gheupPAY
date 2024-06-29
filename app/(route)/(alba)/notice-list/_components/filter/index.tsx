@@ -10,7 +10,9 @@ import Button from "@/app/_components/button";
 
 interface FilterProps {
   onClose: () => void;
-  onFilterChange: (addresses: string[], wage: string) => void;
+  // onFilterChange: (addresses: string[], wage: string) => void;
+  filterParams: {};
+  // wage: number;
 }
 
 export const numberWithCommas = (number: number) => {
@@ -18,7 +20,7 @@ export const numberWithCommas = (number: number) => {
 };
 //가게 등록 머지시 삭제할것
 
-export default function Filter({ onClose,  onFilterChange }: FilterProps) {
+export default function Filter({ onClose }: FilterProps) {
   const [selectedAddresses, setSelectedAddresses] = useState<string[]>([]);
   const [isFocused, setIsFocused] = useState<boolean>(false);
   const [startDate, setStartDate] = useState<string>("");
@@ -50,7 +52,7 @@ export default function Filter({ onClose,  onFilterChange }: FilterProps) {
     setSelectedAddresses([]);
     setStartDate("");
     setWage("");
-    onFilterChange(selectedAddresses, wage);
+    // onFilterChange(selectedAddresses, wage);
   };
 
   const handleInputChange = (e: React.FormEvent<HTMLInputElement>) => {
@@ -68,99 +70,103 @@ export default function Filter({ onClose,  onFilterChange }: FilterProps) {
     setStartDate(e.currentTarget.value);
   };
 
-  const handleSubmit = () => {
-    onFilterChange(selectedAddresses, wage);
-    onClose();
-  };
-
   return (
     <>
-      <div className="absolute right-0 z-10 ml-[20px] mt-[38px] w-[390px] rounded-[10px] border border-gray-20 bg-white px-[20px] py-[24px] shadow">
-        <div className="mb-[24px] flex justify-between font-bold text-l">
-          <h2>상세 필터</h2>
-          <Image
-            className="h-[24px] w-[24px] cursor-pointer"
-            src={close}
-            alt="닫기"
-            width={24}
-            onClick={onClose}
-          />
-        </div>
-        <div className="w-[350px] border-b pb-[24px]">
-          <h3>위치</h3>
-          <ul className="my-[12px] grid h-[258px] w-[350px] grid-cols-2 overflow-scroll overflow-x-hidden rounded-[6px] border border-gray-20 px-[28px] pb-[20px] text-m">
-            {ADDRESS.map((address) => (
-              <li className="grid grid-cols-2 text-m">
-                <data
-                  className="mt-[20px] w-[94px] cursor-pointer"
-                  key={address}
-                  onClick={() => handleAddressClick(address)}
-                >
-                  {address}
-                </data>
-              </li>
-            ))}
-          </ul>
-          <div>
-            <ul className="flex flex-wrap gap-[8px]">
-              {selectedAddresses.map((address) => (
-                <li>
+      <form>
+        <div className="absolute right-[-4px] z-10 mt-[8px] w-[390px] rounded-[10px] border border-gray-20 bg-white px-[20px] py-[24px] shadow">
+          <div className="mb-[24px] flex justify-between font-bold text-l">
+            <h2>상세 필터</h2>
+            <Image
+              className="h-[24px] w-[24px] cursor-pointer"
+              src={close}
+              alt="닫기"
+              width={24}
+              onClick={onClose}
+            />
+          </div>
+          <div className="w-[350px] border-b pb-[24px]">
+            <h3>위치</h3>
+            <ul className="my-[12px] grid h-[258px] w-[350px] grid-cols-2 overflow-scroll overflow-x-hidden rounded-[6px] border border-gray-20 px-[28px] pb-[20px] text-m">
+              {ADDRESS.map((address) => (
+                <li className="grid grid-cols-2 text-m" key={address}>
                   <data
-                    className="flex justify-between gap-[4px] rounded-[20px] bg-red-10 px-[10px] py-[6px] text-m text-red-40"
-                    key={address}
+                    className="mt-[20px] w-[94px] cursor-pointer"
+                    
+                    onClick={() => handleAddressClick(address)}
                   >
                     {address}
-                    <Image
-                      className="mt-[2px] h-[16px] w-[16px] cursor-pointer"
-                      src={closeRed40}
-                      alt="닫기"
-                      width={24}
-                      onClick={() => handleRemoveAddressClick(address)}
-                    />
                   </data>
                 </li>
               ))}
             </ul>
+            <div>
+              <ul className="flex flex-wrap gap-[8px]">
+                {selectedAddresses.map((address) => (
+                  <li key={address}>
+                    <label className="flex justify-between gap-[4px] rounded-[20px] bg-red-10 px-[10px] py-[6px] text-m text-red-40">
+                    <input
+                      className='hidden'
+                      type="checkbox"
+                      name= "address"
+                      value={address}
+                      checked
+                      onChange={() => handleAddressClick(address)}
+                    />
+                    {address}
+                    <Image
+                        className="mt-[2px] h-[16px] w-[16px] cursor-pointer"
+                        src={closeRed40}
+                        alt="닫기"
+                        width={24}
+                        onClick={() => handleRemoveAddressClick(address)}
+                      />
+                  </label>
+                  
+                  </li>
+                ))}
+              </ul>
+            </div>
           </div>
-        </div>
-        <div className="relative mt-[24px] h-[92px] w-[350px]">
-          <p className="mb-[8px]">시작일</p>
-          <input
-            className="h-[58px] w-[350px] rounded-[6px] border border-gray-30 px-[20px] py-[16px] focus:outline-primary"
-            type={isFocused || startDate ? "datetime-local" : "text"}
-            placeholder="입력"
-            value={startDate}
-            id="meeting-time"
-            name="meeting-time"
-            onChange={handleDateChange}
-            onFocus={handleFocus}
-            onBlur={handleBlur}
-            style={{ color: startDate ? "black" : "transparent" }}
-          />
-        </div>
-        <div className="mt-[24px] h-[92px] w-[350px] border-t-2 border-gray-10">
-          <p className="mb-[8px] mt-[24px]">금액</p>
-          <div className="relative flex">
+          <div className="relative mt-[24px] h-[92px] w-[350px]">
+            <p className="mb-[8px]">시작일</p>
             <input
-              className="h-[58px] w-[169px] rounded-[6px] border border-gray-30 px-[20px] py-[16px] focus:outline-primary"
+              className="h-[58px] w-[350px] rounded-[6px] border border-gray-30 px-[20px] py-[16px] focus:outline-primary"
+              type={isFocused || startDate ? "datetime-local" : "text"}
               placeholder="입력"
-              type="text"
-              value={wage}
-              onInput={handleInputChange}
+              value={startDate}
+              id="meeting-time"
+              name="startAtGte"
+              onChange={handleDateChange}
+              onFocus={handleFocus}
+              onBlur={handleBlur}
+              style={{ color: startDate ? "black" : "transparent" }}
             />
-            <p className="mx-[12px] my-[16px]">이상부터</p>
-            <p className="absolute left-[134px] top-[16px]">원</p>
+          </div>
+          <div className="mt-[24px] h-[92px] w-[350px] border-t-2 border-gray-10">
+            <p className="mb-[8px] mt-[24px]">금액</p>
+            <div className="relative flex">
+              <input
+                className="h-[58px] w-[169px] rounded-[6px] border border-gray-30 px-[20px] py-[16px] focus:outline-primary"
+                placeholder="입력"
+                name="wage"
+                type="text"
+                value={wage}
+                onInput={handleInputChange}
+              />
+              <p className="mx-[12px] my-[16px]">이상부터</p>
+              <p className="absolute left-[134px] top-[16px]">원</p>
+            </div>
+          </div>
+          <div className="mt-[56px] flex h-[48px] justify-between gap-[8px]">
+            <Button className="w-[82px]" btnColor="white" onClick={handleReset}>
+              초기화
+            </Button>
+            <Button className="w-[260px]" btnColor="orange">
+              적용하기
+            </Button>
           </div>
         </div>
-        <div className="mt-[56px] flex h-[48px] justify-between gap-[8px]">
-          <Button className="w-28" color="white" onClick={handleReset}>
-            초기화
-          </Button>
-          <Button className="" color="orange" onClick={handleSubmit}>
-            적용하기
-          </Button>
-        </div>
-      </div>
+      </form>
     </>
   );
 }

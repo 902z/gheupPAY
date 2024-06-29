@@ -4,12 +4,44 @@
 
 @layer utilities {
   .base-container {
-    @apply min-h-screen w-full px-3 pt-[102px] md:px-8 md:pt-[70px] lg:mx-auto lg:max-w-[964px] lg:px-0;
+    @apply min-h-screen w-full px-3 pt-[120px] md:px-8 md:pt-[90px] lg:mx-auto lg:max-w-[964px] lg:px-0;
+  }
+}
+
+@layer utilities {
+  @media (min-width: 375px) and (max-width: 743px) {
+    .swiper-slide {
+      width: 171px !important;
+    }
+  }
+
+  @media (min-width: 744px) and (max-width: 1919px) {
+    .swiper-slide {
+      width: 312px !important;
+    }
+  }
+
+  @media (min-width: 1920px) {
+    .swiper-slide {
+      width: 312px !important;
+    }
+  }
+}
+
+@layer utilities {
+  .responsive-text {
+    font-size: clamp(0.5rem, 3vw, 12px);
+  }
+  .truncate {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
   }
 }
 
 body {
   text-decoration: none;
+  background-color: #fafafa;
 }
 
 input:-webkit-autofill {

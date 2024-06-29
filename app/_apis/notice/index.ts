@@ -14,7 +14,7 @@ export async function getCustomizedNotices({
     });
 
     const res = await instance.get(`/notices?${params.toString()}`);
-    return res.data.items;
+    return res.data;
   } catch (error) {
     console.error("getNotices 함수에서 오류 발생:", error);
     throw error;
@@ -24,9 +24,11 @@ export async function getCustomizedNotices({
 // 전체 공고
 export async function getAllNotices({
   offset = 0,
-  limit = 30,
+  limit = 12,
   keyword = "",
   hourlyPayGte = 0,
+  startsAtGte = "",
+  address = "",
   sort = "time",
 }) {
   try {
@@ -35,11 +37,13 @@ export async function getAllNotices({
       limit: limit.toString(),
       keyword,
       hourlyPayGte: hourlyPayGte.toString(),
+      address: address,
+      // startsAtGte: startsAtGte,
       sort,
     });
 
     const res = await instance.get(`/notices?${params.toString()}`);
-    return res.data.items;
+    return res.data;
   } catch (error) {
     console.error("getAllNotices 함수에서 오류 발생:", error);
     throw error;
