@@ -1,16 +1,17 @@
 import Image from "next/image";
-import { DATA } from "./mockdata";
+import { AlertData } from "@/app/_apis/type";
 
-interface AlarmProps {
+interface AlertProps {
   onClick: () => void;
+  alerts: AlertData;
 }
 
-export default function Alarm({ onClick }: AlarmProps) {
+export default async function Alert({ onClick, alerts }: AlertProps) {
   return (
     <div className="fixed inset-0 z-30 rounded-none bg-red-10 px-5 py-10 md:absolute md:inset-auto md:right-0 md:top-[32.5px] md:h-[419px] md:w-[368px] md:rounded-[10px] md:px-5 md:py-6">
       <div className="h-full">
         <header className="mb-4 flex justify-between font-bold text-[20px]">
-          알림 {DATA.count}개
+          알림 {alerts.count}개
           <button className="block md:hidden" onClick={onClick}>
             <Image
               src="/icons/close.png"
@@ -22,7 +23,7 @@ export default function Alarm({ onClick }: AlarmProps) {
           </button>
         </header>
         <ul className="h-[calc(100%-46px)] overflow-auto">
-          {DATA.items.map((item) => {
+          {alerts.items.map((item) => {
             return (
               <li className="mb-2 flex h-[105px] w-full flex-col items-start gap-2 rounded-[5px] bg-white px-3 py-4">
                 {item?.item.result === "accepted" ? (

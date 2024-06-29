@@ -3,13 +3,13 @@ import Modal from "./_components/modals";
 import OpenModal from "./_components/modals/_components/open-modal";
 import ShopRegisterForm from "./_components/shop-register/";
 
-import NotificationButton from "./_components/alert";
+import AlertButton from "./_components/alert";
 export default function Home() {
   return (
     <div className="base-container flex flex-col text-center">
       <div className="m-40 flex justify-between">
         <div>ㅎㅎ</div>
-        <NotificationButton>알림</NotificationButton>
+        <AlertButton>알림</AlertButton>
       </div>
       <Link href="/announce-list">리스트 페이지로 이동</Link>
       <h1 className="font-bold">폰트를 굵게 하고 싶으면 font-bold를 쓰세요.</h1>

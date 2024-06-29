@@ -1,17 +1,13 @@
 "use client";
 
 import { useState } from "react";
-import Alarm from "./notification";
 
-interface NotificationButtonProps {
+interface AlertButtonProps {
   children: React.ReactNode;
 }
 
-export default function NotificationButton({
-  children,
-}: NotificationButtonProps) {
+export default function AlertButton({ children }: AlertButtonProps) {
   const [isOpen, setIsOpen] = useState(false);
-
   // 모바일 : 모달 열리면 > 스크롤 제거, 모달 닫히면 > 스크롤 생성
   // 테블릿 이상 : 모달 열리든 닫히든 스크롤 유지
   const handleOpen = () => {
@@ -32,7 +28,7 @@ export default function NotificationButton({
   return (
     <section className="relative w-[fit-content]">
       <button onClick={handleOpen}>{children}</button>
-      {isOpen && <Alarm onClick={handleClose} />}
+      {/* {isOpen && <Alert onClick={handleClose} alerts={} />} */}
     </section>
   );
 }
