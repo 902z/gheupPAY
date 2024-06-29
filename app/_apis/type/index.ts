@@ -176,6 +176,65 @@ export interface PutShopsShopIdNoticesNoticeId {
   links: Array<object>;
 }
 
+export interface PostUsers {
+  item: {
+    id: string;
+    email: string;
+    type: "employee" | "employer";
+  };
+  links: Array<object>;
+}
+
+export interface GetUsersUserId {
+  item: {
+    id: string;
+    email: string;
+    type: "employee" | "employer";
+    name: string;
+    phone: string;
+    address: string;
+    bio: string;
+    shop: {
+      item: {
+        id: string;
+        name: string;
+        category: string;
+        address1: string;
+        address2: string;
+        description: string;
+        imageUrl: string;
+        originalHourlyPay: number;
+      };
+    };
+  };
+  links: Array<object>;
+}
+
+export interface PutUsersUserId {
+  item: {
+    id: string;
+    email: string;
+    type: "employee" | "employer";
+    name: string;
+    phone: string;
+    address: string;
+    bio: string;
+    shop: {
+      item: {
+        id: string;
+        name: string;
+        category: string;
+        address1: string;
+        address2: string;
+        description: string;
+        imageUrl: string;
+        originalHourlyPay: number;
+      };
+    };
+  };
+  links: Array<object>;
+}
+
 export type ShopData = {
   shopDetail: {
     item: {
