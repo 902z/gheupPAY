@@ -26,7 +26,7 @@ function WindowModal({
   onclick: () => void;
 }) {
   return (
-    <div className="absolute inset-0 z-10 w-full bg-white top-3">
+    <div className="absolute inset-0 top-3 z-10 w-full bg-white">
       <AnimatePresence>
         <motion.div
           initial={{ opacity: 0 }}
@@ -34,7 +34,7 @@ function WindowModal({
           exit={{ opacity: 0 }}
           transition={{ duration: 0.3 }}
         >
-          <main className="base-container mt-[60px] w-full max-w-[964px] pb-[60px] md:pb-[80px]">
+          <div className="base-container mt-[60px] w-full max-w-[964px] pb-[60px] md:pb-[80px]">
             <header className="h- flex w-full justify-between">
               <h2 className="font-bold text-l leading-[25px]">{title}</h2>
               <div
@@ -45,7 +45,7 @@ function WindowModal({
               </div>
             </header>
             {children}
-          </main>
+          </div>
         </motion.div>
       </AnimatePresence>
     </div>

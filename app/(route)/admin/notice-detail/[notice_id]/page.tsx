@@ -1,6 +1,6 @@
 import React from "react";
-import NoticeDetailCard from "../_components/notice-detail-card";
 import { getShopNoticeDetail } from "@/app/_apis/shop";
+import NoticeDetailCard from "@/app/_components/notice-detail-card";
 import AlbaApplicationTable from "../_components/alba-application-table";
 import { getNoticeApplications } from "@/app/_apis/application";
 export const metadata = {
