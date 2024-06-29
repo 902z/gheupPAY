@@ -3,7 +3,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import Button from "../../button";
 import warning from "@/public/icons/warning.png";
 import Image from "next/image";
-
+import { createPortal } from "react-dom";
 
 type ModalProps = {
   closeModal: () => void;
@@ -39,7 +39,7 @@ export default function WarningModal({
     }
   };
 
-  return (
+  return createPortal(
     <AnimatePresence>
       <motion.div
         initial={{ opacity: 0 }}
@@ -64,13 +64,14 @@ export default function WarningModal({
             <Button
               onClick={handleBtn}
               className="mx-24 flex h-[42px] items-center justify-center rounded-[8px] font-bold md:mx-0 md:h-[48px] md:w-[120px]"
-              color="white"
+              btnColor="white"
             >
               확인
             </Button>
           </div>
         </motion.div>
       </motion.div>
-    </AnimatePresence>
+    </AnimatePresence>,
+    document.body,
   );
 }

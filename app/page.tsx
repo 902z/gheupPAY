@@ -7,7 +7,7 @@ export default function Home() {
   return (
     <>
       <div className="base-container flex flex-col text-center">
-        <Link href="/announce-list">리스트 페이지로 이동</Link>
+        <Link href="/notice-list">리스트 페이지로 이동</Link>
         <h1 className="font-bold">
           폰트를 굵게 하고 싶으면 font-bold를 쓰세요.
         </h1>
@@ -39,7 +39,6 @@ export default function Home() {
         <OpenModal warning modalContents="클나!">
           <button>경고하기</button>
         </OpenModal>
-        왜 프리뷰가 안 뜨지
       </div>
     </>
   );
