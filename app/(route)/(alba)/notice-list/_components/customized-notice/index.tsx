@@ -3,10 +3,10 @@ import React from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import NoticeCard from "@/app/_components/notice-card";
-import { NoticeResponse } from "../../../../../_apis/notice/response-type";
+import { GetNotices } from "../../../../../_apis/type/index";
 
 type CustomizedNoticeListProps = {
-  notices: NoticeResponse;
+  notices: GetNotices;
 };
 
 export default function CustomizedNoticeList({

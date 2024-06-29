@@ -1,11 +1,11 @@
 "use client";
 import React, { useEffect, useRef } from "react";
 import Pagination from "@/app/_components/pagination";
-import { NoticeResponse } from "@/app/_apis/notice/response-type.js";
 import NoticeCard from "../notice-card";
+import { GetNotices } from "../../_apis/type/index";
 
 type AllNoticeListProps = {
-  notices: NoticeResponse;
+  notices: GetNotices;
   activePage: number;
   itemsCountPerPage: number;
 };

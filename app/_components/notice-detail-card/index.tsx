@@ -1,4 +1,4 @@
-import { noticeDetail } from "@/app/_apis/type";
+import { NoticeDetail } from "@/app/_apis/type";
 import { calculateTimeRange } from "@/app/_util/calculate-time-range";
 import { calculateWagePercentage } from "@/app/_util/calculate-wage-percentage ";
 import { dateFormat } from "@/app/_util/date-format";
@@ -10,7 +10,7 @@ import mapPin from "@/public/icons/map-pin.png";
 import Button from "@/app/_components/button";
 import OnlyLabelHourlyRate from "../only-label-hourly-rate";
 
-export default function NoticeDetailCard({ noticeDetail }: noticeDetail) {
+export default function NoticeDetailCard({ noticeDetail }: NoticeDetail) {
   const hourlyWage = calculateWagePercentage(noticeDetail.item.hourlyPay);
   const date = dateFormat(noticeDetail.item.startsAt);
 
