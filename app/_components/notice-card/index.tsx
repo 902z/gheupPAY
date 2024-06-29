@@ -1,3 +1,4 @@
+"use client";
 import React from "react";
 import { motion } from "framer-motion";
 import Image from "next/image";
@@ -8,6 +9,8 @@ import mapPin from "@/public/icons/map-pin.png";
 import LabelHourlyRate from "@/app/_components/label-hourly-rate";
 import { calculateWagePercentage } from "@/app/_util/calculate-wage-percentage ";
 import { dateFormat } from "@/app/_util/date-format";
+import { useRouter } from "next/navigation";
+import { getShopNoticeDetail } from "@/app/_apis/shop";
 
 type NoticeCardContents = {
   item: {
@@ -48,6 +51,13 @@ type NoticeCardProps = {
 export default function NoticeCard({ cardContents }: NoticeCardProps) {
   const hourlyWage = calculateWagePercentage(cardContents.item.hourlyPay);
   const date = dateFormat(cardContents.item.startsAt);
+
+  const router = useRouter();
+
+  const goToNoticeDetail = () => {
+    router.push(`/notice-detail/${cardContents.item.id}`);
+  };
+
   return (
     <>
       <motion.div
@@ -55,6 +65,7 @@ export default function NoticeCard({ cardContents }: NoticeCardProps) {
         whileHover={{ scale: 1.05 }}
         whileTap={{ scale: 0.95 }}
         className="cursor-pointer"
+        onClick={goToNoticeDetail}
       >
         <div
           key={cardContents.item.id}
