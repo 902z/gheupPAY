@@ -1,11 +1,13 @@
-import useUserStore from "@/stores/create-store";
 import Image from "next/image";
 import Link from "next/link";
 import AlertButton from "../../alert";
+import { getAlerts } from "@/app/_apis/alert";
+import { getCookie } from "@/app/_util/cookie";
+import { LogoutButton } from "./logout-button";
 
-export default function HeaderLogin() {
-  const logout = useUserStore((state) => state.logout);
-  const type = useUserStore((state) => state.type);
+export default async function HeaderLogin() {
+  const type = await getCookie("type");
+  const initialAlerts = await getAlerts();
   return (
     <>
       <section>
@@ -15,9 +17,9 @@ export default function HeaderLogin() {
           <Link href="/profile-detail">내 프로필</Link>
         )}
       </section>
-      <button onClick={logout}>로그아웃</button>
+      <LogoutButton />
       <figure className="relative h-5 w-5 md:h-6 md:w-6">
-        <AlertButton>
+        <AlertButton initialAlerts={initialAlerts}>
           <Image
             src="/icons/noti-none.png"
             alt="notification"
