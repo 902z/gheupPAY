@@ -11,7 +11,6 @@ type AllNoticeListProps = {
   itemsCountPerPage: number;
   hourlyPayGte: number;
   startsAtGte: string | undefined;
-  //일단 undefined 함께 둠
   address: string[];
 };
 

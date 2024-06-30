@@ -16,7 +16,6 @@ interface FilterProps {
 export const numberWithCommas = (number: number) => {
   return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 };
-//가게 등록 머지시 삭제할것
 
 export default function Filter({ onClose }: FilterProps) {
   const [selectedAddresses, setSelectedAddresses] = useState<string[]>([]);
@@ -45,7 +44,6 @@ export default function Filter({ onClose }: FilterProps) {
     setSelectedAddresses([]);
     setStartDate("");
     setWage("");
-    // onFilterChange(selectedAddresses, wage);
   };
 
   const handleInputChange = (e: React.FormEvent<HTMLInputElement>) => {
@@ -128,7 +126,7 @@ export default function Filter({ onClose }: FilterProps) {
               placeholder="입력"
               value={startDate}
               id="meeting-time"
-              name="startsAtGte"
+              name="startDate"
               onChange={handleDateChange}
               onFocus={handleFocus}
               onBlur={handleBlur}
