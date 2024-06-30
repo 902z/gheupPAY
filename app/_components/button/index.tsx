@@ -9,8 +9,7 @@ interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
 
 const STYLE = {
   white: "bg-white text-primary",
-  orange:
-    "bg-primary text-white hover:bg-orange-600 active:bg-white active:text-primary",
+  orange: "bg-primary text-white hover:bg-[#d43914] active:scale-[0.99]",
 };
 
 const BUTTON =
