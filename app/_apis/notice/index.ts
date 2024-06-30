@@ -4,13 +4,11 @@ import instance from "@/app/_lib/axios";
 export async function getCustomizedNotices({
   offset = 0,
   limit = 5,
-  // startsAtGte = ""
 }) {
   try {
     const params = new URLSearchParams({
       offset: offset.toString(),
       limit: limit.toString(),
-      // startsAtGte,
     });
 
     const res = await instance.get(`/notices?${params.toString()}`);
@@ -38,9 +36,11 @@ export async function getAllNotices({
       keyword,
       hourlyPayGte: hourlyPayGte.toString(),
       address: address,
-      // startsAtGte: startsAtGte,
       sort,
     });
+    if (startsAtGte) {
+      params.append('startsAtGte', startsAtGte);
+    }
 
     const res = await instance.get(`/notices?${params.toString()}`);
     return res.data;

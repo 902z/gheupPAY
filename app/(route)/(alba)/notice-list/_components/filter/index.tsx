@@ -10,9 +10,7 @@ import Button from "@/app/_components/button";
 
 interface FilterProps {
   onClose: () => void;
-  // onFilterChange: (addresses: string[], wage: string) => void;
   filterParams: {};
-  // wage: number;
 }
 
 export const numberWithCommas = (number: number) => {
@@ -25,11 +23,6 @@ export default function Filter({ onClose }: FilterProps) {
   const [isFocused, setIsFocused] = useState<boolean>(false);
   const [startDate, setStartDate] = useState<string>("");
   const [wage, setWage] = useState<string>("");
-
-  // selectedAddresses: 선택된 주소들
-  // startDate: 시작날짜
-  // inputValue: input에 넣은 시급
-  // isFocused: 시작날짜 받을때 focus 여부에 따라서 input type 변환<<placeholder때문에 사용
 
   const handleFocus = () => setIsFocused(true);
   const handleBlur = () => setIsFocused(false);
@@ -135,7 +128,7 @@ export default function Filter({ onClose }: FilterProps) {
               placeholder="입력"
               value={startDate}
               id="meeting-time"
-              name="startAtGte"
+              name="startsAtGte"
               onChange={handleDateChange}
               onFocus={handleFocus}
               onBlur={handleBlur}
