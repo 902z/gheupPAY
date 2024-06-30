@@ -12,7 +12,7 @@ import close from "@/public/icons/close.png";
  * @param {onClick} onClick X 버튼 눌렀을 때 함수
  */
 
-function TitleX({
+function TitleWithXHeader({
   children,
   onClick,
 }: {
@@ -32,4 +32,4 @@ function TitleX({
   );
 }
 
-export default TitleX;
+export default TitleWithXHeader;

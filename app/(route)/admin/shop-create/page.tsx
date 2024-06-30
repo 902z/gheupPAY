@@ -55,7 +55,9 @@ function storeRegister() {
 
   return (
     <>
-      <TitleX onClick={() => router.back()}>가게 등록하기</TitleX>
+      <header className="h- flex w-full justify-between">
+        <h2 className="font-bold text-l leading-[25px]">가게 등록</h2>
+      </header>
       <form onSubmit={handleForm} className="mt-6 w-full md:mt-8">
         <div className="grid w-full grid-rows-[repeat(5,minmax(92px,auto))] gap-y-5 md:grid-cols-2 md:gap-x-5 md:gap-y-6">
           <CustomTextInput

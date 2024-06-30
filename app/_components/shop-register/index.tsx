@@ -3,7 +3,7 @@
 import CustomTextInput from "@/app/_components/custom-text-input";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { storeRegisterSchema } from "../../(route)/admin/shop-register/schema";
+import { storeRegisterSchema } from "../../(route)/admin/shop-create/schema";
 import Button from "@/app/_components/button";
 import CustomTextarea from "@/app/_components/custom-textarea";
 import { ADDRESS } from "@/app/_constants/address";
