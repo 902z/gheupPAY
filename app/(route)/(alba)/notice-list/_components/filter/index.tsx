@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Image from "next/image";
 
 import close from "@/public/icons/close.png";
@@ -21,10 +21,8 @@ export default function Filter({ onClose }: FilterProps) {
   const [selectedAddresses, setSelectedAddresses] = useState<string[]>([]);
   const [isFocused, setIsFocused] = useState<boolean>(false);
   const [startDate, setStartDate] = useState<string>("");
+  const [minDate, setMinDate] = useState<string>("");
   const [wage, setWage] = useState<string>("");
-
-  const handleFocus = () => setIsFocused(true);
-  const handleBlur = () => setIsFocused(false);
 
   const handleAddressClick = (address: string) => {
     setSelectedAddresses((prev) => {
@@ -40,13 +38,24 @@ export default function Filter({ onClose }: FilterProps) {
     setSelectedAddresses((prev) => prev.filter((item) => item !== address));
   };
 
-  const handleReset = () => {
-    setSelectedAddresses([]);
-    setStartDate("");
-    setWage("");
+  const handleFocus = () => setIsFocused(true);
+  const handleBlur = () => setIsFocused(false);
+
+  useEffect(() => {
+    const now = new Date();
+    const year = now.getFullYear();
+    const month = String(now.getMonth() + 1).padStart(2, "0");
+    const day = String(now.getDate()).padStart(2, "0");
+    const hours = String(now.getHours()).padStart(2, "0");
+    const minutes = String(now.getMinutes()).padStart(2, "0");
+    setMinDate(`${year}-${month}-${day}T${hours}:${minutes}`);
+  }, []);
+
+  const handleDateChange = (e: React.FormEvent<HTMLInputElement>) => {
+    setStartDate(e.currentTarget.value);
   };
 
-  const handleInputChange = (e: React.FormEvent<HTMLInputElement>) => {
+  const handleWageChange = (e: React.FormEvent<HTMLInputElement>) => {
     const { value } = e.currentTarget;
     const stringNumericValue = value.replace(/\D/g, "");
     const numericValue = Number(stringNumericValue);
@@ -57,8 +66,10 @@ export default function Filter({ onClose }: FilterProps) {
     }
   };
 
-  const handleDateChange = (e: React.FormEvent<HTMLInputElement>) => {
-    setStartDate(e.currentTarget.value);
+  const handleReset = () => {
+    setSelectedAddresses([]);
+    setStartDate("");
+    setWage("");
   };
 
   return (
@@ -82,7 +93,6 @@ export default function Filter({ onClose }: FilterProps) {
                 <li className="grid grid-cols-2 text-m" key={address}>
                   <data
                     className="mt-[20px] w-[94px] cursor-pointer"
-                    
                     onClick={() => handleAddressClick(address)}
                   >
                     {address}
@@ -95,24 +105,23 @@ export default function Filter({ onClose }: FilterProps) {
                 {selectedAddresses.map((address) => (
                   <li key={address}>
                     <label className="flex justify-between gap-[4px] rounded-[20px] bg-red-10 px-[10px] py-[6px] text-m text-red-40">
-                    <input
-                      className='hidden'
-                      type="checkbox"
-                      name= "address"
-                      value={address}
-                      checked
-                      onChange={() => handleAddressClick(address)}
-                    />
-                    {address}
-                    <Image
+                      <input
+                        className="hidden"
+                        type="checkbox"
+                        name="address"
+                        value={address}
+                        checked
+                        onChange={() => handleAddressClick(address)}
+                      />
+                      {address}
+                      <Image
                         className="mt-[2px] h-[16px] w-[16px] cursor-pointer"
                         src={closeRed40}
                         alt="닫기"
                         width={24}
                         onClick={() => handleRemoveAddressClick(address)}
                       />
-                  </label>
-                  
+                    </label>
                   </li>
                 ))}
               </ul>
@@ -130,6 +139,7 @@ export default function Filter({ onClose }: FilterProps) {
               onChange={handleDateChange}
               onFocus={handleFocus}
               onBlur={handleBlur}
+              min={minDate}
               style={{ color: startDate ? "black" : "transparent" }}
             />
           </div>
@@ -142,7 +152,7 @@ export default function Filter({ onClose }: FilterProps) {
                 name="wage"
                 type="text"
                 value={wage}
-                onInput={handleInputChange}
+                onInput={handleWageChange}
               />
               <p className="mx-[12px] my-[16px]">이상부터</p>
               <p className="absolute left-[134px] top-[16px]">원</p>

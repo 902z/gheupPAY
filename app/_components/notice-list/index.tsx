@@ -40,7 +40,7 @@ export default function AllNoticeList({
   const handleCloseFilter = () => {
     setShowFilter(false);
   };
-  const filterParams = {}
+  const filterParams = {};
 
   return (
     <div>
@@ -60,7 +60,9 @@ export default function AllNoticeList({
             >
               <p>상세필터</p>
             </button>
-            {showFilter && <Filter onClose={handleCloseFilter} filterParams={filterParams} />}
+            {showFilter && (
+              <Filter onClose={handleCloseFilter} filterParams={filterParams} />
+            )}
             {/* 상세필터 버튼입니다 */}
           </div>
         </div>

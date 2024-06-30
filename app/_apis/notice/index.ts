@@ -1,10 +1,7 @@
 import instance from "@/app/_lib/axios";
 
 // 맞춤 공고
-export async function getCustomizedNotices({
-  offset = 0,
-  limit = 5,
-}) {
+export async function getCustomizedNotices({ offset = 0, limit = 5 }) {
   try {
     const params = new URLSearchParams({
       offset: offset.toString(),
@@ -39,7 +36,7 @@ export async function getAllNotices({
       sort,
     });
     if (startsAtGte) {
-      params.append('startsAtGte', startsAtGte);
+      params.append("startsAtGte", startsAtGte);
     }
 
     const res = await instance.get(`/notices?${params.toString()}`);
