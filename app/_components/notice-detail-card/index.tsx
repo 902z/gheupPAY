@@ -61,8 +61,8 @@ export default function NoticeDetailCard({ noticeDetail }: noticeDetail) {
               <p>{noticeDetail.item.shop.item.description}</p>
             </div>
           </div>
-          <Button btnColor="white" className="font-bold">
-            공고 편집하기
+          <Button btnColor="orange" className="font-bold">
+            신청하기
           </Button>
         </div>
       </div>

@@ -22,7 +22,7 @@ interface CustomTextInputPropType
 
 /**
  * 
- * 커스텀 버튼 컴포넌트
+ * 커스텀 가격 input 컴포넌트
  * (react-hook-form + yup 조건)
  * @example
  *<form className="w-[500px]"> //넓이는 부모 요소 100%
