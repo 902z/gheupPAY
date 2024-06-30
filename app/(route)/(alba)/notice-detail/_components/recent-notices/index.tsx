@@ -17,7 +17,6 @@ export default function RecentNotices() {
       // 한 번 맵핑할 때마다 공고id, 가게id 가져와 API 요청함
       const notices = await Promise.all(
         noticesData.slice(1).map(async (notice) => {
-          console.log(notice);
           const noticeId = notice.id;
           const shopId = notice.shop.item.id;
           return (await getShopNoticeDetail(shopId, noticeId)).item;

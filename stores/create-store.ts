@@ -106,8 +106,11 @@ const useUserStore = create<UserStore>()(
       },
       postNotice: (notice) => {
         const notices = get().noticesData;
-        if (notices.some((n) => n.id === notice.id)) return;
-        if (notices.length >= 7) {
+        if (notices.some((n) => n.id === notice.id)) {
+          set({
+            noticesData: [notice, ...notices.filter((n) => n.id !== notice.id)],
+          });
+        } else if (notices.length >= 7) {
           set({ noticesData: [notice, ...notices.slice(0, 6)] });
         } else {
           set({ noticesData: [notice, ...notices] });
