@@ -134,7 +134,7 @@ export default function Filter({ onClose }: FilterProps) {
               type={isFocused || startDate ? "datetime-local" : "text"}
               placeholder="입력"
               value={startDate}
-              id="meeting-time"
+              id="startsAtGte"
               name="startDate"
               onChange={handleDateChange}
               onFocus={handleFocus}
@@ -149,6 +149,7 @@ export default function Filter({ onClose }: FilterProps) {
               <input
                 className="h-[58px] w-[169px] rounded-[6px] border border-gray-30 px-[20px] py-[16px] focus:outline-primary"
                 placeholder="입력"
+                id = "hourlyPayGte"
                 name="wage"
                 type="text"
                 value={wage}
