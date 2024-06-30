@@ -2,7 +2,6 @@ import React from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import Button from "../../button";
 
-
 type ModalProps = {
   closeModal: () => void;
   onClick?: () => void;
