@@ -4,7 +4,6 @@ import Button from "../../button";
 import check from "@/public/icons/check.png";
 import Image from "next/image";
 
-
 type ModalProps = {
   closeModal: () => void;
   children: React.ReactNode;
