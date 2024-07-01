@@ -11,7 +11,6 @@ export default function Layout({
     <div>
       {children}
       {modal}
-      <div id="modal-root" />
     </div>
   );
 }

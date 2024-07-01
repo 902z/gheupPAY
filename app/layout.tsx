@@ -27,6 +27,7 @@ export default function RootLayout({
         <Hydration />
         <Header />
         <main className="min-h-screen">{children}</main>
+        <div id="modal-root" className=""/>
         <Footer />
       </body>
     </html>

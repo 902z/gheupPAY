@@ -5,7 +5,7 @@ export const metadata: Metadata = {
   title: "가게 정보 등록",
 };
 
-export default function StoreRegisterLayout({
+export default function ShopCreateLayout({
   children,
 }: {
   children: React.ReactNode;
