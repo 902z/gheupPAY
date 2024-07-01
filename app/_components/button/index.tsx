@@ -21,11 +21,12 @@ const BUTTON =
  * 기본 넓이는 100%이고 폰트 스타일은 바뀌지 않았습니다.
  * className을 통해 추가적인 스타일을 입혀야 합니다.
  * @param children : 버튼 안에 담을 내용을 적습니다. (ex. "버튼")
- * @param className : 추가적인 css를 넣습니다.
- * @param btnColor : 버튼의 미리 정의된 색상 스타일을 결정합니다. (orange, white)
+ * @param className : 추가적인 css를 넣습니다. 넓이, 폰트 관련 css는 무조건 넣어야 합니다.
+ * @param btnColor : 버튼의 색상 스타일을 결정합니다. (orange, white)
+ * @param btnType : 버튼의 타입을 결정합니다. (button, submit)
  * @returns 버튼 컴포넌트를 반환합니다.
  * @example
- * <Button className="w-8 text-xl" btnColor="orange">버튼</Button>
+ * <Button className="w-8 text-xl" btnColor="orange" btnType="submit" >제출</Button>
  * <Button className="w-6 text-xl" btnColor="white">버튼</Button>
  */
 export default function Button({
