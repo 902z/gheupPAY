@@ -20,47 +20,65 @@ export default function Filter({ onClose }: FilterProps) {
   const [startDate, setStartDate] = useState<string>("");
   const [minDate, setMinDate] = useState<string>("");
   const [wage, setWage] = useState<string>("");
+  
+  useEffect(() => {
+    setMinDate(getNow());
+  }, []);
+
+  useEffect(() => {
+    const savedSelectedAddresses = JSON.parse(localStorage.getItem("selectedAddresses") || "[]");
+    const savedStartDate = localStorage.getItem("startDate") || "";
+    const savedWage = localStorage.getItem("wage") || "";
+
+    setSelectedAddresses(savedSelectedAddresses);
+    setStartDate(savedStartDate);
+    setWage(savedWage);
+  }, []);
 
   const handleAddressClick = (address: string) => {
     setSelectedAddresses((prev) => {
-      if (!prev.includes(address)) {
-        const updatedAddresses = [...prev, address];
-        return updatedAddresses;
-      }
-      return prev;
+      const updatedAddresses = prev.includes(address)
+        ? prev.filter((item) => item !== address)
+        : [...prev, address];
+      localStorage.setItem("selectedAddresses", JSON.stringify(updatedAddresses));
+      return updatedAddresses;
     });
   };
 
   const handleRemoveAddressClick = (address: string) => {
-    setSelectedAddresses((prev) => prev.filter((item) => item !== address));
+    setSelectedAddresses((prev) => {
+      const updatedAddresses = prev.filter((item) => item !== address);
+      localStorage.setItem("selectedAddresses", JSON.stringify(updatedAddresses));
+      return updatedAddresses;
+    });
   };
 
   const handleFocus = () => setIsFocused(true);
   const handleBlur = () => setIsFocused(false);
 
-  useEffect(() => {
-    setMinDate(getNow());
-  }, []);
 
   const handleDateChange = (e: React.FormEvent<HTMLInputElement>) => {
-    setStartDate(e.currentTarget.value);
+    const value = e.currentTarget.value;
+    setStartDate(value);
+    localStorage.setItem("startDate", value);
   };
 
   const handleWageChange = (e: React.FormEvent<HTMLInputElement>) => {
     const { value } = e.currentTarget;
     const stringNumericValue = value.replace(/\D/g, "");
     const numericValue = Number(stringNumericValue);
-    if (numericValue > 999999) {
-      setWage("999,999");
-    } else {
-      setWage(numberWithCommas(numericValue));
-    }
+    const formattedWage = numericValue > 999999 ? "999,999" : numberWithCommas(numericValue);
+    setWage(formattedWage);
+    localStorage.setItem("wage", formattedWage);
   };
 
   const handleReset = () => {
     setSelectedAddresses([]);
     setStartDate("");
     setWage("");
+    localStorage.removeItem("selectedAddresses");
+    localStorage.removeItem("startDate");
+    localStorage.removeItem("wage");
   };
 
   return (
