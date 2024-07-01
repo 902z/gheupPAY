@@ -1,15 +1,14 @@
 import Image from "next/image";
 import Link from "next/link";
-import AlertButton from "../../alert";
-// import { getAlerts } from "@/app/_apis/alert";
+import AlertButton from "./_component/alert";
+import { getAlerts } from "@/app/_apis/alert";
 import { getCookie } from "@/app/_util/cookie";
 import { LogoutButton } from "./logout-button";
-import { alertMockData } from "../../alert/mockdata";
 
 export default async function HeaderLogin() {
   const type = await getCookie("type");
-  // const initialAlerts = await getAlerts();
-  const initialAlerts = alertMockData;
+  const initialAlerts = await getAlerts();
+  // const initialAlerts = alertMockData;
   return (
     <>
       <section>
