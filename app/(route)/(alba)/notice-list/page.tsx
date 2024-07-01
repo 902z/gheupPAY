@@ -15,22 +15,17 @@ interface SearchParamsProps {
 export default async function page({ searchParams }: SearchParamsProps) {
   const customizedNotices = await getCustomizedNotices({});
   const hourlyPayGte = parseInt((searchParams.wage ?? "0").replace(/,/g, ""));
-  const startsAtGte = searchParams.startDate
-    ? new Date(searchParams.startDate).toISOString()
-    : undefined;
+  const startsAtGte = searchParams.startDate &&new Date(searchParams.startDate).toISOString();
 
   const address = searchParams.address || [];
   const page = parseInt(searchParams.page || "1", 10);
   const limit = 6;
   const offset = (page - 1) * limit;
-  const addressString = Array.isArray(address)
-    ? address.join(",")
-    : address || "";
 
   const allNotices = await getAllNotices({
     offset,
     limit,
-    address: addressString,
+    address,
     hourlyPayGte,
     startsAtGte,
   });
@@ -50,9 +45,6 @@ export default async function page({ searchParams }: SearchParamsProps) {
         notices={allNotices}
         activePage={page}
         itemsCountPerPage={limit}
-        hourlyPayGte={hourlyPayGte}
-        startsAtGte={startsAtGte}
-        address={address}
       />
     </div>
   );

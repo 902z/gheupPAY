@@ -10,9 +10,6 @@ type AllNoticeListProps = {
   notices: GetNotices;
   activePage: number;
   itemsCountPerPage: number;
-  hourlyPayGte: number;
-  startsAtGte: string | undefined;
-  address: string[];
 };
 
 const ALL_LIST_SECTION_ID = "all-list-section";
@@ -36,12 +33,14 @@ export default function AllNoticeList({
   }, []);
 
   const handleOpenFilter = () => {
-    setShowFilter(!showFilter);
+    setShowFilter((prevShowFilter) => !prevShowFilter);
   };
+  
+
+  
   const handleCloseFilter = () => {
     setShowFilter(false);
   };
-  const filterParams = {};
 
   return (
     <div>
@@ -62,7 +61,7 @@ export default function AllNoticeList({
               <p>상세필터</p>
             </button>
             {showFilter && (
-              <Filter onClose={handleCloseFilter} filterParams={filterParams} />
+              <Filter onClose={handleCloseFilter}/>
             )}
             {/* 상세필터 버튼입니다 */}
           </div>

@@ -8,10 +8,10 @@ import closeRed40 from "@/public/icons/close-red-40.png";
 import { ADDRESS } from "@/app/_constants/address";
 import Button from "@/app/_components/button";
 import { numberWithCommas } from '@/app/_util/number-with-comma';
+import { getNow } from '@/app/_util/get-now';
 
 interface FilterProps {
   onClose: () => void;
-  filterParams: {};
 }
 
 export default function Filter({ onClose }: FilterProps) {
@@ -39,13 +39,7 @@ export default function Filter({ onClose }: FilterProps) {
   const handleBlur = () => setIsFocused(false);
 
   useEffect(() => {
-    const now = new Date();
-    const year = now.getFullYear();
-    const month = String(now.getMonth() + 1).padStart(2, "0");
-    const day = String(now.getDate()).padStart(2, "0");
-    const hours = String(now.getHours()).padStart(2, "0");
-    const minutes = String(now.getMinutes()).padStart(2, "0");
-    setMinDate(`${year}-${month}-${day}T${hours}:${minutes}`);
+    setMinDate(getNow());
   }, []);
 
   const handleDateChange = (e: React.FormEvent<HTMLInputElement>) => {
@@ -159,7 +153,7 @@ export default function Filter({ onClose }: FilterProps) {
             </div>
           </div>
           <div className="mt-[56px] flex h-[48px] justify-between gap-[8px]">
-            <Button className="w-[82px]" btnColor="white" onClick={handleReset}>
+            <Button type="button" className="w-[82px]" btnColor="white" onClick={handleReset}>
               초기화
             </Button>
             <Button className="w-[260px]" btnColor="orange">
