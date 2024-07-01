@@ -1,7 +1,7 @@
 "use client";
-
-import { InputHTMLAttributes } from "react";
+import { InputHTMLAttributes, useRef, useState } from "react";
 import { UseFormRegisterReturn } from "react-hook-form";
+import { date } from "yup";
 
 interface CustomDateInputPropType
   extends InputHTMLAttributes<HTMLInputElement> {
@@ -56,11 +56,11 @@ function CustomDateInput({
         )}
       </label>
       <input
+        className={`h-[58px] rounded-md border border-solid border-gray-30 bg-white pl-5 text-base font-normal leading-[26px] text-black placeholder:text-gray-40 focus:outline-primary`}
         id={register.name}
         type="datetime-local"
         {...register}
         {...rest}
-        className={`h-[58px] rounded-md border border-solid border-gray-30 bg-white pl-5 text-base font-normal leading-[26px] text-black placeholder:text-gray-40 focus:outline-primary`}
       />
       {errorMessage && (
         <span className="pl-2 text-left text-s font-normal leading-4 text-primary">

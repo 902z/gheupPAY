@@ -10,39 +10,21 @@ import { useForm } from "react-hook-form";
 import Button from "@/app/_components/button";
 import close from "@/public/icons/close.png";
 import Image from "next/image";
-import { format } from "date-fns";
 import { storeNoticeRegisterSchema } from "./schema";
 
 export default function AddNotice() {
   const router = useRouter();
-  const dialogRef = useRef<ElementRef<"dialog">>(null);
   const resolver = yupResolver(storeNoticeRegisterSchema);
   const {
     register,
     handleSubmit,
     formState: { errors },
-    setValue,
-    control,
   } = useForm({ resolver, mode: "onSubmit" });
-
-  useEffect(() => {
-    if (!dialogRef.current?.open) {
-      dialogRef.current?.showModal();
-    }
-  }, []);
 
   function onDismiss() {
     router.back();
   }
-  const onSubmit = (data: any) => {
-    console.log(data);
-  };
-
-  const handleDateChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const date = new Date(event.target.value);
-    const formattedDate = format(date, "yyyy-MM-dd'T'HH:mm:ss'Z'");
-    setValue("startsAt", formattedDate);
-  };
+  const onSubmit = (data: any) => {};
 
   return (
     <div className="mt-[70px]">
