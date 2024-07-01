@@ -9,7 +9,6 @@ import LabelHourlyRate from "@/app/_components/label-hourly-rate";
 import { calculateWagePercentage } from "@/app/_util/calculate-wage-percentage ";
 import { dateFormat } from "@/app/_util/date-format";
 import { GetNotices } from "@/app/_apis/type";
-import { NoticeCardContents } from "@/app/_apis/type";
 import useUserStore from "@/stores/create-store";
 import Link from "next/link";
 
