@@ -10,7 +10,6 @@ import { useForm } from "react-hook-form";
 import Button from "@/app/_components/button";
 import close from "@/public/icons/close.png";
 import Image from "next/image";
-import { postCreateNotice } from "@/app/_apis/notice";
 import { storeNoticeRegisterSchema } from "./schema";
 
 interface SearchParamsProps {

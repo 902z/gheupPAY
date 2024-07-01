@@ -32,7 +32,7 @@ export default async function page() {
               내 가게를 소개하고 공고도 등록해 보세요{" "}
               <LinkButton
                 href="/admin/shop-register"
-                color="orange"
+                btnColor="orange"
                 className="mt-6 font-bold"
               >
                 가게등록하기

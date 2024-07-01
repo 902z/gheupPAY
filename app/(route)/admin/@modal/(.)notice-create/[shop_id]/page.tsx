@@ -13,7 +13,6 @@ import close from "@/public/icons/close.png";
 import Image from "next/image";
 import { storeNoticeRegisterSchema } from "./schema";
 import { useRouter } from "next/navigation";
-import { postCreateNotice } from "@/app/_apis/notice";
 export default function AddNotice() {
   const router = useRouter();
   const params = useParams();
