@@ -1,4 +1,4 @@
-import { GetShopsShopIdNoticesNoticeId } from "@/app/_apis/type";
+"use server";
 import { calculateTimeRange } from "@/app/_util/calculate-time-range";
 import { calculateWagePercentage } from "@/app/_util/calculate-wage-percentage ";
 import { dateFormat } from "@/app/_util/date-format";
@@ -9,14 +9,19 @@ import clock from "@/public/icons/clock.png";
 import mapPin from "@/public/icons/map-pin.png";
 import Button from "@/app/_components/button";
 import OnlyLabelHourlyRate from "../only-label-hourly-rate";
+import { getShopNoticeDetail } from "@/app/_apis/shop";
 
 interface NoticeDetailCardProps {
-  noticeDetail: GetShopsShopIdNoticesNoticeId;
+  shopId: string;
+  noticeId: string;
 }
 
-export default function NoticeDetailCard({
-  noticeDetail,
+// 이제 NoticeDeatilCard에는 shopId와 noticeId가 필요합니다.
+export default async function NoticeDetailCard({
+  shopId,
+  noticeId,
 }: NoticeDetailCardProps) {
+  const noticeDetail = await getShopNoticeDetail(shopId, noticeId);
   const hourlyWage = calculateWagePercentage(noticeDetail.item.hourlyPay);
   const date = dateFormat(noticeDetail.item.startsAt);
 
