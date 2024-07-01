@@ -2,12 +2,16 @@ import React from "react";
 import NoneApplication from "./_components/none-application";
 import { getUser } from "@/app/_apis/user";
 import UserProfile from "./_components/user-profile";
+import { getUserNoticeApplication } from "@/app/_apis/application";
+import NoticeApplicationTable from "./_components/notice-application-table";
 export const metadata = {
   title: "프로필 상세",
 };
 export default async function page() {
   const userId = "309aaf62-068e-4deb-a6c3-a31abacfdc67";
   const userProfile = await getUser(userId);
+
+  const applicationNotice = await getUserNoticeApplication(userId);
 
   return (
     <div className="base-container">
@@ -19,6 +23,7 @@ export default async function page() {
       </div>
       <h2 className="py-8 font-bold text-l md:text-2xl">신청 내역</h2>
       {/* <NoneApplication /> */}
+      <NoticeApplicationTable applicationNotice={applicationNotice} />
     </div>
   );
 }

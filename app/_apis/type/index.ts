@@ -91,3 +91,53 @@ export type UserProfileData = {
     shop: any | null;
   };
 };
+
+export type UserApplication = {
+  offset: number;
+  limit: number;
+  count: number;
+  hasNext: boolean;
+  items: {
+    item: {
+      id: string;
+      status: string;
+      createdAt: string;
+      shop: {
+        item: {
+          id: string;
+          name: string;
+          category: string;
+          address1: string;
+          address2: string;
+          description: string;
+          imageUrl: string;
+          originalHourlyPay: number;
+        };
+        href: string;
+      };
+      notice: {
+        item: {
+          id: string;
+          hourlyPay: number;
+          description: string;
+          startsAt: string; // Assuming this is a date string
+          workhour: number;
+          closed: boolean;
+        };
+        href: string;
+      };
+    };
+    links: {
+      rel: string;
+      description: string;
+      method: string;
+      href: string;
+    }[];
+  }[];
+  links: {
+    rel: string;
+    description: string;
+    method: string;
+    href: string;
+  }[];
+};
