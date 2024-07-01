@@ -3,6 +3,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import Button from "../../button";
 import check from "@/public/icons/check.png";
 import Image from "next/image";
+import { createPortal } from "react-dom";
 
 type ModalProps = {
   closeModal: () => void;
@@ -58,7 +59,7 @@ export default function SelectModal({
       onClickNo();
     }
   };
-  return (
+  return createPortal(
     <AnimatePresence>
       <motion.div
         initial={{ opacity: 0 }}
@@ -82,20 +83,21 @@ export default function SelectModal({
             <Button
               onClick={handleNoBtn}
               className="flex h-[42px] items-center justify-center rounded-[8px] font-bold md:h-[48px] md:w-[120px]"
-              color="white"
+              btnColor="white"
             >
               아니오
             </Button>
             <Button
               onClick={handleYesBtn}
               className="flex h-[42px] items-center justify-center rounded-[8px] font-bold md:h-[48px] md:w-[120px]"
-              color="orange"
+              btnColor="orange"
             >
               {YES_TYPE[yesType]}
             </Button>
           </div>
         </motion.div>
       </motion.div>
-    </AnimatePresence>
+    </AnimatePresence>,
+    document.body,
   );
 }
