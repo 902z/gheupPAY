@@ -27,14 +27,13 @@ export default function AlbaApplicationTable({
             {applicationList.items.map((application, index) => (
               <tr key={index}>
                 <td className="mix-w-[200px] sticky left-0 z-10 border bg-white p-4">
-                  {application.item.user.name}test
+                  {application.item.user.item.name}
                 </td>
                 <td className="min-w-[250px] border bg-white p-4">
-                  {application.item.user.bio}일을 꼼꼼하게 하는 성격임~~~~~~
-                  일하고싶어요
+                  {application.item.user.item.bio}
                 </td>
                 <td className="min-w-[200px] border bg-white p-4">
-                  {application.item.user.phone}010-1111-1111
+                  {application.item.user.item.phone}
                 </td>
                 <td className="border bg-white p-4">
                   <StatusLabel status={application.item.status} />

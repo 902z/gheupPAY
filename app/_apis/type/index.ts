@@ -53,13 +53,15 @@ export type ApplicationItem = {
     status: string;
     createdAt: string;
     user: {
-      id: string;
-      email: string;
-      type: string;
-      name?: string;
-      phone?: string;
-      address?: string;
-      bio?: string;
+      item: {
+        id: string;
+        email: string;
+        type: string;
+        name?: string;
+        phone?: string;
+        address?: string;
+        bio?: string;
+      };
     };
     shop: {
       id: string;
