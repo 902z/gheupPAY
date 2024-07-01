@@ -43,6 +43,7 @@ export const postLogin: PostLogin = async ({ email, password }) => {
         authorization: false,
       },
     );
+    await setCookie("type", data.item.user.item.type);
     await setCookie("accessToken", data.item.token);
     await setCookie("userId", data.item.user.item.id);
     return data;

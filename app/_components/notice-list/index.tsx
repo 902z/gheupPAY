@@ -1,11 +1,12 @@
 "use client";
-import React, { useEffect, useRef } from "react";
+import React, { useEffect } from "react";
 import Pagination from "@/app/_components/pagination";
-import { NoticeResponse } from "@/app/_apis/notice/response-type.js";
 import NoticeCard from "../notice-card";
+import { GetNotices } from "../../_apis/type/index";
+import { NoticeCardSkeleton } from "../notice-card/skeleton";
 
 type AllNoticeListProps = {
-  notices: NoticeResponse;
+  notices: GetNotices;
   activePage: number;
   itemsCountPerPage: number;
 };
@@ -39,10 +40,13 @@ export default function AllNoticeList({
           전체 공고
         </h2>
         <div className="lg grid grid-cols-2 gap-4 lg:grid-cols-3">
-          {noticeList &&
-            noticeList.map((cardContents) => {
-              return <NoticeCard cardContents={cardContents} />;
-            })}
+          {noticeList
+            ? noticeList.map((cardContents) => {
+                return <NoticeCard cardContents={cardContents.item} />;
+              })
+            : [1, 2, 3, 4, 5, 6].map((index) => {
+                return <NoticeCardSkeleton key={index} />;
+              })}
         </div>
         <div className="mb-[60px] mt-10">
           <Pagination

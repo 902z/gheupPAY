@@ -3,10 +3,10 @@ import React from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import NoticeCard from "@/app/_components/notice-card";
-import { NoticeResponse } from "../../../../../_apis/notice/response-type";
+import { GetNotices } from "../../../../../_apis/type/index";
 
 type CustomizedNoticeListProps = {
-  notices: NoticeResponse;
+  notices: GetNotices;
 };
 
 export default function CustomizedNoticeList({
@@ -31,7 +31,7 @@ export default function CustomizedNoticeList({
                   key={cardContents.item.id}
                   className="swiper-slide overflow-visible px-1 py-4 md:px-2"
                 >
-                  <NoticeCard cardContents={cardContents} />
+                  <NoticeCard cardContents={cardContents.item} />
                 </SwiperSlide>
               );
             })}

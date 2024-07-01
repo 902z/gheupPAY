@@ -1,6 +1,8 @@
 import React from "react";
 import { getShopNoticeDetail } from "@/app/_apis/shop";
 import NoticeDetailCard from "@/app/_components/notice-detail-card";
+import AlbaApplicationTable from "../_components/alba-application-table";
+import { getNoticeApplications } from "@/app/_apis/application";
 export const metadata = {
   title: "공고 상세",
 };
@@ -10,12 +12,16 @@ export default async function page() {
 
   const noticeDetail = await getShopNoticeDetail(shopId, noticeId);
 
+  const applicationList = await getNoticeApplications(shopId, noticeId);
+
   return (
     <div className="base-container">
       <NoticeDetailCard noticeDetail={noticeDetail} />
 
-      <h2 className="py-8 font-bold text-l md:text-2xl">신청자 목록</h2>
-      {/* <NoneNotice /> */}
+      <div className="my-12">
+        <h2 className="py-8 font-bold text-l md:text-2xl">신청자 목록</h2>
+        <AlbaApplicationTable applicationList={applicationList} />
+      </div>
     </div>
   );
 }
