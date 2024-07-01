@@ -609,7 +609,7 @@ export type UserApplication = {
   items: {
     item: {
       id: string;
-      status: string;
+      status: "pending" | "accepted" | "rejected" | "canceled";
       createdAt: string;
       shop: {
         item: {
