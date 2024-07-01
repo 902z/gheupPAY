@@ -1,4 +1,6 @@
 import instance from "@/app/_lib/axios";
+import axiosInstance from "../instances";
+import { CreateNoticeRequest } from "../type";
 
 // 맞춤 공고
 export async function getCustomizedNotices({
@@ -42,6 +44,19 @@ export async function getAllNotices({
     return res.data;
   } catch (error) {
     console.error("getAllNotices 함수에서 오류 발생:", error);
+    throw error;
+  }
+}
+
+export async function postCreateNotice(
+  shopId: string,
+  params: CreateNoticeRequest,
+) {
+  try {
+    const res = await axiosInstance.post(`/shops/${shopId}/notices`, params);
+    return res.data;
+  } catch (error) {
+    console.error("PostCreateNotice 함수에서 오류 발생:", error);
     throw error;
   }
 }
