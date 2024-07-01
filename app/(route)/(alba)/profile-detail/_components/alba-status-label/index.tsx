@@ -1,9 +1,8 @@
-"use client";
+import { GetShopsShopIdNoticesNoticeId } from "@/app/_apis/type";
 import React from "react";
-import { motion } from "framer-motion";
 
 type StatusLabelProps = {
-  status: string;
+  status: GetShopsShopIdNoticesNoticeId["item"]["currentUserApplication"]["item"]["status"];
 };
 
 export default function AlbaStatusLabel({ status }: StatusLabelProps) {
