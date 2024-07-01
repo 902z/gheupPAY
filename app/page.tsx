@@ -4,6 +4,7 @@ import { FormEvent, useRef } from "react";
 import { getImageUrl } from "./_apis/image";
 
 import ShopRegisterForm from "./_components/shop-register/";
+import { NoticeCardSkeleton } from "./_components/notice-card/skeleton";
 import OpenModal from "./_components/modals";
 
 export default function Home() {
@@ -17,6 +18,8 @@ export default function Home() {
   return (
     <>
       <div className="base-container flex flex-col text-center">
+        <NoticeCardSkeleton />
+        <Link href="/notice-list">리스트 페이지로 이동</Link>
         <Link href="/notice-list">리스트 페이지로 이동</Link>
         <h1 className="font-bold">
           폰트를 굵게 하고 싶으면 font-bold를 쓰세요.
