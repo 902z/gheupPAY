@@ -1,62 +1,98 @@
 "use client";
+import Image from "next/image";
 import Link from "next/link";
-import { FormEvent, useRef } from "react";
-import { getImageUrl } from "./_apis/image";
-
-import ShopRegisterForm from "./_components/shop-register/";
-import { NoticeCardSkeleton } from "./_components/notice-card/skeleton";
-import OpenModal from "./_components/modals";
+import logo from "@/public/images/logo.png";
+import iphone from "@/public/images/iphone.png";
+import "aos/dist/aos.css";
+import AOS from "aos";
+import { useEffect } from "react";
+import { motion } from "framer-motion";
 
 export default function Home() {
-  const inputRef = useRef<HTMLInputElement>(null);
-  const handleSubmit = async (e: FormEvent) => {
-    e.preventDefault();
-    if (!inputRef.current || !inputRef.current.files) return;
-    console.log(inputRef.current?.files?.[0]);
-    console.log(await getImageUrl(inputRef.current.files[0]));
-  };
+  useEffect(() => {
+    AOS.init({ duration: 1000 });
+  }, []);
+
   return (
     <>
-      <div className="base-container flex flex-col text-center">
-        <NoticeCardSkeleton />
-        <Link href="/notice-list">리스트 페이지로 이동</Link>
-        <Link href="/notice-list">리스트 페이지로 이동</Link>
-        <h1 className="font-bold">
-          폰트를 굵게 하고 싶으면 font-bold를 쓰세요.
-        </h1>
-        <p>기본은 regular입니다. (기본은 설정 X)</p>
-        <p className="text-s">s: 12px</p>
-        <p className="text-m">m: 14px</p>
-        <p>base: 16px (기본은 설정 X)</p>
-        <p className="text-l">l: 20px</p>
-        <p className="text-xl">xl: 28px</p>
-        <Link href="/admin/shop-register" className="text-link">
-          가게 정보 등록 페이지
-        </Link>
-        <form onSubmit={handleSubmit}>
-          <input type="file" ref={inputRef} />
-          <button>전송</button>
-        </form>
-        <Link href="/login" className="text-link">
-          로그인
-        </Link>
-        <span className="text-red">VS</span>
-        <OpenModal
-          window
-          windowTitle="가게 등록"
-          modalContents={<ShopRegisterForm />}
+      <div className="mx-auto flex h-full w-full max-w-[1200px] flex-col overflow-x-hidden px-10">
+        <div className="mb-10 ml-auto flex w-fit justify-end gap-4 rounded-b-2xl bg-white p-4 font-bold text-red-40 shadow-md">
+          <Link href="/login" className="transition-all hover:scale-105">
+            로그인
+          </Link>
+          <Link href="/signup" className="transition-all hover:scale-105">
+            회원가입
+          </Link>
+        </div>
+
+        <div className="flex flex-col items-center justify-center py-4 md:flex-row md:items-start md:gap-14">
+          <div className="w-[300px] md:w-[400px]">
+            <Image src={logo} alt="logo" />
+          </div>
+          <div
+            className="relative left-10 w-[400px] md:w-[500px]"
+            data-aos="fade-up"
+            data-aos-anchor-placement="bottom-bottom"
+          >
+            <Image src={iphone} alt="logo" />
+          </div>
+        </div>
+        <div>
+          <div
+            className="relative left-0 my-20 w-fit rounded-xl bg-gray-20 px-8 py-12 shadow-md md:left-2 md:text-xl"
+            data-aos="fade-down-right"
+          >
+            알바생이 갑자기 그만뒀는데, 어떡하지?
+          </div>
+          <div
+            className="relative left-20 my-20 w-fit rounded-xl bg-gray-20 px-8 py-12 shadow-md md:left-20 md:text-xl"
+            data-aos="fade-down-left"
+          >
+            하루만 알바 대타 해 줄 사람 어디 없나?
+          </div>
+          <div
+            className="relative left-0 my-20 w-fit rounded-xl bg-gray-20 px-8 py-12 shadow-md md:left-2 md:text-xl"
+            data-aos="fade-down-right"
+          >
+            알바 할 시간은 없는데, 급전이 필요해 😢
+          </div>
+        </div>
+        <p
+          className="pb-4 font-bold text-xl md:text-5xl"
+          data-aos="fade-right"
+          data-aos-easing="ease-in-sine"
         >
-          <button className="text-link">가게 정보 등록 모달</button>
-        </OpenModal>
-        <OpenModal select selectType="yes" modalContents="하실건요?">
-          <button>물어보기</button>
-        </OpenModal>
-        <OpenModal confirm modalContents="할게요!">
-          <button>확인하기</button>
-        </OpenModal>
-        <OpenModal warning modalContents="클나!">
-          <button>경고하기</button>
-        </OpenModal>
+          알바가 급할 땐? <br />
+        </p>
+        <p
+          className="pb-4 text-right font-bold text-xl md:text-5xl"
+          data-aos="fade-left"
+          data-aos-easing="ease-in-sine"
+        >
+          일단 <span className="text-2xl text-red-40 md:text-7xl">급PAY</span>로
+          들어와!!!!
+        </p>
+      </div>
+      <div className="md:pb-30 flex h-fit flex-col items-center justify-center bg-red-10 pb-20 pt-8">
+        <div
+          className="w-[300px] md:w-[400px]"
+          data-aos="fade-up"
+          data-aos-anchor-placement="top-bottom"
+        >
+          <Image src={logo} alt="logo" />
+        </div>
+        <Link href="/notice-list">
+          <motion.div
+            className="w-[250px] cursor-pointer rounded-2xl bg-red-40 py-4 text-center font-bold text-l text-white"
+            data-aos="fade-up"
+            data-aos-anchor-placement="top-bottom"
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+            transition={{ duration: 0.1 }}
+          >
+            시작하기
+          </motion.div>
+        </Link>
       </div>
     </>
   );
