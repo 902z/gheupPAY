@@ -26,10 +26,10 @@ export default async function loginRequired(request: NextRequest) {
   }
 
   if (type === "employee" && isAdminPage) {
-    return NextResponse.redirect(new URL("/", request.url));
+    return NextResponse.redirect(new URL("/notice-list", request.url));
   }
   if (type === "employer" && isAlbaPage) {
-    return NextResponse.redirect(new URL("/", request.url));
+    return NextResponse.redirect(new URL("/notice-list", request.url));
   }
 
   return NextResponse.next();
