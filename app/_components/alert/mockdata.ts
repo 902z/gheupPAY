@@ -1,483 +1,278 @@
-type DataType = {
-  offset: number;
-  limit: number;
-  count: number; // 전체 개수
-  hasNext: boolean; // 다음 내용 존재 여부
-  items: {
-    item: {
-      id: string;
-      createdAt: string;
-      result: "accepted" | "rejected";
-      read: boolean;
-      application: {
-        item: {
-          id: string;
-          status: "pending" | "accepted" | "rejected";
-        };
-        href: string;
-      };
-      shop: {
-        item: {
-          id: string;
-          name: string;
-          category: string;
-          address1: string;
-          address2: string;
-          description: string;
-          imageUrl: string;
-          originalHourlyPay: number;
-        };
-        href: string;
-      };
-      notice: {
-        item: {
-          id: string;
-          hourlyPay: number;
-          description: string;
-          startsAt: string;
-          workhour: number;
-          closed: boolean;
-        };
-        href: string;
-      };
-    };
-  }[];
-};
+import { AlertData } from "@/app/_apis/type";
 
-export const DATA: DataType = {
+type alertMockData = AlertData;
+
+export const alertMockData: alertMockData = {
   offset: 0,
-  limit: 11,
-  count: 11, // 전체 개수
+  limit: 0,
+  count: 0, // 전체 개수
   hasNext: false, // 다음 내용 존재 여부
   items: [
     {
       item: {
-        id: "id",
-        createdAt: "날짜",
+        id: "hi",
+        createdAt: "hi",
         result: "accepted",
-        read: true,
+        read: false,
         application: {
           item: {
-            id: "string",
-            status: "rejected",
+            id: "hi",
+            status: "pending",
           },
-          href: "string",
+          href: "hi",
         },
         shop: {
           item: {
-            id: "string",
-            name: "HS 과일주스",
-            category: "string",
-            address1: "string",
-            address2: "string",
-            description: "string",
-            imageUrl: "string",
-            originalHourlyPay: 10,
+            id: "hi",
+            name: "hi",
+            category: "hi",
+            address1: "hi",
+            address2: "hi",
+            description: "hi",
+            imageUrl: "hi",
+            originalHourlyPay: 0,
           },
-          href: "string",
+          href: "hi",
         },
         notice: {
           item: {
-            id: "string",
-            hourlyPay: 10,
-            description: "string",
-            startsAt: "string",
-            workhour: 5,
-            closed: true,
+            id: "hi",
+            hourlyPay: 0,
+            description: "hi",
+            startsAt: "hi",
+            workhour: 0,
+            closed: false,
           },
-          href: "string",
+          href: "hi",
         },
+        links: [{}],
       },
     },
     {
       item: {
-        id: "id",
-        createdAt: "날짜",
+        id: "hi",
+        createdAt: "hi",
         result: "accepted",
         read: true,
         application: {
           item: {
-            id: "string",
-            status: "rejected",
+            id: "hi",
+            status: "pending",
           },
-          href: "string",
+          href: "hi",
         },
         shop: {
           item: {
-            id: "string",
-            name: "string",
-            category: "string",
-            address1: "string",
-            address2: "string",
-            description: "string",
-            imageUrl: "string",
-            originalHourlyPay: 10,
+            id: "hi",
+            name: "hi",
+            category: "hi",
+            address1: "hi",
+            address2: "hi",
+            description: "hi",
+            imageUrl: "hi",
+            originalHourlyPay: 0,
           },
-          href: "string",
+          href: "hi",
         },
         notice: {
           item: {
-            id: "string",
-            hourlyPay: 10,
-            description: "string",
-            startsAt: "string",
-            workhour: 5,
-            closed: true,
+            id: "hi",
+            hourlyPay: 0,
+            description: "hi",
+            startsAt: "hi",
+            workhour: 0,
+            closed: false,
           },
-          href: "string",
+          href: "hi",
         },
+        links: [{}],
       },
     },
     {
       item: {
-        id: "id",
-        createdAt: "날짜",
+        id: "hi",
+        createdAt: "hi",
         result: "accepted",
         read: true,
         application: {
           item: {
-            id: "string",
-            status: "rejected",
+            id: "hi",
+            status: "pending",
           },
-          href: "string",
+          href: "hi",
         },
         shop: {
           item: {
-            id: "string",
-            name: "string",
-            category: "string",
-            address1: "string",
-            address2: "string",
-            description: "string",
-            imageUrl: "string",
-            originalHourlyPay: 10,
+            id: "hi",
+            name: "hi",
+            category: "hi",
+            address1: "hi",
+            address2: "hi",
+            description: "hi",
+            imageUrl: "hi",
+            originalHourlyPay: 0,
           },
-          href: "string",
+          href: "hi",
         },
         notice: {
           item: {
-            id: "string",
-            hourlyPay: 10,
-            description: "string",
-            startsAt: "string",
-            workhour: 5,
-            closed: true,
+            id: "hi",
+            hourlyPay: 0,
+            description: "hi",
+            startsAt: "hi",
+            workhour: 0,
+            closed: false,
           },
-          href: "string",
+          href: "hi",
         },
+        links: [{}],
       },
     },
     {
       item: {
-        id: "id",
-        createdAt: "날짜",
+        id: "hi",
+        createdAt: "hi",
         result: "accepted",
         read: true,
         application: {
           item: {
-            id: "string",
-            status: "rejected",
+            id: "hi",
+            status: "pending",
           },
-          href: "string",
+          href: "hi",
         },
         shop: {
           item: {
-            id: "string",
-            name: "string",
-            category: "string",
-            address1: "string",
-            address2: "string",
-            description: "string",
-            imageUrl: "string",
-            originalHourlyPay: 10,
+            id: "hi",
+            name: "hi",
+            category: "hi",
+            address1: "hi",
+            address2: "hi",
+            description: "hi",
+            imageUrl: "hi",
+            originalHourlyPay: 0,
           },
-          href: "string",
+          href: "hi",
         },
         notice: {
           item: {
-            id: "string",
-            hourlyPay: 10,
-            description: "string",
-            startsAt: "string",
-            workhour: 5,
-            closed: true,
+            id: "hi",
+            hourlyPay: 0,
+            description: "hi",
+            startsAt: "hi",
+            workhour: 0,
+            closed: false,
           },
-          href: "string",
+          href: "hi",
         },
+        links: [{}],
       },
     },
     {
       item: {
-        id: "id",
-        createdAt: "날짜",
+        id: "hi",
+        createdAt: "hi",
         result: "accepted",
         read: true,
         application: {
           item: {
-            id: "string",
-            status: "rejected",
+            id: "hi",
+            status: "pending",
           },
-          href: "string",
+          href: "hi",
         },
         shop: {
           item: {
-            id: "string",
-            name: "string",
-            category: "string",
-            address1: "string",
-            address2: "string",
-            description: "string",
-            imageUrl: "string",
-            originalHourlyPay: 10,
+            id: "hi",
+            name: "hi",
+            category: "hi",
+            address1: "hi",
+            address2: "hi",
+            description: "hi",
+            imageUrl: "hi",
+            originalHourlyPay: 0,
           },
-          href: "string",
+          href: "hi",
         },
         notice: {
           item: {
-            id: "string",
-            hourlyPay: 10,
-            description: "string",
-            startsAt: "string",
-            workhour: 5,
-            closed: true,
+            id: "hi",
+            hourlyPay: 0,
+            description: "hi",
+            startsAt: "hi",
+            workhour: 0,
+            closed: false,
           },
-          href: "string",
+          href: "hi",
         },
+        links: [{}],
       },
     },
     {
       item: {
-        id: "id",
-        createdAt: "날짜",
+        id: "hi",
+        createdAt: "hi",
         result: "accepted",
         read: true,
         application: {
           item: {
-            id: "string",
-            status: "rejected",
+            id: "hi",
+            status: "pending",
           },
-          href: "string",
+          href: "hi",
         },
         shop: {
           item: {
-            id: "string",
-            name: "string",
-            category: "string",
-            address1: "string",
-            address2: "string",
-            description: "string",
-            imageUrl: "string",
-            originalHourlyPay: 10,
+            id: "hi",
+            name: "hi",
+            category: "hi",
+            address1: "hi",
+            address2: "hi",
+            description: "hi",
+            imageUrl: "hi",
+            originalHourlyPay: 0,
           },
-          href: "string",
+          href: "hi",
         },
         notice: {
           item: {
-            id: "string",
-            hourlyPay: 10,
-            description: "string",
-            startsAt: "string",
-            workhour: 5,
-            closed: true,
+            id: "hi",
+            hourlyPay: 0,
+            description: "hi",
+            startsAt: "hi",
+            workhour: 0,
+            closed: false,
           },
-          href: "string",
+          href: "hi",
         },
+        links: [{}],
       },
     },
+  ],
+  links: [
     {
-      item: {
-        id: "id",
-        createdAt: "날짜",
-        result: "accepted",
-        read: true,
-        application: {
-          item: {
-            id: "string",
-            status: "rejected",
-          },
-          href: "string",
-        },
-        shop: {
-          item: {
-            id: "string",
-            name: "string",
-            category: "string",
-            address1: "string",
-            address2: "string",
-            description: "string",
-            imageUrl: "string",
-            originalHourlyPay: 10,
-          },
-          href: "string",
-        },
-        notice: {
-          item: {
-            id: "string",
-            hourlyPay: 10,
-            description: "string",
-            startsAt: "string",
-            workhour: 5,
-            closed: true,
-          },
-          href: "string",
-        },
-      },
+      rel: "self",
+      description: "현재 페이지",
+      method: "GET",
+      href: "hi",
     },
     {
-      item: {
-        id: "id",
-        createdAt: "날짜",
-        result: "accepted",
-        read: true,
-        application: {
-          item: {
-            id: "string",
-            status: "rejected",
-          },
-          href: "string",
-        },
-        shop: {
-          item: {
-            id: "string",
-            name: "string",
-            category: "string",
-            address1: "string",
-            address2: "string",
-            description: "string",
-            imageUrl: "string",
-            originalHourlyPay: 10,
-          },
-          href: "string",
-        },
-        notice: {
-          item: {
-            id: "string",
-            hourlyPay: 10,
-            description: "string",
-            startsAt: "string",
-            workhour: 5,
-            closed: true,
-          },
-          href: "string",
-        },
-      },
+      rel: "prev",
+      description: "이전 페이지",
+      method: "GET",
+      href: "hi",
     },
     {
-      item: {
-        id: "id",
-        createdAt: "날짜",
-        result: "accepted",
-        read: true,
-        application: {
-          item: {
-            id: "string",
-            status: "rejected",
-          },
-          href: "string",
-        },
-        shop: {
-          item: {
-            id: "string",
-            name: "string",
-            category: "string",
-            address1: "string",
-            address2: "string",
-            description: "string",
-            imageUrl: "string",
-            originalHourlyPay: 10,
-          },
-          href: "string",
-        },
-        notice: {
-          item: {
-            id: "string",
-            hourlyPay: 10,
-            description: "string",
-            startsAt: "string",
-            workhour: 5,
-            closed: true,
-          },
-          href: "string",
-        },
-      },
+      rel: "next",
+      description: "다음 페이지",
+      method: "GET",
+      href: "hi",
     },
     {
-      item: {
-        id: "id",
-        createdAt: "날짜",
-        result: "accepted",
-        read: true,
-        application: {
-          item: {
-            id: "string",
-            status: "rejected",
-          },
-          href: "string",
-        },
-        shop: {
-          item: {
-            id: "string",
-            name: "string",
-            category: "string",
-            address1: "string",
-            address2: "string",
-            description: "string",
-            imageUrl: "string",
-            originalHourlyPay: 10,
-          },
-          href: "string",
-        },
-        notice: {
-          item: {
-            id: "string",
-            hourlyPay: 10,
-            description: "string",
-            startsAt: "string",
-            workhour: 5,
-            closed: true,
-          },
-          href: "string",
-        },
-      },
-    },
-    {
-      item: {
-        id: "id",
-        createdAt: "날짜",
-        result: "accepted",
-        read: true,
-        application: {
-          item: {
-            id: "string",
-            status: "rejected",
-          },
-          href: "string",
-        },
-        shop: {
-          item: {
-            id: "string",
-            name: "string",
-            category: "string",
-            address1: "string",
-            address2: "string",
-            description: "string",
-            imageUrl: "string",
-            originalHourlyPay: 10,
-          },
-          href: "string",
-        },
-        notice: {
-          item: {
-            id: "string",
-            hourlyPay: 10,
-            description: "string",
-            startsAt: "string",
-            workhour: 5,
-            closed: true,
-          },
-          href: "string",
-        },
-      },
+      rel: "user",
+      description: "사용자 정보",
+      method: "GET",
+      href: "hi",
     },
   ],
 };
