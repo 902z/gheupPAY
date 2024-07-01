@@ -7,15 +7,12 @@ import close from "@/public/icons/close.png";
 import closeRed40 from "@/public/icons/close-red-40.png";
 import { ADDRESS } from "@/app/_constants/address";
 import Button from "@/app/_components/button";
+import { numberWithCommas } from '@/app/_util/number-with-comma';
 
 interface FilterProps {
   onClose: () => void;
   filterParams: {};
 }
-
-export const numberWithCommas = (number: number) => {
-  return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-};
 
 export default function Filter({ onClose }: FilterProps) {
   const [selectedAddresses, setSelectedAddresses] = useState<string[]>([]);
@@ -78,13 +75,15 @@ export default function Filter({ onClose }: FilterProps) {
         <div className="absolute right-[-4px] z-10 mt-[8px] w-[390px] rounded-[10px] border border-gray-20 bg-white px-[20px] py-[24px] shadow">
           <div className="mb-[24px] flex justify-between font-bold text-l">
             <h2>상세 필터</h2>
+            <div className='w-[24px] h-[24px]'>
             <Image
-              className="h-[24px] w-[24px] cursor-pointer"
+              className="cursor-pointer"
               src={close}
               alt="닫기"
               width={24}
               onClick={onClose}
             />
+            </div>
           </div>
           <div className="w-[350px] border-b pb-[24px]">
             <h3>위치</h3>
