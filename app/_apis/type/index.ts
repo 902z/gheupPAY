@@ -78,3 +78,16 @@ export type NoticeCardContents = {
     },
   ];
 };
+
+export type UserProfileData = {
+  item: {
+    id: string;
+    email: string;
+    type: string;
+    name: string;
+    phone: string;
+    address: string;
+    bio: string;
+    shop: any | null;
+  };
+};
