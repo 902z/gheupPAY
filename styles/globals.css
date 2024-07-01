@@ -80,3 +80,7 @@ input:-webkit-autofill {
   background: gray;
   border-radius: 5px;
 }
+
+.scroll-locked {
+  overflow: hidden;
+}

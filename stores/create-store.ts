@@ -1,40 +1,11 @@
+import { GetNotices } from "@/app/_apis/type";
 import { deleteCookie } from "@/app/_util/cookie";
 import { create } from "zustand";
 import { createJSONStorage, persist } from "zustand/middleware";
 
 type UserState = {
   type: "employer" | "employee" | null;
-  noticesData: {
-    item: {
-      id: number;
-      hourlyPay: number;
-      startsAt: string;
-      workhour: number;
-      description: string;
-      closed: boolean;
-      shop: {
-        item: {
-          id: string;
-          name: string;
-          category: string;
-          address1: string;
-          address2: string;
-          description: string;
-          imageUrl: string;
-          originalHourlyPay: number;
-        };
-        href: string;
-      };
-    };
-    links: [
-      {
-        rel: "self";
-        description: "공고 정보";
-        method: "GET";
-        href: string;
-      },
-    ];
-  }[];
+  noticesData: GetNotices["items"][0]["item"][];
 };
 
 type UserActions = {
@@ -135,9 +106,12 @@ const useUserStore = create<UserStore>()(
       },
       postNotice: (notice) => {
         const notices = get().noticesData;
-        if (notices.some((n) => n.item.id === notice.item.id)) return;
-        if (notices.length >= 6) {
-          set({ noticesData: [notice, ...notices.slice(0, 5)] });
+        if (notices.some((n) => n.id === notice.id)) {
+          set({
+            noticesData: [notice, ...notices.filter((n) => n.id !== notice.id)],
+          });
+        } else if (notices.length >= 7) {
+          set({ noticesData: [notice, ...notices.slice(0, 6)] });
         } else {
           set({ noticesData: [notice, ...notices] });
         }
