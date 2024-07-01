@@ -2,9 +2,15 @@ import Image from "next/image";
 import React from "react";
 import mapPin from "@/public/icons/map-pin.png";
 import Button from "@/app/_components/button";
-import { ShopData } from "@/app/_apis/type";
+import { GetShopsShopId } from "@/app/_apis/type";
 
-export default function MyShopDetailCard({ shopDetail }: ShopData) {
+interface MyShopDetailCardProps {
+  shopDetail: GetShopsShopId;
+}
+
+export default function MyShopDetailCard({
+  shopDetail,
+}: MyShopDetailCardProps) {
   return (
     <div>
       <div className="box-border flex h-fit w-full flex-col rounded-[12px] bg-red-10 p-5 lg:flex-row lg:gap-4">

@@ -15,10 +15,12 @@ export default function useModal() {
 
   const openModal = () => {
     setIsOpen(true);
+    document.querySelector("html")?.classList.add("scroll-locked");
   };
 
   const closeModal = () => {
     setIsOpen(false);
+    document.querySelector("html")?.classList.remove("scroll-locked");
   };
 
   return {

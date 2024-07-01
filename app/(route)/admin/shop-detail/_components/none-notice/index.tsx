@@ -7,7 +7,7 @@ export default function NoneNotice() {
       <p className="my-8 text-m">공고를 등록해 보세요.</p>
       <LinkButton
         href="/admin/notice-create"
-        color="orange"
+        btnColor="orange"
         className="font-bold"
       >
         공고 등록하기
