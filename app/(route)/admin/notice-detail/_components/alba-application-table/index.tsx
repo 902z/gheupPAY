@@ -1,9 +1,9 @@
-import { Application } from "@/app/_apis/type";
+import { GetShopsShopIdNoticesNoticeIdApplications } from "@/app/_apis/type";
 import React from "react";
 import StatusLabel from "../status-label";
 
 type AlbaApplicationTableProps = {
-  applicationList: Application;
+  applicationList: GetShopsShopIdNoticesNoticeIdApplications;
 };
 
 export default function AlbaApplicationTable({

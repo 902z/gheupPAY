@@ -151,61 +151,6 @@ export interface GetShopsShopIdNoticesNoticeId {
   links: Array<object>;
 }
 
-export type ApplicationItem = {
-  item: {
-    id: string;
-    status: string;
-    createdAt: string;
-    user: {
-      item: {
-        id: string;
-        email: string;
-        type: string;
-        name?: string;
-        phone?: string;
-        address?: string;
-        bio?: string;
-      };
-    };
-    shop: {
-      id: string;
-      name: string;
-      category: string;
-      address1: string;
-      address2: string;
-      description: string;
-      imageUrl: string;
-      originalHourlyPay: number;
-      href: string;
-    };
-    notice: {
-      id: string;
-      hourlyPay: number;
-      description: string;
-      startsAt: string;
-      workhour: number;
-      closed: boolean;
-      href: string;
-    };
-    links: {
-      rel: string;
-      description: string;
-      method: string;
-      href: string;
-      body?: {
-        status: "accepted" | "rejected";
-      };
-    }[];
-  };
-};
-
-export type Application = {
-  offset: number;
-  limit: number;
-  count: number;
-  hasNext: boolean;
-  items: ApplicationItem[];
-};
 export interface PutShopsShopIdNoticesNoticeId {
   item: {
     id: string;

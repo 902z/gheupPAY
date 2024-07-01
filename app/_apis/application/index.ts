@@ -1,13 +1,13 @@
 import instance from "@/app/_lib/axios";
-import { Application } from "../type";
+import { GetShopsShopIdNoticesNoticeIdApplications } from "../type";
 
 // 1. 가게의 특정 공고의 지원 목록 조회
 export async function getNoticeApplications(
   shop_id: string,
   notice_id: string,
-): Promise<Application> {
+): Promise<GetShopsShopIdNoticesNoticeIdApplications> {
   try {
-    const res = await instance.get<Application>(
+    const res = await instance.get<GetShopsShopIdNoticesNoticeIdApplications>(
       `/shops/${shop_id}/notices/${notice_id}/applications`,
     );
     return res.data;

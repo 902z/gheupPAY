@@ -1,9 +1,10 @@
 "use client";
 import React from "react";
 import { motion } from "framer-motion";
+import { GetShopsShopIdNoticesNoticeId } from "@/app/_apis/type";
 
 type StatusLabelProps = {
-  status: string;
+  status: GetShopsShopIdNoticesNoticeId["item"]["currentUserApplication"]["item"]["status"];
 };
 
 export default function StatusLabel({ status }: StatusLabelProps) {
