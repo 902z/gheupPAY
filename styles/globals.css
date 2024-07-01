@@ -81,6 +81,16 @@ input:-webkit-autofill {
   border-radius: 5px;
 }
 
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
 .scroll-locked {
   overflow: hidden;
+}
+
+input[type='datetime-local']::-webkit-calendar-picker-indicator {
+  cursor: pointer;
 }

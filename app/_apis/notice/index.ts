@@ -1,16 +1,11 @@
 import instance from "@/app/_lib/axios";
 
 // 맞춤 공고
-export async function getCustomizedNotices({
-  offset = 0,
-  limit = 5,
-  // startsAtGte = ""
-}) {
+export async function getCustomizedNotices({ offset = 0, limit = 5 }) {
   try {
     const params = new URLSearchParams({
       offset: offset.toString(),
       limit: limit.toString(),
-      // startsAtGte,
     });
 
     const res = await instance.get(`/notices?${params.toString()}`);
@@ -27,16 +22,34 @@ export async function getAllNotices({
   limit = 12,
   keyword = "",
   hourlyPayGte = 0,
+  startsAtGte = "",
+  address = [],
   sort = "time",
+}: {
+  offset?: number;
+  limit?: number;
+  keyword?: string;
+  hourlyPayGte?: number;
+  startsAtGte?: string;
+  address?: string[];
+  sort?: string;
 }) {
   try {
     const params = new URLSearchParams({
       offset: offset.toString(),
       limit: limit.toString(),
-      keyword,
       hourlyPayGte: hourlyPayGte.toString(),
+      keyword,
       sort,
     });
+    if (Array.isArray(address)) {
+      address.forEach(addr => params.append("address", addr));
+    } else if (address) {
+      params.append("address", address);
+    }
+    if (startsAtGte) {
+      params.append("startsAtGte", startsAtGte);
+    }
 
     const res = await instance.get(`/notices?${params.toString()}`);
     return res.data;
