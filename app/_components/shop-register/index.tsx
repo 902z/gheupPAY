@@ -133,7 +133,7 @@ function ShopRegisterForm() {
         </div>
       </div>
       <div className="mx-auto my-0 mt-6 w-[321px] text-base md:mt-8">
-        <Button className="text-base" type="submit" color="orange">
+        <Button className="text-base" type="submit" btnColor="orange">
           완료하기
         </Button>
       </div>

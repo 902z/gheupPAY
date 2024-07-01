@@ -1,7 +1,8 @@
 import { AxiosError, AxiosResponse } from "axios";
 import axiosInstance from "../instances";
 import instance from "@/app/_lib/axios";
-import { ShopInfo, UserInfo } from "../type";
+import { GetShopsShopIdNoticesNoticeId, ShopInfo, UserInfo } from "../type";
+
 // 가게 정보 조회
 export async function getShopDetail(shop_id: string) {
   try {
@@ -14,7 +15,10 @@ export async function getShopDetail(shop_id: string) {
 }
 
 // 4. 가게의 특정 공고 조회
-export async function getShopNoticeDetail(shop_id: string, notice_id: string) {
+export async function getShopNoticeDetail(
+  shop_id: string,
+  notice_id: string,
+): Promise<GetShopsShopIdNoticesNoticeId> {
   try {
     const res = await instance.get(`/shops/${shop_id}/notices/${notice_id}`);
     return res.data;

@@ -1,4 +1,4 @@
-import { noticeDetail } from "@/app/_apis/type";
+import { GetShopsShopIdNoticesNoticeId } from "@/app/_apis/type";
 import { calculateTimeRange } from "@/app/_util/calculate-time-range";
 import { calculateWagePercentage } from "@/app/_util/calculate-wage-percentage ";
 import { dateFormat } from "@/app/_util/date-format";
@@ -10,7 +10,13 @@ import mapPin from "@/public/icons/map-pin.png";
 import Button from "@/app/_components/button";
 import OnlyLabelHourlyRate from "../only-label-hourly-rate";
 
-export default function NoticeDetailCard({ noticeDetail }: noticeDetail) {
+interface NoticeDetailCardProps {
+  noticeDetail: GetShopsShopIdNoticesNoticeId;
+}
+
+export default function NoticeDetailCard({
+  noticeDetail,
+}: NoticeDetailCardProps) {
   const hourlyWage = calculateWagePercentage(noticeDetail.item.hourlyPay);
   const date = dateFormat(noticeDetail.item.startsAt);
 
@@ -61,8 +67,8 @@ export default function NoticeDetailCard({ noticeDetail }: noticeDetail) {
               <p>{noticeDetail.item.shop.item.description}</p>
             </div>
           </div>
-          <Button btnColor="orange" className="font-bold">
-            신청하기
+          <Button btnColor="white" className="font-bold">
+            공고 편집하기
           </Button>
         </div>
       </div>
