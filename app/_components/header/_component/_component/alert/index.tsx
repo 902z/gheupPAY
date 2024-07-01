@@ -1,11 +1,12 @@
 "use client";
 
-import { useState } from "react";
+import { useRef, useState } from "react";
 import AlertList from "./alert-component";
 import Image from "next/image";
 import { AlertData } from "@/app/_apis/type";
 import { getAlerts } from "@/app/_apis/alert";
 import { isAxiosError } from "axios";
+import useOutsideClick from "@/app/_hooks/use-outside-click";
 
 interface AlertButtonProps {
   initialAlerts: AlertData;
@@ -24,10 +25,10 @@ export default function AlertButton({
   const [isOpen, setIsOpen] = useState(false);
   const [alerts, setAlerts] = useState<AlertData["items"]>(initialAlerts.items);
   const [alertConfig, setAlertConfig] = useState<InfiniteScrollProps>({
-    hasNext: true,
-    offset: 0,
+    hasNext: initialAlerts.hasNext,
+    offset: initialAlerts.offset,
   });
-
+  const alertRef = useRef<HTMLDivElement>(null);
   // 모바일 : 모달 열리면 > 스크롤 제거, 모달 닫히면 > 스크롤 생성
   // 테블릿 이상 : 모달 열리든 닫히든 스크롤 유지
   const handleOpen = () => {
@@ -44,6 +45,8 @@ export default function AlertButton({
     setIsOpen((prev) => !prev);
     document.body.className = "overflow-auto";
   };
+
+  useOutsideClick({ ref: alertRef, handler: handleClose });
 
   const fetchData = async () => {
     if (!alertConfig.hasNext) return;
@@ -68,7 +71,10 @@ export default function AlertButton({
     <section className="relative w-[fit-content]">
       <button onClick={handleOpen}>{children}</button>
       {isOpen && (
-        <div className="fixed inset-0 z-30 rounded-none bg-red-10 px-5 py-10 md:absolute md:inset-auto md:right-0 md:top-[32.5px] md:h-[419px] md:w-[368px] md:rounded-[10px] md:px-5 md:py-6">
+        <div
+          className="fixed inset-0 z-30 rounded-none bg-red-10 px-5 py-10 md:absolute md:inset-auto md:right-0 md:top-[32.5px] md:h-[419px] md:w-[368px] md:rounded-[10px] md:px-5 md:py-6"
+          ref={alertRef}
+        >
           <div className="h-full">
             <header className="mb-4 flex justify-between font-bold text-[20px]">
               알림 {initialAlerts.count || 0}개

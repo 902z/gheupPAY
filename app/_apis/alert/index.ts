@@ -8,7 +8,7 @@ export async function getAlerts(offset: number = 0) {
   try {
     const params = new URLSearchParams({
       offset: offset.toString(),
-      limit: "10",
+      limit: "6",
     });
     const userId = await getCookie("userId");
     const response = await axiosInstance.get<AlertData>(
