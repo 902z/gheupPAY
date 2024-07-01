@@ -1,7 +1,6 @@
 "use client";
 import Link from "next/link";
 import OpenModal from "./_components/modals/";
-import ShopRegisterForm from "./_components/shop-register/";
 
 export default function Home() {
   return (
@@ -17,29 +16,15 @@ export default function Home() {
         <p>base: 16px (기본은 설정 X)</p>
         <p className="text-l">l: 20px</p>
         <p className="text-xl">xl: 28px</p>
-        <Link href="/admin/shop-register" className="text-link">
-          가게 정보 등록 페이지
-        </Link>
-        <span className="text-red">VS</span>
-        <OpenModal
-          window
-          windowTitle="가게 등록"
-          modalContents={<ShopRegisterForm />}
-        >
-          <button className="text-link">가게 정보 등록 모달</button>
-        </OpenModal>
         <OpenModal select selectType="yes" modalContents="하실건요?">
           <button>물어보기</button>
         </OpenModal>
-
         <OpenModal confirm modalContents="할게요!">
           <button>확인하기</button>
         </OpenModal>
-
         <OpenModal warning modalContents="클나!">
           <button>경고하기</button>
         </OpenModal>
-        왜 프리뷰가 안 뜨지
       </div>
     </>
   );
