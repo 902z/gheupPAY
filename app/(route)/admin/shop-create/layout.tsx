@@ -1,5 +1,4 @@
 import { Metadata } from "next";
-import TitleX from "@/app/_components/title-with-x";
 
 export const metadata: Metadata = {
   title: "가게 정보 등록",
