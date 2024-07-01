@@ -6,6 +6,7 @@ import { getImageUrl } from "./_apis/image";
 import ShopRegisterForm from "./_components/shop-register/";
 import { NoticeCardSkeleton } from "./_components/notice-card/skeleton";
 import OpenModal from "./_components/modals";
+import NoticeDetailCardSkeleton from "./_components/notice-detail-card/notice-detail-card-skeleton";
 
 export default function Home() {
   const inputRef = useRef<HTMLInputElement>(null);
@@ -18,6 +19,7 @@ export default function Home() {
   return (
     <>
       <div className="base-container flex flex-col text-center">
+        <NoticeDetailCardSkeleton />
         <NoticeCardSkeleton />
         <Link href="/notice-list">리스트 페이지로 이동</Link>
         <Link href="/notice-list">리스트 페이지로 이동</Link>

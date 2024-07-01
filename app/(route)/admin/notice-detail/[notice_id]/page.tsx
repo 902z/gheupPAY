@@ -3,6 +3,7 @@ import React, { Suspense } from "react";
 import NoticeDetailCard from "@/app/_components/notice-detail-card";
 import AlbaApplicationTable from "../_components/alba-application-table";
 import { getNoticeApplications } from "@/app/_apis/application";
+import NoticeDetailCardSkeleton from "@/app/_components/notice-detail-card/notice-detail-card-skeleton";
 export const metadata = {
   title: "공고 상세",
 };
@@ -14,7 +15,7 @@ export default async function page() {
 
   return (
     <div className="base-container">
-      <Suspense fallback={<div>Loading...</div>}>
+      <Suspense fallback={<NoticeDetailCardSkeleton />}>
         <NoticeDetailCard shopId={shopId} noticeId={noticeId} />
       </Suspense>
       <div className="my-12">
