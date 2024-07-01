@@ -11,21 +11,8 @@ export default function AlbaStatusLabel({ status }: StatusLabelProps) {
     switch (status) {
       case "pending":
         return (
-          <div className="flex justify-center gap-4">
-            <motion.button
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              className="cursor-pointer rounded-md border-2 border-primary bg-white px-4 py-2 font-bold text-m text-primary"
-            >
-              거절하기
-            </motion.button>
-            <motion.button
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              className="cursor-pointer rounded-md border-2 border-blue-20 bg-white px-4 py-2 font-bold text-m text-blue-20"
-            >
-              승인하기
-            </motion.button>
+          <div className="inline rounded-full bg-green-10 px-3 py-2 font-bold text-m text-green-20">
+            대기중
           </div>
         );
       case "accepted":

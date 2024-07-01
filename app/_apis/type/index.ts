@@ -120,7 +120,7 @@ export type UserApplication = {
           id: string;
           hourlyPay: number;
           description: string;
-          startsAt: string; // Assuming this is a date string
+          startsAt: string;
           workhour: number;
           closed: boolean;
         };
