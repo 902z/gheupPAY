@@ -1,4 +1,5 @@
 import instance from "@/app/_lib/axios";
+import axiosInstance from "../instances";
 
 // 맞춤 공고
 export async function getCustomizedNotices({
