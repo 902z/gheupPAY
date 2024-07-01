@@ -1,9 +1,9 @@
 import AlertCard from "./alert-card";
 import { IntersectionArea } from "../../../../interception-area";
-import { AlertData } from "@/app/_apis/type";
+import { getUsersUserIdAlerts } from "@/app/_apis/type";
 
 interface AlertProps {
-  alerts: AlertData["items"];
+  alerts: getUsersUserIdAlerts["items"];
   onImpression: () => void;
 }
 

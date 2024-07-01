@@ -1,6 +1,6 @@
-import { AlertData } from "@/app/_apis/type";
+import { getUsersUserIdAlerts } from "@/app/_apis/type";
 
-type alertMockData = AlertData;
+type alertMockData = getUsersUserIdAlerts;
 
 export const makeAlertMockData = (): alertMockData => {
   return {

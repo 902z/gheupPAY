@@ -2,7 +2,7 @@
 import { getCookie } from "@/app/_util/cookie";
 import axiosInstance from "../instances";
 import { isAxiosError } from "axios";
-import { AlertData } from "../type";
+import { getUsersUserIdAlerts } from "../type";
 
 export async function getAlerts(offset: number = 0) {
   try {
@@ -11,7 +11,7 @@ export async function getAlerts(offset: number = 0) {
       limit: "6",
     });
     const userId = await getCookie("userId");
-    const response = await axiosInstance.get<AlertData>(
+    const response = await axiosInstance.get<getUsersUserIdAlerts>(
       `/users/${userId}/alerts`,
       {
         params,

@@ -3,13 +3,13 @@
 import { useRef, useState } from "react";
 import AlertList from "./alert-component";
 import Image from "next/image";
-import { AlertData } from "@/app/_apis/type";
+import { getUsersUserIdAlerts } from "@/app/_apis/type";
 import { getAlerts } from "@/app/_apis/alert";
 import { isAxiosError } from "axios";
 import useOutsideClick from "@/app/_hooks/use-outside-click";
 
 interface AlertButtonProps {
-  initialAlerts: AlertData;
+  initialAlerts: getUsersUserIdAlerts;
   children: React.ReactNode;
 }
 
@@ -23,7 +23,9 @@ export default function AlertButton({
   initialAlerts,
 }: AlertButtonProps) {
   const [isOpen, setIsOpen] = useState(false);
-  const [alerts, setAlerts] = useState<AlertData["items"]>(initialAlerts.items);
+  const [alerts, setAlerts] = useState<getUsersUserIdAlerts["items"]>(
+    initialAlerts.items,
+  );
   const [alertConfig, setAlertConfig] = useState<InfiniteScrollProps>({
     hasNext: initialAlerts.hasNext,
     offset: initialAlerts.offset,

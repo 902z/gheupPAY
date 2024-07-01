@@ -1,8 +1,8 @@
-import { AlertData } from "@/app/_apis/type";
+import { getUsersUserIdAlerts } from "@/app/_apis/type";
 import Image from "next/image";
 
 interface AlertCardProps {
-  item: AlertData["items"][0];
+  item: getUsersUserIdAlerts["items"][0];
 }
 
 export default function AlertCard({ item }: AlertCardProps) {
