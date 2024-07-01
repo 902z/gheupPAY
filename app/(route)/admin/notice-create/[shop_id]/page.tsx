@@ -10,9 +10,16 @@ import { useForm } from "react-hook-form";
 import Button from "@/app/_components/button";
 import close from "@/public/icons/close.png";
 import Image from "next/image";
+import { postCreateNotice } from "@/app/_apis/notice";
 import { storeNoticeRegisterSchema } from "./schema";
 
-export default function AddNotice() {
+interface SearchParamsProps {
+  searchParams: {
+    page: string;
+  };
+}
+
+export default function AddNotice({ searchParams }: SearchParamsProps) {
   const router = useRouter();
   const resolver = yupResolver(storeNoticeRegisterSchema);
   const {
@@ -24,7 +31,12 @@ export default function AddNotice() {
   function onDismiss() {
     router.back();
   }
-  const onSubmit = (data: any) => {};
+
+  const onSubmit = async (data: any) => {
+    data.startsAt = new Date(data.startsAt).toISOString();
+    // const response = await postCreateNotice(shop_id, data);
+    console.log(data);
+  };
 
   return (
     <div className="mt-[70px]">

@@ -3,16 +3,21 @@ import CustomPriceInput from "@/app/_components/custom-price-input";
 import CustomTextarea from "@/app/_components/custom-textarea";
 import CustomTimeInput from "@/app/_components/custom-time-input";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { useRouter } from "next/navigation";
-import React, { ElementRef, useEffect, useRef } from "react";
+import { useParams } from "next/navigation";
+import React, { ElementRef, use, useEffect, useRef } from "react";
 import { createPortal } from "react-dom";
 import { useForm } from "react-hook-form";
-import { storeNoticeRegisterSchema } from "./schema";
 import CustomDateInput from "@/app/_components/custom-date-input";
 import Button from "@/app/_components/button";
+import close from "@/public/icons/close.png";
+import Image from "next/image";
+import { storeNoticeRegisterSchema } from "./schema";
+import { useRouter } from "next/navigation";
+import { postCreateNotice } from "@/app/_apis/notice";
 export default function AddNotice() {
   const router = useRouter();
-  const dialogRef = useRef<ElementRef<"dialog">>(null);
+  const params = useParams();
+  const shop_id = params.shop_id as string;
   const resolver = yupResolver(storeNoticeRegisterSchema);
   const {
     register,
@@ -20,47 +25,43 @@ export default function AddNotice() {
     formState: { errors },
   } = useForm({ resolver, mode: "onSubmit" });
 
-  useEffect(() => {
-    if (!dialogRef.current?.open) {
-      dialogRef.current?.showModal();
-    }
-  }, []);
-
   function onDismiss() {
     router.back();
   }
-  const onSubmit = (data: any) => {
+  const onSubmit = async (data: any) => {
+    data.startsAt = new Date(data.startsAt).toISOString();
+    // const response = await postCreateNotice(shop_id, data);
     console.log(data);
   };
 
   return createPortal(
-    <div className="justify-conter fixed inset-0 flex items-center">
-      <dialog
-        ref={dialogRef}
-        className="m-0 h-full max-h-none w-full max-w-none"
-      >
-        <div className="p-3 md:p-8">
-          <div className="mb-6 flex justify-between">
-            <h1 className="font-bold text-l">공고 등록</h1>
-            <button onClick={onDismiss}>닫기</button>
-          </div>
+    <div className="fixed inset-0 z-50 flex justify-center bg-black bg-opacity-50 md:pt-[188px]">
+      <div className="relative w-full max-w-[964px] rounded-t-lg bg-white pt-[35px]">
+        <section className="h-full w-full overflow-scroll px-3 pb-[40px]">
+          <header className="h- flex w-full justify-between">
+            <h2 className="font-bold text-l leading-[25px]">공고 등록</h2>
+            <div
+              className="relative h-6 w-6 cursor-pointer md:h-8 md:w-8"
+              onClick={() => router.back()}
+            >
+              <Image src={close} alt="닫기 버튼" fill priority />
+            </div>
+          </header>
           <form onSubmit={handleSubmit(onSubmit)}>
             <div className="flex flex-col gap-6">
               <div className="flex flex-col gap-5">
-                <div className="flex flex-nowrap gap-5">
+                <div className="grid gap-5 md:grid-cols-2 lg:grid-cols-3">
                   <CustomPriceInput
                     label="시급"
                     displayRequiredMarker={true}
                     register={register("hourlyPay")}
                     errorMessage={errors.hourlyPay?.message}
-                    className="md:w-1/2 lg:w-1/3"
                   />
                   <CustomDateInput
                     label="시작일시"
                     displayRequiredMarker={true}
                     register={register("startsAt")}
                     errorMessage={errors.startsAt?.message}
-                    className="lg:w-1/3"
                   />
                   <CustomTimeInput
                     label="업무 시간"
@@ -68,7 +69,6 @@ export default function AddNotice() {
                     register={register("workhour")}
                     placeholder="12시간 이하로 입력해주세요."
                     errorMessage={errors.workhour?.message}
-                    className="md:w-full lg:w-1/3"
                   />
                 </div>
                 <CustomTextarea
@@ -83,9 +83,9 @@ export default function AddNotice() {
               </Button>
             </div>
           </form>
-        </div>
-      </dialog>
+        </section>
+      </div>
     </div>,
-    document.getElementById("modal-root")!,
+    document.body,
   );
 }
