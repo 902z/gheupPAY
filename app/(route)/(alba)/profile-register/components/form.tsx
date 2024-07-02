@@ -11,7 +11,6 @@ import CustomFormDropdown from "@/app/_components/custom-form-dropdown";
 import { AddressType, FORMATTED_ADDRESS } from "@/app/_constants/address";
 
 export default function CreateProfileForm() {
-  const router = useRouter();
   const resolver = yupResolver(profileRegisterSchema);
   const {
     register,
