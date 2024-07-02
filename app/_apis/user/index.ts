@@ -77,9 +77,14 @@ export async function putUserProfile(
     );
     return res.data;
   } catch (error) {
-    const message = (error as AxiosError<{ message: string }>).response?.data
-      .message;
-    notification(`Error while fetching. ${message ?? ""}`, "error");
-    throw error;
+    if (isAxiosError(error)) {
+      if (error.response?.status === 403 || error.response?.status === 404) {
+        const message = error.response.data.message;
+        notification(`Error while fetching. ${message ?? ""}`, "error");
+      }
+    } else {
+      notification(`${API_ERROR_MESSAGE}`, "error");
+    }
+    throw new Error(API_ERROR_MESSAGE);
   }
 }
