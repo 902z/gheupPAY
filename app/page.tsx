@@ -21,7 +21,7 @@ export default function Home() {
   }, []);
 
   return (
-    <>
+    <div className="relative bg-gradient-to-b from-red-20 via-transparent to-transparent">
       <div className="mx-auto flex w-full max-w-[1200px] flex-col overflow-x-hidden px-4">
         <div className="mb-10 ml-auto flex w-fit justify-end gap-4 rounded-b-2xl bg-white p-4 font-bold text-red-40 shadow-md">
           <Link href="/login" className="transition-all hover:scale-105">
@@ -47,11 +47,11 @@ export default function Home() {
           </Link>
           <div className="pt-4 md:pt-20">
             <div className="flex flex-col pb-20 md:flex-row">
-              <div className="-z-10 hidden w-[450px] md:block md:w-[700px]">
+              <div className="hidden w-[450px] md:block md:w-[700px]">
                 <Image src={img1} alt="" />
               </div>
 
-              <div className="flex flex-col gap-20 md:relative md:right-40 md:float-right">
+              <div className="z-10 flex flex-col gap-20 md:relative md:right-40 md:float-right">
                 <div
                   className="relative left-0 w-fit rounded-xl bg-gray-10 px-8 py-12 shadow-md md:left-2 md:text-xl"
                   data-aos="fade-down-right"
@@ -241,6 +241,6 @@ export default function Home() {
           </motion.div>
         </Link>
       </div>
-    </>
+    </div>
   );
 }
