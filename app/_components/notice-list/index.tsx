@@ -20,13 +20,11 @@ export default function AllNoticeList({
   notices,
   activePage,
   itemsCountPerPage,
-  keyword,
 }: AllNoticeListProps) {
   const noticeList = notices.items;
   const totalItemsCount = notices.count;
   const [showFilter, setShowFilter] = useState(false);
-  const searchParams = useSearchParams();
-  const searchKeyword = searchParams.get("keyword");
+  const searchKeyword = useSearchParams().get("keyword");
 
   useEffect(() => {
     if (window.location.hash) {

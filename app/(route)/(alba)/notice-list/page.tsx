@@ -53,6 +53,7 @@ export default async function page({ searchParams }: SearchParamsProps) {
           notices={allNotices}
           activePage={page}
           itemsCountPerPage={limit}
+          keyword={keyword}
         />
       </div>
     </div>
