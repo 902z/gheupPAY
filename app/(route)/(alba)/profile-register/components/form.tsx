@@ -8,7 +8,7 @@ import Button from "@/app/_components/button";
 import CustomTextInput from "@/app/_components/custom-text-input";
 import { profileRegisterSchema } from "./schema";
 import CustomFormDropdown from "@/app/_components/custom-form-dropdown";
-import { FORMATTED_ADDRESS } from "@/app/_constants/address";
+import { AddressType, FORMATTED_ADDRESS } from "@/app/_constants/address";
 
 export default function CreateProfileForm() {
   const router = useRouter();
@@ -45,13 +45,15 @@ export default function CreateProfileForm() {
               errorMessage={errors.phone?.message}
               placeholder="010-1234-5678"
             />
-            <CustomFormDropdown
+            <CustomFormDropdown<AddressType>
               label="선호 지역"
               displayRequiredMarker={true}
               options={FORMATTED_ADDRESS}
               register={register("address")}
-              setValue={(value: string): void => setValue("address", value)}
-              getValues={(): string => getValues("address")}
+              setValue={(value: AddressType): void =>
+                setValue("address", value)
+              }
+              getValues={(): AddressType => getValues("address")}
               placeholder="선택"
             />
           </div>
