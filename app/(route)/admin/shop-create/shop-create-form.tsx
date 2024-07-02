@@ -3,7 +3,7 @@
 import CustomTextInput from "@/app/_components/custom-text-input";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { storeRegisterSchema } from "../../(route)/admin/shop-register/schema";
+import { storeRegisterSchema } from "./schema";
 import Button from "@/app/_components/button";
 import CustomTextarea from "@/app/_components/custom-textarea";
 import { ADDRESS } from "@/app/_constants/address";
@@ -12,6 +12,7 @@ import CustomPriceInput from "@/app/_components/custom-price-input";
 import { CUISINE_OPTION } from "@/app/_constants/category";
 import camera from "@/public/icons/camera.png";
 import Image from "next/image";
+import React, { ElementRef, useEffect, useRef } from "react";
 interface FormValues {
   name: string;
   category: string;
@@ -27,7 +28,7 @@ const formattedAddresses = ADDRESS.map((address) => ({
   value: address,
 }));
 
-function ShopRegisterForm() {
+function ShopCreateForm() {
   const resolver = yupResolver(storeRegisterSchema);
 
   const {
@@ -99,10 +100,7 @@ function ShopRegisterForm() {
         />
 
         <div className="flex h-[235px] w-full max-w-[483px] flex-col gap-2 md:col-start-1 md:col-end-3 md:row-start-4 md:row-end-5 md:h-[310px]">
-          <label
-            htmlFor="shop-image"
-            className="h-full w-full cursor-pointer text-start text-base font-normal leading-[26px] text-black"
-          >
+          <label className="h-full w-full cursor-pointer text-start text-base font-normal leading-[26px] text-black">
             가게 이미지
             <div className="mt-2 flex h-[200px] w-full flex-col items-center justify-center gap-[13px] rounded-xl bg-gray-30 md:h-[276px]">
               <div className="relative h-8 w-8 md:h-9 md:w-9">
@@ -114,7 +112,6 @@ function ShopRegisterForm() {
             </div>
           </label>
           <input
-            id="shop-image"
             type="file"
             name={"imageUrl"}
             // ref=""
@@ -141,4 +138,4 @@ function ShopRegisterForm() {
   );
 }
 
-export default ShopRegisterForm;
+export default ShopCreateForm;
