@@ -6,6 +6,7 @@ import { AxiosError, isAxiosError } from "axios";
 import { PutUsersUserId, UserProfileData } from "../type";
 import { AddressType } from "@/app/_constants/address";
 import notification from "@/app/_util/notification";
+import { getCookie } from "@/app/_util/cookie";
 
 // 회원가입
 interface Params {
@@ -66,11 +67,9 @@ type putUserProfileParams = {
   address: AddressType;
 };
 
-export async function putUserProfile(
-  userId: string,
-  params: putUserProfileParams,
-) {
+export async function putUserProfile(params: putUserProfileParams) {
   try {
+    const userId = await getCookie("userId");
     const res = await axiosInstance.put<PutUsersUserId>(
       `/users/${userId}`,
       params,
@@ -78,9 +77,13 @@ export async function putUserProfile(
     return res.data;
   } catch (error) {
     if (isAxiosError(error)) {
-      if (error.response?.status === 403 || error.response?.status === 404) {
+      if (
+        error.response?.status === 403 ||
+        error.response?.status === 404 ||
+        error.response?.status === 400
+      ) {
         const message = error.response.data.message;
-        notification(`Error while fetching. ${message ?? ""}`, "error");
+        notification(`${message ?? ""}`, "error");
       }
     } else {
       notification(`${API_ERROR_MESSAGE}`, "error");

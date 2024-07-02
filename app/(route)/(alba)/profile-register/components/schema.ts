@@ -5,7 +5,7 @@ export const profileRegisterSchema = yup.object().shape({
   name: yup.string().required(errorMessage),
   phone: yup
     .string()
-    .matches(/^\d{3}-\d{4}-\d{4}$/, "번호 형식은 010-1234-5678으로 해주세요")
+    .matches(/^010-\d{4}-\d{4}$/, "번호 형식은 010-1234-5678으로 해주세요")
     .required(errorMessage),
   address: yup
     .mixed<AddressType>()
