@@ -9,7 +9,7 @@ export default function NotFound() {
   return (
     <>
       <div className="base-container">
-        <div className="mt-40 flex flex-col items-center justify-center">
+        <div className="mt-10 flex flex-col items-center justify-center">
           <Image alt="404" src={errorImage} width={600} />
           <h1 className="pt-4 font-bold text-2xl">
             페이지가 없거나 접근할 수 없어요
@@ -18,7 +18,7 @@ export default function NotFound() {
           <LinkButton
             href="/notice-list"
             btnColor="orange"
-            className="w-[200px]"
+            className="w-fit px-12 md:px-20"
           >
             홈으로 가기
           </LinkButton>
