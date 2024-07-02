@@ -11,6 +11,7 @@ type AllNoticeListProps = {
   notices: GetNotices;
   activePage: number;
   itemsCountPerPage: number;
+  keyword?: string;
 };
 
 const ALL_LIST_SECTION_ID = "all-list-section";
@@ -19,10 +20,13 @@ export default function AllNoticeList({
   notices,
   activePage,
   itemsCountPerPage,
+  keyword,
 }: AllNoticeListProps) {
   const noticeList = notices.items;
   const totalItemsCount = notices.count;
   const [showFilter, setShowFilter] = useState(false);
+  const searchParams = useSearchParams();
+  const searchKeyword = searchParams.get("keyword");
 
   useEffect(() => {
     if (window.location.hash) {
@@ -36,7 +40,7 @@ export default function AllNoticeList({
   const handleOpenFilter = () => {
     setShowFilter((prevShowFilter) => !prevShowFilter);
   };
-  
+
   const handleCloseFilter = () => {
     setShowFilter(false);
   };
@@ -49,7 +53,14 @@ export default function AllNoticeList({
             className="pb-4 font-bold text-l md:pb-12 md:text-2xl"
             id={ALL_LIST_SECTION_ID}
           >
-            전체 공고
+            {searchKeyword ? (
+              <span>
+                <span className="text-primary">{searchKeyword}</span>
+                {"에 대한 공고 목록"}
+              </span>
+            ) : (
+              "전체 공고"
+            )}
           </h2>
           {/* 상세필터 버튼입니다 */}
           <div className="relative">
@@ -59,9 +70,7 @@ export default function AllNoticeList({
             >
               <p>상세필터</p>
             </button>
-            {showFilter && (
-              <Filter onClose={handleCloseFilter}/>
-            )}
+            {showFilter && <Filter onClose={handleCloseFilter} />}
             {/* 상세필터 버튼입니다 */}
           </div>
         </div>
