@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import "@/styles/globals.css";
 import Hydration from "./_components/hydration";
+import ToastProvider from "./_components/toast/toastProvider";
 
 export const metadata: Metadata = {
   description:
@@ -23,7 +24,9 @@ export default function RootLayout({
     <html lang="ko">
       <body className="relative bg-gradient-to-b from-red-20 via-transparent to-transparent">
         <Hydration />
-        <main className="min-h-screen">{children}</main>
+        <main className="min-h-screen">
+          <ToastProvider>{children}</ToastProvider>
+        </main>
       </body>
     </html>
   );
