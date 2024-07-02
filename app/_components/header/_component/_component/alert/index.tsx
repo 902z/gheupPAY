@@ -75,7 +75,7 @@ export default function AlertButton({
     <section className="relative w-[fit-content]" ref={alertRef}>
       <button onClick={handleOpen}>{children}</button>
       {isOpen && (
-        <div className="fixed inset-0 z-30 rounded-none bg-red-10 px-5 py-10 md:absolute md:inset-auto md:right-0 md:top-[32.5px] md:h-[419px] md:w-[368px] md:rounded-[10px] md:px-5 md:py-6">
+        <div className="fixed inset-0 z-30 rounded-none bg-red-10 px-5 py-10 md:absolute md:inset-auto md:right-0 md:top-[32.5px] md:h-[419px] md:w-[368px] md:rounded-[10px] md:border md:border-[#CBC9CF] md:px-5 md:py-6 md:shadow-md">
           <div className="h-full">
             <header className="mb-4 flex justify-between font-bold text-[20px]">
               알림 {initialAlerts.count || 0}개
