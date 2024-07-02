@@ -1,5 +1,15 @@
 import instance from "@/app/_lib/axios";
-import { GetShopsShopId, GetShopsShopIdNoticesNoticeId } from "../type";
+import {
+  GetShopsShopId,
+  GetShopsShopIdNoticesNoticeId,
+  PostShops,
+} from "../type";
+import { AddressType } from "@/app/_constants/address";
+import { CategoryType } from "@/app/_constants/category";
+import axiosInstance from "../instances";
+import { isAxiosError } from "axios";
+import { API_ERROR_MESSAGE } from "@/app/_constants/error-message";
+import { getImageUrl } from "../image";
 
 // 가게 정보 조회
 export async function getShopDetail(shop_id: string): Promise<GetShopsShopId> {
@@ -25,3 +35,55 @@ export async function getShopNoticeDetail(
     throw error;
   }
 }
+
+//가게 등록하기
+export const postShopCreate = async ({
+  name,
+  category,
+  address1,
+  address2,
+  description = "사장님이 가게 설명을 입력하지 않았습니다.",
+  imageUrl,
+  originalHourlyPay,
+}: {
+  name: string;
+  category: CategoryType;
+  address1: AddressType;
+  address2: string;
+  description?: string;
+  imageUrl?: File;
+  originalHourlyPay: number;
+}): Promise<boolean> => {
+  try {
+    let processedImageUrl;
+    if (imageUrl) {
+      processedImageUrl = await getImageUrl(imageUrl);
+    } else {
+      processedImageUrl = "";
+    }
+    const response = await axiosInstance.post<PostShops>(
+      "/shops",
+      {
+        name,
+        category,
+        address1,
+        address2,
+        description,
+        imageUrl: processedImageUrl,
+        originalHourlyPay,
+      },
+      {
+        authorization: true,
+      },
+    );
+    return response.status === 200;
+  } catch (error) {
+    if (isAxiosError(error)) {
+      if (error.response?.status === 409 || error.response?.status === 401) {
+        throw new Error(error.response.data.message);
+      }
+    }
+    console.log(error);
+    throw new Error(API_ERROR_MESSAGE);
+  }
+};

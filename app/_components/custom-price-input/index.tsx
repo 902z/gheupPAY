@@ -16,7 +16,6 @@ interface CustomTextInputPropType
   label: string;
   displayRequiredMarker?: boolean;
   register: UseFormRegisterReturn;
-  type?: "text" | "password";
   errorMessage?: string;
 }
 

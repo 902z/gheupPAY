@@ -4,19 +4,16 @@ import { InputHTMLAttributes, useRef, useState } from "react";
 import { UseFormRegisterReturn } from "react-hook-form";
 import DownArrow from "@/public/icons/down-arrow.png";
 
-interface Option {
-  label: string;
-  value: string;
-}
 
-interface FormDropdownProps extends InputHTMLAttributes<HTMLInputElement> {
+export interface FormDropdownProps<T>
+  extends InputHTMLAttributes<HTMLInputElement> {
   label: string;
   placeholder: string;
-  options: Option[];
+  options: { label: string; value: T }[];
   register: UseFormRegisterReturn;
   displayRequiredMarker: boolean;
-  setValue: (value: string) => void;
-  getValues: () => string;
+  setValue: (value: T) => void;
+  getValues: () => T;
   errorMessage?: string;
 }
 
@@ -45,14 +42,16 @@ interface FormDropdownProps extends InputHTMLAttributes<HTMLInputElement> {
   // 호출부
 <div --> 너비는 항상 부모에 full 이기 때문에 부모요소에서 지정해주세요>
   <form onSubmit={handleSubmit(onSubmit)}>
-    <CustomFormDropdown
-          label="주소"
-          options={formattedAddresses}
-          register={register("address1")}
-          setValue={(value: string): void => setValue("address1", value)}
-          getValues={(): string => getValues("address1")}
+        <CustomFormDropdown<CategoryType>
+          label="분류"
+          options={CUISINE_OPTION}
+          register={register("category")}
+          setValue={(value: CategoryType): void => setValue("category", value)}
+          getValues={(): CategoryType => getValues("category")}
           placeholder="선택"
-    />
+          displayRequiredMarker={true}
+          errorMessage={errors.category?.message}
+        />
     <button type="submit">Submit</button>
   </form>
 </div>
@@ -69,7 +68,7 @@ interface FormDropdownProps extends InputHTMLAttributes<HTMLInputElement> {
  * @param errorMessage 에러메시지
  */
 
-function CustomFormDropdown({
+function CustomFormDropdown<T extends string>({
   label,
   options,
   register,
@@ -78,7 +77,7 @@ function CustomFormDropdown({
   placeholder,
   displayRequiredMarker = false,
   errorMessage,
-}: FormDropdownProps) {
+}: FormDropdownProps<T>) {
   const [isOpen, setIsOpen] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
   const handleDropdown = () => {
@@ -94,7 +93,9 @@ function CustomFormDropdown({
     const selected = options.find(
       (item) => item.label === e.currentTarget.textContent,
     );
-    setValue(selected?.value || "");
+    if (selected) {
+      setValue(selected?.value);
+    }
     setIsOpen(false);
   };
 
