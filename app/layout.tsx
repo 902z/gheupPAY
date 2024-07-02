@@ -26,9 +26,11 @@ export default function RootLayout({
     <html lang="ko">
       <body className="relative">
         <Hydration />
+        <Header />
         <main className="min-h-screen">
           <ToastProvider>{children}</ToastProvider>
         </main>
+        <Footer />
       </body>
     </html>
   );
