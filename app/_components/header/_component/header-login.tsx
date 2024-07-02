@@ -27,6 +27,7 @@ export default async function HeaderLogin() {
               alt="notification"
               width={24}
               height={24}
+              className="h-auto w-auto"
             />
           ) : (
             <Image
@@ -34,6 +35,7 @@ export default async function HeaderLogin() {
               alt="notification"
               width={24}
               height={24}
+              className="h-auto w-auto"
             />
           )}
         </AlertButton>
