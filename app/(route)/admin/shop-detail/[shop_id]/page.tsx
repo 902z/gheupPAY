@@ -2,6 +2,8 @@ import React from "react";
 import MyShopDetailCard from "../_components/my-shop-detail-card";
 import NoneNotice from "../_components/none-notice";
 import { getShopDetail } from "@/app/_apis/shop";
+import Header from "@/app/_components/header";
+import Footer from "@/app/_components/footer";
 
 export const metadata = {
   title: "내 가게 상세",
@@ -12,12 +14,16 @@ export default async function page() {
   const shopDetail = await getShopDetail(shopId);
 
   return (
-    <div className="base-container">
-      <h2 className="pb-4 font-bold text-l md:text-2xl">내 가게</h2>
-      <MyShopDetailCard shopDetail={shopDetail} />
+    <>
+      <Header />
+      <div className="base-container">
+        <h2 className="pb-4 font-bold text-l md:text-2xl">내 가게</h2>
+        <MyShopDetailCard shopDetail={shopDetail} />
 
-      <h2 className="py-8 font-bold text-l md:text-2xl">등록한 공고</h2>
-      <NoneNotice />
-    </div>
+        <h2 className="py-8 font-bold text-l md:text-2xl">등록한 공고</h2>
+        <NoneNotice />
+      </div>
+      <Footer />
+    </>
   );
 }

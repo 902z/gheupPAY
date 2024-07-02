@@ -3,6 +3,9 @@ import { getShopNoticeDetail } from "@/app/_apis/shop";
 import NoticeDetailCard from "@/app/_components/notice-detail-card";
 import AlbaApplicationTable from "../_components/alba-application-table";
 import { getNoticeApplications } from "@/app/_apis/application";
+import Header from "@/app/_components/header";
+import Footer from "@/app/_components/footer";
+
 export const metadata = {
   title: "공고 상세",
 };
@@ -15,13 +18,17 @@ export default async function page() {
   const applicationList = await getNoticeApplications(shopId, noticeId);
 
   return (
-    <div className="base-container">
-      <NoticeDetailCard noticeDetail={noticeDetail} />
+    <>
+      <Header />
+      <div className="base-container">
+        <NoticeDetailCard noticeDetail={noticeDetail} />
 
-      <div className="my-12">
-        <h2 className="py-8 font-bold text-l md:text-2xl">신청자 목록</h2>
-        <AlbaApplicationTable applicationList={applicationList} />
+        <div className="my-12">
+          <h2 className="py-8 font-bold text-l md:text-2xl">신청자 목록</h2>
+          <AlbaApplicationTable applicationList={applicationList} />
+        </div>
       </div>
-    </div>
+      <Footer />
+    </>
   );
 }

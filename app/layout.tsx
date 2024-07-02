@@ -21,7 +21,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="ko">
-      <body className="relative bg-gradient-to-b from-red-20 via-transparent to-transparent">
+      <body>
         <Hydration />
         <main className="min-h-screen">{children}</main>
       </body>
