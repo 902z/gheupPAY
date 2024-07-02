@@ -2,8 +2,10 @@ import instance from "@/app/_lib/axios";
 import { API_ERROR_MESSAGE } from "../../_constants/error-message";
 import { UserType } from "../../_constants/user-type";
 import axiosInstance from "../instances";
-import { isAxiosError } from "axios";
-import { UserProfileData } from "../type";
+import { AxiosError, isAxiosError } from "axios";
+import { PutUsersUserId, UserProfileData } from "../type";
+import { AddressType } from "@/app/_constants/address";
+import notification from "@/app/_util/notification";
 
 // 회원가입
 interface Params {
@@ -54,6 +56,30 @@ export async function getUser(user_id: string): Promise<UserProfileData> {
     return res.data;
   } catch (error) {
     console.error("getUser 함수에서 오류 발생:", error);
+    throw error;
+  }
+}
+
+type putUserProfileParams = {
+  name: string;
+  phone: string;
+  address: AddressType;
+};
+
+export async function putUserProfile(
+  userId: string,
+  params: putUserProfileParams,
+) {
+  try {
+    const res = await axiosInstance.put<PutUsersUserId>(
+      `/users/${userId}`,
+      params,
+    );
+    return res.data;
+  } catch (error) {
+    const message = (error as AxiosError<{ message: string }>).response?.data
+      .message;
+    notification(`Error while fetching. ${message ?? ""}`, "error");
     throw error;
   }
 }

@@ -1,16 +1,24 @@
 "use client";
 import CustomTextarea from "@/app/_components/custom-textarea";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { useRouter } from "next/navigation";
-import React from "react";
+import React, { useEffect, useRef } from "react";
 import { useForm } from "react-hook-form";
 import Button from "@/app/_components/button";
 import CustomTextInput from "@/app/_components/custom-text-input";
 import { profileRegisterSchema } from "./schema";
 import CustomFormDropdown from "@/app/_components/custom-form-dropdown";
 import { AddressType, FORMATTED_ADDRESS } from "@/app/_constants/address";
+import { putUserProfile } from "@/app/_apis/user";
+import { getCookie } from "@/app/_util/cookie";
+
+type FormDataType = {
+  name: string;
+  phone: string;
+  address: AddressType;
+};
 
 export default function CreateProfileForm() {
+  const userId = useRef<string | undefined>();
   const resolver = yupResolver(profileRegisterSchema);
   const {
     register,
@@ -20,9 +28,25 @@ export default function CreateProfileForm() {
     formState: { errors },
   } = useForm({ resolver, mode: "onSubmit" });
 
-  const onSubmit = async (data: any) => {
-    // const response = await postCreateNotice(shop_id, data);
+  useEffect(() => {
+    const fetchUserId = async () => {
+      // getCookie가 비동기 함수라고 가정하고 await를 사용하여 결과를 기다림
+      const userIdValue = await getCookie("userId");
+      if (userId) {
+        userId.current = userIdValue; // userId가 ref 객체라면 .current에 값을 할당
+      }
+    };
+
+    fetchUserId();
+  }, []);
+
+  const onSubmit = async (data: FormDataType) => {
     console.log(data);
+    if (!userId.current) {
+      throw new Error("유저 아이디가 없습니다.");
+    }
+    const response = await putUserProfile("어쩔티비", data);
+    console.log(response);
   };
 
   return (
