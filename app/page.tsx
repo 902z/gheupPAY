@@ -33,10 +33,19 @@ export default function Home() {
         </div>
 
         <div className="flex flex-col items-center justify-center py-4">
-          <div className="w-[300px] md:w-[400px]">
+          <div className="w-[200px] md:w-[300px]">
             <Image src={logo} alt="logo" />
           </div>
-          <div>
+          <Link href="/notice-list">
+            <motion.div
+              className="w-[200px] cursor-pointer rounded-2xl bg-red-40 py-4 text-center font-bold text-white md:px-12 md:text-l"
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+            >
+              시작하기
+            </motion.div>
+          </Link>
+          <div className="pt-4 md:pt-20">
             <div className="flex flex-col pb-20 md:flex-row">
               <div className="-z-10 hidden w-[450px] md:block md:w-[700px]">
                 <Image src={img1} alt="" />
@@ -225,11 +234,8 @@ export default function Home() {
         <Link href="/notice-list">
           <motion.div
             className="w-[250px] cursor-pointer rounded-2xl bg-red-40 py-4 text-center font-bold text-l text-white"
-            data-aos="fade-up"
-            data-aos-anchor-placement="top-bottom"
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
-            transition={{ duration: 0.1 }}
           >
             시작하기
           </motion.div>
