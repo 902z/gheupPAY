@@ -6,15 +6,29 @@ import AllNoticeList from "@/app/_components/notice-list";
 interface SearchParamsProps {
   searchParams: {
     page: string;
+    wage?: string;
+    startDate?: string;
+    address?: string[];
   };
 }
 
 export default async function page({ searchParams }: SearchParamsProps) {
   const customizedNotices = await getCustomizedNotices({});
+  const hourlyPayGte = parseInt((searchParams.wage ?? "0").replace(/,/g, ""));
+  const startsAtGte = searchParams.startDate &&new Date(searchParams.startDate).toISOString();
+
+  const address = searchParams.address || [];
   const page = parseInt(searchParams.page || "1", 10);
   const limit = 6;
   const offset = (page - 1) * limit;
-  const allNotices = await getAllNotices({ offset, limit });
+
+  const allNotices = await getAllNotices({
+    offset,
+    limit,
+    address,
+    hourlyPayGte,
+    startsAtGte,
+  });
 
   return (
     <div className="mt-[102px] w-full md:mt-[70px] lg:mx-auto">
@@ -26,8 +40,6 @@ export default async function page({ searchParams }: SearchParamsProps) {
           <CustomizedNoticeList notices={customizedNotices} />
         </div>
       </div>
-
-      {/* <Filter></Filter> */}
 
       <AllNoticeList
         notices={allNotices}

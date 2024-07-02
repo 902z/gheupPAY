@@ -13,7 +13,7 @@ export default async function HeaderLogin() {
     <>
       <section>
         {type === "employer" ? (
-          <Link href="/admin/store-detail">내 가게</Link>
+          <Link href="/admin/shop-detail">내 가게</Link>
         ) : (
           <Link href="/profile-detail">내 프로필</Link>
         )}
