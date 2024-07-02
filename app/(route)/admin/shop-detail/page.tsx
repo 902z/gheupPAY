@@ -45,10 +45,18 @@ export default async function page() {
   } else {
     return (
       <>
-        <h2 className="pb-4 font-bold text-l md:text-2xl">내 가게</h2>
-        <MyShopDetailCard shopDetail={shopDetail} />
-        <h2 className="py-8 font-bold text-l md:text-2xl">등록한 공고</h2>
-        <NoneNotice shopId={shopId} />
+        <div className="base-container">
+          <h2 className="pb-4 pt-[40px] font-bold text-l md:text-2xl">
+            내 가게
+          </h2>
+          <MyShopDetailCard shopDetail={shopDetail} />
+          <div className="pb-[120px]">
+            <h2 className="pb-8 pt-[60px] font-bold text-l md:text-2xl">
+              등록한 공고
+            </h2>
+            <NoneNotice shopId={shopId} />
+          </div>
+        </div>
       </>
     );
   }
