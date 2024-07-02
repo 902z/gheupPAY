@@ -14,6 +14,15 @@ export const storeRegisterSchema = yup.object().shape({
     .required(errorMessage),
   address2: yup.string().required(errorMessage),
   description: yup.string(),
-  imageUrl: yup.mixed<FileList>(),
+  imageUrl: yup
+    .mixed<FileList>()
+    .required(errorMessage)
+    .test({
+      name: "file-length",
+      message: "이미지 하나를 넣어주세요.",
+      test: (value) => {
+        return value && value.length === 1;
+      },
+    }),
   originalHourlyPay: yup.string().required(errorMessage),
 });

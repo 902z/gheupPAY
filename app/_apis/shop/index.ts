@@ -51,16 +51,11 @@ export const postShopCreate = async ({
   address1: AddressType;
   address2: string;
   description?: string;
-  imageUrl?: File;
+  imageUrl: File;
   originalHourlyPay: number;
 }): Promise<boolean> => {
   try {
-    let processedImageUrl;
-    if (imageUrl) {
-      processedImageUrl = await getImageUrl(imageUrl);
-    } else {
-      processedImageUrl = "";
-    }
+    const processedImageUrl = await getImageUrl(imageUrl);
     const response = await axiosInstance.post<PostShops>(
       "/shops",
       {

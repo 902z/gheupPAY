@@ -3,12 +3,7 @@ import {
   MINIMUM_HOURLY_WAGE,
 } from "@/app/_constants/hourly-wage";
 import { numberWithCommas } from "@/app/_util/number-with-comma";
-import {
-  ChangeEvent,
-  KeyboardEvent,
-  InputHTMLAttributes,
-  useState,
-} from "react";
+import { ChangeEvent, InputHTMLAttributes, useState } from "react";
 import { UseFormRegisterReturn } from "react-hook-form";
 
 interface CustomTextInputPropType

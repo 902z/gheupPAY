@@ -16,7 +16,6 @@ import React, { useEffect, useRef, useState } from "react";
 import { postShopCreate } from "@/app/_apis/shop";
 import useModal from "@/app/_hooks/use-modal";
 import ConfirmModal from "@/app/_components/modals/_components/confirm-modal";
-import { useRouter } from "next/navigation";
 import pulse from "@/public/icons/pulse.svg";
 
 interface FormValues {
@@ -25,22 +24,12 @@ interface FormValues {
   address1: AddressType;
   address2: string;
   description?: string;
-  imageUrl?: FileList;
+  imageUrl: FileList;
   originalHourlyPay: string;
 }
 
 function ShopCreateForm() {
-  const router = useRouter();
-  const {
-    isOpen: successIsOpen,
-    openModal: successOpenModal,
-    closeModal: successCloseModal,
-  } = useModal();
-  const {
-    isOpen: failIsOpen,
-    openModal: failOpenModal,
-    closeModal: failCloseModal,
-  } = useModal();
+  const { isOpen, openModal, closeModal } = useModal();
   const modalMessage = useRef<string | null>(null);
   const [waiting, setWaiting] = useState(false);
   const resolver = yupResolver(storeRegisterSchema);
@@ -65,6 +54,7 @@ function ShopCreateForm() {
   }, [image]);
 
   const handleForm = handleSubmit(async (data: FormValues) => {
+    console.log(data.imageUrl);
     const processedData = {
       ...data,
       originalHourlyPay: Number(data.originalHourlyPay.replaceAll(",", "")),
@@ -77,12 +67,12 @@ function ShopCreateForm() {
       const result = await postShopCreate(processedData);
       if (result) {
         modalMessage.current = "등록이 완료되었습니다.";
-        successOpenModal();
+        openModal();
       }
     } catch (error) {
       if (error instanceof Error) {
         modalMessage.current = error.message;
-        failOpenModal();
+        openModal();
       }
     } finally {
       setWaiting(false);
@@ -143,12 +133,19 @@ function ShopCreateForm() {
             errorMessage={errors.originalHourlyPay?.message}
           />
 
-          <div className="flex h-[235px] w-full max-w-[483px] flex-col gap-2 md:col-start-1 md:col-end-3 md:row-start-4 md:row-end-5 md:h-[310px]">
+          <div className="flex h-[240px] w-full max-w-[483px] flex-col gap-2 md:col-start-1 md:col-end-3 md:row-start-4 md:row-end-5 md:h-[310px]">
             <label
               htmlFor="imageUrl"
               className="h-full w-full cursor-pointer text-start text-base font-normal leading-[26px] text-black"
             >
-              가게 이미지
+              가게 이미지{" "}
+              <abbr
+                className="no-underline"
+                title="필수입력"
+                aria-label="required"
+              >
+                *
+              </abbr>
               <div className="relative mt-2 h-[200px] w-full rounded-xl bg-gray-30 md:h-[276px]">
                 {imagePreview ? (
                   <Image
@@ -176,6 +173,9 @@ function ShopCreateForm() {
               className="hidden"
               {...register("imageUrl")}
             />
+            <span className="pl-2 text-left text-s font-normal leading-4 text-primary">
+              {errors.imageUrl?.message}
+            </span>
           </div>
 
           <div className="md:col-start-1 md:col-end-3 md:row-start-5 md:row-end-6">
@@ -202,13 +202,8 @@ function ShopCreateForm() {
           )}
         </div>
       </form>
-      {failIsOpen && (
-        <ConfirmModal onClick={handleRedirect} closeModal={failCloseModal}>
-          {modalMessage.current}
-        </ConfirmModal>
-      )}
-      {successIsOpen && (
-        <ConfirmModal onClick={handleRedirect} closeModal={successCloseModal}>
+      {isOpen && (
+        <ConfirmModal onClick={handleRedirect} closeModal={closeModal}>
           {modalMessage.current}
         </ConfirmModal>
       )}
