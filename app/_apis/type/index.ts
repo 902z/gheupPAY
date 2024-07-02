@@ -587,3 +587,66 @@ export interface PutUsersUserIdAlertsAlertId {
   }[];
   links: Array<object>;
 }
+
+export type UserProfileData = {
+  item: {
+    id: string;
+    email: string;
+    type: string;
+    name: string;
+    phone: string;
+    address: string;
+    bio: string;
+    shop: any | null;
+  };
+};
+
+export type UserApplication = {
+  offset: number;
+  limit: number;
+  count: number;
+  hasNext: boolean;
+  items: {
+    item: {
+      id: string;
+      status: "pending" | "accepted" | "rejected" | "canceled";
+      createdAt: string;
+      shop: {
+        item: {
+          id: string;
+          name: string;
+          category: string;
+          address1: string;
+          address2: string;
+          description: string;
+          imageUrl: string;
+          originalHourlyPay: number;
+        };
+        href: string;
+      };
+      notice: {
+        item: {
+          id: string;
+          hourlyPay: number;
+          description: string;
+          startsAt: string;
+          workhour: number;
+          closed: boolean;
+        };
+        href: string;
+      };
+    };
+    links: {
+      rel: string;
+      description: string;
+      method: string;
+      href: string;
+    }[];
+  }[];
+  links: {
+    rel: string;
+    description: string;
+    method: string;
+    href: string;
+  }[];
+};
