@@ -5,6 +5,7 @@ import NoticeCard from "../notice-card";
 import { GetNotices } from "../../_apis/type/index";
 import { NoticeCardSkeleton } from "../notice-card/skeleton";
 import Filter from "@/app/(route)/(alba)/notice-list/_components/filter";
+import { useSearchParams } from "next/navigation";
 
 type AllNoticeListProps = {
   notices: GetNotices;
@@ -35,8 +36,6 @@ export default function AllNoticeList({
   const handleOpenFilter = () => {
     setShowFilter((prevShowFilter) => !prevShowFilter);
   };
-  
-
   
   const handleCloseFilter = () => {
     setShowFilter(false);

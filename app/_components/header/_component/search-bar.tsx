@@ -15,7 +15,7 @@ export default function SearchBar({ className }: SearchBarProps) {
     e.preventDefault();
     const value = inputRef.current?.value;
     if (value) {
-      router.push(`/announce-list/${value}`);
+      router.push(`/notice-list?keyword=${value}`);
     }
   };
 
@@ -29,6 +29,7 @@ export default function SearchBar({ className }: SearchBarProps) {
         className="h-9 w-full rounded-[10px] bg-gray-10 px-2 py-[10px] indent-[30px] text-s focus:outline-[0.5px] focus:outline-primary md:h-10 md:max-w-[450px] md:px-[10px] md:text-m lg:w-full lg:max-w-[450px]"
         placeholder="가게 이름으로 찾아보세요"
         ref={inputRef}
+        name="keyword"
       />
     </form>
   );

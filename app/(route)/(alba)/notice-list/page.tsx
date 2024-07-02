@@ -9,6 +9,7 @@ interface SearchParamsProps {
     wage?: string;
     startDate?: string;
     address?: string[];
+    keyword?: string;
   };
 }
 
@@ -16,6 +17,7 @@ export default async function page({ searchParams }: SearchParamsProps) {
   const customizedNotices = await getCustomizedNotices({});
   const hourlyPayGte = parseInt((searchParams.wage ?? "0").replace(/,/g, ""));
   const startsAtGte = searchParams.startDate &&new Date(searchParams.startDate).toISOString();
+  const keyword = searchParams.keyword;
 
   const address = searchParams.address || [];
   const page = parseInt(searchParams.page || "1", 10);
@@ -28,6 +30,7 @@ export default async function page({ searchParams }: SearchParamsProps) {
     address,
     hourlyPayGte,
     startsAtGte,
+    keyword,
   });
 
   return (
