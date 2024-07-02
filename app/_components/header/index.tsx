@@ -14,14 +14,26 @@ export default async function Header() {
           href="/"
           className="relative col-start-1 h-[30px] w-[84px] md:h-10 md:w-28"
         >
-          <Image src="/images/logo.png" alt="Logo" fill />
+          <Image
+            src="/images/logo.png"
+            alt="Logo"
+            fill
+            priority
+            sizes="100% 100%"
+          />
         </Link>
         <form
           action="/notice-list"
           className={"relative col-span-full md:ml-8 md:mr-[22px] md:flex-1"}
         >
           <section className="absolute left-[10px] top-[10px] h-4 w-4 md:h-5 md:w-5">
-            <Image src="/icons/search.png" alt="" fill />
+            <Image
+              src="/icons/search.png"
+              alt=""
+              fill
+              priority
+              sizes="100% 100%"
+            />
           </section>
           <input
             type="search"
