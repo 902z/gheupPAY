@@ -1,5 +1,8 @@
 import instance from "@/app/_lib/axios";
-import { GetShopsShopIdNoticesNoticeIdApplications } from "../type";
+import {
+  GetShopsShopIdNoticesNoticeIdApplications,
+  PutShopsShopIdNoticesNoticeIdApplicationsApplicationId,
+} from "../type";
 
 // 1. 가게의 특정 공고의 지원 목록 조회
 export async function getNoticeApplications(
@@ -24,7 +27,7 @@ export async function getUserNoticeApplication(
   user_id: string,
   offset = 0,
   limit = 10,
-) {
+): Promise<PutShopsShopIdNoticesNoticeIdApplicationsApplicationId> {
   try {
     const res = await instance.get(
       `/users/${user_id}/applications?offset=${offset}&limit=${limit}`,
@@ -32,6 +35,25 @@ export async function getUserNoticeApplication(
     return res.data;
   } catch (error) {
     console.error("getUserNoticeApplication 함수에서 오류 발생:", error);
+    throw error;
+  }
+}
+
+// 가게의 특정 공고 지원 승인, 거절 또는 취소
+export async function putNoticeApplicationStatus(
+  shop_id: string,
+  notice_id: string,
+  application_id: string,
+  status: "pending" | "accepted" | "rejected" | "canceled",
+) {
+  try {
+    const res = await instance.put(
+      `/shops/${shop_id}/notices/${notice_id}/applications/${application_id}`,
+      { status },
+    );
+    return res.data;
+  } catch (error) {
+    console.error("putNoticeApplicationStatus 함수에서 오류 발생:", error);
     throw error;
   }
 }

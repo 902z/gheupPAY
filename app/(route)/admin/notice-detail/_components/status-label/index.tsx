@@ -1,13 +1,42 @@
 "use client";
-import React from "react";
+import React, { useState } from "react";
 import { motion } from "framer-motion";
-import { GetShopsShopIdNoticesNoticeId } from "@/app/_apis/type";
+import { PutShopsShopIdNoticesNoticeIdApplicationsApplicationId } from "@/app/_apis/type";
+import { putNoticeApplicationStatus } from "@/app/_apis/application";
 
 type StatusLabelProps = {
-  status: GetShopsShopIdNoticesNoticeId["item"]["currentUserApplication"]["item"]["status"];
+  status: "pending" | "accepted" | "rejected" | "canceled";
+  noticeId: PutShopsShopIdNoticesNoticeIdApplicationsApplicationId["item"]["notice"]["item"]["id"];
+  shopId: PutShopsShopIdNoticesNoticeIdApplicationsApplicationId["item"]["shop"]["item"]["id"];
+  applicationId: PutShopsShopIdNoticesNoticeIdApplicationsApplicationId["item"]["id"];
 };
 
-export default function StatusLabel({ status }: StatusLabelProps) {
+export default function StatusLabel({
+  status,
+  shopId,
+  noticeId,
+  applicationId,
+}: StatusLabelProps) {
+  const [currentStatus, setCurrentStatus] = useState(status);
+
+  const updateStatus = async (status: "accepted" | "rejected") => {
+    const newStatus = await putNoticeApplicationStatus(
+      shopId,
+      noticeId,
+      applicationId,
+      status,
+    );
+    setCurrentStatus(newStatus.item.status);
+  };
+
+  const handleRejectClick = () => {
+    updateStatus("rejected");
+  };
+
+  const handleAcceptClick = () => {
+    updateStatus("accepted");
+  };
+
   const statusState = (status: string) => {
     switch (status) {
       case "pending":
@@ -17,6 +46,7 @@ export default function StatusLabel({ status }: StatusLabelProps) {
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
               className="cursor-pointer rounded-md border-2 border-primary bg-white px-4 py-2 font-bold text-m text-primary"
+              onClick={handleRejectClick}
             >
               거절하기
             </motion.button>
@@ -24,6 +54,7 @@ export default function StatusLabel({ status }: StatusLabelProps) {
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
               className="cursor-pointer rounded-md border-2 border-blue-20 bg-white px-4 py-2 font-bold text-m text-blue-20"
+              onClick={handleAcceptClick}
             >
               승인하기
             </motion.button>
@@ -52,5 +83,5 @@ export default function StatusLabel({ status }: StatusLabelProps) {
     }
   };
 
-  return <div>{statusState(status)}</div>;
+  return <div>{statusState(currentStatus)}</div>;
 }

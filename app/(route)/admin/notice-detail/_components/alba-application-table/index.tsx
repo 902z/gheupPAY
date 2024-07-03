@@ -55,7 +55,12 @@ export default function AlbaApplicationTable({
                   {application.item.user.item.phone}
                 </td>
                 <td className="border bg-white p-4">
-                  <StatusLabel status={application.item.status} />
+                  <StatusLabel
+                    status={application.item.status}
+                    applicationId={application.item.id}
+                    shopId={application.item.shop.item.id}
+                    noticeId={application.item.notice.item.id}
+                  />
                 </td>
               </tr>
             ))}
