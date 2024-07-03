@@ -1,6 +1,7 @@
 import instance from "@/app/_lib/axios";
 import {
   GetShopsShopIdNoticesNoticeIdApplications,
+  GetUsersUserIdApplications,
   PutShopsShopIdNoticesNoticeIdApplicationsApplicationId,
 } from "../type";
 
@@ -27,9 +28,9 @@ export async function getUserNoticeApplication(
   user_id: string,
   offset = 0,
   limit = 10,
-): Promise<PutShopsShopIdNoticesNoticeIdApplicationsApplicationId> {
+): Promise<GetUsersUserIdApplications> {
   try {
-    const res = await instance.get(
+    const res = await instance.get<GetUsersUserIdApplications>(
       `/users/${user_id}/applications?offset=${offset}&limit=${limit}`,
     );
     return res.data;
@@ -45,12 +46,13 @@ export async function putNoticeApplicationStatus(
   notice_id: string,
   application_id: string,
   status: "pending" | "accepted" | "rejected" | "canceled",
-) {
+): Promise<PutShopsShopIdNoticesNoticeIdApplicationsApplicationId> {
   try {
-    const res = await instance.put(
-      `/shops/${shop_id}/notices/${notice_id}/applications/${application_id}`,
-      { status },
-    );
+    const res =
+      await instance.put<PutShopsShopIdNoticesNoticeIdApplicationsApplicationId>(
+        `/shops/${shop_id}/notices/${notice_id}/applications/${application_id}`,
+        { status },
+      );
     return res.data;
   } catch (error) {
     console.error("putNoticeApplicationStatus 함수에서 오류 발생:", error);

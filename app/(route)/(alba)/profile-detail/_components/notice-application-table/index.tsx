@@ -66,7 +66,12 @@ export default function NoticeApplicationTable({
                   원
                 </td>
                 <td className="border bg-white p-4">
-                  <AlbaStatusLabel status={application.item.status} />
+                  <AlbaStatusLabel
+                    status={application.item.status}
+                    applicationId={application.item.id}
+                    shopId={application.item.shop.item.id}
+                    noticeId={application.item.notice.item.id}
+                  />
                 </td>
               </tr>
             ))}
