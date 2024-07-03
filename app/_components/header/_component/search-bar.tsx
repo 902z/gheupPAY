@@ -16,6 +16,7 @@ export default function SearchBar({ className }: SearchBarProps) {
     const value = inputRef.current?.value;
     if (value) {
       router.push(`/notice-list?keyword=${value}`);
+      inputRef.current.value = "" 
     }
   };
 
