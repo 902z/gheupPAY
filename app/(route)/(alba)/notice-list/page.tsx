@@ -2,6 +2,9 @@ import React from "react";
 import CustomizedNoticeList from "./_components/customized-notice";
 import { getAllNotices, getCustomizedNotices } from "@/app/_apis/notice";
 import AllNoticeList from "@/app/_components/notice-list";
+import { getCookie } from "@/app/_util/cookie";
+import Image from "next/image";
+import bluredCustomeDesktop from "@/public/images/blured-custome-desktop.png";
 
 interface SearchParamsProps {
   searchParams: {
@@ -14,7 +17,8 @@ interface SearchParamsProps {
 }
 
 export default async function page({ searchParams }: SearchParamsProps) {
-  const customizedNotices = await getCustomizedNotices({});
+  const token = await getCookie("accessToken");
+  const customizedNotices = token ? await getCustomizedNotices({}) : null;
   const hourlyPayGte = parseInt((searchParams.wage ?? "0").replace(/,/g, ""));
   const startsAtGte =
     searchParams.startDate && new Date(searchParams.startDate).toISOString();
@@ -36,15 +40,34 @@ export default async function page({ searchParams }: SearchParamsProps) {
 
   const allNoticeListClassName = keyword ? "pt-12" : "";
 
+  const bgClass = token ? "bg-red-10" : "bg-[#b3a5a2]";
+
   return (
     <div className="mt-[102px] w-full md:mt-[70px] lg:mx-auto">
       {!keyword && (
-        <div className="mb-10 bg-red-10 px-4 py-12">
+        <div className={`mb-10 ${bgClass} px-4 py-10`}>
           <div className="mx-auto flex w-full flex-col px-2 md:justify-center lg:max-w-[1000px]">
-            <h2 className="pb-4 font-bold text-l md:pb-12 md:text-2xl">
+            <h2 className="pb-4 font-bold text-l md:pb-8 md:text-2xl">
               맞춤 공고
             </h2>
-            <CustomizedNoticeList notices={customizedNotices} />
+            {token ? (
+              <CustomizedNoticeList notices={customizedNotices} />
+            ) : (
+              <div className="relative">
+                <Image
+                  src={bluredCustomeDesktop}
+                  alt="로그인시 사용 가능한 서비스입니다."
+                  priority
+                  sizes="100% 100%"
+                  className="rounded-2xl"
+                />
+                <p className="absolute bottom-[50%] right-[50%] translate-x-1/2 text-center font-bold text-l text-gray-5 md:pb-12 md:text-xl">
+                  로그인 후 이용 가능한
+                  <br />
+                  사용자 맞춤 서비스입니다!
+                </p>
+              </div>
+            )}
           </div>
         </div>
       )}
