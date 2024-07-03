@@ -1,21 +1,21 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { getCookie } from "@/app/_util/cookie";
-import { useRouter } from "next/navigation";
 
 const useCheckLoginStatus = () => {
-  const router = useRouter();
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   useEffect(() => {
     const checkLoginStatus = async () => {
       const accessToken = await getCookie("accessToken");
       if (accessToken) {
-        alert("이미 로그인 상태입니다.");
-        router.replace("/notice-list");
+        setIsLoggedIn(true);
       }
     };
 
     checkLoginStatus();
-  }, [router]);
+  }, []);
+
+  return {isLoggedIn, setIsLoggedIn};
 };
 
 export default useCheckLoginStatus;
