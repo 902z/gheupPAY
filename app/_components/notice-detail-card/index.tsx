@@ -99,9 +99,13 @@ export default async function NoticeDetailCard({
               <p>{noticeDetail.item.shop.item.description}</p>
             </div>
           </div>
-          {noticeDetail.item.closed || isLater || type === "employer" ? (
+          {noticeDetail.item.closed || isLater ? (
             <Button btnColor="orange" className="font-bold" disabled>
               신청 불가
+            </Button>
+          ) : type === "employer" ? (
+            <Button btnColor="orange" className="font-bold" disabled>
+              알바 계정만 신청 가능합니다
             </Button>
           ) : (
             <RegisterButton
