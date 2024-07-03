@@ -71,7 +71,7 @@ function SignUpForm() {
     }
   });
 
-  useCheckLoginStatus();
+  const { isLoggedIn, setIsLoggedIn } = useCheckLoginStatus();
 
   return (
     <>
@@ -116,11 +116,21 @@ function SignUpForm() {
         )}
       </form>
       {failIsOpen && (
-        <ConfirmModal closeModal={failCloseModal}>{modalMessage.current}</ConfirmModal>
+        <ConfirmModal closeModal={failCloseModal}>
+          {modalMessage.current}
+        </ConfirmModal>
       )}
       {successIsOpen && (
         <ConfirmModal onClick={handleRedirect} closeModal={successCloseModal}>
           {modalMessage.current}
+        </ConfirmModal>
+      )}
+      {isLoggedIn && (
+        <ConfirmModal
+          closeModal={() => setIsLoggedIn(false)}
+          onClick={() => router.replace("/notice-list")}
+        >
+          이미 로그인 상태입니다
         </ConfirmModal>
       )}
     </>

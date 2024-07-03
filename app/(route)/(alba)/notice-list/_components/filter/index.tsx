@@ -7,26 +7,32 @@ import close from "@/public/icons/close.png";
 import closeRed40 from "@/public/icons/close-red-40.png";
 import { ADDRESS } from "@/app/_constants/address";
 import Button from "@/app/_components/button";
-import { numberWithCommas } from '@/app/_util/number-with-comma';
-import { getNow } from '@/app/_util/get-now';
+import { numberWithCommas } from "@/app/_util/number-with-comma";
+import { getNow } from "@/app/_util/get-now";
+import { useSearchParams, useRouter } from "next/navigation";
 
 interface FilterProps {
   onClose: () => void;
+  keyword?: string;
 }
 
-export default function Filter({ onClose }: FilterProps) {
+export default function Filter({ onClose, keyword }: FilterProps) {
   const [selectedAddresses, setSelectedAddresses] = useState<string[]>([]);
   const [isFocused, setIsFocused] = useState<boolean>(false);
   const [startDate, setStartDate] = useState<string>("");
   const [minDate, setMinDate] = useState<string>("");
   const [wage, setWage] = useState<string>("");
-  
+  const searchParams = useSearchParams();
+  const router = useRouter();
+
   useEffect(() => {
     setMinDate(getNow());
   }, []);
 
   useEffect(() => {
-    const savedSelectedAddresses = JSON.parse(localStorage.getItem("selectedAddresses") || "[]");
+    const savedSelectedAddresses = JSON.parse(
+      localStorage.getItem("selectedAddresses") || "[]",
+    );
     const savedStartDate = localStorage.getItem("startDate") || "";
     const savedWage = localStorage.getItem("wage") || "";
 
@@ -40,7 +46,10 @@ export default function Filter({ onClose }: FilterProps) {
       const updatedAddresses = prev.includes(address)
         ? prev.filter((item) => item !== address)
         : [...prev, address];
-      localStorage.setItem("selectedAddresses", JSON.stringify(updatedAddresses));
+      localStorage.setItem(
+        "selectedAddresses",
+        JSON.stringify(updatedAddresses),
+      );
       return updatedAddresses;
     });
   };
@@ -48,14 +57,16 @@ export default function Filter({ onClose }: FilterProps) {
   const handleRemoveAddressClick = (address: string) => {
     setSelectedAddresses((prev) => {
       const updatedAddresses = prev.filter((item) => item !== address);
-      localStorage.setItem("selectedAddresses", JSON.stringify(updatedAddresses));
+      localStorage.setItem(
+        "selectedAddresses",
+        JSON.stringify(updatedAddresses),
+      );
       return updatedAddresses;
     });
   };
 
   const handleFocus = () => setIsFocused(true);
   const handleBlur = () => setIsFocused(false);
-
 
   const handleDateChange = (e: React.FormEvent<HTMLInputElement>) => {
     const value = e.currentTarget.value;
@@ -67,7 +78,8 @@ export default function Filter({ onClose }: FilterProps) {
     const { value } = e.currentTarget;
     const stringNumericValue = value.replace(/\D/g, "");
     const numericValue = Number(stringNumericValue);
-    const formattedWage = numericValue > 999999 ? "999,999" : numberWithCommas(numericValue);
+    const formattedWage =
+      numericValue > 999999 ? "999,999" : numberWithCommas(numericValue);
     setWage(formattedWage);
     localStorage.setItem("wage", formattedWage);
   };
@@ -81,20 +93,41 @@ export default function Filter({ onClose }: FilterProps) {
     localStorage.removeItem("wage");
   };
 
+  const handleApply = () => {
+    const query = new URLSearchParams();
+
+    query.append("page", "1");
+
+    if (wage) query.append("wage", wage);
+    if (startDate) query.append("startDate", startDate);
+
+    if (Array.isArray(selectedAddresses)) {
+      selectedAddresses.forEach((addr) => query.append("address", addr));
+    } else if (selectedAddresses) {
+      query.append("address", selectedAddresses);
+    }
+
+    const keywordParam = searchParams.get("keyword") || keyword;
+    if (keywordParam) query.append("keyword", keywordParam);
+
+    router.push(`/notice-list?${query.toString()}`);
+    onClose();
+  };
+
   return (
     <>
       <form>
         <div className="absolute right-[-4px] z-10 mt-[8px] w-[390px] rounded-[10px] border border-gray-20 bg-white px-[20px] py-[24px] shadow">
           <div className="mb-[24px] flex justify-between font-bold text-l">
             <h2>상세 필터</h2>
-            <div className='w-[24px] h-[24px]'>
-            <Image
-              className="cursor-pointer"
-              src={close}
-              alt="닫기"
-              width={24}
-              onClick={onClose}
-            />
+            <div className="h-[24px] w-[24px]">
+              <Image
+                className="cursor-pointer"
+                src={close}
+                alt="닫기"
+                width={24}
+                onClick={onClose}
+              />
             </div>
           </div>
           <div className="w-[350px] border-b pb-[24px]">
@@ -160,7 +193,7 @@ export default function Filter({ onClose }: FilterProps) {
               <input
                 className="h-[58px] w-[169px] rounded-[6px] border border-gray-30 px-[20px] py-[16px] focus:outline-primary"
                 placeholder="입력"
-                id = "hourlyPayGte"
+                id="hourlyPayGte"
                 name="wage"
                 type="text"
                 value={wage}
@@ -171,10 +204,19 @@ export default function Filter({ onClose }: FilterProps) {
             </div>
           </div>
           <div className="mt-[56px] flex h-[48px] justify-between gap-[8px]">
-            <Button type="button" className="w-[82px]" btnColor="white" onClick={handleReset}>
+            <Button
+              type="button"
+              className="w-[82px]"
+              btnColor="white"
+              onClick={handleReset}
+            >
               초기화
             </Button>
-            <Button className="w-[260px]" btnColor="orange">
+            <Button
+              className="w-[260px]"
+              btnColor="orange"
+              onClick={handleApply}
+            >
               적용하기
             </Button>
           </div>

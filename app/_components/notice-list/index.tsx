@@ -5,11 +5,13 @@ import NoticeCard from "../notice-card";
 import { GetNotices } from "../../_apis/type/index";
 import { NoticeCardSkeleton } from "../notice-card/skeleton";
 import Filter from "@/app/(route)/(alba)/notice-list/_components/filter";
+import { useSearchParams } from "next/navigation";
 
 type AllNoticeListProps = {
   notices: GetNotices;
   activePage: number;
   itemsCountPerPage: number;
+  keyword?: string;
 };
 
 const ALL_LIST_SECTION_ID = "all-list-section";
@@ -22,6 +24,7 @@ export default function AllNoticeList({
   const noticeList = notices.items;
   const totalItemsCount = notices.count;
   const [showFilter, setShowFilter] = useState(false);
+  const searchKeyword = useSearchParams().get("keyword");
 
   useEffect(() => {
     if (window.location.hash) {
@@ -48,7 +51,14 @@ export default function AllNoticeList({
             className="pb-4 font-bold text-l md:pb-12 md:text-2xl"
             id={ALL_LIST_SECTION_ID}
           >
-            전체 공고
+            {searchKeyword ? (
+              <span>
+                <span className="text-primary">{searchKeyword}</span>
+                {"에 대한 공고 목록"}
+              </span>
+            ) : (
+              "전체 공고"
+            )}
           </h2>
           {/* 상세필터 버튼입니다 */}
           <div className="relative">
