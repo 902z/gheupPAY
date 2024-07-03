@@ -4,20 +4,23 @@ import CustomPriceInput from "@/app/_components/custom-price-input";
 import CustomTimeInput from "@/app/_components/custom-time-input";
 import CustomTextarea from "@/app/_components/custom-textarea";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { useRouter } from "next/navigation";
 import React from "react";
 import { useForm } from "react-hook-form";
 import Button from "@/app/_components/button";
 import { storeNoticeRegisterSchema } from "./schema";
+import { postCreateNotice } from "@/app/_apis/notice";
+import useModal from "@/app/_hooks/use-modal";
+import ConfirmModal from "@/app/_components/modals/_components/confirm-modal";
 
-interface SearchParamsProps {
-  searchParams: {
-    page: string;
-  };
-}
+type postCreateNoticeParams = {
+  hourlyPay: string;
+  startsAt: string;
+  workhour: number;
+  description: string;
+};
 
-export default function AddNotice({ searchParams }: SearchParamsProps) {
-  const router = useRouter();
+export default function AddNotice() {
+  const { isOpen, closeModal, openModal } = useModal();
   const resolver = yupResolver(storeNoticeRegisterSchema);
   const {
     register,
@@ -25,10 +28,20 @@ export default function AddNotice({ searchParams }: SearchParamsProps) {
     formState: { errors },
   } = useForm({ resolver, mode: "onSubmit" });
 
-  const onSubmit = async (data: any) => {
-    data.startsAt = new Date(data.startsAt).toISOString();
-    // const response = await postCreateNotice(shop_id, data);
-    console.log(data);
+  const onSubmit = async (data: postCreateNoticeParams) => {
+    const hourlyPay = Number(data.hourlyPay.replace(/,/g, ""));
+    const proceedData = {
+      ...data,
+      startsAt: new Date(data.startsAt).toISOString(),
+      hourlyPay: hourlyPay,
+    };
+    const response = await postCreateNotice(proceedData);
+    if (response) {
+      openModal();
+    }
+  };
+  const handleModalConfirm = () => {
+    window.location.replace("/admin/shop-detail");
   };
 
   return (
@@ -73,6 +86,11 @@ export default function AddNotice({ searchParams }: SearchParamsProps) {
             </Button>
           </div>
         </form>
+        {isOpen && (
+          <ConfirmModal closeModal={closeModal} onClick={handleModalConfirm}>
+            등록이 완료되었습니다.
+          </ConfirmModal>
+        )}
       </div>
     </div>
   );
