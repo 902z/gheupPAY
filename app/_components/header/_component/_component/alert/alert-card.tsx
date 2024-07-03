@@ -3,6 +3,7 @@ import Image from "next/image";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import { putAlerts } from "@/app/_apis/alert";
+import timeDifferenceFromNow from "@/app/_util/time-difference-from-now";
 
 interface AlertCardProps {
   item: getUsersUserIdAlerts["items"][0];
@@ -59,7 +60,9 @@ export default function AlertCard({ item, onDelete }: AlertCardProps) {
               )}
               되었어요.
             </p>
-            <p className="text-[12px] text-gray-500">{item?.item.createdAt}</p>
+            <p className="text-[12px] text-gray-500">
+              {timeDifferenceFromNow(item?.item.createdAt)}
+            </p>
           </li>
         </SwiperSlide>
         <SwiperSlide></SwiperSlide>
