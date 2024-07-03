@@ -1,5 +1,5 @@
 "use client";
-import { UserApplication } from "@/app/_apis/type";
+import { GetUsersUserIdApplications, UserApplication } from "@/app/_apis/type";
 import React, { useEffect } from "react";
 import AlbaStatusLabel from "../alba-status-label";
 import { calculateTimeRange } from "@/app/_util/calculate-time-range";
@@ -8,7 +8,7 @@ import formattedNumber from "@/app/_util/number-format";
 import Pagination from "@/app/_components/pagination";
 
 type NoticeApplicationTableProps = {
-  applicationNotice: UserApplication;
+  applicationNotice: GetUsersUserIdApplications;
   activePage: number;
   itemsCountPerPage: number;
 };
