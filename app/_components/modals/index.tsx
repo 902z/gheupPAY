@@ -3,7 +3,7 @@ import useModal from "@/app/_hooks/use-modal";
 import ConfirmModal from "./_components/confirm-modal";
 import WarningModal from "./_components/warning-modal";
 import SelectModal from "./_components/select-modal";
-import WindowModal from "./_components/window-modal";
+
 
 type ConfirmOnly = {
   confirm: true;
@@ -11,8 +11,6 @@ type ConfirmOnly = {
   warning?: never;
   select?: never;
   selectType?: never;
-  windowTitle?: never;
-  window?: never;
   onClickYes?: never;
   onClickNo?: never;
 };
@@ -23,8 +21,6 @@ type WarningOnly = {
   onClick?: () => void;
   select?: never;
   selectType?: never;
-  windowTitle?: never;
-  window?: never;
   onClickYes?: never;
   onClickNo?: never;
 };
@@ -37,26 +33,12 @@ type SelectOnly = {
   onClickYes?: () => void;
   onClickNo?: () => void;
   onClick?: never;
-  window?: never;
-  windowTitle?: never;
-};
-
-type WindowOnly = {
-  confirm?: never;
-  warning?: never;
-  select?: never;
-  selectType?: never;
-  window: true;
-  windowTitle: string;
-  onClickYes?: never;
-  onClickNo?: never;
-  onClick?: never;
 };
 
 type OpenModalProps = {
   children: React.ReactNode;
   modalContents: React.ReactNode | string;
-} & (ConfirmOnly | WarningOnly | SelectOnly | WindowOnly);
+} & (ConfirmOnly | WarningOnly | SelectOnly);
 
 /**
  * 
@@ -93,12 +75,11 @@ type OpenModalProps = {
     }}
   >
 
-  * @param {boolean} modalType confirm warning select window 중 하나 선택
-  *  select 선택했으면 selectType 필수 window 선택했으면 windowTitle 필수
-  *
+  * @param {boolean} modalType confirm warning select 중 하나 선택
+  *  select 선택했으면 selectType 필수
   * @param {onClick} onClick 버튼 누르면 실행할 동작, select는 onClickYes onClickNo로 줍니다.
   * @param {ReactNode|string} modalContents 모달 안에 들어갈 내용
- * @author ☯️채종민 extends 김보미
+  * @author ☯️채종민 extends 김보미
  */
 
 export default function OpenModal({
@@ -107,8 +88,6 @@ export default function OpenModal({
   warning,
   select,
   selectType,
-  window,
-  windowTitle,
   modalContents,
   onClick,
   onClickYes,
@@ -139,11 +118,6 @@ export default function OpenModal({
         >
           {modalContents}
         </SelectModal>
-      )}
-      {isOpen && window && (
-        <WindowModal title={windowTitle} onclick={closeModal}>
-          {modalContents}
-        </WindowModal>
       )}
     </>
   );

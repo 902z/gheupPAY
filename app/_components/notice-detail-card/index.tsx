@@ -39,6 +39,7 @@ export default async function NoticeDetailCard({
             alt=""
             src={noticeDetail.item.shop.item.imageUrl}
             fill={true}
+            sizes="100% 100%"
             className="rounded-[12px] object-cover"
           />
         </div>
