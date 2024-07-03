@@ -26,7 +26,7 @@ export default function NoticeCard({ cardContents }: NoticeCardProps) {
   );
 
   return (
-    <div className="cursor-pointer duration-150 hover:scale-105 active:scale-95">
+    <article className="cursor-pointer duration-150 hover:scale-105 active:scale-95">
       <div
         key={cardContents.id}
         className="h-[261px] w-full rounded-[12px] border border-gray-20 bg-white p-3 md:h-[349px] lg:w-[305px]"
@@ -74,6 +74,6 @@ export default function NoticeCard({ cardContents }: NoticeCardProps) {
           </div>
         </div>
       </div>
-    </div>
+    </article>
   );
 }

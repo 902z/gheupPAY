@@ -54,7 +54,7 @@ export default async function NoticeDetailCard({
           {noticeDetail.item.shop.item.name}
         </data>
       </div>
-      <div className="box-border flex h-fit w-full flex-col rounded-[12px] border border-gray-10 bg-white p-5 lg:flex-row lg:gap-4">
+      <section className="box-border flex h-fit w-full flex-col rounded-[12px] border border-gray-10 bg-white p-5 lg:flex-row lg:gap-4">
         <div className="relative mb-2 box-border h-[180px] w-full rounded-[12px] md:h-[360px] lg:h-[308px] lg:w-[539px]">
           <Image
             alt=""
@@ -113,7 +113,7 @@ export default async function NoticeDetailCard({
             />
           )}
         </div>
-      </div>
+      </section>
       <div className="mt-4 box-border flex h-fit w-full flex-col break-words rounded-[12px] bg-gray-10 p-5">
         <h3 className="font-bold">공고 설명</h3>
         <p>{noticeDetail.item.description}</p>
