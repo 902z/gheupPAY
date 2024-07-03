@@ -13,8 +13,14 @@ export async function getNoticeApplications(
   limit = 10,
 ): Promise<GetShopsShopIdNoticesNoticeIdApplications> {
   try {
+    const params = new URLSearchParams({
+      offset: offset.toString(),
+      limit: limit.toString(),
+    });
+
     const res = await instance.get<GetShopsShopIdNoticesNoticeIdApplications>(
-      `/shops/${shop_id}/notices/${notice_id}/applications?offset=${offset}&limit=${limit}`,
+      `/shops/${shop_id}/notices/${notice_id}/applications`,
+      { params },
     );
     return res.data;
   } catch (error) {
@@ -30,8 +36,14 @@ export async function getUserNoticeApplication(
   limit = 10,
 ): Promise<GetUsersUserIdApplications> {
   try {
+    const params = new URLSearchParams({
+      offset: offset.toString(),
+      limit: limit.toString(),
+    });
+
     const res = await instance.get<GetUsersUserIdApplications>(
-      `/users/${user_id}/applications?offset=${offset}&limit=${limit}`,
+      `/users/${user_id}/applications`,
+      { params },
     );
     return res.data;
   } catch (error) {
