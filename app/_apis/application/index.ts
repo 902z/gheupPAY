@@ -20,9 +20,15 @@ export async function getNoticeApplications(
 }
 
 // 유저의 지원 목록 조회
-export async function getUserNoticeApplication(user_id: string) {
+export async function getUserNoticeApplication(
+  user_id: string,
+  offset = 0,
+  limit = 10,
+) {
   try {
-    const res = await instance.get(`/users/${user_id}/applications`);
+    const res = await instance.get(
+      `/users/${user_id}/applications?offset=${offset}&limit=${limit}`,
+    );
     return res.data;
   } catch (error) {
     console.error("getUserNoticeApplication 함수에서 오류 발생:", error);

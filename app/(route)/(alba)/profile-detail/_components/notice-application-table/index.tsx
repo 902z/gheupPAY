@@ -1,19 +1,38 @@
+"use client";
 import { UserApplication } from "@/app/_apis/type";
-import React from "react";
+import React, { useEffect } from "react";
 import AlbaStatusLabel from "../alba-status-label";
 import { calculateTimeRange } from "@/app/_util/calculate-time-range";
 import { dateFormat } from "@/app/_util/date-format";
 import formattedNumber from "@/app/_util/number-format";
+import Pagination from "@/app/_components/pagination";
 
 type NoticeApplicationTableProps = {
   applicationNotice: UserApplication;
+  activePage: number;
+  itemsCountPerPage: number;
 };
+
+const APPLICATION_LIST_ID = "application-list";
 
 export default function NoticeApplicationTable({
   applicationNotice,
+  activePage,
+  itemsCountPerPage,
 }: NoticeApplicationTableProps) {
+  const totalItemsCount = applicationNotice.count;
+
+  useEffect(() => {
+    if (window.location.hash) {
+      const element = document.querySelector(window.location.hash);
+      if (element) {
+        element.scrollIntoView({ behavior: "smooth" });
+      }
+    }
+  }, []);
+
   return (
-    <>
+    <div id={APPLICATION_LIST_ID}>
       <div className="overflow-auto rounded-xl shadow-md">
         <table className="w-full table-auto border-collapse border-spacing-0 border-gray-20">
           <thead>
@@ -53,7 +72,15 @@ export default function NoticeApplicationTable({
             ))}
           </tbody>
         </table>
+        <div className="my-2">
+          <Pagination
+            activePage={activePage}
+            totalItemsCount={totalItemsCount}
+            itemsCountPerPage={itemsCountPerPage}
+            focusHash={APPLICATION_LIST_ID}
+          />
+        </div>
       </div>
-    </>
+    </div>
   );
 }

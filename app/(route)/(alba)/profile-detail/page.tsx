@@ -4,14 +4,31 @@ import { getUser } from "@/app/_apis/user";
 import UserProfile from "./_components/user-profile";
 import { getUserNoticeApplication } from "@/app/_apis/application";
 import NoticeApplicationTable from "./_components/notice-application-table";
+
 export const metadata = {
   title: "프로필 상세",
 };
-export default async function page() {
+
+type PageProps = {
+  searchParams: {
+    page?: string;
+  };
+};
+
+export default async function page({ searchParams }: PageProps) {
   const userId = "309aaf62-068e-4deb-a6c3-a31abacfdc67";
+
+  const page = parseInt(searchParams.page || "1", 10);
+  const limit = 10;
+  const offset = (page - 1) * limit;
+
   const userProfile = await getUser(userId);
 
-  const applicationNotice = await getUserNoticeApplication(userId);
+  const applicationNotice = await getUserNoticeApplication(
+    userId,
+    offset,
+    limit,
+  );
 
   return (
     <div className="base-container">
@@ -23,7 +40,11 @@ export default async function page() {
       </div>
       <h2 className="py-8 font-bold text-l md:text-2xl">신청 내역</h2>
       {/* <NoneApplication /> */}
-      <NoticeApplicationTable applicationNotice={applicationNotice} />
+      <NoticeApplicationTable
+        applicationNotice={applicationNotice}
+        activePage={page}
+        itemsCountPerPage={limit}
+      />
     </div>
   );
 }
