@@ -104,10 +104,7 @@ input::-webkit-inner-spin-button {
 .scroll-locked {
   overflow: hidden;
 }
-<<<<<<< HEAD
-=======
 
 input[type="datetime-local"]::-webkit-calendar-picker-indicator {
   cursor: pointer;
 }
->>>>>>> 0cda967c729719dcb5ab98b6a7c6e50f4b86f371

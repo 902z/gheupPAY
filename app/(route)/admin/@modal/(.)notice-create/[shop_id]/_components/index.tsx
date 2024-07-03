@@ -1,0 +1,65 @@
+import { yupResolver } from "@hookform/resolvers/yup";
+import { useParams, useRouter } from "next/navigation";
+import { useForm } from "react-hook-form";
+import { storeNoticeRegisterSchema } from "./schema";
+import CustomPriceInput from "@/app/_components/custom-price-input";
+import CustomDateInput from "@/app/_components/custom-date-input";
+import CustomTimeInput from "@/app/_components/custom-time-input";
+import CustomTextarea from "@/app/_components/custom-textarea";
+import Button from "@/app/_components/button";
+
+export default function CreateNoticeForm() {
+  const router = useRouter();
+  const params = useParams();
+  const shop_id = params.shop_id as string;
+  const resolver = yupResolver(storeNoticeRegisterSchema);
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm({ resolver, mode: "onSubmit" });
+
+  const onSubmit = async (data: any) => {
+    data.startsAt = new Date(data.startsAt).toISOString();
+    //const response = await postCreateNotice(shop_id, data);
+    console.log(data);
+  };
+  return (
+    <form onSubmit={handleSubmit(onSubmit)}>
+      <div className="flex flex-col gap-6">
+        <div className="flex flex-col gap-5">
+          <div className="grid gap-5 md:grid-cols-2 lg:grid-cols-3">
+            <CustomPriceInput
+              label="시급"
+              displayRequiredMarker={true}
+              register={register("hourlyPay")}
+              errorMessage={errors.hourlyPay?.message}
+            />
+            <CustomDateInput
+              label="시작일시"
+              displayRequiredMarker={true}
+              register={register("startsAt")}
+              errorMessage={errors.startsAt?.message}
+            />
+            <CustomTimeInput
+              label="업무 시간"
+              displayRequiredMarker={true}
+              register={register("workhour")}
+              placeholder="12시간 이하로 입력해주세요."
+              errorMessage={errors.workhour?.message}
+            />
+          </div>
+          <CustomTextarea
+            label="공고 설명"
+            placeholder="공고 설명을 입력해 주세요"
+            register={register("description")}
+          />
+        </div>
+
+        <Button className="" type="submit">
+          등록하기
+        </Button>
+      </div>
+    </form>
+  );
+}
