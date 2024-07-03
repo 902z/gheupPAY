@@ -5,10 +5,12 @@ import { GetShopsShopIdNoticesNoticeIdApplications } from "../type";
 export async function getNoticeApplications(
   shop_id: string,
   notice_id: string,
+  offset = 0,
+  limit = 10,
 ): Promise<GetShopsShopIdNoticesNoticeIdApplications> {
   try {
     const res = await instance.get<GetShopsShopIdNoticesNoticeIdApplications>(
-      `/shops/${shop_id}/notices/${notice_id}/applications`,
+      `/shops/${shop_id}/notices/${notice_id}/applications?offset=${offset}&limit=${limit}`,
     );
     return res.data;
   } catch (error) {

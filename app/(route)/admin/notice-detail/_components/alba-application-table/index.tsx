@@ -1,16 +1,35 @@
+"use client";
 import { GetShopsShopIdNoticesNoticeIdApplications } from "@/app/_apis/type";
-import React from "react";
+import React, { useEffect } from "react";
 import StatusLabel from "../status-label";
+import Pagination from "@/app/_components/pagination";
 
 type AlbaApplicationTableProps = {
   applicationList: GetShopsShopIdNoticesNoticeIdApplications;
+  activePage: number;
+  itemsCountPerPage: number;
 };
+
+const APPLICATION_LIST_ID = "application-list";
 
 export default function AlbaApplicationTable({
   applicationList,
+  activePage,
+  itemsCountPerPage,
 }: AlbaApplicationTableProps) {
+  const totalItemsCount = applicationList.count;
+
+  useEffect(() => {
+    if (window.location.hash) {
+      const element = document.querySelector(window.location.hash);
+      if (element) {
+        element.scrollIntoView({ behavior: "smooth" });
+      }
+    }
+  }, []);
+
   return (
-    <>
+    <div id={APPLICATION_LIST_ID}>
       <div className="overflow-auto rounded-xl shadow-md">
         <table className="w-full table-auto border-collapse border-spacing-0 border-gray-20">
           <thead>
@@ -42,7 +61,15 @@ export default function AlbaApplicationTable({
             ))}
           </tbody>
         </table>
+        <div className="my-2">
+          <Pagination
+            activePage={activePage}
+            totalItemsCount={totalItemsCount}
+            itemsCountPerPage={itemsCountPerPage}
+            focusHash={APPLICATION_LIST_ID}
+          />
+        </div>
       </div>
-    </>
+    </div>
   );
 }
