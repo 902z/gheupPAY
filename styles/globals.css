@@ -101,10 +101,23 @@ input::-webkit-inner-spin-button {
   margin: 0;
 }
 
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
 .scroll-locked {
   overflow: hidden;
 }
 
 input[type="datetime-local"]::-webkit-calendar-picker-indicator {
   cursor: pointer;
+}
+
+input::-webkit-search-decoration,
+input::-webkit-search-cancel-button,
+input::-webkit-search-results-button,
+input::-webkit-search-results-decoration {
+  display: none;
 }
