@@ -39,9 +39,9 @@ function PageModal({ children, title }: PageModalProp) {
         initial={{ y: 400, opacity: 1 }}
         animate={{ y: 0, opacity: 1 }}
         transition={{ duration: 0.6, ease: "easeOut" }}
-        className="relative w-full max-w-[964px] rounded-t-lg bg-white pt-[35px]"
+        className="relative w-full max-w-[985px] rounded-t-lg bg-white pt-[35px]"
       >
-        <section className="h-full w-full overflow-scroll px-3 pb-[40px]">
+        <section className="h-full w-full overflow-scroll px-10 pb-[40px]">
           <header className="h- flex w-full justify-between">
             <h1 className="font-bold text-l leading-[25px]">{title}</h1>
             <div
