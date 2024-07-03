@@ -3,6 +3,8 @@ import { useRouter } from "next/navigation";
 import Image from "next/image";
 import close from "@/public/icons/close.png";
 import { createPortal } from "react-dom";
+import { useEffect } from "react";
+import { motion } from "framer-motion";
 
 interface PageModalProp {
   children: React.ReactNode;
@@ -24,12 +26,24 @@ interface PageModalProp {
 
 function PageModal({ children, title }: PageModalProp) {
   const router = useRouter();
+  useEffect(() => {
+    document.body.style.overflow = "hidden";
+
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, []);
   return createPortal(
     <div className="fixed inset-0 z-50 flex justify-center bg-black bg-opacity-50 md:pt-[188px]">
-      <div className="relative w-full max-w-[964px] rounded-t-lg bg-white pt-[35px]">
-        <section className="h-full w-full overflow-scroll px-3 pb-[40px]">
+      <motion.div
+        initial={{ y: 400, opacity: 1 }}
+        animate={{ y: 0, opacity: 1 }}
+        transition={{ duration: 0.6, ease: "easeOut" }}
+        className="relative w-full max-w-[985px] rounded-t-lg bg-white pt-[35px]"
+      >
+        <section className="h-full w-full overflow-scroll px-10 pb-[40px]">
           <header className="h- flex w-full justify-between">
-            <h2 className="font-bold text-l leading-[25px]">{title}</h2>
+            <h1 className="font-bold text-l leading-[25px]">{title}</h1>
             <div
               className="relative h-6 w-6 cursor-pointer md:h-8 md:w-8"
               onClick={() => router.back()}
@@ -39,7 +53,7 @@ function PageModal({ children, title }: PageModalProp) {
           </header>
           {children}
         </section>
-      </div>
+      </motion.div>
     </div>,
     document.body,
   );
