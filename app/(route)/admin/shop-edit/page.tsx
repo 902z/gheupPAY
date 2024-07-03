@@ -6,6 +6,7 @@ import { useSearchParams } from "next/navigation";
 import { Suspense, useEffect, useState } from "react";
 import ShopEditForm from "./shop-edit-form";
 import LoadingSign from "./loading";
+import { numberWithCommas } from "@/app/_util/number-with-comma";
 interface InitialData {
   name: string;
   category: CategoryType;
@@ -13,7 +14,7 @@ interface InitialData {
   address2: string;
   description: string;
   imageUrl: string;
-  originalHourlyPay: number;
+  originalHourlyPay: string;
 }
 
 export default function ShopEdit() {
@@ -34,7 +35,9 @@ export default function ShopEdit() {
             address2: shopDetail.item.address2,
             description: shopDetail.item.description,
             imageUrl: shopDetail.item.imageUrl,
-            originalHourlyPay: shopDetail.item.originalHourlyPay,
+            originalHourlyPay: numberWithCommas(
+              shopDetail.item.originalHourlyPay,
+            ),
           };
           setInitialData(formValue);
         } else {

@@ -12,6 +12,7 @@ interface CustomTextInputPropType
   displayRequiredMarker?: boolean;
   register: UseFormRegisterReturn;
   errorMessage?: string;
+  initialValue?: string;
 }
 
 /**
@@ -28,6 +29,7 @@ interface CustomTextInputPropType
           setValue("originalHourlyPay", value)
         }
       displayRequiredMarker={true}
+      initialValue="12,000"
       errorMessage={errors.originalHourlyPay?.message}
     />
   </form>
@@ -36,6 +38,7 @@ interface CustomTextInputPropType
  * @param {UseFormRegister} register useForm register(name) 넣어주기 
  * @param {boolean} displayRequiredMarker label 옆에 * 필수 입력 표시
  * @param {string} errorMessage 입력 오류 시 나올 에러 메시지
+ * @param {string} initialValue 디펄트값
  * @param {} rest input태그 넣고 싶은 속성 넣을 수 있습니다.
  */
 
@@ -44,11 +47,14 @@ function CustomPriceInput({
   register,
   displayRequiredMarker = false,
   errorMessage,
+  initialValue,
   ...rest
 }: CustomTextInputPropType) {
   const MINIMUM_WAGE_WITH_COMMAS = numberWithCommas(MINIMUM_HOURLY_WAGE);
   const MAXIMUM_WAGE_WITH_COMMAS = numberWithCommas(MAXIMUM_HOURLY_WAGE);
-  const [stringValue, setStringValue] = useState(MINIMUM_WAGE_WITH_COMMAS);
+  const [stringValue, setStringValue] = useState(
+    initialValue ? initialValue : MINIMUM_WAGE_WITH_COMMAS,
+  );
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     const { value } = e.target;
@@ -59,6 +65,7 @@ function CustomPriceInput({
     } else {
       setStringValue(numberWithCommas(numericValue));
     }
+    register.onChange(e);
   };
 
   const handleBlur = () => {

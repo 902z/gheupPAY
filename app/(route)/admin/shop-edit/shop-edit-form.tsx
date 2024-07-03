@@ -26,7 +26,7 @@ interface InitialData {
   address2: string;
   description: string;
   imageUrl: string;
-  originalHourlyPay: number;
+  originalHourlyPay: string;
 }
 
 interface FormValues {
@@ -64,7 +64,7 @@ function ShopEditForm({ initialData, shop_id }: ShopEditFormProps) {
       address1: initialData.address1,
       address2: initialData.address2,
       description: initialData.description,
-      originalHourlyPay: numberWithCommas(initialData.originalHourlyPay),
+      originalHourlyPay: initialData.originalHourlyPay,
     },
   });
   const [imagePreview, setImagePreview] = useState(initialData.imageUrl);
@@ -77,6 +77,7 @@ function ShopEditForm({ initialData, shop_id }: ShopEditFormProps) {
   }, [image]);
 
   const handleForm = handleSubmit(async (data: FormValues) => {
+    console.log(data);
     let editedImageUrl: File | string;
     if (!data.imageUrl || data.imageUrl?.length === 0) {
       editedImageUrl = initialData.imageUrl;
@@ -158,6 +159,7 @@ function ShopEditForm({ initialData, shop_id }: ShopEditFormProps) {
             placeholder="기본 시급을 입력해 주세요"
             register={register("originalHourlyPay")}
             displayRequiredMarker={true}
+            initialValue={initialData.originalHourlyPay}
             errorMessage={errors.originalHourlyPay?.message}
           />
 
