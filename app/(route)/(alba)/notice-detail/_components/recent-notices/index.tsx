@@ -1,6 +1,6 @@
 import { getShopNoticeDetail } from "@/app/_apis/shop";
 import NoticeCard from "@/app/_components/notice-card";
-import { NoticeCardSkeleton } from "@/app/_components/notice-card/skeleton";
+import { NoticeCardSkeleton } from "@/app/_components/notice-card/_component/skeleton";
 import { getNotices, NoticeIds } from "@/app/_util/notice";
 import { Suspense } from "react";
 

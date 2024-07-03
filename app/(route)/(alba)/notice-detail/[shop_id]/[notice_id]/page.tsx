@@ -3,8 +3,8 @@ import { getShopNoticeDetail } from "@/app/_apis/shop";
 import NoticeDetailCard from "@/app/_components/notice-detail-card";
 import { getNotices } from "@/app/_util/notice";
 import RecentNotices from "../../_components/recent-notices";
-import { NoticeCardSkeleton } from "@/app/_components/notice-card/skeleton";
-import NoticeDetailCardSkeleton from "@/app/_components/notice-detail-card/notice-detail-card-skeleton";
+import { NoticeCardSkeleton } from "@/app/_components/notice-card/_component/skeleton";
+import NoticeDetailCardSkeleton from "@/app/_components/notice-detail-card/_component/notice-detail-card-skeleton";
 
 export const metadata = {
   title: "공고 상세",
