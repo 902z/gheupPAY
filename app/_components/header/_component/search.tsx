@@ -27,11 +27,17 @@ export default function SearchBar({ className }: SearchBarProps) {
   };
 
   return (
-    <form onSubmit={handleSubmit} className={"relative " + className}>
-      <div className="absolute left-[10px] top-[10px] h-4 w-4 md:h-5 md:w-5">
-        <Image src="/icons/search.png" alt="" fill priority sizes="100% 100%" />
-      </div>
-      <div>
+    <form onSubmit={handleSubmit} className={className}>
+      <div className="relative flex items-center md:max-w-[450px]">
+        <div className="absolute left-[10px] top-[10px] h-4 w-4 md:h-5 md:w-5">
+          <Image
+            src="/icons/search.png"
+            alt=""
+            fill
+            priority
+            sizes="100% 100%"
+          />
+        </div>
         <input
           type="search"
           className="h-9 w-full rounded-[10px] bg-gray-10 px-2 py-[10px] indent-[30px] text-s focus:outline-[0.5px] focus:outline-primary md:h-10 md:max-w-[450px] md:px-[10px] md:text-m lg:w-full lg:max-w-[450px]"
@@ -42,7 +48,7 @@ export default function SearchBar({ className }: SearchBarProps) {
           name="keyword"
         />
         {inputValue && (
-          <div className="absolute left-[425px] top-4 h-2 w-2 cursor-pointer">
+          <div className="absolute right-4 top-[14px] h-2 w-2 cursor-pointer md:right-3 md:top-4 lg:right-3 lg:top-4">
             <Image
               src={closeGray40}
               alt="닫기"
