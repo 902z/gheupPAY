@@ -1,7 +1,6 @@
 "use client";
 import { InputHTMLAttributes, useRef, useState } from "react";
 import { UseFormRegisterReturn } from "react-hook-form";
-import { date } from "yup";
 
 interface CustomDateInputPropType
   extends InputHTMLAttributes<HTMLInputElement> {

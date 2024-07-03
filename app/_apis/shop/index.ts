@@ -1,7 +1,18 @@
 import { AxiosError, AxiosResponse } from "axios";
 import axiosInstance from "../instances";
 import instance from "@/app/_lib/axios";
-import { GetShopsShopIdNoticesNoticeId, ShopInfo, UserInfo } from "../type";
+import {
+  GetShopsShopId,
+  GetShopsShopIdNoticesNoticeId,
+  GetUsersUserId,
+  UserProfileData,
+} from "../type";
+
+import { AddressType } from "@/app/_constants/address";
+import { CategoryType } from "@/app/_constants/category";
+import { isAxiosError } from "axios";
+import { API_ERROR_MESSAGE } from "@/app/_constants/error-message";
+import { getImageUrl } from "../image";
 
 // 가게 정보 조회
 export async function getShopDetail(shop_id: string) {
@@ -61,9 +72,55 @@ export async function GET<T>(endpoint: string, params?: object): Promise<T> {
 }
 
 export function getUserInfo(user_id: string) {
-  return GET<UserInfo>(`/users/${user_id}`);
+  return GET<GetUsersUserId>(`/users/${user_id}`);
 }
 
-export function getShopInfo<T>(shop_id: string) {
-  return GET<ShopInfo>(`/shops/${shop_id}`);
+export function getShopInfo(shop_id: string) {
+  return GET<GetShopsShopId>(`/shops/${shop_id}`);
 }
+//가게 등록하기
+export const postShopCreate = async ({
+  name,
+  category,
+  address1,
+  address2,
+  description = "사장님이 가게 설명을 입력하지 않았습니다.",
+  imageUrl,
+  originalHourlyPay,
+}: {
+  name: string;
+  category: CategoryType;
+  address1: AddressType;
+  address2: string;
+  description?: string;
+  imageUrl: File;
+  originalHourlyPay: number;
+}): Promise<boolean> => {
+  try {
+    const processedImageUrl = await getImageUrl(imageUrl);
+    const response = await axiosInstance.post<UserProfileData>(
+      "/shops",
+      {
+        name,
+        category,
+        address1,
+        address2,
+        description,
+        imageUrl: processedImageUrl,
+        originalHourlyPay,
+      },
+      {
+        authorization: true,
+      },
+    );
+    return response.status === 200;
+  } catch (error) {
+    if (isAxiosError(error)) {
+      if (error.response?.status === 409 || error.response?.status === 401) {
+        throw new Error(error.response.data.message);
+      }
+    }
+    console.log(error);
+    throw new Error(API_ERROR_MESSAGE);
+  }
+};

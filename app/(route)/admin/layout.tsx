@@ -9,9 +9,8 @@ export default function Layout({
 }) {
   return (
     <div>
-      <div>{children}</div>
-      <div>{modal}</div>
-      <div id="modal-root" />
+      {children}
+      {modal}
     </div>
   );
 }

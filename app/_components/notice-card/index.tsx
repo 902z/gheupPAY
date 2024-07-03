@@ -38,14 +38,13 @@ export default function NoticeCard({ cardContents }: NoticeCardProps) {
             className="h-[261px] w-full rounded-[12px] border border-gray-20 bg-white p-3 md:h-[349px] lg:w-[305px]"
             onClick={() => postNotice(cardContents)}
           >
-            <div className="relative mb-2 box-border h-[82px] w-full rounded-[12px] md:h-[160px]">
+            <div className="relative mb-2 box-border h-[82px] w-full overflow-hidden rounded-[12px] md:h-[160px]">
               <Image
                 alt=""
                 src={cardContents.shop.item.imageUrl}
                 fill={true}
-                layout="fill"
-                objectFit="cover"
-                className="rounded-[12px]"
+                className="rounded-[12px] object-cover"
+                sizes="100% 100%"
               />
             </div>
             <div className="px-1">

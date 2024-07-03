@@ -1,16 +1,14 @@
 import React from "react";
 import MyShopDetailCard from "./_components/my-shop-detail-card";
 import NoneNotice from "./_components/none-notice";
-import { getCookie } from "@/app/_util/cookie";
-import { getShopDetail, getShopInfo, getUserInfo } from "@/app/_apis/shop";
-import { ShopInfo, UserInfo } from "@/app/_apis/type";
+import { getShopDetail } from "@/app/_apis/shop";
 import { LinkButton } from "@/app/_components/button";
 
 export const metadata = {
   title: "내 가게 상세",
 };
 
-export default async function page() {
+export default async function ShopDetail() {
   const shopId = "4490151c-5217-4157-b072-9c37b05bed47";
   const shopDetail = await getShopDetail(shopId);
   // const userId = await getCookie("userId");

@@ -1,3 +1,6 @@
+import { AddressType } from "@/app/_constants/address";
+import { CategoryType } from "@/app/_constants/category";
+
 export interface PostToken {
   item: {
     token: string; // jwt 토큰 decode하면 payload에 userId 활용 가능 (참고)
@@ -214,8 +217,8 @@ export type ShopInfo = {
   item: {
     id: string;
     name: string;
-    category: string;
-    address1: string;
+    category: CategoryType;
+    address1: AddressType;
     address2: string;
     description: string;
     imageUrl: string;
@@ -563,27 +566,65 @@ export interface PutUsersUserIdAlertsAlertId {
   links: Array<object>;
 }
 
-export type UserInfo = {
+export type UserProfileData = {
   item: {
     id: string;
     email: string;
-    type: "employee" | "employer";
+    type: string;
     name: string;
     phone: string;
     address: string;
     bio: string;
+    shop: any | null;
   };
-  shop?: {
+};
+
+export type UserApplication = {
+  offset: number;
+  limit: number;
+  count: number;
+  hasNext: boolean;
+  items: {
     item: {
       id: string;
-      name: string;
-      category: string;
-      address1: string;
-      address2: string;
-      description: string;
-      imageUrl: string;
-      originalHourlyPay: number;
+      status: "pending" | "accepted" | "rejected" | "canceled";
+      createdAt: string;
+      shop: {
+        item: {
+          id: string;
+          name: string;
+          category: string;
+          address1: string;
+          address2: string;
+          description: string;
+          imageUrl: string;
+          originalHourlyPay: number;
+        };
+        href: string;
+      };
+      notice: {
+        item: {
+          id: string;
+          hourlyPay: number;
+          description: string;
+          startsAt: string;
+          workhour: number;
+          closed: boolean;
+        };
+        href: string;
+      };
     };
-  };
-  links: [];
+    links: {
+      rel: string;
+      description: string;
+      method: string;
+      href: string;
+    }[];
+  }[];
+  links: {
+    rel: string;
+    description: string;
+    method: string;
+    href: string;
+  }[];
 };
