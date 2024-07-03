@@ -10,6 +10,8 @@ import { calculateWagePercentage } from "@/app/_util/calculate-wage-percentage "
 import { dateFormat } from "@/app/_util/date-format";
 import { GetNotices } from "@/app/_apis/type";
 import postNoticeAction from "@/app/actions/post-notice-action";
+import { BlindComponent } from "./blind-component";
+import compareWorkingDateDiffFromNow from "@/app/_util/calculate-date-diff";
 
 type NoticeCardProps = {
   cardContents: GetNotices["items"][0]["item"];
@@ -18,6 +20,10 @@ type NoticeCardProps = {
 export default function NoticeCard({ cardContents }: NoticeCardProps) {
   const hourlyWage = calculateWagePercentage(cardContents.hourlyPay);
   const date = dateFormat(cardContents.startsAt);
+  const isLater: boolean = compareWorkingDateDiffFromNow(
+    cardContents.startsAt,
+    cardContents.workhour,
+  );
 
   return (
     <div className="cursor-pointer duration-150 hover:scale-105 active:scale-95">
@@ -31,10 +37,15 @@ export default function NoticeCard({ cardContents }: NoticeCardProps) {
             alt=""
             src={cardContents.shop.item.imageUrl}
             fill={true}
-            layout="fill"
-            objectFit="cover"
-            className="rounded-[12px]"
+            sizes="100% 100%"
+            className="rounded-[12px] object-cover"
           />
+          {cardContents.closed ? (
+            <BlindComponent description="마감 완료" />
+          ) : isLater ? (
+            <BlindComponent description="지난 공고" />
+          ) : null}{" "}
+          // 여기 수정
         </div>
         <div className="px-1">
           <data className="font-bold md:text-l">
