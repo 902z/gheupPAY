@@ -29,7 +29,7 @@ export default function CustomizedNoticeList({
               return (
                 <SwiperSlide
                   key={cardContents.item.id}
-                  className="swiper-slide overflow-visible px-1 py-4 md:px-2"
+                  className="noticeCard overflow-visible px-1 py-4 md:px-2"
                 >
                   <NoticeCard cardContents={cardContents.item} />
                 </SwiperSlide>

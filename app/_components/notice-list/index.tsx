@@ -35,9 +35,7 @@ export default function AllNoticeList({
   const handleOpenFilter = () => {
     setShowFilter((prevShowFilter) => !prevShowFilter);
   };
-  
 
-  
   const handleCloseFilter = () => {
     setShowFilter(false);
   };
@@ -60,16 +58,19 @@ export default function AllNoticeList({
             >
               <p>상세필터</p>
             </button>
-            {showFilter && (
-              <Filter onClose={handleCloseFilter}/>
-            )}
+            {showFilter && <Filter onClose={handleCloseFilter} />}
             {/* 상세필터 버튼입니다 */}
           </div>
         </div>
         <div className="lg grid grid-cols-2 gap-4 lg:grid-cols-3">
           {noticeList
             ? noticeList.map((cardContents) => {
-                return <NoticeCard cardContents={cardContents.item} />;
+                return (
+                  <NoticeCard
+                    cardContents={cardContents.item}
+                    key={cardContents.item.id}
+                  />
+                );
               })
             : [1, 2, 3, 4, 5, 6].map((index) => {
                 return <NoticeCardSkeleton key={index} />;

@@ -48,7 +48,13 @@ function PageModal({ children, title }: PageModalProp) {
               className="relative h-6 w-6 cursor-pointer md:h-8 md:w-8"
               onClick={() => router.back()}
             >
-              <Image src={close} alt="닫기 버튼" fill priority />
+              <Image
+                src={close}
+                alt="닫기 버튼"
+                fill
+                priority
+                sizes="100% 100%"
+              />
             </div>
           </header>
           {children}
