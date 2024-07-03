@@ -117,7 +117,7 @@ export default function Filter({ onClose, keyword }: FilterProps) {
   return (
     <>
       <form>
-        <div className="absolute right-[-4px] z-10 mt-[8px] w-[390px] rounded-[10px] border border-gray-20 bg-white px-[20px] py-[24px] shadow">
+        <div className="absolute right-[-4px] z-20 mt-[8px] w-[390px] rounded-[10px] border border-gray-20 bg-white px-[20px] py-[24px] shadow">
           <div className="mb-[24px] flex justify-between font-bold text-l">
             <h2>상세 필터</h2>
             <div className="h-[24px] w-[24px]">
