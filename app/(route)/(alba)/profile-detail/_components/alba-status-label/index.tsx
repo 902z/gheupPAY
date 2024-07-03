@@ -39,7 +39,7 @@ export default function AlbaStatusLabel({
 
   const statusStateMap: Record<string, React.ReactNode> = {
     pending: (
-      <div className="flex justify-center gap-4">
+      <div className="flex items-center justify-start gap-4">
         <div className="flex items-center rounded-full bg-green-10 px-3 py-2 font-bold text-m text-green-20">
           대기중
         </div>
@@ -52,7 +52,7 @@ export default function AlbaStatusLabel({
           <motion.button
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
-            className="cursor-pointer rounded-md border-2 border-primary bg-white px-4 py-2 font-bold text-m text-primary"
+            className="cursor-pointer rounded-md border-2 border-primary bg-white px-3 py-2 font-bold text-m text-primary"
           >
             취소하기
           </motion.button>
