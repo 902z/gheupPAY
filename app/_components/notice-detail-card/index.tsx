@@ -111,7 +111,7 @@ export default async function NoticeDetailCard({
             <RegisterButton
               type={type}
               address={address}
-              userApplication={userApplication as GetUsersUserIdApplications}
+              userApplication={userApplication}
               shopId={shopId}
               noticeId={noticeId}
             />

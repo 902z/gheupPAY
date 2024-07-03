@@ -13,7 +13,7 @@ import { redirectAction } from "@/app/_actions";
 interface RegisterButtonProps {
   type?: string;
   address?: string;
-  userApplication: GetUsersUserIdApplications;
+  userApplication: GetUsersUserIdApplications | null;
   shopId: string;
   noticeId: string;
 }
@@ -25,6 +25,14 @@ export default function RegisterButton({
   shopId,
   noticeId,
 }: RegisterButtonProps) {
+  if (userApplication === null) {
+    return (
+      <LinkButton className="" href={"/login"}>
+        신청하기
+      </LinkButton>
+    );
+  }
+
   const isRegister = userApplication.items.some((obj) => {
     return (
       obj.item.notice.item.id === noticeId && obj.item.status !== "canceled"
@@ -39,10 +47,6 @@ export default function RegisterButton({
       "canceled",
     );
   };
-
-  if (!type) {
-    return <Link href={"/login"}>신청하기</Link>;
-  }
 
   if (isRegister) {
     return (
