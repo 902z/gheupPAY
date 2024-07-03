@@ -38,6 +38,6 @@ export default async function loginRequired(request: NextRequest) {
 export const config = {
   matcher: [
     // 아래 페이지들은 공통으로 들어갈 수 있는 페이지입니다.
-    "/((?!login|signup|notice-list|notice-detail|api|_next/static|_next/image|favicon.ico).*)",
+    "/((?!login|signup|notice-list|notice-detail|api|_next/static|_next/image|images|icons|fonts|favicon.ico).*)",
   ],
 };

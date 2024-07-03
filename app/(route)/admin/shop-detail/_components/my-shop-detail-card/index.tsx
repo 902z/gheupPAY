@@ -25,6 +25,7 @@ export default function MyShopDetailCard({
             alt=""
             src={imageUrl}
             fill={true}
+            sizes="100% 100%"
             className="rounded-[12px] object-cover"
           />
         </div>

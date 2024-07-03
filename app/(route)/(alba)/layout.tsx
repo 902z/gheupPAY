@@ -1,16 +1,17 @@
-
+import Link from "next/link";
 
 export default function Layout({
-  modal,
   children,
+  modal,
 }: {
-  modal: React.ReactNode;
   children: React.ReactNode;
+  modal: React.ReactNode;
 }) {
   return (
-    <div>
+    <>
       {children}
       {modal}
-    </div>
+      <Link href="/profile-register">아니</Link>
+    </>
   );
 }
