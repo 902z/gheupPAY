@@ -81,9 +81,11 @@ export default function AddNotice() {
               />
             </div>
 
-            <Button className="" type="submit">
-              등록하기
-            </Button>
+            <div className="flex justify-center">
+              <Button className="max-w-[312px]" type="submit">
+                등록하기
+              </Button>
+            </div>
           </div>
         </form>
         {isOpen && (
