@@ -10,6 +10,9 @@ import mapPin from "@/public/icons/map-pin.png";
 import Button from "@/app/_components/button";
 import OnlyLabelHourlyRate from "../only-label-hourly-rate";
 import { getShopNoticeDetail } from "@/app/_apis/shop";
+import compareWorkingDateDiffFromNow from "@/app/_util/calculate-date-diff";
+import { BlindComponent } from "../blind-component";
+import RegisterButton from "./_component/register-button";
 
 interface NoticeDetailCardProps {
   shopId: string;
@@ -24,7 +27,10 @@ export default async function NoticeDetailCard({
   const noticeDetail = await getShopNoticeDetail(shopId, noticeId);
   const hourlyWage = calculateWagePercentage(noticeDetail.item.hourlyPay);
   const date = dateFormat(noticeDetail.item.startsAt);
-
+  const isLater: boolean = compareWorkingDateDiffFromNow(
+    noticeDetail.item.startsAt,
+    noticeDetail.item.workhour,
+  );
   return (
     <>
       <div>
@@ -42,6 +48,11 @@ export default async function NoticeDetailCard({
             sizes="100% 100%"
             className="rounded-[12px] object-cover"
           />
+          {noticeDetail.item.closed ? (
+            <BlindComponent description="마감 완료" />
+          ) : isLater ? (
+            <BlindComponent description="지난 공고" />
+          ) : null}{" "}
         </div>
         <div className="relative flex-1 px-1 lg:flex lg:flex-col lg:items-stretch lg:py-3">
           <div className="lg:flex-1">
@@ -73,9 +84,7 @@ export default async function NoticeDetailCard({
               <p>{noticeDetail.item.shop.item.description}</p>
             </div>
           </div>
-          <Button btnColor="white" className="font-bold">
-            공고 편집하기
-          </Button>
+          <RegisterButton closed={noticeDetail.item.closed} isLater={isLater} />
         </div>
       </div>
       <div className="mt-4 box-border flex h-fit w-full flex-col break-words rounded-[12px] bg-gray-10 p-5">
