@@ -8,6 +8,7 @@ import {
 import OpenModal from "../../modals";
 import Button, { LinkButton } from "../../button";
 import { redirect } from "next/navigation";
+import { redirectAction } from "@/app/_actions";
 
 interface RegisterButtonProps {
   type?: string;
@@ -81,9 +82,7 @@ export default function RegisterButton({
         <OpenModal
           modalContents="내 프로필을 먼저 등록해주세요"
           confirm
-          onClick={async () => {
-            redirect("/profile-register");
-          }}
+          onClick={async () => await redirectAction("/profile-register")}
         >
           <Button className="font-bold">신청하기</Button>
         </OpenModal>
