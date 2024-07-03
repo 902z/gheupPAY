@@ -1,7 +1,7 @@
 import loadingGif from "@/public/images/loading.gif";
 import Image from "next/image";
 
-function Loading() {
+function LoadingSign() {
   return (
     <div className="mt-[150px] flex flex-col items-center">
       <Image src={loadingGif} alt="로딩 중" width={400} height={400} />
@@ -9,4 +9,4 @@ function Loading() {
   );
 }
 
-export default Loading;
+export default LoadingSign;

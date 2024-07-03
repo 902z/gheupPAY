@@ -1,12 +1,13 @@
 "use client";
+import PageModal from "@/app/_components/page-modal";
 import { getShopDetail } from "@/app/_apis/shop";
 import { AddressType } from "@/app/_constants/address";
 import { CategoryType } from "@/app/_constants/category";
 import { useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
-import ShopEditForm from "./shop-edit-form";
 import { numberWithCommas } from "@/app/_util/number-with-comma";
-import LoadingSign from "./loading-sign";
+import ShopEditForm from "../../shop-edit/shop-edit-form";
+import LoadingSign from "@/app/(route)/admin/shop-edit/loading-sign";
 interface InitialData {
   name: string;
   category: CategoryType;
@@ -17,7 +18,7 @@ interface InitialData {
   originalHourlyPay: string;
 }
 
-export default function ShopEdit() {
+function ShopEdit() {
   const searchParams = useSearchParams();
   const shop_id = searchParams.get("shop_id");
   console.log(shop_id);
@@ -51,10 +52,15 @@ export default function ShopEdit() {
     };
     getShopInfo();
   }, []);
-
-  return initialData ? (
-    <ShopEditForm shop_id={shop_id!} initialData={initialData} />
-  ) : (
-    <LoadingSign />
+  return (
+    <PageModal title="가게 정보">
+      {initialData ? (
+        <ShopEditForm shop_id={shop_id!} initialData={initialData} />
+      ) : (
+        <LoadingSign />
+      )}
+    </PageModal>
   );
 }
+
+export default ShopEdit;
