@@ -28,7 +28,7 @@ export async function getAlerts(offset: number = 0) {
   }
 }
 
-export async function putAlerts(id: any) {
+export async function putAlerts(id: string) {
   try {
     const userId = await getCookie("userId");
     const response = await axiosInstance.put(`/users/${userId}/alerts/${id}`);

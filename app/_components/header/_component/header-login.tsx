@@ -4,11 +4,12 @@ import AlertButton from "./_component/alert";
 import { getAlerts } from "@/app/_apis/alert";
 import { getCookie } from "@/app/_util/cookie";
 import { LogoutButton } from "./logout-button";
+import { item } from "./mockData";
 
 export default async function HeaderLogin() {
   const type = await getCookie("type");
-  const initialAlerts = await getAlerts();
-  // const initialAlerts = alertMockData;
+  // const initialAlerts = await getAlerts();
+  const initialAlerts = item;
   return (
     <>
       <section>

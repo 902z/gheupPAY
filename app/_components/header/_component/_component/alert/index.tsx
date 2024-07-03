@@ -52,6 +52,10 @@ export default function AlertButton({
 
   useOutsideClick({ ref: alertRef, handler: handleClose });
 
+  const deleteData = (id: string) => {
+    setAlerts(() => alerts.filter((value) => value.item.id !== id));
+  };
+
   const fetchData = async () => {
     if (!alertConfig.hasNext) return;
     try {
@@ -78,8 +82,13 @@ export default function AlertButton({
         <div className="fixed inset-0 z-30 rounded-none bg-red-10 px-5 py-10 md:absolute md:inset-auto md:right-0 md:top-[32.5px] md:h-[419px] md:w-[368px] md:rounded-[10px] md:border md:border-[#CBC9CF] md:px-5 md:py-6 md:shadow-md">
           <div className="h-full">
             <header className="mb-4 flex justify-between font-bold text-[20px]">
-              알림 {initialAlerts.count || 0}개
-              <button className="block md:hidden" onClick={handleClose}>
+              <div className="flex flex-col md:ml-2">
+                <span>알림 {initialAlerts.count || 0}개</span>
+                <span className="text-sm text-gray-50">
+                  오른쪽으로 밀거나 클릭해서 읽음 처리해주세요!
+                </span>
+              </div>
+              <button className="mb-6 block md:hidden" onClick={handleClose}>
                 <Image
                   src="/icons/close.png"
                   width={24}
@@ -89,7 +98,11 @@ export default function AlertButton({
                 />
               </button>
             </header>
-            <AlertList alerts={alerts} onImpression={fetchData} />
+            <AlertList
+              alerts={alerts}
+              onImpression={fetchData}
+              onDelete={deleteData}
+            />
           </div>
         </div>
       )}

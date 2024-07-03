@@ -9,20 +9,23 @@
 }
 
 @layer utilities {
+  .alertCard {
+    width: 100%;
+  }
   @media (min-width: 375px) and (max-width: 743px) {
-    .swiper-slide {
+    .noticeCard {
       width: 171px !important;
     }
   }
 
   @media (min-width: 744px) and (max-width: 1919px) {
-    .swiper-slide {
+    .noticeCard {
       width: 312px !important;
     }
   }
 
   @media (min-width: 1920px) {
-    .swiper-slide {
+    .noticeCard {
       width: 312px !important;
     }
   }
@@ -91,6 +94,6 @@ input::-webkit-inner-spin-button {
   overflow: hidden;
 }
 
-input[type='datetime-local']::-webkit-calendar-picker-indicator {
+input[type="datetime-local"]::-webkit-calendar-picker-indicator {
   cursor: pointer;
 }
