@@ -3,7 +3,7 @@ import { API_ERROR_MESSAGE } from "../../_constants/error-message";
 import { UserType } from "../../_constants/user-type";
 import axiosInstance from "../instances";
 import { isAxiosError } from "axios";
-import { UserProfileData } from "../type";
+import { GetUsersUserId, UserProfileData } from "../type";
 
 // 회원가입
 interface Params {
@@ -48,12 +48,17 @@ export const postSignUp: PostSignUp = async ({ email, password, type }) => {
 };
 
 // 내 정보 조회
-export async function getUser(user_id: string): Promise<UserProfileData> {
+export async function getUser(user_id: string): Promise<GetUsersUserId> {
   try {
-    const res = await instance.get<UserProfileData>(`/users/${user_id}`);
+    const res = await axiosInstance.get<GetUsersUserId>(`/users/${user_id}`);
     return res.data;
   } catch (error) {
+    if (isAxiosError(error)) {
+      if (error.response?.status === 404) {
+        throw new Error(error.response.data.message);
+      }
+    }
     console.error("getUser 함수에서 오류 발생:", error);
-    throw error;
+    throw new Error(API_ERROR_MESSAGE);
   }
 }

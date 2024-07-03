@@ -197,7 +197,7 @@ export interface GetUsersUserId {
     phone: string;
     address: string;
     bio: string;
-    shop: {
+    shop?: {
       item: {
         id: string;
         name: string;
