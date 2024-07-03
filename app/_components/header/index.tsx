@@ -15,7 +15,7 @@ export default async function Header() {
     >
       <section className="grid h-[102px] grid-cols-2 grid-rows-2 px-5 pb-[10px] pt-[15px] md:flex md:h-[70px] md:px-8 md:py-[15px] lg:mx-auto lg:w-full lg:max-w-[1024px]">
         <Link
-          href="/"
+          href="/notice-list"
           className="relative col-start-1 h-[30px] w-[84px] md:h-10 md:w-28"
         >
           <Image
