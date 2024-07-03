@@ -4,7 +4,6 @@ import { InputHTMLAttributes, useRef, useState } from "react";
 import { UseFormRegisterReturn } from "react-hook-form";
 import DownArrow from "@/public/icons/down-arrow.png";
 
-
 export interface FormDropdownProps<T>
   extends InputHTMLAttributes<HTMLInputElement> {
   label: string;
