@@ -29,7 +29,7 @@ export default function SearchBar({ className }: SearchBarProps) {
   return (
     <form onSubmit={handleSubmit} className={"relative " + className}>
       <div className="absolute left-[10px] top-[10px] h-4 w-4 md:h-5 md:w-5">
-        <Image src="/icons/search.png" alt="" fill />
+        <Image src="/icons/search.png" alt="" fill priority sizes="100% 100%" />
       </div>
       <div>
         <input
@@ -42,13 +42,15 @@ export default function SearchBar({ className }: SearchBarProps) {
           name="keyword"
         />
         {inputValue && (
-          <div className="absolute left-[425px] top-4 h-2 w-2">
+          <div className="absolute left-[425px] top-4 h-2 w-2 cursor-pointer">
             <Image
               src={closeGray40}
               alt="닫기"
               width={24}
               height={24}
               onClick={handleClear}
+              priority
+              sizes="100% 100%"
             />
           </div>
         )}

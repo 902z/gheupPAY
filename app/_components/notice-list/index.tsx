@@ -75,7 +75,12 @@ export default function AllNoticeList({
         <div className="lg grid grid-cols-2 gap-4 lg:grid-cols-3">
           {noticeList
             ? noticeList.map((cardContents) => {
-                return <NoticeCard cardContents={cardContents.item} />;
+                return (
+                  <NoticeCard
+                    cardContents={cardContents.item}
+                    key={cardContents.item.id}
+                  />
+                );
               })
             : [1, 2, 3, 4, 5, 6].map((index) => {
                 return <NoticeCardSkeleton key={index} />;

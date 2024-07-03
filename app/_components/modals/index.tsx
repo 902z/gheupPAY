@@ -3,7 +3,7 @@ import useModal from "@/app/_hooks/use-modal";
 import ConfirmModal from "./_components/confirm-modal";
 import WarningModal from "./_components/warning-modal";
 import SelectModal from "./_components/select-modal";
-import WindowModal from "./_components/window-modal";
+
 
 type ConfirmOnly = {
   confirm: true;
