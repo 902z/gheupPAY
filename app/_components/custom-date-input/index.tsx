@@ -17,17 +17,14 @@ interface CustomDateInputPropType
  * @example
  *<form className="w-[500px]"> //넓이는 부모 요소 100%
     <CustomTextInput(
-      label="비밀번호"
-      placeholder="비밀번호를 입력하세요"
+      label="날짜"
       register={register("email"))}
       displayRequiredMarker={true} //생략하면 * 없음
-      type="password" // 생략하면 text
       errorMessage={errors.password?.message}
     />
   </form>
  * @author 임진조 extends ☯️채종민
  * @param {string} label input의 label
- * @param {string} placeholder input의 placeholder
  * @param {UseFormRegister} register useForm register(name) 넣어주기 
  * @param {boolean} displayRequiredMarker label 옆에 * 필수 입력 표시
  * @param {string} errorMessage 입력 오류 시 나올 에러 메시지
