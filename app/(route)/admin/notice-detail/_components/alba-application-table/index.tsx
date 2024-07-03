@@ -29,8 +29,8 @@ export default function AlbaApplicationTable({
   }, []);
 
   return (
-    <div id={APPLICATION_LIST_ID}>
-      <div className="overflow-auto rounded-xl shadow-md">
+    <div id={APPLICATION_LIST_ID} className="rounded-xl shadow-md">
+      <div className="overflow-auto">
         <table className="w-full table-auto border-collapse border-spacing-0 border-gray-20">
           <thead>
             <tr className="border bg-red-10 text-left">
@@ -55,20 +55,25 @@ export default function AlbaApplicationTable({
                   {application.item.user.item.phone}
                 </td>
                 <td className="border bg-white p-4">
-                  <StatusLabel status={application.item.status} />
+                  <StatusLabel
+                    status={application.item.status}
+                    applicationId={application.item.id}
+                    shopId={application.item.shop.item.id}
+                    noticeId={application.item.notice.item.id}
+                  />
                 </td>
               </tr>
             ))}
           </tbody>
         </table>
-        <div className="my-2">
-          <Pagination
-            activePage={activePage}
-            totalItemsCount={totalItemsCount}
-            itemsCountPerPage={itemsCountPerPage}
-            focusHash={APPLICATION_LIST_ID}
-          />
-        </div>
+      </div>
+      <div className="py-2">
+        <Pagination
+          activePage={activePage}
+          totalItemsCount={totalItemsCount}
+          itemsCountPerPage={itemsCountPerPage}
+          focusHash={APPLICATION_LIST_ID}
+        />
       </div>
     </div>
   );

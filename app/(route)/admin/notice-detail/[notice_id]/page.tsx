@@ -15,8 +15,8 @@ type PageProps = {
 };
 
 export default async function page({ searchParams }: PageProps) {
-  const shopId = "4490151c-5217-4157-b072-9c37b05bed47";
-  const noticeId = "99996477-82db-4bda-aae1-4044f11d9a8b";
+  const shopId = "ea7af667-2069-4e00-a594-cd69b9b9708c";
+  const noticeId = "18f52927-8420-4113-badb-673b9b0caac8";
 
   const page = parseInt(searchParams.page || "1", 10);
   const limit = 10;
