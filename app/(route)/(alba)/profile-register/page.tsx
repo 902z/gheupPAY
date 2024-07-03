@@ -1,6 +1,6 @@
 "use client";
 import React from "react";
-import CreateProfileForm from "./components/form";
+import CreateProfileForm from "./_components/form";
 
 export default function AddNotice() {
   return (
