@@ -5,6 +5,7 @@ import { CategoryType } from "@/app/_constants/category";
 import { useSearchParams } from "next/navigation";
 import { Suspense, useEffect, useState } from "react";
 import ShopEditForm from "./shop-edit-form";
+import LoadingSign from "./loading";
 interface InitialData {
   name: string;
   category: CategoryType;
@@ -49,10 +50,6 @@ export default function ShopEdit() {
   }, []);
 
   return (
-    initialData && (
-      <Suspense>
-        <ShopEditForm shop_id={shop_id!} initialData={initialData} />
-      </Suspense>
-    )
+    initialData && <ShopEditForm shop_id={shop_id!} initialData={initialData} />
   );
 }

@@ -1,12 +1,11 @@
-
+import loadingGif from "@/public/images/loading.gif";
 import Image from "next/image";
 
 function Loading() {
   return (
-    <section className="mt-[50px] flex flex-col items-center">
-      <Image src={""} alt="로딩 중" width={80} height={80} />
-      <h2 className="font-bold text-primary">급페이~ 급페이~ 급페이</h2>
-    </section>
+    <div className="mt-[150px] flex flex-col items-center">
+      <Image src={loadingGif} alt="로딩 중" width={400} height={400} />
+    </div>
   );
 }
 
