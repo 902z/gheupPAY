@@ -5,6 +5,7 @@ import AllNoticeList from "@/app/_components/notice-list";
 import { getCookie } from "@/app/_util/cookie";
 import Image from "next/image";
 import bluredCustomeDesktop from "@/public/images/blured-custome-desktop.png";
+import bluredCustomeMobile from "@/public/images/blured-custome-mobile.png";
 import { LinkButton } from "@/app/_components/button";
 
 interface SearchParamsProps {
@@ -55,13 +56,24 @@ export default async function page({ searchParams }: SearchParamsProps) {
               <CustomizedNoticeList notices={customizedNotices} />
             ) : (
               <div className="relative">
-                <Image
-                  src={bluredCustomeDesktop}
-                  alt="로그인시 사용 가능한 서비스입니다."
-                  priority
-                  sizes="100% 100%"
-                  className="rounded-2xl"
-                />
+                <div className="md:hidden">
+                  <Image
+                    src={bluredCustomeMobile}
+                    alt="로그인시 사용 가능한 서비스입니다."
+                    priority
+                    sizes="100% 100%"
+                    className="rounded-2xl"
+                  />
+                </div>
+                <div className="hidden md:block">
+                  <Image
+                    src={bluredCustomeDesktop}
+                    alt="로그인시 사용 가능한 서비스입니다."
+                    priority
+                    sizes="100% 100%"
+                    className="rounded-2xl"
+                  />
+                </div>
                 <p className="absolute bottom-[50%] right-[50%] translate-x-1/2 text-center font-bold text-l text-gray-5 md:pb-12 md:text-xl">
                   로그인 후 이용 가능한
                   <br />
