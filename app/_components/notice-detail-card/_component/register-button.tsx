@@ -26,7 +26,9 @@ export default function RegisterButton({
   noticeId,
 }: RegisterButtonProps) {
   const isRegister = userApplication.items.some((obj) => {
-    return obj.item.notice.item.id === noticeId;
+    return (
+      obj.item.notice.item.id === noticeId && obj.item.status !== "canceled"
+    );
   });
 
   const handleCancel = async () => {
@@ -70,14 +72,16 @@ export default function RegisterButton({
   return (
     <>
       {address ? (
-        <Button
-          className="font-bold"
-          onClick={async () => {
+        <OpenModal
+          modalContents="지원하시겠습니까?"
+          select
+          onClickYes={async () => {
             await postShopsShopIdNoticesNoticeIdApplications(shopId, noticeId);
           }}
+          selectType="yes"
         >
-          신청하기
-        </Button>
+          <Button className="font-bold">신청하기</Button>
+        </OpenModal>
       ) : (
         <OpenModal
           modalContents="내 프로필을 먼저 등록해주세요"
