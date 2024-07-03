@@ -9,7 +9,7 @@ import { useRouter } from "next/navigation";
 import { USER_TYPE } from "@/app/_constants/user-type";
 import pulse from "@/public/icons/pulse.svg";
 import Image from "next/image";
-import { useState } from "react";
+import { useRef, useState } from "react";
 import useUserStore from "@/stores/create-store";
 import useCheckLoginStatus from "@/app/_hooks/use-check-login-status";
 import useModal from "@/app/_hooks/use-modal";
@@ -33,7 +33,7 @@ function LoginForm() {
     mode: "onSubmit",
   });
   const [waiting, setWaiting] = useState(false);
-  const [failMessage, setFailMessage] = useState("");
+  const modalMessage = useRef<string | null>(null);
   const login = useUserStore((state) => state.login);
 
   const handleForm = handleSubmit(async (data: FormValues) => {
@@ -50,7 +50,7 @@ function LoginForm() {
       }
     } catch (error) {
       if (error instanceof Error) {
-        setFailMessage(error.message);
+        modalMessage.current = error.message;
         openModal();
       }
     } finally {
@@ -90,7 +90,9 @@ function LoginForm() {
       </form>
 
       {isOpen && (
-        <ConfirmModal closeModal={closeModal}>{failMessage}</ConfirmModal>
+        <ConfirmModal closeModal={closeModal}>
+          {modalMessage.current}
+        </ConfirmModal>
       )}
       {isLoggedIn && (
         <ConfirmModal

@@ -8,7 +8,7 @@ import { UserType } from "@/app/_constants/user-type";
 import Button from "@/app/_components/button";
 import { postSignUp } from "@/app/_apis/user";
 import { useRouter } from "next/navigation";
-import { useState } from "react";
+import { useRef, useState } from "react";
 import pulse from "@/public/icons/pulse.svg";
 import Image from "next/image";
 import useCheckLoginStatus from "@/app/_hooks/use-check-login-status";
@@ -35,7 +35,8 @@ function SignUpForm() {
     openModal: failOpenModal,
     closeModal: failCloseModal,
   } = useModal();
-  const [modalMessage, setModalMessage] = useState("");
+
+  const modalMessage = useRef<string | null>(null);
   const {
     handleSubmit,
     register,
@@ -57,12 +58,12 @@ function SignUpForm() {
       setWaiting(true);
       const result = await postSignUp({ email, password, type });
       if (result) {
-        setModalMessage("가입이 완료되었습니다!");
+        modalMessage.current = "가입이 완료되었습니다!";
         successOpenModal();
       }
     } catch (error) {
       if (error instanceof Error) {
-        setModalMessage(error.message);
+        modalMessage.current = error.message;
         failOpenModal();
       }
     } finally {
@@ -115,11 +116,11 @@ function SignUpForm() {
         )}
       </form>
       {failIsOpen && (
-        <ConfirmModal closeModal={failCloseModal}>{modalMessage}</ConfirmModal>
+        <ConfirmModal closeModal={failCloseModal}>{modalMessage.current}</ConfirmModal>
       )}
       {successIsOpen && (
         <ConfirmModal onClick={handleRedirect} closeModal={successCloseModal}>
-          {modalMessage}
+          {modalMessage.current}
         </ConfirmModal>
       )}
       {isLoggedIn && (
