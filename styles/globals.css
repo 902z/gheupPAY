@@ -4,7 +4,7 @@
 
 @layer utilities {
   .base-container {
-    @apply min-h-screen w-full px-3 pt-[120px] md:px-8 md:pt-[90px] lg:mx-auto lg:max-w-[964px] lg:px-0;
+    @apply min-h-screen w-full px-3 pt-[8rem] md:px-8 md:pt-[10rem] lg:mx-auto lg:max-w-[964px] lg:px-0;
   }
 }
 
@@ -91,6 +91,6 @@ input::-webkit-inner-spin-button {
   overflow: hidden;
 }
 
-input[type='datetime-local']::-webkit-calendar-picker-indicator {
+input[type="datetime-local"]::-webkit-calendar-picker-indicator {
   cursor: pointer;
 }
