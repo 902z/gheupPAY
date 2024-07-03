@@ -13,10 +13,21 @@ import { CUISINE_OPTION, CategoryType } from "@/app/_constants/category";
 import camera from "@/public/icons/camera.png";
 import Image from "next/image";
 import React, { useEffect, useRef, useState } from "react";
-import { postShopCreate } from "@/app/_apis/shop";
+import { putEditShop } from "@/app/_apis/shop";
 import useModal from "@/app/_hooks/use-modal";
 import ConfirmModal from "@/app/_components/modals/_components/confirm-modal";
 import pulse from "@/public/icons/pulse.svg";
+import { numberWithCommas } from "@/app/_util/number-with-comma";
+
+interface InitialData {
+  name: string;
+  category: CategoryType;
+  address1: AddressType;
+  address2: string;
+  description: string;
+  imageUrl: string;
+  originalHourlyPay: number;
+}
 
 interface FormValues {
   name: string;
@@ -24,11 +35,15 @@ interface FormValues {
   address1: AddressType;
   address2: string;
   description?: string;
-  imageUrl: FileList;
+  imageUrl?: FileList;
   originalHourlyPay: string;
 }
+interface ShopEditFormProps {
+  initialData: InitialData;
+  shop_id: string;
+}
 
-function ShopCreateForm() {
+function ShopEditForm({ initialData, shop_id }: ShopEditFormProps) {
   const { isOpen, openModal, closeModal } = useModal();
   const modalMessage = useRef<string | null>(null);
   const [waiting, setWaiting] = useState(false);
@@ -43,8 +58,16 @@ function ShopCreateForm() {
   } = useForm<FormValues>({
     resolver,
     mode: "onSubmit",
+    defaultValues: {
+      name: initialData.name,
+      category: initialData.category,
+      address1: initialData.address1,
+      address2: initialData.address2,
+      description: initialData.description,
+      originalHourlyPay: numberWithCommas(initialData.originalHourlyPay),
+    },
   });
-  const [imagePreview, setImagePreview] = useState("");
+  const [imagePreview, setImagePreview] = useState(initialData.imageUrl);
   const image = watch("imageUrl");
   useEffect(() => {
     if (image && image.length > 0) {
@@ -54,17 +77,24 @@ function ShopCreateForm() {
   }, [image]);
 
   const handleForm = handleSubmit(async (data: FormValues) => {
+    let editedImageUrl: File | string;
+    if (!data.imageUrl || data.imageUrl?.length === 0) {
+      editedImageUrl = initialData.imageUrl;
+    } else {
+      editedImageUrl = data.imageUrl[0];
+    }
     const processedData = {
       ...data,
       originalHourlyPay: Number(data.originalHourlyPay.replaceAll(",", "")),
-      imageUrl: data.imageUrl && data.imageUrl[0],
+      imageUrl: editedImageUrl,
+      shop_id: shop_id,
     };
 
     try {
       setWaiting(true);
-      const result = await postShopCreate(processedData);
+      const result = await putEditShop(processedData);
       if (result) {
-        modalMessage.current = "등록이 완료되었습니다.";
+        modalMessage.current = "수정이 완료되었습니다.";
         openModal();
       }
     } catch (error) {
@@ -209,4 +239,4 @@ function ShopCreateForm() {
   );
 }
 
-export default ShopCreateForm;
+export default ShopEditForm;
