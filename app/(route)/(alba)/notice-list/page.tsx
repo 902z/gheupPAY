@@ -80,7 +80,7 @@ export default async function page({ searchParams }: SearchParamsProps) {
                   <p className="absolute bottom-[50%] right-[50%] translate-x-1/2 text-center font-bold text-l text-gray-5 md:pb-12 md:text-xl">
                     프로필 등록 후 이용 가능한
                     <br />
-                    사용자 맞춤 서비스입니다!
+                    알바님 맞춤 서비스입니다!
                   </p>
                   <div className="absolute right-[50%] top-[50%] w-60 translate-x-1/2">
                     <LinkButton
