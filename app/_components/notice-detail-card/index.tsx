@@ -13,6 +13,13 @@ import { getShopNoticeDetail } from "@/app/_apis/shop";
 import compareWorkingDateDiffFromNow from "@/app/_util/calculate-date-diff";
 import { BlindComponent } from "../blind-component";
 import RegisterButton from "./_component/register-button";
+import { getCookie } from "@/app/_util/cookie";
+import { getUsersUserIdApplications } from "@/app/_apis/user";
+import { putShopsShopIdNoticesNoticeIdApplicationsApplicationId } from "@/app/_apis/application";
+import {
+  GetUsersUserIdApplications,
+  UserApplication,
+} from "../../_apis/type/index";
 
 interface NoticeDetailCardProps {
   shopId: string;
@@ -31,6 +38,14 @@ export default async function NoticeDetailCard({
     noticeDetail.item.startsAt,
     noticeDetail.item.workhour,
   );
+  const type = await getCookie("type");
+  const address = await getCookie("address");
+  const userId = await getCookie("userId");
+  const userApplication =
+    typeof userId === "string"
+      ? await getUsersUserIdApplications(userId)
+      : null;
+
   return (
     <>
       <div>
@@ -84,7 +99,19 @@ export default async function NoticeDetailCard({
               <p>{noticeDetail.item.shop.item.description}</p>
             </div>
           </div>
-          <RegisterButton closed={noticeDetail.item.closed} isLater={isLater} />
+          {noticeDetail.item.closed || isLater || type === "employer" ? (
+            <Button btnColor="orange" className="font-bold" disabled>
+              신청 불가
+            </Button>
+          ) : (
+            <RegisterButton
+              type={type}
+              address={address}
+              userApplication={userApplication as GetUsersUserIdApplications}
+              shopId={shopId}
+              noticeId={noticeId}
+            />
+          )}
         </div>
       </div>
       <div className="mt-4 box-border flex h-fit w-full flex-col break-words rounded-[12px] bg-gray-10 p-5">
