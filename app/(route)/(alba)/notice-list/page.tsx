@@ -5,6 +5,7 @@ import AllNoticeList from "@/app/_components/notice-list";
 import { getCookie } from "@/app/_util/cookie";
 import Image from "next/image";
 import bluredCustomeDesktop from "@/public/images/blured-custome-desktop.png";
+import { LinkButton } from "@/app/_components/button";
 
 interface SearchParamsProps {
   searchParams: {
@@ -66,6 +67,15 @@ export default async function page({ searchParams }: SearchParamsProps) {
                   <br />
                   사용자 맞춤 서비스입니다!
                 </p>
+                <div className="absolute right-[50%] top-[50%] w-60 translate-x-1/2">
+                  <LinkButton
+                    href={"/admin/notice-list"}
+                    className="w-10 text-xl"
+                    btnColor="orange"
+                  >
+                    로그인 하러 가기
+                  </LinkButton>
+                </div>
               </div>
             )}
           </div>
