@@ -85,7 +85,7 @@ export default function AlertButton({
               <div className="flex flex-col md:ml-2">
                 <span>알림 {initialAlerts.count || 0}개</span>
                 <span className="text-sm text-gray-50">
-                  오른쪽으로 밀거나 클릭해서 읽음 처리해주세요!
+                  밀어서 읽음 처리해주세요!
                 </span>
               </div>
               <button className="mb-6 block md:hidden" onClick={handleClose}>
