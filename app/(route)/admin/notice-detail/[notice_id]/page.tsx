@@ -22,11 +22,6 @@ export default async function page(
   const limit = 10;
   const offset = (page - 1) * limit;
 
-  const noticeDetail = await getShopNoticeDetail(
-    params.shop_id,
-    params.notice_id,
-  );
-
   const applicationList = await getNoticeApplications(
     params.shop_id,
     params.notice_id,
@@ -37,7 +32,7 @@ export default async function page(
   return (
     <div className="base-container">
       <Suspense fallback={<NoticeDetailCardSkeleton />}>
-        <NoticeDetailCard shopId={shopId} noticeId={noticeId} />
+        <NoticeDetailCard shopId={params.shop_id} noticeId={params.notice_id} />
       </Suspense>
       <div className="my-12">
         <h2 className="py-8 font-bold text-l md:text-2xl">신청자 목록</h2>
