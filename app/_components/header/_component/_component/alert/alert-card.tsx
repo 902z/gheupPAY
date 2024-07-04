@@ -4,6 +4,7 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import { putAlerts } from "@/app/_apis/alert";
 import timeDifferenceFromNow from "@/app/_util/time-difference-from-now";
+import { useRouter } from "next/navigation";
 
 interface AlertCardProps {
   item: getUsersUserIdAlerts["items"][0];
@@ -11,15 +12,22 @@ interface AlertCardProps {
 }
 
 export default function AlertCard({ item, onDelete }: AlertCardProps) {
+  const router = useRouter();
+  const handleMove = () => {
+    router.push(
+      `/notice-detail/${item.item.shop.item.id}/${item.item.notice.item.id}`,
+    );
+  };
+
   const handleRemove = async () => {
-    // await putAlerts(item.item.id);
+    await putAlerts(item.item.id);
     onDelete(item.item.id);
   };
 
   return (
     <section className="z-10 flex w-full flex-col">
       <Swiper
-        onClick={handleRemove}
+        onClick={handleMove}
         onSlideChange={handleRemove}
         dir="rtl"
         slidesPerView="auto"
