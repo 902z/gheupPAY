@@ -11,11 +11,10 @@ import { isAxiosError } from "axios";
 import { API_ERROR_MESSAGE } from "@/app/_constants/error-message";
 import { getImageUrl } from "../image";
 
-
 // 가게 정보 조회
 export async function getShopDetail(shopId: string): Promise<GetShopsShopId> {
   try {
-    const res = await axiosInstance.get(`/shops/${shopId}`);
+    const res = await instance.get(`/shops/${shopId}`);
     return res.data;
   } catch (error) {
     if (isAxiosError(error)) {
@@ -129,18 +128,15 @@ export const putEditShop = async ({
     } else {
       processedImageUrl = imageUrl;
     }
-    const response = await axiosInstance.put<PutShopsShopId>(
-      `/shops/${shopId}`,
-      {
-        name,
-        category,
-        address1,
-        address2,
-        description,
-        imageUrl: processedImageUrl,
-        originalHourlyPay,
-      },
-    );
+    const response = await instance.put<PutShopsShopId>(`/shops/${shopId}`, {
+      name,
+      category,
+      address1,
+      address2,
+      description,
+      imageUrl: processedImageUrl,
+      originalHourlyPay,
+    });
     return response.status === 200;
   } catch (error) {
     if (isAxiosError(error)) {
