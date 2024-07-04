@@ -20,8 +20,13 @@ export async function getAlerts(offset: number = 0) {
     return response.data;
   } catch (error) {
     if (isAxiosError(error)) {
-      console.error(error.message);
-      throw new Error(error.message);
+      if (error.response?.status === 403 || error.response?.status === 400) {
+        console.error(error.message);
+        throw new Error(error.message);
+      } else {
+        console.error(error);
+        throw new Error("알 수 없는 axios 오류가 발생했습니다.");
+      }
     } else {
       throw new Error("알 수 없는 오류가 발생했습니다.");
     }
@@ -35,8 +40,13 @@ export async function putAlerts(id: string) {
     return response.data;
   } catch (error) {
     if (isAxiosError(error)) {
-      console.error(error.message);
-      throw new Error(error.message);
+      if (error.response?.status === 403 || error.response?.status === 400) {
+        console.error(error.message);
+        throw new Error(error.message);
+      } else {
+        console.error(error);
+        throw new Error("알 수 없는 axios 오류가 발생했습니다.");
+      }
     } else {
       throw new Error("알 수 없는 오류가 발생했습니다.");
     }

@@ -60,8 +60,17 @@ export async function getUser(user_id: string): Promise<UserProfileData> {
     const res = await instance.get<UserProfileData>(`/users/${user_id}`);
     return res.data;
   } catch (error) {
-    console.error("getUser 함수에서 오류 발생:", error);
-    throw error;
+    if (isAxiosError(error)) {
+      if (error.response?.status === 404) {
+        console.error(error.message);
+        throw new Error(error.message);
+      } else {
+        console.error(error);
+        throw new Error("알 수 없는 axios 오류가 발생했습니다.");
+      }
+    } else {
+      throw new Error("알 수 없는 오류가 발생했습니다.");
+    }
   }
 }
 

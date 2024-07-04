@@ -43,7 +43,7 @@ export async function getAllNotices({
       sort,
     });
     if (Array.isArray(address)) {
-      address.forEach(addr => params.append("address", addr));
+      address.forEach((addr) => params.append("address", addr));
     } else if (address) {
       params.append("address", address);
     }

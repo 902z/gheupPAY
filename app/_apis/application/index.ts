@@ -27,6 +27,12 @@ export async function getNoticeApplications(
     );
     return res.data;
   } catch (error) {
+    if (isAxiosError(error)) {
+      if (error.response?.status === 400 || error.response?.status === 404) {
+        console.error(error.message);
+        throw error;
+      }
+    }
     console.error("getNoticeApplications 함수에서 오류 발생:", error);
     throw error;
   }
@@ -45,8 +51,14 @@ export async function postShopsShopIdNoticesNoticeIdApplications(
     return res.data;
   } catch (error) {
     if (isAxiosError(error)) {
-      console.error(error.message);
-      throw error;
+      if (
+        error.response?.status === 400 ||
+        error.response?.status === 401 ||
+        error.response?.status === 404
+      ) {
+        console.error(error.message);
+        throw error;
+      }
     } else {
       console.error("서버 오류입니다.");
       throw error;
@@ -70,8 +82,17 @@ export async function putShopsShopIdNoticesNoticeIdApplicationsApplicationId(
     return res.data;
   } catch (error) {
     if (isAxiosError(error)) {
-      console.error(error.message);
-      throw error;
+      if (
+        error.response?.status === 400 ||
+        error.response?.status === 401 ||
+        error.response?.status === 404
+      ) {
+        console.error(error.message);
+        throw error;
+      } else {
+        console.error("서버 오류입니다.");
+        throw error;
+      }
     } else {
       console.error("서버 오류입니다.");
       throw error;
@@ -97,8 +118,18 @@ export async function getUserNoticeApplication(
     );
     return res.data;
   } catch (error) {
-    console.error("getUserNoticeApplication 함수에서 오류 발생:", error);
-    throw error;
+    if (isAxiosError(error)) {
+      if (error.response?.status === 400 || error.response?.status === 403) {
+        console.error(error.message);
+        throw error;
+      } else {
+        console.error("서버 오류입니다.");
+        throw error;
+      }
+    } else {
+      console.error("서버 오류입니다.");
+      throw error;
+    }
   }
 }
 
@@ -117,7 +148,22 @@ export async function putNoticeApplicationStatus(
       );
     return res.data;
   } catch (error) {
-    console.error("putNoticeApplicationStatus 함수에서 오류 발생:", error);
-    throw error;
+    if (isAxiosError(error)) {
+      if (
+        error.response?.status === 400 ||
+        error.response?.status === 401 ||
+        error.response?.status === 403 ||
+        error.response?.status === 404
+      ) {
+        console.error(error.message);
+        throw error;
+      } else {
+        console.error("서버 오류입니다.");
+        throw error;
+      }
+    } else {
+      console.error("서버 오류입니다.");
+      throw error;
+    }
   }
 }
