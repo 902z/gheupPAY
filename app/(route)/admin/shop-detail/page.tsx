@@ -1,10 +1,11 @@
 import MyShopDetailCard from "./_components/my-shop-detail-card";
 import { getUser } from "@/app/_apis/user";
 import { getCookie } from "@/app/_util/cookie";
-import PostedNotice from "./_components/posted-notice";
 import NoneSignButton from "@/app/_components/none-sign-button";
-import { getShopNoticeList } from "@/app/_apis/notice";
 import { redirect } from "next/navigation";
+import IsRegisterComponent from "./_components/is-register-component";
+import { Suspense } from "react";
+import { NoticeCardSkeleton } from "@/app/_components/notice-card/_component/skeleton";
 
 async function ShopDetail() {
   const user_id = await getCookie("userId");
@@ -23,10 +24,6 @@ async function ShopDetail() {
     );
   }
 
-  const noticesList = await getShopNoticeList({
-    shop_id: userProfileDetail.item.shop.item.id,
-  });
-
   return (
     <section className="mb-20 md:mb-[120px]">
       <MyShopDetailCard
@@ -36,26 +33,21 @@ async function ShopDetail() {
         description={userProfileDetail.item.shop.item.description}
         shopId={userProfileDetail.item.shop.item.id}
       />
-      {noticesList.count ? (
-        <>
-          <h2 className="py-8 font-bold text-l md:text-2xl">
-            내가 등록한 공고
-          </h2>
-          <PostedNotice
-            shop={userProfileDetail.item.shop}
-            initialList={noticesList}
-          />
-        </>
-      ) : (
-        <>
-          <h2 className="py-8 font-bold text-l md:text-2xl">등록한 공고</h2>
-          <NoneSignButton
-            signText="공고를 등록해 보세요"
-            btnHref="/admin/notice-create"
-            BtnText="공고 등록하기"
-          />
-        </>
-      )}
+      <h2 className="py-8 font-bold text-l md:text-2xl">내가 등록한 공고</h2>
+      <Suspense
+        fallback={
+          <div className="grid grid-cols-2 gap-4 lg:grid-cols-3">
+            {[1, 2, 3, 4, 5, 6].map((index) => (
+              <NoticeCardSkeleton key={index} />
+            ))}
+          </div>
+        }
+      >
+        <IsRegisterComponent
+          id={userProfileDetail.item.shop.item.id}
+          shop={userProfileDetail.item.shop}
+        />
+      </Suspense>
     </section>
   );
 }

@@ -3,9 +3,8 @@ import { getShopNoticeList } from "@/app/_apis/notice";
 import { GetShopsShopIdNotices, GetUsersUserId } from "@/app/_apis/type";
 import { IntersectionArea } from "@/app/_components/interception-area";
 import NoticeCard from "@/app/_components/notice-card";
-import { NoticeCardSkeleton } from "@/app/_components/notice-card/_component/skeleton";
 import { isAxiosError } from "axios";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
 interface PostedNoticeProp {
   shop: GetUsersUserId["item"]["shop"];
@@ -53,47 +52,44 @@ export default function PostedNotice({ shop, initialList }: PostedNoticeProp) {
   return (
     <>
       <div className="grid grid-cols-2 gap-4 lg:grid-cols-3">
-        {notices
-          ? notices.map((notice, index) => {
-              if (notices.length === index + 1) {
-                return (
-                  <IntersectionArea
-                    key={notice.item.id}
-                    onImpression={handleImpression}
-                  >
-                    <NoticeCard
-                      noticeId={notice.item.id}
-                      address1={shop.item.address1}
-                      closed={notice.item.closed}
-                      shopId={shop.item.id}
-                      hourlyPay={notice.item.hourlyPay}
-                      imageUrl={shop.item.imageUrl}
-                      name={shop.item.name}
-                      startsAt={notice.item.startsAt}
-                      workhour={notice.item.workhour}
-                      key={notice.item.id}
-                    />
-                  </IntersectionArea>
-                );
-              }
+        {notices &&
+          notices.map((notice, index) => {
+            if (notices.length === index + 1) {
               return (
-                <NoticeCard
-                  noticeId={notice.item.id}
-                  address1={shop.item.address1}
-                  closed={notice.item.closed}
-                  shopId={shop.item.id}
-                  hourlyPay={notice.item.hourlyPay}
-                  imageUrl={shop.item.imageUrl}
-                  name={shop.item.name}
-                  startsAt={notice.item.startsAt}
-                  workhour={notice.item.workhour}
+                <IntersectionArea
                   key={notice.item.id}
-                />
+                  onImpression={handleImpression}
+                >
+                  <NoticeCard
+                    noticeId={notice.item.id}
+                    address1={shop.item.address1}
+                    closed={notice.item.closed}
+                    shopId={shop.item.id}
+                    hourlyPay={notice.item.hourlyPay}
+                    imageUrl={shop.item.imageUrl}
+                    name={shop.item.name}
+                    startsAt={notice.item.startsAt}
+                    workhour={notice.item.workhour}
+                    key={notice.item.id}
+                  />
+                </IntersectionArea>
               );
-            })
-          : [1, 2, 3, 4, 5, 6].map((index) => (
-              <NoticeCardSkeleton key={index} />
-            ))}
+            }
+            return (
+              <NoticeCard
+                noticeId={notice.item.id}
+                address1={shop.item.address1}
+                closed={notice.item.closed}
+                shopId={shop.item.id}
+                hourlyPay={notice.item.hourlyPay}
+                imageUrl={shop.item.imageUrl}
+                name={shop.item.name}
+                startsAt={notice.item.startsAt}
+                workhour={notice.item.workhour}
+                key={notice.item.id}
+              />
+            );
+          })}
       </div>
     </>
   );
