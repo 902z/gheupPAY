@@ -14,7 +14,7 @@ import { getImageUrl } from "../image";
 // 가게 정보 조회
 export async function getShopDetail(shopId: string): Promise<GetShopsShopId> {
   try {
-    const res = await axiosInstance.get(`/shops/${shopId}`);
+    const res = await instance.get(`/shops/${shopId}`);
     return res.data;
   } catch (error) {
     if (isAxiosError(error)) {
