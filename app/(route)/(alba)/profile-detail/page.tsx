@@ -45,11 +45,6 @@ export default async function page({ searchParams }: PageProps) {
         activePage={page}
         itemsCountPerPage={limit}
       />
-      <NoticeApplicationTable
-        applicationNotice={applicationNotice}
-        activePage={page}
-        itemsCountPerPage={limit}
-      />
     </div>
   );
 }
