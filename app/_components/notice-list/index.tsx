@@ -77,7 +77,16 @@ export default function AllNoticeList({
             ? noticeList.map((cardContents) => {
                 return (
                   <NoticeCard
-                    cardContents={cardContents.item}
+                    address1={cardContents.item.shop.item.address1}
+                    closed={cardContents.item.closed}
+                    hourlyPay={cardContents.item.hourlyPay}
+                    noticeId={cardContents.item.id}
+                    shopId={cardContents.item.shop.item.id}
+                    content={cardContents.item}
+                    imageUrl={cardContents.item.shop.item.imageUrl}
+                    name={cardContents.item.shop.item.name}
+                    startsAt={cardContents.item.startsAt}
+                    workhour={cardContents.item.workhour}
                     key={cardContents.item.id}
                   />
                 );
