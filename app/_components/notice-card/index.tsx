@@ -47,7 +47,7 @@ export default function NoticeCard({
     if (content) {
       await postNoticeAction(content);
     } else {
-      await redirectAction(`/notice-detail/${shopId}/${noticeId}`);
+      await redirectAction(`/admin/notice-detail/${shopId}/${noticeId}`);
     }
   };
   // async () => await postNoticeAction(cardContents)

@@ -58,7 +58,7 @@ export const postSignUp: PostSignUp = async ({ email, password, type }) => {
 // 내 정보 조회
 export async function getUser(user_id: string): Promise<GetUsersUserId> {
   try {
-    const res = await instance.get<GetUsersUserId>(`/users/${user_id}`);
+    const res = await axiosInstance.get<GetUsersUserId>(`/users/${user_id}`);
     return res.data;
   } catch (error) {
     if (isAxiosError(error)) {

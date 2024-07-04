@@ -59,11 +59,11 @@ export default function AlertButton({
   const fetchData = async () => {
     if (!alertConfig.hasNext) return;
     try {
-      const { items, hasNext, offset } = await getAlerts();
+      const { items, hasNext } = await getAlerts();
       setAlerts((prev) => [...prev, ...items]);
-      setAlertConfig(() => ({
+      setAlertConfig((prev) => ({
         hasNext,
-        offset: offset + 10,
+        offset: prev.offset + 6,
       }));
     } catch (e) {
       if (isAxiosError(e)) {

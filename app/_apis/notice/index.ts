@@ -81,17 +81,14 @@ type GetShopNotice = (
 
 export const getShopNoticeList: GetShopNotice = async ({
   shop_id,
-  offset,
-  limit,
+  offset = 0,
+  limit = 6,
 }) => {
   try {
-    const QueryParams = new URLSearchParams();
-    if (offset) {
-      QueryParams.append("offset", offset.toString());
-    }
-    if (limit) {
-      QueryParams.append("limit", limit.toString());
-    }
+    const QueryParams = new URLSearchParams({
+      offset: offset.toString(),
+      limit: limit.toString(),
+    });
     const res = await axiosInstance.get<GetShopsShopIdNotices>(
       `/shops/${shop_id}/notices?${QueryParams.toString()}`,
     );

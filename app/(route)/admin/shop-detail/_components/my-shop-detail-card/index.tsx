@@ -53,7 +53,7 @@ export default function MyShopDetailCard({
               편집하기
             </LinkButton>
             <LinkButton
-              href="/admin/shop-create"
+              href="/admin/notice-create"
               btnColor="orange"
               className="font-bold"
             >
