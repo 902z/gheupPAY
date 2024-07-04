@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import "@/styles/globals.css";
 import Header from "./_components/header";
 import Footer from "./_components/footer";
-import Hydration from "./_components/hydration";
 import ToastProvider from "./_components/toast/toastProvider";
 
 export const metadata: Metadata = {
@@ -25,7 +24,6 @@ export default function RootLayout({
   return (
     <html lang="ko">
       <body className="relative">
-        <Hydration />
         <Header />
         <main className="min-h-screen">
           <ToastProvider>{children}</ToastProvider>

@@ -14,7 +14,7 @@ import "aos/dist/aos.css";
 import AOS from "aos";
 import { useEffect } from "react";
 import { motion } from "framer-motion";
-import Loading from "./loading";
+import Loading from "./_components/loading/loading";
 
 export default function Home() {
   useEffect(() => {

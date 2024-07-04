@@ -10,7 +10,6 @@ import { USER_TYPE } from "@/app/_constants/user-type";
 import pulse from "@/public/icons/pulse.svg";
 import Image from "next/image";
 import { useRef, useState } from "react";
-import useUserStore from "@/stores/create-store";
 import useCheckLoginStatus from "@/app/_hooks/use-check-login-status";
 import useModal from "@/app/_hooks/use-modal";
 import ConfirmModal from "@/app/_components/modals/_components/confirm-modal";
@@ -34,14 +33,12 @@ function LoginForm() {
   });
   const [waiting, setWaiting] = useState(false);
   const modalMessage = useRef<string | null>(null);
-  const login = useUserStore((state) => state.login);
 
   const handleForm = handleSubmit(async (data: FormValues) => {
     try {
       setWaiting(true);
       const result = await postLogin(data);
       if (result) {
-        login(result.item.user.item.type);
         if (result.item.user.item.type === USER_TYPE.EMPLOYEE) {
           router.replace("/notice-list");
         } else {
