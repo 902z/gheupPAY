@@ -1,8 +1,8 @@
-import React from "react";
-import { getShopNoticeDetail } from "@/app/_apis/shop";
+import React, { Suspense } from "react";
 import NoticeDetailCard from "@/app/_components/notice-detail-card";
 import AlbaApplicationTable from "../_components/alba-application-table";
 import { getNoticeApplications } from "@/app/_apis/application";
+import NoticeDetailCardSkeleton from "@/app/_components/notice-detail-card/_component/notice-detail-card-skeleton";
 
 export const metadata = {
   title: "공고 상세",
@@ -22,8 +22,6 @@ export default async function page({ searchParams }: PageProps) {
   const limit = 10;
   const offset = (page - 1) * limit;
 
-  const noticeDetail = await getShopNoticeDetail(shopId, noticeId);
-
   const applicationList = await getNoticeApplications(
     shopId,
     noticeId,
@@ -33,8 +31,9 @@ export default async function page({ searchParams }: PageProps) {
 
   return (
     <div className="base-container">
-      <NoticeDetailCard noticeDetail={noticeDetail} />
-
+      <Suspense fallback={<NoticeDetailCardSkeleton />}>
+        <NoticeDetailCard shopId={shopId} noticeId={noticeId} />
+      </Suspense>
       <div className="my-12">
         <h2 className="py-8 font-bold text-l md:text-2xl">신청자 목록</h2>
         <AlbaApplicationTable

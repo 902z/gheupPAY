@@ -3,10 +3,14 @@ import { API_ERROR_MESSAGE } from "../../_constants/error-message";
 import { UserType } from "../../_constants/user-type";
 import axiosInstance from "../instances";
 import { isAxiosError } from "axios";
+import {
+  GetUsersUserIdApplications,
+  PutUsersUserId,
+  UserProfileData,
+} from "../type";
 import { AddressType } from "@/app/_constants/address";
 import notification from "@/app/_util/notification";
 import { getCookie } from "@/app/_util/cookie";
-import { PutUsersUserId, UserProfileData } from "../type";
 
 // 회원가입
 interface Params {
@@ -56,8 +60,17 @@ export async function getUser(user_id: string): Promise<UserProfileData> {
     const res = await instance.get<UserProfileData>(`/users/${user_id}`);
     return res.data;
   } catch (error) {
-    console.error("getUser 함수에서 오류 발생:", error);
-    throw error;
+    if (isAxiosError(error)) {
+      if (error.response?.status === 404) {
+        console.error(error.message);
+        throw new Error(error.message);
+      } else {
+        console.error(error);
+        throw new Error("알 수 없는 axios 오류가 발생했습니다.");
+      }
+    } else {
+      throw new Error("알 수 없는 오류가 발생했습니다.");
+    }
   }
 }
 
@@ -89,5 +102,31 @@ export async function putUserProfile(params: putUserProfileParams) {
       notification(`${API_ERROR_MESSAGE}`, "error");
     }
     throw new Error(API_ERROR_MESSAGE);
+  }
+}
+
+// get/users/user_id/applications
+export async function getUsersUserIdApplications(userId: string) {
+  try {
+    const res = await axiosInstance.get<GetUsersUserIdApplications>(
+      `/users/${userId}/applications`,
+    );
+    return res.data;
+  } catch (error) {
+    if (isAxiosError(error)) {
+      if (error.response?.status === 403) {
+        console.error(error.message);
+        throw new Error(error.message);
+      } else if (error.response?.status === 400) {
+        console.error("요청 양식 오류");
+        throw new Error(error.message);
+      } else {
+        console.error("getUsersUserIdApplications 함수에서 오류 발생:", error);
+        throw error;
+      }
+    } else {
+      console.error("getUsersUserIdApplications 함수에서 오류 발생:", error);
+      throw error;
+    }
   }
 }

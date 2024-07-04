@@ -15,17 +15,14 @@
     "aos": "^2.3.4",
     "axios": "^1.7.2",
     "framer-motion": "^11.2.11",
-    "lodash": "^4.17.21",
     "next": "14.2.4",
     "react": "^18",
     "react-dom": "^18",
     "react-hook-form": "^7.52.0",
-    "react-hook-use-form": "^1.2.0",
     "react-toastify": "^10.0.5",
     "sharp": "^0.33.4",
     "swiper": "^11.1.4",
-    "yup": "^1.4.0",
-    "zustand": "^4.5.2"
+    "yup": "^1.4.0"
   },
   "devDependencies": {
     "@types/aos": "^3.0.7",

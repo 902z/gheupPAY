@@ -3,7 +3,7 @@ import React, { useEffect, useRef, useState } from "react";
 import Pagination from "@/app/_components/pagination";
 import NoticeCard from "../notice-card";
 import { GetNotices } from "../../_apis/type/index";
-import { NoticeCardSkeleton } from "../notice-card/skeleton";
+import { NoticeCardSkeleton } from "../notice-card/_component/skeleton";
 import Filter from "@/app/(route)/(alba)/notice-list/_components/filter";
 import { useSearchParams } from "next/navigation";
 

@@ -13,7 +13,7 @@ const STYLE = {
 };
 
 const BUTTON =
-  "w-full rounded-md border-[1.5px] border-primary py-2 text-center font-bold duration-200 hover:scale-[1.005] disabled:border-none disabled:bg-gray-40 disabled:text-white md:py-[10px] lg:py-[14px]";
+  "w-full rounded-md border-[1.5px] border-primary py-2 text-center font-bold duration-200 hover:scale-[1.005] disabled:scale-[1] disabled:border-none disabled:bg-gray-40 disabled:text-white md:py-[10px] lg:py-[14px]";
 
 /**
  * css를 입힌 버튼 컴포넌트입니다. 버튼의 색상을 결정할 수 있습니다.
