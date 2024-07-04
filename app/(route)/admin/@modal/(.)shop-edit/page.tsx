@@ -20,15 +20,14 @@ interface InitialData {
 
 function ShopEdit() {
   const searchParams = useSearchParams();
-  const shop_id = searchParams.get("shop_id");
-  console.log(shop_id);
+  const shopId = searchParams.get("shopId");
   const [initialData, setInitialData] = useState<InitialData>();
 
   useEffect(() => {
     const getShopInfo = async () => {
       try {
-        if (shop_id) {
-          const shopDetail = await getShopDetail(shop_id);
+        if (shopId) {
+          const shopDetail = await getShopDetail(shopId);
           const formValue: InitialData = {
             name: shopDetail.item.name,
             category: shopDetail.item.category,
@@ -55,7 +54,7 @@ function ShopEdit() {
   return (
     <PageModal title="가게 정보">
       {initialData ? (
-        <ShopEditForm shop_id={shop_id!} initialData={initialData} />
+        <ShopEditForm shopId={shopId!} initialData={initialData} />
       ) : (
         <LoadingSign />
       )}

@@ -40,10 +40,10 @@ interface FormValues {
 }
 interface ShopEditFormProps {
   initialData: InitialData;
-  shop_id: string;
+  shopId: string;
 }
 
-function ShopEditForm({ initialData, shop_id }: ShopEditFormProps) {
+function ShopEditForm({ initialData, shopId }: ShopEditFormProps) {
   const { isOpen, openModal, closeModal } = useModal();
   const modalMessage = useRef<string | null>(null);
   const [waiting, setWaiting] = useState(false);
@@ -88,7 +88,7 @@ function ShopEditForm({ initialData, shop_id }: ShopEditFormProps) {
       ...data,
       originalHourlyPay: Number(data.originalHourlyPay.replaceAll(",", "")),
       imageUrl: editedImageUrl,
-      shop_id: shop_id,
+      shopId: shopId,
     };
 
     try {

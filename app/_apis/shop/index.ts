@@ -13,9 +13,9 @@ import { API_ERROR_MESSAGE } from "@/app/_constants/error-message";
 import { getImageUrl } from "../image";
 
 // 가게 정보 조회
-export async function getShopDetail(shop_id: string): Promise<GetShopsShopId> {
+export async function getShopDetail(shopId: string): Promise<GetShopsShopId> {
   try {
-    const res = await axiosInstance.get(`/shops/${shop_id}`);
+    const res = await axiosInstance.get(`/shops/${shopId}`);
     return res.data;
   } catch (error) {
     console.error("getShopDetail 함수에서 오류 발생:", error);
@@ -25,11 +25,11 @@ export async function getShopDetail(shop_id: string): Promise<GetShopsShopId> {
 
 // 4. 가게의 특정 공고 조회
 export async function getShopNoticeDetail(
-  shop_id: string,
-  notice_id: string,
+  shopId: string,
+  noticeId: string,
 ): Promise<GetShopsShopIdNoticesNoticeId> {
   try {
-    const res = await instance.get(`/shops/${shop_id}/notices/${notice_id}`);
+    const res = await instance.get(`/shops/${shopId}/notices/${noticeId}`);
     return res.data;
   } catch (error) {
     console.error("getShopNoticeDetail 함수에서 오류 발생:", error);
@@ -93,7 +93,7 @@ export const putEditShop = async ({
   description = "사장님이 가게 설명을 입력하지 않았습니다.",
   imageUrl,
   originalHourlyPay,
-  shop_id,
+  shopId,
 }: {
   name: string;
   category: CategoryType;
@@ -102,7 +102,7 @@ export const putEditShop = async ({
   description?: string;
   imageUrl: File | string;
   originalHourlyPay: number;
-  shop_id: string;
+  shopId: string;
 }): Promise<boolean> => {
   try {
     let processedImageUrl: string;
@@ -112,7 +112,7 @@ export const putEditShop = async ({
       processedImageUrl = imageUrl;
     }
     const response = await axiosInstance.put<PutShopsShopId>(
-      `/shops/${shop_id}`,
+      `/shops/${shopId}`,
       {
         name,
         category,

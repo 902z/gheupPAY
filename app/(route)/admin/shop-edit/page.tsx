@@ -19,15 +19,14 @@ interface InitialData {
 
 export default function ShopEdit() {
   const searchParams = useSearchParams();
-  const shop_id = searchParams.get("shop_id");
-  console.log(shop_id);
+  const shopId = searchParams.get("shopId");
   const [initialData, setInitialData] = useState<InitialData>();
 
   useEffect(() => {
     const getShopInfo = async () => {
       try {
-        if (shop_id) {
-          const shopDetail = await getShopDetail(shop_id);
+        if (shopId) {
+          const shopDetail = await getShopDetail(shopId);
           const formValue: InitialData = {
             name: shopDetail.item.name,
             category: shopDetail.item.category,
@@ -45,6 +44,7 @@ export default function ShopEdit() {
         }
       } catch (error) {
         if (error instanceof Error) {
+          console.log("error", error);
           throw new Error("기존의 데이터를 불러올 수 없습니다.");
         }
       }
@@ -52,9 +52,10 @@ export default function ShopEdit() {
     getShopInfo();
   }, []);
 
-  return initialData ? (
-    <ShopEditForm shop_id={shop_id!} initialData={initialData} />
-  ) : (
-    <LoadingSign />
+  return (
+    initialData && <ShopEditForm shopId={shopId!} initialData={initialData} />
   );
+  // ) : (
+  //   <LoadingSign />
+  // );
 }
