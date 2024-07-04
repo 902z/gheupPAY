@@ -3,7 +3,6 @@ import CustomizedNoticeList from "./_components/customized-notice";
 import { getAllNotices, getCustomizedNotices } from "@/app/_apis/notice";
 import AllNoticeList from "@/app/_components/notice-list";
 import { getCookie } from "@/app/_util/cookie";
-import { getUser } from "@/app/_apis/user";
 import Image from "next/image";
 import bluredCustomeDesktop from "@/public/images/blured-custome-desktop.png";
 import bluredCustomeMobile from "@/public/images/blured-custome-mobile.png";
@@ -16,6 +15,7 @@ interface SearchParamsProps {
     startDate?: string;
     address?: string[];
     keyword?: string;
+    sort: string;
   };
 }
 
@@ -33,6 +33,8 @@ export default async function page({ searchParams }: SearchParamsProps) {
   const limit = 6;
   const offset = (page - 1) * limit;
 
+  const sort = searchParams.sort || "time";
+
   const allNotices = await getAllNotices({
     offset,
     limit,
@@ -40,6 +42,7 @@ export default async function page({ searchParams }: SearchParamsProps) {
     hourlyPayGte,
     startsAtGte,
     keyword,
+    sort,
   });
 
   const allNoticeListClassName = keyword ? "pt-12" : "";
@@ -142,6 +145,7 @@ export default async function page({ searchParams }: SearchParamsProps) {
           activePage={page}
           itemsCountPerPage={limit}
           keyword={keyword}
+          sort={sort}
         />
       </div>
     </div>

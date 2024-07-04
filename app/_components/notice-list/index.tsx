@@ -5,13 +5,15 @@ import NoticeCard from "../notice-card";
 import { GetNotices } from "../../_apis/type/index";
 import { NoticeCardSkeleton } from "../notice-card/_component/skeleton";
 import Filter from "@/app/(route)/(alba)/notice-list/_components/filter";
-import { useSearchParams } from "next/navigation";
+import { useSearchParams, useRouter } from "next/navigation";
+import SortDropDown from "./_component/sort-drop-down";
 
 type AllNoticeListProps = {
   notices: GetNotices;
   activePage: number;
   itemsCountPerPage: number;
   keyword?: string;
+  sort: string;
 };
 
 const ALL_LIST_SECTION_ID = "all-list-section";
@@ -25,6 +27,7 @@ export default function AllNoticeList({
   const totalItemsCount = notices.count;
   const [showFilter, setShowFilter] = useState(false);
   const searchKeyword = useSearchParams().get("keyword");
+  const router = useRouter();
 
   useEffect(() => {
     if (window.location.hash) {
@@ -41,6 +44,12 @@ export default function AllNoticeList({
 
   const handleCloseFilter = () => {
     setShowFilter(false);
+  };
+
+  const handleSortSubmit = (sortValue: string) => {
+    const searchParams = new URLSearchParams(window.location.search);
+    searchParams.set("sort", sortValue);
+    router.push(`?${searchParams.toString()}`);
   };
 
   return (
@@ -60,16 +69,24 @@ export default function AllNoticeList({
               "전체 공고"
             )}
           </h2>
-          {/* 상세필터 버튼입니다 */}
-          <div className="relative">
-            <button
-              className="h-[30px] rounded-[5px] bg-red-30 px-[12px] font-bold text-m text-white"
-              onClick={handleOpenFilter}
-            >
-              <p>상세필터</p>
-            </button>
-            {showFilter && <Filter onClose={handleCloseFilter} />}
+
+          <div className="flex gap-4">
+            <SortDropDown
+              onSelect={handleSortSubmit}
+              defaultValue="time"
+            />
+
             {/* 상세필터 버튼입니다 */}
+            <div className="relative">
+              <button
+                className="h-[30px] rounded-[5px] bg-red-30 px-[12px] font-bold text-m text-white"
+                onClick={handleOpenFilter}
+              >
+                <p>상세필터</p>
+              </button>
+              {showFilter && <Filter onClose={handleCloseFilter} />}
+              {/* 상세필터 버튼입니다 */}
+            </div>
           </div>
         </div>
         <div className="lg grid grid-cols-2 gap-4 lg:grid-cols-3">
