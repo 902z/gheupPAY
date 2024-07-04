@@ -46,7 +46,7 @@ export default function NoticeCard({ cardContents }: NoticeCardProps) {
                 sizes="100% 100%"
                 layout="fill"
                 objectFit="cover"
-                className="rounded-[12px] object-cover border border-black border-opacity-10"
+                className="rounded-[12px] border border-black border-opacity-10 object-cover"
               />
             </div>
             <div className="px-1">

@@ -1,5 +1,3 @@
-
-
 export default function Layout({
   modal,
   children,

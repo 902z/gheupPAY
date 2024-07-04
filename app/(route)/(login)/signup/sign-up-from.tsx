@@ -116,7 +116,9 @@ function SignUpForm() {
         )}
       </form>
       {failIsOpen && (
-        <ConfirmModal closeModal={failCloseModal}>{modalMessage.current}</ConfirmModal>
+        <ConfirmModal closeModal={failCloseModal}>
+          {modalMessage.current}
+        </ConfirmModal>
       )}
       {successIsOpen && (
         <ConfirmModal onClick={handleRedirect} closeModal={successCloseModal}>

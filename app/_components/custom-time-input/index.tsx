@@ -18,11 +18,9 @@ interface CustomTimeInputPropType
  * @example
  *<form className="w-[500px]"> //넓이는 부모 요소 100%
     <CustomTextInput(
-      label="비밀번호"
-      placeholder="비밀번호를 입력하세요"
+      label="시간"
       register={register("email"))}
       displayRequiredMarker={true} //생략하면 * 없음
-      type="password" // 생략하면 text
       errorMessage={errors.password?.message}
     />
   </form>
