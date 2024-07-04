@@ -17,6 +17,10 @@ export default async function loginRequired(request: NextRequest) {
     request.nextUrl.pathname.startsWith("/profile-detail") ||
     request.nextUrl.pathname.startsWith("/profile-register");
 
+  if (isLandingPage && token) {
+    return NextResponse.redirect(new URL("/notice-list", request.url));
+  }
+
   if (isLandingPage) {
     return NextResponse.next();
   }
