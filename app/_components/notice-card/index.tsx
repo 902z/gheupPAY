@@ -47,9 +47,7 @@ export default function NoticeCard({
     if (content) {
       await postNoticeAction(content);
     } else {
-      await redirectAction(
-        `/admin/notice-detail?shop_id=${shopId}&notice_id=${noticeId}`,
-      );
+      await redirectAction(`/notice-detail/${shopId}/${noticeId}`);
     }
   };
   // async () => await postNoticeAction(cardContents)
