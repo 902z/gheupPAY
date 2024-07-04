@@ -44,6 +44,7 @@ export default function ShopEdit() {
           throw new Error("가게를 찾지 못했습니다.");
         }
       } catch (error) {
+        setFailed(true);
         if (error instanceof Error) {
           throw new Error("기존의 데이터를 불러올 수 없습니다.");
         }
