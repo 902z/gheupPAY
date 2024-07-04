@@ -104,7 +104,7 @@ export async function putUserProfile(params: putUserProfileParams) {
 // get/users/user_id/applications
 export async function getUsersUserIdApplications(userId: string) {
   try {
-    const res = await axiosInstance.get<GetUsersUserIdApplications>(
+    const res = await instance.get<GetUsersUserIdApplications>(
       `/users/${userId}/applications`,
     );
     return res.data;
