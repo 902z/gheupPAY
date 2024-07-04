@@ -105,7 +105,7 @@ export default async function NoticeDetailCard({
             </Button>
           ) : type === "employer" ? (
             <Button btnColor="orange" className="font-bold" disabled>
-              알바 계정만 신청 가능합니다
+              알바생만 신청 가능합니다
             </Button>
           ) : (
             <RegisterButton
