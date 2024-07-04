@@ -4,7 +4,7 @@ import { GetShopsShopIdNotices, GetUsersUserId } from "@/app/_apis/type";
 import { IntersectionArea } from "@/app/_components/interception-area";
 import NoticeCard from "@/app/_components/notice-card";
 import { isAxiosError } from "axios";
-import { useState } from "react";
+import { useCallback, useState } from "react";
 
 interface PostedNoticeProp {
   shop: GetUsersUserId["item"]["shop"];
@@ -27,7 +27,7 @@ export default function PostedNotice({ shop, initialList }: PostedNoticeProp) {
 
   if (!shop) return;
 
-  const handleImpression = async () => {
+  const handleImpression = useCallback(async () => {
     if (!noticeConfig.hasNext) return;
     try {
       const { items, hasNext } = await getShopNoticeList({
@@ -47,7 +47,7 @@ export default function PostedNotice({ shop, initialList }: PostedNoticeProp) {
         throw Error("알림을 불러오는데 오류가 발생했습니다.");
       }
     }
-  };
+  }, [noticeConfig]);
 
   return (
     <>

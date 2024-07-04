@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef, useState } from "react";
+import { useCallback, useRef, useState } from "react";
 import AlertList from "./alert-component";
 import Image from "next/image";
 import { getUsersUserIdAlerts } from "@/app/_apis/type";
@@ -56,7 +56,7 @@ export default function AlertButton({
     setAlerts(() => alerts.filter((value) => value.item.id !== id));
   };
 
-  const fetchData = async () => {
+  const fetchData = useCallback(async () => {
     if (!alertConfig.hasNext) return;
     try {
       const { items, hasNext } = await getAlerts();
@@ -73,7 +73,7 @@ export default function AlertButton({
         throw Error("알림을 불러오는데 오류가 발생했습니다.");
       }
     }
-  };
+  }, [alertConfig]);
 
   return (
     <section className="relative w-[fit-content]" ref={alertRef}>

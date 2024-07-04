@@ -1,5 +1,5 @@
 "use client";
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useState } from "react";
 import Pagination from "@/app/_components/pagination";
 import NoticeCard from "../notice-card";
 import { GetNotices } from "../../_apis/type/index";
