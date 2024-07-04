@@ -11,7 +11,6 @@ export default function Layout({
     <>
       {children}
       {modal}
-      <Link href="/profile-register">아니</Link>
     </>
   );
 }
