@@ -14,19 +14,22 @@ type PageProps = {
   };
 };
 
-export default async function page({ searchParams }: PageProps) {
-  const shopId = "ea7af667-2069-4e00-a594-cd69b9b9708c";
-  const noticeId = "18f52927-8420-4113-badb-673b9b0caac8";
-
+export default async function page(
+  { searchParams }: PageProps,
+  { params }: { params: { shop_id: string; notice_id: string } },
+) {
   const page = parseInt(searchParams.page || "1", 10);
   const limit = 10;
   const offset = (page - 1) * limit;
 
-  const noticeDetail = await getShopNoticeDetail(shopId, noticeId);
+  const noticeDetail = await getShopNoticeDetail(
+    params.shop_id,
+    params.notice_id,
+  );
 
   const applicationList = await getNoticeApplications(
-    shopId,
-    noticeId,
+    params.shop_id,
+    params.notice_id,
     offset,
     limit,
   );
