@@ -1,9 +1,9 @@
 import MyShopDetailCard from "./_components/my-shop-detail-card";
-import NoneNotice from "./_components/none-notice";
 import { getUser } from "@/app/_apis/user";
 import { getCookie } from "@/app/_util/cookie";
 import PostedNotice from "./_components/posted-notice";
 import NoneSignButton from "@/app/_components/none-sign-button";
+import { item } from "../../../_components/header/_component/mockData";
 
 async function ShopDetail() {
   const user_id = await getCookie("userId");
@@ -17,6 +17,7 @@ async function ShopDetail() {
           name={userProfileDetail.item.shop.item.name}
           address1={userProfileDetail.item.shop.item.address1}
           description={userProfileDetail.item.shop.item.description}
+          shopId={userProfileDetail.item.shop.item.id}
         />
         <PostedNotice shop_id={userProfileDetail.item.shop.item.id} />
       </>

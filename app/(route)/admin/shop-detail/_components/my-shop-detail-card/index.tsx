@@ -1,14 +1,14 @@
 import Image from "next/image";
 import React from "react";
 import mapPin from "@/public/icons/map-pin.png";
-import Button from "@/app/_components/button";
-import { GetShopsShopId } from "@/app/_apis/type";
+import Button, { LinkButton } from "@/app/_components/button";
 
 interface MyShopDetailCardProps {
   imageUrl: string;
   name: string;
   address1: string;
   description: string;
+  shopId: string;
 }
 
 export default function MyShopDetailCard({
@@ -16,6 +16,7 @@ export default function MyShopDetailCard({
   name,
   address1,
   description,
+  shopId,
 }: MyShopDetailCardProps) {
   return (
     <div className="pb-[60px]">
@@ -44,12 +45,20 @@ export default function MyShopDetailCard({
             </div>
           </div>
           <div className="flex items-center justify-center gap-4">
-            <Button btnColor="white" className="font-bold">
+            <LinkButton
+              href={`/admin/shop-edit?shop_id=${shopId}`}
+              btnColor="white"
+              className="font-bold"
+            >
               편집하기
-            </Button>
-            <Button btnColor="orange" className="font-bold">
+            </LinkButton>
+            <LinkButton
+              href="/admin/shop-create"
+              btnColor="orange"
+              className="font-bold"
+            >
               공고 등록하기
-            </Button>
+            </LinkButton>
           </div>
         </div>
       </div>
