@@ -19,6 +19,7 @@ type PageProps = {
 
 export default async function Page({ searchParams }: PageProps) {
   const userId = await getCookie("userId");
+  const userAddress = await getCookie("address");
 
   if (!userId) {
     return null;
@@ -38,7 +39,7 @@ export default async function Page({ searchParams }: PageProps) {
 
   return (
     <div className="base-container">
-      {!userProfile.item.address ? (
+      {!userAddress ? (
         <NoneProfile />
       ) : (
         <>
