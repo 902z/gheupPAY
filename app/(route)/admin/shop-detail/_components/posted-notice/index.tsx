@@ -9,41 +9,24 @@ import { useEffect, useState } from "react";
 
 interface PostedNoticeProp {
   shop: GetUsersUserId["item"]["shop"];
+  initialList: GetShopsShopIdNotices;
 }
 interface InfiniteScrollProps {
   hasNext: boolean;
   offset: number;
 }
 
-export default function PostedNotice({ shop }: PostedNoticeProp) {
+export default function PostedNotice({ shop, initialList }: PostedNoticeProp) {
   const [noticeConfig, setNoticeConfig] = useState<InfiniteScrollProps>({
-    hasNext: true,
-    offset: 0,
+    hasNext: initialList.hasNext,
+    offset: initialList.offset + 6,
   });
 
-  const [notices, setNotices] = useState<GetShopsShopIdNotices["items"]>([]);
+  const [notices, setNotices] = useState<GetShopsShopIdNotices["items"]>(
+    initialList.items,
+  );
 
   if (!shop) return;
-
-  const initialFetch = async () => {
-    try {
-      const { items, hasNext } = await getShopNoticeList({
-        shop_id: shop.item.id,
-      });
-      setNoticeConfig(() => ({
-        hasNext,
-        offset: 6,
-      }));
-      setNotices(() => items);
-    } catch (e) {
-      if (isAxiosError(e)) {
-        console.error(e.message);
-      } else {
-        console.error(e);
-        throw Error("알림을 불러오는데 오류가 발생했습니다.");
-      }
-    }
-  };
 
   const handleImpression = async () => {
     if (!noticeConfig.hasNext) return;
@@ -66,10 +49,6 @@ export default function PostedNotice({ shop }: PostedNoticeProp) {
       }
     }
   };
-
-  useEffect(() => {
-    initialFetch();
-  }, []);
 
   return (
     <>

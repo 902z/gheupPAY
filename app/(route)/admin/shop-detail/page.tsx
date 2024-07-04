@@ -41,7 +41,10 @@ async function ShopDetail() {
           <h2 className="py-8 font-bold text-l md:text-2xl">
             내가 등록한 공고
           </h2>
-          <PostedNotice shop={userProfileDetail.item.shop} />
+          <PostedNotice
+            shop={userProfileDetail.item.shop}
+            initialList={noticesList}
+          />
         </>
       ) : (
         <>
