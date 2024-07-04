@@ -18,8 +18,8 @@ type PageProps = {
 export default async function page({ searchParams }: PageProps) {
   const userId = "309aaf62-068e-4deb-a6c3-a31abacfdc67";
 
-  const page = parseInt(searchParams.page || "1", 10);
-  const limit = 10;
+  const page = parseInt(searchParams.page || "1", 5);
+  const limit = 5;
   const offset = (page - 1) * limit;
 
   const userProfile = await getUser(userId);
