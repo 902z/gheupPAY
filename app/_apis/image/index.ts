@@ -1,3 +1,6 @@
+import { isAxiosError } from "axios";
+import instance from "@/app/_lib/axios";
+
 interface PresignedURL {
   item: {
     url: string;
@@ -5,12 +8,9 @@ interface PresignedURL {
   links: Array<object>;
 }
 
-import { isAxiosError } from "axios";
-import axiosInstance from "../instances";
-
 async function createPredefinedURL(file: File): Promise<PresignedURL> {
   try {
-    const { data } = await axiosInstance.post<PresignedURL>("/images", {
+    const { data } = await instance.post<PresignedURL>("/images", {
       name: file.name,
     });
     return data;
@@ -26,7 +26,7 @@ async function createPredefinedURL(file: File): Promise<PresignedURL> {
 
 async function uploadImageToS3(url: string, file: File) {
   try {
-    const { data } = await axiosInstance.put(url, file, {
+    const { data } = await instance.put(url, file, {
       authorization: false,
     });
     return data;

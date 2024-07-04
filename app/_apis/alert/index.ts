@@ -1,8 +1,8 @@
 "use server";
 import { getCookie } from "@/app/_util/cookie";
-import axiosInstance from "../instances";
 import { isAxiosError } from "axios";
 import { getUsersUserIdAlerts } from "../type";
+import instance from "@/app/_lib/axios";
 
 export async function getAlerts(offset: number = 0) {
   try {
@@ -11,7 +11,7 @@ export async function getAlerts(offset: number = 0) {
       limit: "6",
     });
     const userId = await getCookie("userId");
-    const response = await axiosInstance.get<getUsersUserIdAlerts>(
+    const response = await instance.get<getUsersUserIdAlerts>(
       `/users/${userId}/alerts`,
       {
         params,
@@ -36,7 +36,7 @@ export async function getAlerts(offset: number = 0) {
 export async function putAlerts(id: string) {
   try {
     const userId = await getCookie("userId");
-    const response = await axiosInstance.put(`/users/${userId}/alerts/${id}`);
+    const response = await instance.put(`/users/${userId}/alerts/${id}`);
     return response.data;
   } catch (error) {
     if (isAxiosError(error)) {

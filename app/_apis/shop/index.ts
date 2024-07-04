@@ -1,4 +1,3 @@
-import axiosInstance from "../instances";
 import instance from "@/app/_lib/axios";
 import {
   GetShopsShopId,
@@ -76,7 +75,7 @@ export const postShopCreate = async ({
 }): Promise<boolean> => {
   try {
     const processedImageUrl = await getImageUrl(imageUrl);
-    const response = await axiosInstance.post<PostShop>(
+    const response = await instance.post<PostShop>(
       "/shops",
       {
         name,

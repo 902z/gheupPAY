@@ -1,5 +1,4 @@
 import instance from "@/app/_lib/axios";
-import axiosInstance from "../instances";
 import { getCookie } from "@/app/_util/cookie";
 import {
   GetUsersUserId,
@@ -79,7 +78,7 @@ type postCreateNoticeParams = {
 export async function getShopId() {
   try {
     const userId = await getCookie("userId");
-    const res = await axiosInstance.get<GetUsersUserId>(`/users/${userId}`);
+    const res = await instance.get<GetUsersUserId>(`/users/${userId}`);
     const shopId = res.data.item.shop.item.id;
     return shopId;
   } catch (error) {
@@ -98,7 +97,7 @@ export async function getShopId() {
 export async function postCreateNotice(params: postCreateNoticeParams) {
   try {
     const shopId = await getShopId();
-    const res = await axiosInstance.post<PostShopsShopIdNotices>(
+    const res = await instance.post<PostShopsShopIdNotices>(
       `/shops/${shopId}/notices`,
       params,
     );

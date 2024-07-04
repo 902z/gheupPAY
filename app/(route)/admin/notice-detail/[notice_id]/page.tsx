@@ -14,17 +14,17 @@ type PageProps = {
   };
 };
 
-export default async function page({ searchParams }: PageProps) {
-  const shopId = "4490151c-5217-4157-b072-9c37b05bed47";
-  const noticeId = "99996477-82db-4bda-aae1-4044f11d9a8b";
-
-  const page = parseInt(searchParams.page || "1", 5);
-  const limit = 5;
+export default async function page(
+  { searchParams }: PageProps,
+  { params }: { params: { shop_id: string; notice_id: string } },
+) {
+  const page = parseInt(searchParams.page || "1", 10);
+  const limit = 10;
   const offset = (page - 1) * limit;
 
   const applicationList = await getNoticeApplications(
-    shopId,
-    noticeId,
+    params.shop_id,
+    params.notice_id,
     offset,
     limit,
   );
@@ -32,7 +32,7 @@ export default async function page({ searchParams }: PageProps) {
   return (
     <div className="base-container">
       <Suspense fallback={<NoticeDetailCardSkeleton />}>
-        <NoticeDetailCard shopId={shopId} noticeId={noticeId} />
+        <NoticeDetailCard shopId={params.shop_id} noticeId={params.notice_id} />
       </Suspense>
       <div className="my-12">
         <h2 className="py-8 font-bold text-l md:text-2xl">신청자 목록</h2>

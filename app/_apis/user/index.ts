@@ -1,7 +1,6 @@
 import instance from "@/app/_lib/axios";
 import { API_ERROR_MESSAGE } from "../../_constants/error-message";
 import { UserType } from "../../_constants/user-type";
-import axiosInstance from "../instances";
 import { isAxiosError } from "axios";
 import {
   GetUsersUserIdApplications,
@@ -31,7 +30,7 @@ type PostSignUp = (params: Params) => Promise<boolean>;
 
 export const postSignUp: PostSignUp = async ({ email, password, type }) => {
   try {
-    const response = await axiosInstance.post<Response>(
+    const response = await instance.post<Response>(
       "/users",
       {
         email,
@@ -83,10 +82,7 @@ type putUserProfileParams = {
 export async function putUserProfile(params: putUserProfileParams) {
   try {
     const userId = await getCookie("userId");
-    const res = await axiosInstance.put<PutUsersUserId>(
-      `/users/${userId}`,
-      params,
-    );
+    const res = await instance.put<PutUsersUserId>(`/users/${userId}`, params);
     return res.data;
   } catch (error) {
     if (isAxiosError(error)) {
@@ -108,7 +104,7 @@ export async function putUserProfile(params: putUserProfileParams) {
 // get/users/user_id/applications
 export async function getUsersUserIdApplications(userId: string) {
   try {
-    const res = await axiosInstance.get<GetUsersUserIdApplications>(
+    const res = await instance.get<GetUsersUserIdApplications>(
       `/users/${userId}/applications`,
     );
     return res.data;
