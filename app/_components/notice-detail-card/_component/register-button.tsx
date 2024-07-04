@@ -9,6 +9,7 @@ import OpenModal from "../../modals";
 import Button, { LinkButton } from "../../button";
 import { redirect } from "next/navigation";
 import { redirectAction } from "@/app/_actions";
+import notification from "@/app/_util/notification";
 
 interface RegisterButtonProps {
   type?: string;
@@ -40,12 +41,21 @@ export default function RegisterButton({
   });
 
   const handleCancel = async () => {
-    await putShopsShopIdNoticesNoticeIdApplicationsApplicationId(
+    const result = await putShopsShopIdNoticesNoticeIdApplicationsApplicationId(
       shopId,
       noticeId,
       userApplication.items[0].item.id,
       "canceled",
     );
+    if (result) notification("신청이 취소되었습니다.", "info");
+  };
+
+  const handleRegister = async () => {
+    const result = await postShopsShopIdNoticesNoticeIdApplications(
+      shopId,
+      noticeId,
+    );
+    if (result) notification("신청이 완료되었습니다.", "info");
   };
 
   if (isRegister) {
@@ -79,9 +89,7 @@ export default function RegisterButton({
         <OpenModal
           modalContents="지원하시겠습니까?"
           select
-          onClickYes={async () => {
-            await postShopsShopIdNoticesNoticeIdApplications(shopId, noticeId);
-          }}
+          onClickYes={handleRegister}
           selectType="yes"
         >
           <Button className="font-bold">신청하기</Button>
