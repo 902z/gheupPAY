@@ -1,12 +1,13 @@
 "use client";
+import PageModal from "@/app/_components/page-modal";
 import { getShopDetail } from "@/app/_apis/shop";
 import { AddressType } from "@/app/_constants/address";
 import { CategoryType } from "@/app/_constants/category";
 import { useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
-import ShopEditForm from "./shop-edit-form";
 import { numberWithCommas } from "@/app/_util/number-with-comma";
-import ErrorSign from "./error";
+import ShopEditForm from "../../shop-edit/shop-edit-form";
+import ErrorSign from "@/app/(route)/admin/shop-edit/error";
 interface InitialData {
   name: string;
   category: CategoryType;
@@ -17,7 +18,7 @@ interface InitialData {
   originalHourlyPay: string;
 }
 
-export default function ShopEdit() {
+function ShopEdit() {
   const searchParams = useSearchParams();
   const shopId = searchParams.get("shopId");
   const [initialData, setInitialData] = useState<InitialData>();
@@ -44,6 +45,7 @@ export default function ShopEdit() {
           throw new Error("가게를 찾지 못했습니다.");
         }
       } catch (error) {
+        setFailed(true);
         if (error instanceof Error) {
           throw new Error("기존의 데이터를 불러올 수 없습니다.");
         }
@@ -51,10 +53,17 @@ export default function ShopEdit() {
     };
     getShopInfo();
   }, []);
-
-  return failed ? (
-    <ErrorSign />
-  ) : (
-    initialData && <ShopEditForm shopId={shopId!} initialData={initialData} />
+  return (
+    <PageModal title="가게 정보">
+      {failed ? (
+        <ErrorSign />
+      ) : (
+        initialData && (
+          <ShopEditForm shopId={shopId!} initialData={initialData} />
+        )
+      )}
+    </PageModal>
   );
 }
+
+export default ShopEdit;
