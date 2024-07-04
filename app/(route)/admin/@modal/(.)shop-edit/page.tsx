@@ -8,6 +8,7 @@ import { useEffect, useState } from "react";
 import { numberWithCommas } from "@/app/_util/number-with-comma";
 import ShopEditForm from "../../shop-edit/shop-edit-form";
 import LoadingSign from "@/app/(route)/admin/shop-edit/loading-sign";
+import ErrorSign from "@/app/(route)/admin/shop-edit/error";
 interface InitialData {
   name: string;
   category: CategoryType;
@@ -22,6 +23,7 @@ function ShopEdit() {
   const searchParams = useSearchParams();
   const shopId = searchParams.get("shopId");
   const [initialData, setInitialData] = useState<InitialData>();
+  const [failed, setFailed] = useState(false);
 
   useEffect(() => {
     const getShopInfo = async () => {
@@ -44,6 +46,7 @@ function ShopEdit() {
           throw new Error("가게를 찾지 못했습니다.");
         }
       } catch (error) {
+        setFailed(true);
         if (error instanceof Error) {
           throw new Error("기존의 데이터를 불러올 수 없습니다.");
         }
@@ -53,7 +56,9 @@ function ShopEdit() {
   }, []);
   return (
     <PageModal title="가게 정보">
-      {initialData ? (
+      {failed ? (
+        <ErrorSign />
+      ) : initialData ? (
         <ShopEditForm shopId={shopId!} initialData={initialData} />
       ) : (
         <LoadingSign />

@@ -77,7 +77,6 @@ function ShopEditForm({ initialData, shopId }: ShopEditFormProps) {
   }, [image]);
 
   const handleForm = handleSubmit(async (data: FormValues) => {
-    console.log(data);
     let editedImageUrl: File | string;
     if (!data.imageUrl || data.imageUrl?.length === 0) {
       editedImageUrl = initialData.imageUrl;
