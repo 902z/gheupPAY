@@ -1,4 +1,4 @@
-import axiosInstance from "../instances";
+import instance from "@/app/_lib/axios";
 import { UserType } from "../../_constants/user-type";
 import { isAxiosError } from "axios";
 import { API_ERROR_MESSAGE } from "../../_constants/error-message";
@@ -33,7 +33,7 @@ type PostLogin = (params: Params) => Promise<Response>;
 
 export const postLogin: PostLogin = async ({ email, password }) => {
   try {
-    const { data } = await axiosInstance.post<Response>(
+    const { data } = await instance.post<Response>(
       "/token",
       {
         email,

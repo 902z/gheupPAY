@@ -243,8 +243,8 @@ export interface GetShopsShopId {
   item: {
     id: string;
     name: string;
-    category: string;
-    address1: string;
+    category: CategoryType;
+    address1: AddressType;
     address2: string;
     description: string;
     imageUrl: string;

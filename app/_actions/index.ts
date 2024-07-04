@@ -7,6 +7,7 @@ export async function logout() {
   await deleteCookie("accessToken");
   await deleteCookie("userId");
   await deleteCookie("type");
+  await deleteCookie("address");
   redirect("/");
 }
 

@@ -5,7 +5,6 @@ import {
   PostShopsShopIdNoticesNoticeIdApplications,
   PutShopsShopIdNoticesNoticeIdApplicationsApplicationId,
 } from "../type";
-import axiosInstance from "../instances";
 import { isAxiosError } from "axios";
 
 // 1. 가게의 특정 공고의 지원 목록 조회
@@ -44,10 +43,9 @@ export async function postShopsShopIdNoticesNoticeIdApplications(
   notice_id: string,
 ) {
   try {
-    const res =
-      await axiosInstance.post<PostShopsShopIdNoticesNoticeIdApplications>(
-        `/shops/${shop_id}/notices/${notice_id}/applications`,
-      );
+    const res = await instance.post<PostShopsShopIdNoticesNoticeIdApplications>(
+      `/shops/${shop_id}/notices/${notice_id}/applications`,
+    );
     return res.data;
   } catch (error) {
     if (isAxiosError(error)) {
@@ -75,7 +73,7 @@ export async function putShopsShopIdNoticesNoticeIdApplicationsApplicationId(
 ): Promise<PutShopsShopIdNoticesNoticeIdApplicationsApplicationId> {
   try {
     const res =
-      await axiosInstance.put<PutShopsShopIdNoticesNoticeIdApplicationsApplicationId>(
+      await instance.put<PutShopsShopIdNoticesNoticeIdApplicationsApplicationId>(
         `/shops/${shop_id}/notices/${notice_id}/applications/${application_id}`,
         { status },
       );

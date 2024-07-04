@@ -1,5 +1,4 @@
 import instance from "@/app/_lib/axios";
-import axiosInstance from "../instances";
 import { getCookie } from "@/app/_util/cookie";
 import {
   GetShopsShopIdNotices,
@@ -89,7 +88,7 @@ export const getShopNoticeList: GetShopNotice = async ({
       offset: offset.toString(),
       limit: limit.toString(),
     });
-    const res = await axiosInstance.get<GetShopsShopIdNotices>(
+    const res = await instance.get<GetShopsShopIdNotices>(
       `/shops/${shop_id}/notices?${QueryParams.toString()}`,
     );
     return res.data;
@@ -114,7 +113,7 @@ type postCreateNoticeParams = {
 export async function getShopId() {
   try {
     const userId = await getCookie("userId");
-    const res = await axiosInstance.get<GetUsersUserId>(`/users/${userId}`);
+    const res = await instance.get<GetUsersUserId>(`/users/${userId}`);
     const shopId = res.data.item.shop?.item.id;
     return shopId;
   } catch (error) {
@@ -133,7 +132,7 @@ export async function getShopId() {
 export async function postCreateNotice(params: postCreateNoticeParams) {
   try {
     const shopId = await getShopId();
-    const res = await axiosInstance.post<PostShopsShopIdNotices>(
+    const res = await instance.post<PostShopsShopIdNotices>(
       `/shops/${shopId}/notices`,
       params,
     );
