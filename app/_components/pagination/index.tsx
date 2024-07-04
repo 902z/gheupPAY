@@ -77,7 +77,7 @@ export default function Pagination({
       </Link>
       {paginationList.map((page) => (
         <Link
-          className={` ${activePage === page ? "bg-red-30 text-white" : ""} flex h-10 w-10 items-center justify-center rounded-sm`}
+          className={` ${activePage === page ? "bg-red-30 text-white" : ""} flex h-10 w-10 items-center justify-center rounded-sm hover:bg-red-10 hover:text-black`}
           key={page}
           href={creatPageURL(page)}
         >

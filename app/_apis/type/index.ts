@@ -210,35 +210,10 @@ export interface GetUsersUserId {
       };
     };
   };
-  links: Array<object>;
+  links: [];
 }
 
-export interface PutUsersUserId {
-  item: {
-    id: string;
-    email: string;
-    type: "employee" | "employer";
-    name: string;
-    phone: string;
-    address: string;
-    bio: string;
-    shop: {
-      item: {
-        id: string;
-        name: string;
-        category: string;
-        address1: string;
-        address2: string;
-        description: string;
-        imageUrl: string;
-        originalHourlyPay: number;
-      };
-    };
-  };
-  links: Array<object>;
-}
-
-export interface PostShops {
+export type PostShop = {
   item: {
     id: string;
     name: string;
@@ -253,16 +228,16 @@ export interface PostShops {
         id: string;
         email: string;
         type: "employer" | "employee";
-        name: string; // optional
-        phone: string; // optional
-        address: string; // optional
-        bio: string; // optional
+        name: string;
+        phone: string;
+        address: string;
+        bio: string;
       };
       href: string;
     };
   };
   links: Array<object>;
-}
+};
 
 export interface GetShopsShopId {
   item: {
@@ -279,10 +254,10 @@ export interface GetShopsShopId {
         id: string;
         email: string;
         type: "employer" | "employee";
-        name: string; // optional
-        phone: string; // optional
-        address: string; // optional
-        bio: string; // optional
+        name: string;
+        phone: string;
+        address: string;
+        bio: string;
       };
       href: string;
     };
@@ -652,4 +627,29 @@ export type UserApplication = {
     method: string;
     href: string;
   }[];
+};
+
+export type PutUsersUserId = {
+  item: {
+    id: "string";
+    email: "string";
+    type: "employer | employee";
+    name?: "string";
+    phone?: "string";
+    address?: "string";
+    bio?: "string";
+    shop: {
+      item: {
+        id: "string";
+        name: "string";
+        category: "string";
+        address1: "string";
+        address2: "string";
+        description: "string";
+        imageUrl: "string";
+        originalHourlyPay: "number";
+      };
+    } | null;
+  };
+  links: [];
 };

@@ -18,7 +18,7 @@ export default function MyShopDetailCard({
   description,
 }: MyShopDetailCardProps) {
   return (
-    <div>
+    <div className="pb-[60px]">
       <div className="box-border flex h-fit w-full flex-col rounded-[12px] bg-red-10 p-5 lg:flex-row lg:gap-4">
         <div className="relative mb-2 box-border h-[180px] w-full rounded-[12px] lg:h-[308px] lg:w-[539px]">
           <Image

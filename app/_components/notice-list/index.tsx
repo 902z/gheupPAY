@@ -45,10 +45,10 @@ export default function AllNoticeList({
 
   return (
     <div>
-      <div className="mx-auto flex w-full flex-col px-4 md:justify-center lg:max-w-[964px]">
+      <section className="mx-auto flex w-full flex-col px-4 md:justify-center lg:max-w-[964px]">
         <div className="flex justify-between">
           <h2
-            className="pb-4 font-bold text-l md:pb-12 md:text-2xl"
+            className="pb-4 font-bold text-l md:pb-8 md:text-2xl"
             id={ALL_LIST_SECTION_ID}
           >
             {searchKeyword ? (
@@ -94,7 +94,7 @@ export default function AllNoticeList({
             focusHash={ALL_LIST_SECTION_ID}
           />
         </div>
-      </div>
+      </section>
     </div>
   );
 }

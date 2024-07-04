@@ -1,18 +1,14 @@
+import axiosInstance from "../instances";
 import instance from "@/app/_lib/axios";
-import {
-  GetShopsShopId,
-  GetShopsShopIdNoticesNoticeId,
-  PostShops,
-} from "../type";
 import { AddressType } from "@/app/_constants/address";
 import { CategoryType } from "@/app/_constants/category";
-import axiosInstance from "../instances";
 import { isAxiosError } from "axios";
 import { API_ERROR_MESSAGE } from "@/app/_constants/error-message";
 import { getImageUrl } from "../image";
+import { GetShopsShopIdNoticesNoticeId, PostShop } from "../type";
 
 // 가게 정보 조회
-export async function getShopDetail(shop_id: string): Promise<GetShopsShopId> {
+export async function getShopDetail(shop_id: string) {
   try {
     const res = await instance.get(`/shops/${shop_id}`);
     return res.data;
@@ -56,7 +52,7 @@ export const postShopCreate = async ({
 }): Promise<boolean> => {
   try {
     const processedImageUrl = await getImageUrl(imageUrl);
-    const response = await axiosInstance.post<PostShops>(
+    const response = await axiosInstance.post<PostShop>(
       "/shops",
       {
         name,

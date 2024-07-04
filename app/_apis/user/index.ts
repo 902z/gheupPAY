@@ -3,10 +3,10 @@ import { API_ERROR_MESSAGE } from "../../_constants/error-message";
 import { UserType } from "../../_constants/user-type";
 import axiosInstance from "../instances";
 import { isAxiosError } from "axios";
-import { PutUsersUserId, UserProfileData } from "../type";
 import { AddressType } from "@/app/_constants/address";
 import notification from "@/app/_util/notification";
 import { getCookie } from "@/app/_util/cookie";
+import { PutUsersUserId, UserProfileData } from "../type";
 
 // 회원가입
 interface Params {
