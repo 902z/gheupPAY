@@ -1,6 +1,7 @@
 "use client";
+"use client";
 import { GetShopsShopIdNoticesNoticeIdApplications } from "@/app/_apis/type";
-import React from "react";
+import React, { useEffect } from "react";
 import StatusLabel from "../status-label";
 import Table from "@/app/_components/table";
 
@@ -53,6 +54,17 @@ export default function AlbaApplicationTable({
   activePage,
   itemsCountPerPage,
 }: AlbaApplicationTableProps) {
+  const totalItemsCount = applicationList.count;
+
+  useEffect(() => {
+    if (window.location.hash) {
+      const element = document.querySelector(window.location.hash);
+      if (element) {
+        element.scrollIntoView({ behavior: "smooth" });
+      }
+    }
+  }, []);
+
   return (
     <Table
       items={applicationList}

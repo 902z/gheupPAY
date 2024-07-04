@@ -23,18 +23,18 @@ export default function AlbaStatusLabel({
 }: StatusLabelProps) {
   const [currentStatus, setCurrentStatus] = useState(status);
 
-  const updateStatus = async (status: "canceled") => {
+  const updateStatus = async () => {
     const newStatus = await putNoticeApplicationStatus(
       shopId,
       noticeId,
       applicationId,
-      status,
+      "canceled",
     );
     setCurrentStatus(newStatus.item.status);
   };
 
   const handleCancelClick = () => {
-    updateStatus("canceled");
+    updateStatus();
   };
 
   const statusStateMap: Record<string, React.ReactNode> = {

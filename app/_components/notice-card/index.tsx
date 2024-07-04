@@ -43,8 +43,10 @@ export default function NoticeCard({ cardContents }: NoticeCardProps) {
                 alt=""
                 src={cardContents.shop.item.imageUrl}
                 fill={true}
-                className="rounded-[12px] object-cover"
                 sizes="100% 100%"
+                layout="fill"
+                objectFit="cover"
+                className="rounded-[12px] object-cover border border-black border-opacity-10"
               />
             </div>
             <div className="px-1">

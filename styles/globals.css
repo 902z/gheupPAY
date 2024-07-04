@@ -97,3 +97,10 @@ input::-webkit-inner-spin-button {
 input[type="datetime-local"]::-webkit-calendar-picker-indicator {
   cursor: pointer;
 }
+
+input::-webkit-search-decoration,
+input::-webkit-search-cancel-button,
+input::-webkit-search-results-button,
+input::-webkit-search-results-decoration {
+  display: none;
+}
