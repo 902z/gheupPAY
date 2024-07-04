@@ -2,7 +2,7 @@ import instance from "@/app/_lib/axios";
 import { API_ERROR_MESSAGE } from "../../_constants/error-message";
 import { UserType } from "../../_constants/user-type";
 import axiosInstance from "../instances";
-import { AxiosError, isAxiosError } from "axios";
+import { isAxiosError } from "axios";
 import {
   GetUsersUserIdApplications,
   PutUsersUserId,
