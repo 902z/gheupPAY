@@ -10,6 +10,7 @@ import { AddressType, FORMATTED_ADDRESS } from "@/app/_constants/address";
 import { putUserProfile } from "@/app/_apis/user";
 import useModal from "@/app/_hooks/use-modal";
 import ConfirmModal from "@/app/_components/modals/_components/confirm-modal";
+import { setCookie } from "@/app/_util/cookie";
 
 type FormDataType = {
   name: string;
@@ -33,6 +34,7 @@ export default function CreateProfileForm() {
   };
 
   const onSubmit = async (data: FormDataType) => {
+    await setCookie("address", data.address);
     const response = await putUserProfile(data);
     if (response) {
       openModal();

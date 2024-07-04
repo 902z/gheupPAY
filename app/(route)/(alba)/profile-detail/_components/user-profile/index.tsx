@@ -15,9 +15,11 @@ export default function UserProfile({ userProfile }: UserProfileProps) {
       <div className="box-border flex h-fit w-full flex-col rounded-[12px] bg-red-10 p-5">
         <div className="flex items-center">
           <h3 className="flex-1 font-bold text-m text-primary">이름</h3>
-          <Button btnColor="white" className="w-[100px] md:w-[169px]">
-            편집하기
-          </Button>
+          <div className="w-[100px] md:w-[169px]">
+            <Button btnColor="white" className="w-[100px] md:w-[169px]">
+              편집하기
+            </Button>
+          </div>
         </div>
         <data className="font-bold text-xl">{userProfile.item.name}</data>
         <div className="flex items-center gap-1">

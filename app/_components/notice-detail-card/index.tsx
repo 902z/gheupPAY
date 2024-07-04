@@ -1,4 +1,4 @@
-import { GetShopsShopIdNoticesNoticeId } from "@/app/_apis/type";
+"use server";
 import { calculateTimeRange } from "@/app/_util/calculate-time-range";
 import { calculateWagePercentage } from "@/app/_util/calculate-wage-percentage ";
 import { dateFormat } from "@/app/_util/date-format";
@@ -9,16 +9,42 @@ import clock from "@/public/icons/clock.png";
 import mapPin from "@/public/icons/map-pin.png";
 import Button from "@/app/_components/button";
 import OnlyLabelHourlyRate from "../only-label-hourly-rate";
+import { getShopNoticeDetail } from "@/app/_apis/shop";
+import compareWorkingDateDiffFromNow from "@/app/_util/calculate-date-diff";
+import { BlindComponent } from "../blind-component";
+import RegisterButton from "./_component/register-button";
+import { getCookie } from "@/app/_util/cookie";
+import { getUsersUserIdApplications } from "@/app/_apis/user";
+import { putShopsShopIdNoticesNoticeIdApplicationsApplicationId } from "@/app/_apis/application";
+import {
+  GetUsersUserIdApplications,
+  UserApplication,
+} from "../../_apis/type/index";
 
 interface NoticeDetailCardProps {
-  noticeDetail: GetShopsShopIdNoticesNoticeId;
+  shopId: string;
+  noticeId: string;
 }
 
-export default function NoticeDetailCard({
-  noticeDetail,
+// 이제 NoticeDeatilCard에는 shopId와 noticeId가 필요합니다.
+export default async function NoticeDetailCard({
+  shopId,
+  noticeId,
 }: NoticeDetailCardProps) {
+  const noticeDetail = await getShopNoticeDetail(shopId, noticeId);
   const hourlyWage = calculateWagePercentage(noticeDetail.item.hourlyPay);
   const date = dateFormat(noticeDetail.item.startsAt);
+  const isLater: boolean = compareWorkingDateDiffFromNow(
+    noticeDetail.item.startsAt,
+    noticeDetail.item.workhour,
+  );
+  const type = await getCookie("type");
+  const address = await getCookie("address");
+  const userId = await getCookie("userId");
+  const userApplication =
+    typeof userId === "string"
+      ? await getUsersUserIdApplications(userId)
+      : null;
 
   return (
     <>
@@ -28,7 +54,7 @@ export default function NoticeDetailCard({
           {noticeDetail.item.shop.item.name}
         </data>
       </div>
-      <div className="box-border flex h-fit w-full flex-col rounded-[12px] border border-gray-10 bg-white p-5 lg:flex-row lg:gap-4">
+      <section className="box-border flex h-fit w-full flex-col rounded-[12px] border border-gray-10 bg-white p-5 lg:flex-row lg:gap-4">
         <div className="relative mb-2 box-border h-[180px] w-full rounded-[12px] md:h-[360px] lg:h-[308px] lg:w-[539px]">
           <Image
             alt=""
@@ -37,6 +63,11 @@ export default function NoticeDetailCard({
             sizes="100% 100%"
             className="rounded-[12px] object-cover"
           />
+          {noticeDetail.item.closed ? (
+            <BlindComponent description="마감 완료" />
+          ) : isLater ? (
+            <BlindComponent description="지난 공고" />
+          ) : null}{" "}
         </div>
         <div className="relative flex-1 px-1 lg:flex lg:flex-col lg:items-stretch lg:py-3">
           <div className="lg:flex-1">
@@ -68,11 +99,25 @@ export default function NoticeDetailCard({
               <p>{noticeDetail.item.shop.item.description}</p>
             </div>
           </div>
-          <Button btnColor="white" className="font-bold">
-            공고 편집하기
-          </Button>
+          {noticeDetail.item.closed || isLater ? (
+            <Button btnColor="orange" className="font-bold" disabled>
+              신청 불가
+            </Button>
+          ) : type === "employer" ? (
+            <Button btnColor="orange" className="font-bold" disabled>
+              알바생만 신청 가능합니다
+            </Button>
+          ) : (
+            <RegisterButton
+              type={type}
+              address={address}
+              userApplication={userApplication}
+              shopId={shopId}
+              noticeId={noticeId}
+            />
+          )}
         </div>
-      </div>
+      </section>
       <div className="mt-4 box-border flex h-fit w-full flex-col break-words rounded-[12px] bg-gray-10 p-5">
         <h3 className="font-bold">공고 설명</h3>
         <p>{noticeDetail.item.description}</p>

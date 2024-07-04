@@ -3,8 +3,11 @@ import React from "react";
 
 function ShopDetail() {
   return (
-    <div className="base-container">
+    <div className="base-container flex flex-col gap-3">
       <Link href="/admin/shop-create">가게 등록하기</Link>
+      <div>
+        <Link href="/admin/notice-create">공고 등록</Link>
+      </div>
       <Link href="/admin/shop-edit?shopId=147349f4-9781-4266-8213-4f127b6ee5f9">
         가게 편집하기
       </Link>

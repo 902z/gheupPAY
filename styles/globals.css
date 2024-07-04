@@ -4,7 +4,7 @@
 
 @layer utilities {
   .base-container {
-    @apply min-h-screen w-full px-3 pt-[120px] md:px-8 md:pt-[90px] lg:mx-auto lg:max-w-[964px] lg:px-0;
+    @apply min-h-screen w-full px-3 pt-[8rem] md:px-8 md:pt-[10rem] lg:mx-auto lg:max-w-[964px] lg:px-0;
   }
 }
 
@@ -83,6 +83,23 @@ input:-webkit-autofill {
   background: gray;
   border-radius: 5px;
 }
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox  */
+input[type="number"] {
+  -moz-appearance: textfield;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
 
 input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {
@@ -101,6 +118,6 @@ input[type="datetime-local"]::-webkit-calendar-picker-indicator {
 input::-webkit-search-decoration,
 input::-webkit-search-cancel-button,
 input::-webkit-search-results-button,
-input::-webkit-search-results-decoration{
-    display: none;
+input::-webkit-search-results-decoration {
+  display: none;
 }

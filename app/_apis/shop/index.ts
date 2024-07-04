@@ -1,16 +1,17 @@
+import axiosInstance from "../instances";
 import instance from "@/app/_lib/axios";
 import {
   GetShopsShopId,
   GetShopsShopIdNoticesNoticeId,
-  PostShops,
+  PostShop,
   PutShopsShopId,
 } from "../type";
 import { AddressType } from "@/app/_constants/address";
 import { CategoryType } from "@/app/_constants/category";
-import axiosInstance from "../instances";
 import { isAxiosError } from "axios";
 import { API_ERROR_MESSAGE } from "@/app/_constants/error-message";
 import { getImageUrl } from "../image";
+
 
 // 가게 정보 조회
 export async function getShopDetail(shopId: string): Promise<GetShopsShopId> {
@@ -18,8 +19,17 @@ export async function getShopDetail(shopId: string): Promise<GetShopsShopId> {
     const res = await axiosInstance.get(`/shops/${shopId}`);
     return res.data;
   } catch (error) {
-    console.error("getShopDetail 함수에서 오류 발생:", error);
-    throw error;
+    if (isAxiosError(error)) {
+      if (error.response?.status === 404) {
+        console.error(error.message);
+        throw new Error(error.message);
+      } else {
+        console.error(error);
+        throw new Error("알 수 없는 axios 오류가 발생했습니다.");
+      }
+    } else {
+      throw new Error("알 수 없는 오류가 발생했습니다.");
+    }
   }
 }
 
@@ -32,8 +42,17 @@ export async function getShopNoticeDetail(
     const res = await instance.get(`/shops/${shopId}/notices/${noticeId}`);
     return res.data;
   } catch (error) {
-    console.error("getShopNoticeDetail 함수에서 오류 발생:", error);
-    throw error;
+    if (isAxiosError(error)) {
+      if (error.response?.status === 404) {
+        console.error(error.message);
+        throw new Error(error.message);
+      } else {
+        console.error(error);
+        throw new Error("알 수 없는 axios 오류가 발생했습니다.");
+      }
+    } else {
+      throw new Error("알 수 없는 오류가 발생했습니다.");
+    }
   }
 }
 
@@ -57,7 +76,7 @@ export const postShopCreate = async ({
 }): Promise<boolean> => {
   try {
     const processedImageUrl = await getImageUrl(imageUrl);
-    const response = await axiosInstance.post<PostShops>(
+    const response = await axiosInstance.post<PostShop>(
       "/shops",
       {
         name,
