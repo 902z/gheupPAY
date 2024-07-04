@@ -7,7 +7,6 @@ import { useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
 import { numberWithCommas } from "@/app/_util/number-with-comma";
 import ShopEditForm from "../../shop-edit/shop-edit-form";
-import LoadingSign from "@/app/(route)/admin/shop-edit/loading-sign";
 import ErrorSign from "@/app/(route)/admin/shop-edit/error";
 interface InitialData {
   name: string;
@@ -58,10 +57,10 @@ function ShopEdit() {
     <PageModal title="가게 정보">
       {failed ? (
         <ErrorSign />
-      ) : initialData ? (
-        <ShopEditForm shopId={shopId!} initialData={initialData} />
       ) : (
-        <LoadingSign />
+        initialData && (
+          <ShopEditForm shopId={shopId!} initialData={initialData} />
+        )
       )}
     </PageModal>
   );
