@@ -9,3 +9,7 @@ export async function logout() {
   await deleteCookie("type");
   redirect("/");
 }
+
+export async function redirectAction(url: string) {
+  redirect(url);
+}
