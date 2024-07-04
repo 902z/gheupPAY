@@ -6,6 +6,7 @@ import { useEffect, useState } from "react";
 import CreateProfileForm from "@/app/(route)/(alba)/profile-register/_components/form";
 import ErrorSign from "@/app/_components/error-sign";
 import { getUser } from "@/app/_apis/user";
+import PageModal from "@/app/_components/page-modal";
 interface InitialData {
   name: string;
   phone: string;
@@ -44,9 +45,13 @@ export default function ShopEdit() {
     getUserInfo();
   }, []);
 
-  return failed ? (
-    <ErrorSign />
-  ) : (
-    initialData && <CreateProfileForm initialData={initialData} />
+  return (
+    <PageModal title="내 프로필">
+      {failed ? (
+        <ErrorSign />
+      ) : (
+        initialData && <CreateProfileForm initialData={initialData} />
+      )}
+    </PageModal>
   );
 }
