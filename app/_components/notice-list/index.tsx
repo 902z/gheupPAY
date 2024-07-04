@@ -27,6 +27,7 @@ export default function AllNoticeList({
   const totalItemsCount = notices.count;
   const [showFilter, setShowFilter] = useState(false);
   const searchKeyword = useSearchParams().get("keyword");
+  const currentSort = useSearchParams().get("sort") || "time";
   const router = useRouter();
 
   useEffect(() => {
@@ -73,7 +74,7 @@ export default function AllNoticeList({
           <div className="flex gap-4">
             <SortDropDown
               onSelect={handleSortSubmit}
-              defaultValue="time"
+              defaultValue={currentSort}
             />
 
             {/* 상세필터 버튼입니다 */}
