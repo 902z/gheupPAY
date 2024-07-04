@@ -25,8 +25,8 @@ export default async function Page({ searchParams }: PageProps) {
     return null;
   }
 
-  const page = parseInt(searchParams.page || "1", 10);
-  const limit = 10;
+  const page = parseInt(searchParams.page || "1", 5);
+  const limit = 5;
   const offset = (page - 1) * limit;
 
   const userProfile = await getUser(userId);
