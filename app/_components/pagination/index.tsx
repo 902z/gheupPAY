@@ -25,7 +25,7 @@ export default function Pagination({
   const pathname = usePathname();
   const searchParams = useSearchParams();
 
-  const creatPageURL = (page: number) => {
+  const createPageURL = (page: number) => {
     const params = new URLSearchParams(searchParams);
     params.set("page", page.toString());
     return `${pathname}?${params.toString()}#${focusHash}`;
@@ -54,32 +54,33 @@ export default function Pagination({
     (_, i) => startPage + i,
   );
 
+  const isContent = totalItemsCount > 0;
+
   return (
     <div className="flex justify-center gap-[2px] text-m">
-      <Link
-        className={`${activePage === 1 ? "pointer-events-none" : ""} flex h-10 w-10 items-center justify-center`}
-        href={{
-          pathname: `${pathname}`,
-          query: { page: prevPage },
-          hash: focusHash,
-        }}
-      >
-        {activePage === 1 ? (
-          <Image
-            src={arrowLeftDisabled}
-            alt="arrow-left"
-            width={20}
-            height={20}
-          />
-        ) : (
-          <Image src={arrowLeft} alt="arrow-left" width={20} height={20} />
-        )}
-      </Link>
+      {isContent ? (
+        <Link
+          className={`${activePage === 1 ? "pointer-events-none" : ""} flex h-10 w-10 items-center justify-center`}
+          href={createPageURL(prevPage)}
+        >
+          {activePage === 1 ? (
+            <Image
+              src={arrowLeftDisabled}
+              alt="arrow-left"
+              width={20}
+              height={20}
+            />
+          ) : (
+            <Image src={arrowLeft} alt="arrow-left" width={20} height={20} />
+          )}
+        </Link>
+      ) : null}
+
       {paginationList.map((page) => (
         <Link
           className={` ${activePage === page ? "bg-red-30 text-white" : ""} flex h-10 w-10 items-center justify-center rounded-sm hover:bg-red-10 hover:text-black`}
           key={page}
-          href={creatPageURL(page)}
+          href={createPageURL(page)}
         >
           {page}
         </Link>
@@ -87,11 +88,7 @@ export default function Pagination({
       {endPage !== totalPage ? (
         <Link
           className="flex h-10 w-10 items-center justify-center"
-          href={{
-            pathname: `${pathname}`,
-            query: { page: nextPage },
-            hash: focusHash,
-          }}
+          href={createPageURL(nextPage)}
         >
           <Image src={arrowRight} alt="arrow-right" />
         </Link>
