@@ -573,7 +573,7 @@ export type UserProfileData = {
     type: string;
     name: string;
     phone: string;
-    address: string;
+    address: AddressType;
     bio: string;
     shop: any | null;
   };

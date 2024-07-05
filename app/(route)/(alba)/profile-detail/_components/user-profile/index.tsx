@@ -1,5 +1,5 @@
-import { GetUsersUserId, UserProfileData } from "@/app/_apis/type";
-import Button from "@/app/_components/button";
+import { GetUsersUserId } from "@/app/_apis/type";
+import { LinkButton } from "@/app/_components/button";
 import Image from "next/image";
 import React from "react";
 import mapPin from "@/public/icons/map-pin.png";
@@ -16,9 +16,13 @@ export default function UserProfile({ userProfile }: UserProfileProps) {
         <div className="flex items-center">
           <h3 className="flex-1 font-bold text-m text-primary">이름</h3>
           <div className="w-[100px] md:w-[169px]">
-            <Button btnColor="white" className="w-[100px] md:w-[169px]">
+            <LinkButton
+              href={`/profile-edit?userId=${userProfile.item.id}`}
+              btnColor="white"
+              className="w-[100px] md:w-[169px]"
+            >
               편집하기
-            </Button>
+            </LinkButton>
           </div>
         </div>
         <data className="font-bold text-xl">{userProfile.item.name}</data>
