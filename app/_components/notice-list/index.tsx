@@ -65,7 +65,7 @@ export default function AllNoticeList({
       <section className="mx-auto flex w-full flex-col px-4 md:justify-center lg:max-w-[964px]">
         <div className="md:flex justify-between">
           <h2
-            className="pb-4 font-bold text-l md:pb-4 md:text-2xl"
+            className="pb-2 md:pb-4 font-bold text-l md:text-2xl"
             id={ALL_LIST_SECTION_ID}
           >
             {searchKeyword ? (
@@ -99,7 +99,16 @@ export default function AllNoticeList({
             ? noticeList.map((cardContents) => {
                 return (
                   <NoticeCard
-                    cardContents={cardContents.item}
+                    address1={cardContents.item.shop.item.address1}
+                    closed={cardContents.item.closed}
+                    hourlyPay={cardContents.item.hourlyPay}
+                    noticeId={cardContents.item.id}
+                    shopId={cardContents.item.shop.item.id}
+                    content={cardContents.item}
+                    imageUrl={cardContents.item.shop.item.imageUrl}
+                    name={cardContents.item.shop.item.name}
+                    startsAt={cardContents.item.startsAt}
+                    workhour={cardContents.item.workhour}
                     key={cardContents.item.id}
                   />
                 );

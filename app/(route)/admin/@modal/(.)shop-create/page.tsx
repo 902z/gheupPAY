@@ -1,3 +1,4 @@
+"use client";
 import PageModal from "@/app/_components/page-modal";
 import ShopCreateForm from "../../shop-create/shop-create-form";
 
