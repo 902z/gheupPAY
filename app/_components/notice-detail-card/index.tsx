@@ -49,7 +49,9 @@ export default async function NoticeDetailCard({
   return (
     <>
       <div>
-        <h3 className="font-bold text-m text-primary">식당</h3>
+        <h3 className="font-bold text-m text-primary">
+          {noticeDetail.item.shop.item.category}
+        </h3>
         <data className="font-bold text-l">
           {noticeDetail.item.shop.item.name}
         </data>
@@ -71,7 +73,9 @@ export default async function NoticeDetailCard({
         </div>
         <div className="relative flex-1 px-1 lg:flex lg:flex-col lg:items-stretch lg:py-3">
           <div className="lg:flex-1">
-            <h3 className="font-bold text-m text-primary">식당</h3>
+            <h3 className="font-bold text-m text-primary">
+              {noticeDetail.item.shop.item.category}
+            </h3>
             <div className="flex gap-2 py-2">
               <data className="pt-1 font-bold text-ml md:text-l">
                 {formattedNumber(noticeDetail.item.hourlyPay)}원
