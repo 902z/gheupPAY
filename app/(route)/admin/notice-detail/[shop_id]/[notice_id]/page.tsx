@@ -5,9 +5,6 @@ import { getNoticeApplications } from "@/app/_apis/application";
 import NoticeDetailCardSkeleton from "@/app/_components/notice-detail-card/_component/notice-detail-card-skeleton";
 import { LinkButton } from "@/app/_components/button";
 
-export const metadata = {
-  title: "공고 상세",
-};
 
 type PageProps = {
   searchParams: {

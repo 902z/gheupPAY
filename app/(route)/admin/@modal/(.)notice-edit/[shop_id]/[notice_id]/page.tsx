@@ -1,6 +1,5 @@
 "use client";
 import { getNoticeInfo } from "@/app/_apis/notice";
-import PageModal from "@/app/_components/page-modal";
 import { useEffect, useState } from "react";
 import CreateNoticeForm from "../../../(.)notice-create/_components";
 import { numberWithCommas } from "@/app/_util/number-with-comma";
@@ -50,14 +49,12 @@ export default function NoticeEdit({ params }: NoticeEditProps) {
     getNoticeDetail();
   }, []);
   return (
-    <PageModal title="공고 수정">
-      {initialInfo && (
-        <CreateNoticeForm
-          initialForm={initialInfo}
-          shopId={shop_id}
-          noticeId={notice_id}
-        />
-      )}
-    </PageModal>
+    initialInfo && (
+      <CreateNoticeForm
+        initialForm={initialInfo}
+        shopId={shop_id}
+        noticeId={notice_id}
+      />
+    )
   );
 }
