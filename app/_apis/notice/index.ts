@@ -1,6 +1,7 @@
 import instance from "@/app/_lib/axios";
 import { getCookie } from "@/app/_util/cookie";
 import {
+  GetNotices,
   GetShopsShopIdNotices,
   GetUsersUserId,
   PostShopsShopIdNotices,
@@ -10,14 +11,16 @@ import notification from "@/app/_util/notification";
 import { API_ERROR_MESSAGE } from "@/app/_constants/error-message";
 
 // 맞춤 공고
-export async function getCustomizedNotices({ offset = 0, limit = 5 }) {
+export async function getCustomizedNotices(address: string) {
   try {
     const params = new URLSearchParams({
-      offset: offset.toString(),
-      limit: limit.toString(),
+      offset: "0",
+      limit: "5",
+      address,
+      sort: "pay",
     });
 
-    const res = await instance.get(`/notices?${params.toString()}`);
+    const res = await instance.get<GetNotices>(`/notices?${params.toString()}`);
     return res.data;
   } catch (error) {
     console.error("getNotices 함수에서 오류 발생:", error);
