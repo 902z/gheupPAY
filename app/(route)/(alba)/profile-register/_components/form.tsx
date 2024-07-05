@@ -16,9 +16,14 @@ type FormDataType = {
   name: string;
   phone: string;
   address: AddressType;
+  bio: string;
 };
 
-export default function CreateProfileForm() {
+export default function CreateProfileForm({
+  initialData,
+}: {
+  initialData?: FormDataType;
+}) {
   const resolver = yupResolver(profileRegisterSchema);
   const { isOpen, closeModal, openModal } = useModal();
   const {
@@ -27,16 +32,25 @@ export default function CreateProfileForm() {
     setValue,
     getValues,
     formState: { errors },
-  } = useForm({ resolver, mode: "onSubmit" });
+  } = useForm<FormDataType>({
+    resolver,
+    mode: "onSubmit",
+    defaultValues: {
+      name: initialData?.name,
+      phone: initialData?.phone,
+      address: initialData?.address,
+      bio: initialData?.bio,
+    },
+  });
 
   const handleModalConfirm = () => {
     window.location.replace("/profile-detail");
   };
 
   const onSubmit = async (data: FormDataType) => {
-    await setCookie("address", data.address);
     const response = await putUserProfile(data);
     if (response) {
+      await setCookie("address", data.address);
       openModal();
     }
   };

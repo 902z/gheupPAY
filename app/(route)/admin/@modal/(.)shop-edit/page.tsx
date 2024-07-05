@@ -7,7 +7,7 @@ import { useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
 import { numberWithCommas } from "@/app/_util/number-with-comma";
 import ShopEditForm from "../../shop-edit/shop-edit-form";
-import ErrorSign from "@/app/(route)/admin/shop-edit/error";
+import ErrorSign from "../../shop-edit/error";
 interface InitialData {
   name: string;
   category: CategoryType;
