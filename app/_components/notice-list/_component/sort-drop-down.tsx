@@ -3,6 +3,7 @@ import React, { useState, useRef, useEffect } from "react";
 import useOutsideClick from "@/app/_hooks/use-outside-click";
 import Image from "next/image";
 import DownArrow from "@/public/icons/down-arrow.png";
+import { useSearchParams } from "next/navigation";
 
 const options = [
   { label: "마감임박순", value: "time" },
@@ -25,6 +26,7 @@ const SortDropDown: React.FC<SortDropDownProps> = ({
     defaultValue,
   );
   const dropdownRef = useRef<HTMLDivElement>(null);
+  const searchParams = useSearchParams();
 
   const handleDropdownToggle = () => {
     setIsOpen((prev) => !prev);
@@ -40,6 +42,12 @@ const SortDropDown: React.FC<SortDropDownProps> = ({
     ref: dropdownRef,
     handler: () => setIsOpen(false),
   });
+
+  useEffect(() => {
+    const sort = searchParams.get("sort") || defaultValue;
+    const selected = options.find((option) => option.value === sort);
+    setSelectedOption(selected?.label);
+  }, [searchParams, defaultValue]);
 
   useEffect(() => {
     if (defaultValue) {

@@ -27,7 +27,9 @@ export default function AllNoticeList({
   const totalItemsCount = notices.count;
   const [showFilter, setShowFilter] = useState(false);
   const searchKeyword = useSearchParams().get("keyword");
+  const searchParams = useSearchParams();
   const currentSort = useSearchParams().get("sort") || "time";
+  const [sortValue, setSortValue] = useState("time");
   const router = useRouter();
 
   useEffect(() => {
@@ -51,7 +53,12 @@ export default function AllNoticeList({
     const searchParams = new URLSearchParams(window.location.search);
     searchParams.set("sort", sortValue);
     router.push(`?${searchParams.toString()}`);
+    setSortValue(sortValue);
   }, []);
+
+  useEffect(() => {
+    setSortValue("time");
+  }, [searchParams.get("keyword")]);
 
   return (
     <div>
