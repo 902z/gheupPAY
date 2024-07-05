@@ -46,7 +46,7 @@ export default function MyShopDetailCard({
           </div>
           <div className="flex items-center justify-center gap-4">
             <LinkButton
-              href={`/admin/shop-edit?shop_id=${shopId}`}
+              href={`/admin/shop-edit?shopId=${shopId}`}
               btnColor="white"
               className="font-bold"
             >
