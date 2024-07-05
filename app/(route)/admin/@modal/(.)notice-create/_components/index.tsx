@@ -7,7 +7,7 @@ import CustomDateInput from "@/app/_components/custom-date-input";
 import CustomTimeInput from "@/app/_components/custom-time-input";
 import CustomTextarea from "@/app/_components/custom-textarea";
 import Button from "@/app/_components/button";
-import { postCreateNotice } from "@/app/_apis/notice";
+import { postCreateNotice, putNoticeEdit } from "@/app/_apis/notice";
 import ConfirmModal from "@/app/_components/modals/_components/confirm-modal";
 import useModal from "@/app/_hooks/use-modal";
 
@@ -17,16 +17,33 @@ type postCreateNoticeParams = {
   workhour: number;
   description: string;
 };
+interface CreateNoticeFormProps {
+  initialForm?: postCreateNoticeParams;
+  shopId?: string;
+  noticeId?: string;
+}
 
-export default function CreateNoticeForm() {
+export default function CreateNoticeForm({
+  initialForm,
+  shopId,
+  noticeId,
+}: CreateNoticeFormProps) {
   const { isOpen, closeModal, openModal } = useModal();
   const resolver = yupResolver(storeNoticeRegisterSchema);
   const {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm({ resolver, mode: "onSubmit" });
-
+  } = useForm<postCreateNoticeParams>({
+    resolver,
+    mode: "onSubmit",
+    defaultValues: {
+      hourlyPay: initialForm?.hourlyPay,
+      startsAt: initialForm?.startsAt,
+      description: initialForm?.description,
+      workhour: initialForm?.workhour,
+    },
+  });
   const onSubmit = async (data: postCreateNoticeParams) => {
     const hourlyPay = Number(data.hourlyPay.replace(/,/g, ""));
     const proceedData = {
@@ -34,7 +51,12 @@ export default function CreateNoticeForm() {
       startsAt: new Date(data.startsAt).toISOString(),
       hourlyPay: hourlyPay,
     };
-    const response = await postCreateNotice(proceedData);
+    let response;
+    if (shopId && noticeId) {
+      response = await putNoticeEdit(proceedData, shopId, noticeId);
+    } else {
+      response = await postCreateNotice(proceedData);
+    }
     if (response) {
       openModal();
     }
