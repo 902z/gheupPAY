@@ -2,9 +2,9 @@ import instance from "@/app/_lib/axios";
 import { getCookie } from "@/app/_util/cookie";
 import {
   GetNotices,
+  GetShopsShopIdNotices,
   GetUsersUserId,
   PostShopsShopIdNotices,
-  PutUsersUserId,
 } from "../type";
 import { isAxiosError } from "axios";
 import notification from "@/app/_util/notification";
@@ -71,6 +71,41 @@ export async function getAllNotices({
   }
 }
 
+// 가게의 공고 목록 조회
+interface getShopNoticeListParams {
+  shop_id: string;
+  offset?: number;
+  limit?: number;
+}
+type GetShopNotice = (
+  params: getShopNoticeListParams,
+) => Promise<GetShopsShopIdNotices>;
+
+export const getShopNoticeList: GetShopNotice = async ({
+  shop_id,
+  offset = 0,
+  limit = 6,
+}) => {
+  try {
+    const QueryParams = new URLSearchParams({
+      offset: offset.toString(),
+      limit: limit.toString(),
+    });
+    const res = await instance.get<GetShopsShopIdNotices>(
+      `/shops/${shop_id}/notices?${QueryParams.toString()}`,
+    );
+    return res.data;
+  } catch (error) {
+    if (isAxiosError(error)) {
+      if (error.response?.status === 404) {
+        throw new Error(error.response.data.message);
+      }
+    }
+    console.error("getUser 함수에서 오류 발생:", error);
+    throw new Error(API_ERROR_MESSAGE);
+  }
+};
+
 type postCreateNoticeParams = {
   hourlyPay: number;
   startsAt: string;
@@ -82,7 +117,7 @@ export async function getShopId() {
   try {
     const userId = await getCookie("userId");
     const res = await instance.get<GetUsersUserId>(`/users/${userId}`);
-    const shopId = res.data.item.shop.item.id;
+    const shopId = res.data.item.shop?.item.id;
     return shopId;
   } catch (error) {
     if (isAxiosError(error)) {

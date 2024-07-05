@@ -22,7 +22,7 @@ export default async function page({
       </Suspense>
       <div className="my-12">
         <h2 className="py-8 font-bold text-l md:text-2xl">최근에 본 공고</h2>
-        <div className="lg grid grid-cols-2 gap-4 lg:grid-cols-3">
+        <div className="grid grid-cols-2 gap-4 lg:grid-cols-3">
           <Suspense
             fallback={[1, 2, 3, 4, 5, 6].map((value) => (
               <NoticeCardSkeleton key={value} />
