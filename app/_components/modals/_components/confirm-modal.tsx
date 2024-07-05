@@ -44,7 +44,7 @@ export default function ConfirmModal({
         exit={{ opacity: 0 }}
         transition={{ duration: 0.3 }}
         className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50"
-        onClick={closeModal} // 밖에 클릭시 모달 닫음
+        onClick={handleBtn} // 밖에 클릭시 모달 닫음
       >
         <motion.div
           className="relative flex h-[220px] w-full max-w-[327px] flex-col rounded-lg bg-white p-4 shadow-lg md:max-w-[540px]"
@@ -65,6 +65,6 @@ export default function ConfirmModal({
         </motion.div>
       </motion.div>
     </AnimatePresence>,
-    document.body
+    document.body,
   );
 }
