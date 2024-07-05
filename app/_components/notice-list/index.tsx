@@ -27,6 +27,7 @@ export default function AllNoticeList({
   const totalItemsCount = notices.count;
   const [showFilter, setShowFilter] = useState(false);
   const searchKeyword = useSearchParams().get("keyword");
+  const currentSort = useSearchParams().get("sort") || "time";
   const router = useRouter();
 
   useEffect(() => {

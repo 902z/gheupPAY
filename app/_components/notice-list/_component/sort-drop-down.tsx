@@ -16,9 +16,14 @@ type SortDropDownProps = {
   defaultValue?: string;
 };
 
-const SortDropDown: React.FC<SortDropDownProps> = ({ onSelect, defaultValue }) => {
+const SortDropDown: React.FC<SortDropDownProps> = ({
+  onSelect,
+  defaultValue,
+}) => {
   const [isOpen, setIsOpen] = useState(false);
-  const [selectedOption, setSelectedOption] = useState<string | undefined>(defaultValue);
+  const [selectedOption, setSelectedOption] = useState<string | undefined>(
+    defaultValue,
+  );
   const dropdownRef = useRef<HTMLDivElement>(null);
 
   const handleDropdownToggle = () => {
@@ -38,7 +43,9 @@ const SortDropDown: React.FC<SortDropDownProps> = ({ onSelect, defaultValue }) =
 
   useEffect(() => {
     if (defaultValue) {
-      const defaultOption = options.find(option => option.value === "time");
+      const defaultOption = options.find(
+        (option) => option.value === defaultValue,
+      );
       if (defaultOption) {
         setSelectedOption(defaultOption.label);
         onSelect(defaultOption.value);
@@ -52,7 +59,7 @@ const SortDropDown: React.FC<SortDropDownProps> = ({ onSelect, defaultValue }) =
     <div ref={dropdownRef} className="relative w-[105px]">
       <form className="relative">
         <input
-          className={`text-m h-[30px] w-[110px] py-[6.5px] pl-3 cursor-pointer rounded-[6px] border border-gray-30 text-left hover:bg-gray-10 focus:outline-none ${
+          className={`h-[30px] w-[110px] cursor-pointer rounded-[6px] border border-gray-30 py-[6.5px] pl-3 text-left text-m hover:bg-gray-10 focus:outline-none ${
             selectedOption === "" ? "text-gray-40" : "text-black"
           }`}
           value={selectedOption || ""}
