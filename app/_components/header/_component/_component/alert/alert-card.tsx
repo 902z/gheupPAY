@@ -2,8 +2,10 @@ import { getUsersUserIdAlerts } from "@/app/_apis/type";
 import Image from "next/image";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
-import { putAlerts } from "@/app/_apis/alert";
 import timeDifferenceFromNow from "@/app/_util/time-difference-from-now";
+import { useRouter } from "next/navigation";
+import { Navigation } from "swiper/modules";
+import { putAlerts } from "@/app/_apis/alert";
 
 interface AlertCardProps {
   item: getUsersUserIdAlerts["items"][0];
@@ -11,26 +13,32 @@ interface AlertCardProps {
 }
 
 export default function AlertCard({ item, onDelete }: AlertCardProps) {
+  const router = useRouter();
+  const handleMove = () => {
+    router.push(
+      `/notice-detail/${item.item.shop.item.id}/${item.item.notice.item.id}`,
+    );
+  };
+
   const handleRemove = async () => {
-    // await putAlerts(item.item.id);
+    await putAlerts(item.item.id);
     onDelete(item.item.id);
   };
 
   return (
     <section className="z-10 flex w-full flex-col">
       <Swiper
-        onClick={handleRemove}
+        rewind={true}
+        navigation={true}
+        modules={[Navigation]}
+        onClick={handleMove}
         onSlideChange={handleRemove}
-        dir="rtl"
-        slidesPerView="auto"
-        mousewheel
+        slidesPerView={"auto"}
+        onDrag={handleRemove}
         className="alertCard"
       >
         <SwiperSlide>
-          <li
-            className="mb-2 flex h-[105px] !w-full flex-col items-start gap-2 rounded-[5px] bg-white px-3 py-4 duration-200 hover:scale-[1.01] active:scale-95"
-            dir="ltr"
-          >
+          <li className="mb-2 flex h-[105px] !w-full flex-col items-start gap-2 rounded-[5px] bg-white px-3 py-4 duration-200 hover:scale-[1.01] active:scale-95">
             {item?.item.result === "accepted" ? (
               <Image
                 src="/icons/alert-allowed.png"
@@ -65,6 +73,7 @@ export default function AlertCard({ item, onDelete }: AlertCardProps) {
             </p>
           </li>
         </SwiperSlide>
+        <SwiperSlide></SwiperSlide>
         <SwiperSlide></SwiperSlide>
       </Swiper>
     </section>

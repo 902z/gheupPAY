@@ -13,10 +13,9 @@ import { useSearchParams, useRouter } from "next/navigation";
 
 interface FilterProps {
   onClose: () => void;
-  keyword?: string;
 }
 
-export default function Filter({ onClose, keyword }: FilterProps) {
+export default function Filter({ onClose}: FilterProps) {
   const [selectedAddresses, setSelectedAddresses] = useState<string[]>([]);
   const [isFocused, setIsFocused] = useState<boolean>(false);
   const [startDate, setStartDate] = useState<string>("");
@@ -40,7 +39,7 @@ export default function Filter({ onClose, keyword }: FilterProps) {
     setStartDate(savedStartDate);
     setWage(savedWage);
   }, []);
-
+  
   const handleAddressClick = (address: string) => {
     setSelectedAddresses((prev) => {
       const updatedAddresses = prev.includes(address)
@@ -107,7 +106,7 @@ export default function Filter({ onClose, keyword }: FilterProps) {
       query.append("address", selectedAddresses);
     }
 
-    const keywordParam = searchParams.get("keyword") || keyword;
+    const keywordParam = searchParams.get("keyword");
     if (keywordParam) query.append("keyword", keywordParam);
 
     router.push(`/notice-list?${query.toString()}`);
@@ -116,7 +115,7 @@ export default function Filter({ onClose, keyword }: FilterProps) {
 
   return (
     <>
-      <form className="fixed inset-0 z-50 overflow-y-scroll rounded-[10px] border border-gray-20 bg-white px-[20px] py-[24px] shadow md:absolute md:left-[-315px] md:top-[37px] md:h-[845px] md:w-[390px]">
+      <form className="fixed inset-0 z-50 md:z-20 overflow-y-scroll rounded-[10px] border border-gray-20 bg-white px-[20px] py-[24px] shadow md:absolute md:left-[-315px] md:top-[37px] md:h-[845px] md:w-[390px]">
         <div className="mb-[24px] flex justify-between font-bold text-l">
           <h2>상세 필터</h2>
           <div className="h-[24px] w-[24px]">

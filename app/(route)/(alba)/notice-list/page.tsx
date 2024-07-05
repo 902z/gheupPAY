@@ -14,6 +14,7 @@ interface SearchParamsProps {
     startDate?: string;
     address?: string[];
     keyword?: string;
+    sort: string;
   };
 }
 
@@ -32,6 +33,8 @@ export default async function page({ searchParams }: SearchParamsProps) {
   const limit = 6;
   const offset = (page - 1) * limit;
 
+  const sort = searchParams.sort || "time";
+
   const allNotices = await getAllNotices({
     offset,
     limit,
@@ -39,6 +42,7 @@ export default async function page({ searchParams }: SearchParamsProps) {
     hourlyPayGte,
     startsAtGte,
     keyword,
+    sort,
   });
 
   let payNotices: GetNotices;
@@ -81,7 +85,7 @@ export default async function page({ searchParams }: SearchParamsProps) {
       {!keyword && (
         <section className={`mb-10 ${bgClass} px-4 py-10`}>
           <div className="mx-auto flex w-full flex-col px-2 md:justify-center lg:max-w-[1000px]">
-            <h2 className="pb-4 font-bold text-l md:pb-8 md:text-2xl">
+            <h2 className="md:px-3 font-bold text-l md:pb-2 md:text-2xl">
               맞춤 공고
             </h2>
             {renderCustomizedNoticesSection()}
@@ -94,6 +98,7 @@ export default async function page({ searchParams }: SearchParamsProps) {
           activePage={page}
           itemsCountPerPage={limit}
           keyword={keyword}
+          sort={sort}
         />
       </div>
     </div>

@@ -56,6 +56,7 @@ export default function RegisterButton({
       noticeId,
     );
     if (result) notification("신청이 완료되었습니다.", "info");
+    await redirectAction(`/notice-detail/${shopId}/${noticeId}`);
   };
 
   if (isRegister) {
