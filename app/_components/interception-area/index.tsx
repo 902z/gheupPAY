@@ -32,6 +32,7 @@ export function IntersectionArea({ onImpression, children }: Props) {
         observer.unobserve(currentRef);
       }
     };
-  }, [targetRef]);
+  }, [onImpression, targetRef]);
+
   return <div ref={targetRef}>{children}</div>;
 }
