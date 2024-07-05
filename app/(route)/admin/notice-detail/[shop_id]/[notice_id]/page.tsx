@@ -1,4 +1,3 @@
-"use client";
 import React, { Suspense } from "react";
 import NoticeDetailCard from "@/app/_components/notice-detail-card";
 import AlbaApplicationTable from "../../_components/alba-application-table";
