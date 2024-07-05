@@ -17,6 +17,7 @@ export async function getCustomizedNotices(address: string) {
       offset: "0",
       limit: "5",
       address,
+      sort: "pay",
     });
 
     const res = await instance.get<GetNotices>(`/notices?${params.toString()}`);
