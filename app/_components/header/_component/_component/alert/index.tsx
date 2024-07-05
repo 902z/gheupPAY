@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef, useState } from "react";
+import { useCallback, useRef, useState } from "react";
 import AlertList from "./alert-component";
 import Image from "next/image";
 import { getUsersUserIdAlerts } from "@/app/_apis/type";
@@ -28,7 +28,7 @@ export default function AlertButton({
   );
   const [alertConfig, setAlertConfig] = useState<InfiniteScrollProps>({
     hasNext: initialAlerts.hasNext,
-    offset: initialAlerts.offset,
+    offset: initialAlerts.offset + 10,
   });
   const alertRef = useRef<HTMLDivElement>(null);
   // 모바일 : 모달 열리면 > 스크롤 제거, 모달 닫히면 > 스크롤 생성
@@ -56,14 +56,14 @@ export default function AlertButton({
     setAlerts(() => alerts.filter((value) => value.item.id !== id));
   };
 
-  const fetchData = async () => {
+  const fetchData = useCallback(async () => {
     if (!alertConfig.hasNext) return;
     try {
-      const { items, hasNext, offset } = await getAlerts();
+      const { items, hasNext } = await getAlerts();
       setAlerts((prev) => [...prev, ...items]);
-      setAlertConfig(() => ({
+      setAlertConfig((prev) => ({
         hasNext,
-        offset: offset + 10,
+        offset: prev.offset + 6,
       }));
     } catch (e) {
       if (isAxiosError(e)) {
@@ -73,7 +73,7 @@ export default function AlertButton({
         throw Error("알림을 불러오는데 오류가 발생했습니다.");
       }
     }
-  };
+  }, [alertConfig]);
 
   return (
     <section className="relative w-[fit-content]" ref={alertRef}>
@@ -85,7 +85,7 @@ export default function AlertButton({
               <div className="flex flex-col md:ml-2">
                 <span>알림 {initialAlerts.count || 0}개</span>
                 <span className="text-sm text-gray-50">
-                  오른쪽으로 밀거나 클릭해서 읽음 처리해주세요!
+                  밀어서 읽음 처리해주세요!
                 </span>
               </div>
               <button className="mb-6 block md:hidden" onClick={handleClose}>
