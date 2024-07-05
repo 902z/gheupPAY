@@ -5,7 +5,6 @@ import { isAxiosError } from "axios";
 import {
   GetUsersUserIdApplications,
   PutUsersUserId,
-  UserProfileData as GetUserUserId,
   GetUsersUserId,
 } from "../type";
 import { AddressType } from "@/app/_constants/address";
