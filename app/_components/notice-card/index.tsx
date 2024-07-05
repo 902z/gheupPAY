@@ -9,14 +9,11 @@ import LabelHourlyRate from "@/app/_components/label-hourly-rate";
 import { calculateWagePercentage } from "@/app/_util/calculate-wage-percentage ";
 import { dateFormat } from "@/app/_util/date-format";
 import { GetNotices } from "@/app/_apis/type";
-import postNoticeAction from "@/app/actions/post-notice-action";
 import { BlindComponent } from "../blind-component";
 import compareWorkingDateDiffFromNow from "@/app/_util/calculate-date-diff";
-import { redirectAction } from "@/app/_actions";
 
 type NoticeCardProps = {
   noticeId: string;
-  shopId: string;
   hourlyPay: number;
   startsAt: string;
   workhour: number;
@@ -32,31 +29,21 @@ export default function NoticeCard({
   startsAt,
   workhour,
   noticeId,
-  shopId,
   imageUrl,
   name,
   address1,
-  content,
   closed,
 }: NoticeCardProps) {
   // shop.item.imageUrl, shop.item.name, shop.item.address1
   const hourlyWage = calculateWagePercentage(hourlyPay);
   const date = dateFormat(startsAt);
   const isLater: boolean = compareWorkingDateDiffFromNow(startsAt, workhour);
-  const handleClick = async () => {
-    if (content) {
-      await postNoticeAction(content);
-    } else {
-      await redirectAction(`/admin/notice-detail/${shopId}/${noticeId}`);
-    }
-  };
-  // async () => await postNoticeAction(cardContents)
+
   return (
     <article className="cursor-pointer duration-150 hover:scale-105 active:scale-95">
       <div
         key={noticeId}
         className="h-[261px] w-full rounded-[12px] border border-gray-20 bg-white p-3 md:h-[359px] lg:h-[349px] lg:w-[305px]"
-        onClick={handleClick}
       >
         <div className="relative mb-2 box-border h-[82px] w-full rounded-[12px] md:h-[170px] lg:h-[160px]">
           <Image

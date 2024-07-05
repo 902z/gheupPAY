@@ -1,7 +1,5 @@
 import React, { Suspense } from "react";
-import { getShopNoticeDetail } from "@/app/_apis/shop";
 import NoticeDetailCard from "@/app/_components/notice-detail-card";
-import { getNotices } from "@/app/_util/notice";
 import RecentNotices from "../../_components/recent-notices";
 import { NoticeCardSkeleton } from "@/app/_components/notice-card/_component/skeleton";
 import NoticeDetailCardSkeleton from "@/app/_components/notice-detail-card/_component/notice-detail-card-skeleton";
@@ -28,7 +26,10 @@ export default async function page({
               <NoticeCardSkeleton key={value} />
             ))}
           >
-            <RecentNotices />
+            <RecentNotices
+              shopId={params.shop_id}
+              noticeId={params.notice_id}
+            />
           </Suspense>
         </div>
       </div>

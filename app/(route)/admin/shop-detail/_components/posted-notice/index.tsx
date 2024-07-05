@@ -1,6 +1,8 @@
 "use client";
+import { redirectAction } from "@/app/_actions";
 import { getShopNoticeList } from "@/app/_apis/notice";
 import { GetShopsShopIdNotices, GetUsersUserId } from "@/app/_apis/type";
+import { RedirectButton } from "@/app/_components/action-button";
 import { IntersectionArea } from "@/app/_components/interception-area";
 import NoticeCard from "@/app/_components/notice-card";
 import { isAxiosError } from "axios";
@@ -60,34 +62,42 @@ export default function PostedNotice({ shop, initialList }: PostedNoticeProp) {
                   key={notice.item.id}
                   onImpression={handleImpression}
                 >
-                  <NoticeCard
+                  <RedirectButton
                     noticeId={notice.item.id}
-                    address1={shop.item.address1}
-                    closed={notice.item.closed}
                     shopId={shop.item.id}
-                    hourlyPay={notice.item.hourlyPay}
-                    imageUrl={shop.item.imageUrl}
-                    name={shop.item.name}
-                    startsAt={notice.item.startsAt}
-                    workhour={notice.item.workhour}
-                    key={notice.item.id}
-                  />
+                  >
+                    <NoticeCard
+                      noticeId={notice.item.id}
+                      address1={shop.item.address1}
+                      closed={notice.item.closed}
+                      hourlyPay={notice.item.hourlyPay}
+                      imageUrl={shop.item.imageUrl}
+                      name={shop.item.name}
+                      startsAt={notice.item.startsAt}
+                      workhour={notice.item.workhour}
+                      key={notice.item.id}
+                    />
+                  </RedirectButton>
                 </IntersectionArea>
               );
             }
             return (
-              <NoticeCard
-                noticeId={notice.item.id}
-                address1={shop.item.address1}
-                closed={notice.item.closed}
+              <RedirectButton
                 shopId={shop.item.id}
-                hourlyPay={notice.item.hourlyPay}
-                imageUrl={shop.item.imageUrl}
-                name={shop.item.name}
-                startsAt={notice.item.startsAt}
-                workhour={notice.item.workhour}
+                noticeId={notice.item.id}
                 key={notice.item.id}
-              />
+              >
+                <NoticeCard
+                  noticeId={notice.item.id}
+                  address1={shop.item.address1}
+                  closed={notice.item.closed}
+                  hourlyPay={notice.item.hourlyPay}
+                  imageUrl={shop.item.imageUrl}
+                  name={shop.item.name}
+                  startsAt={notice.item.startsAt}
+                  workhour={notice.item.workhour}
+                />
+              </RedirectButton>
             );
           })}
       </div>
