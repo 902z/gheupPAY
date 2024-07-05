@@ -47,14 +47,16 @@ export default async function page({ searchParams }: SearchParamsProps) {
 
   const allNoticeListClassName = keyword ? "pt-12" : "";
 
-  const bgClass = token&&hasAddress ? "bg-red-10" : "bg-[#b3a5a2]";
+  const bgClass = token && hasAddress ? "bg-red-10" : "bg-[#b3a5a2]";
 
   return (
     <div className="mt-[102px] w-full md:mt-[70px] lg:mx-auto">
       {!keyword && (
         <section className={`mb-10 ${bgClass} px-4 py-10`}>
-          <div className="mx-auto flex w-full flex-col px-2 md:justify-center lg:max-w-[1000px]">
-            <h2 className="pb-4 font-bold text-l md:pb-8 md:text-2xl">맞춤 공고</h2>
+          <div className="lg:px- mx-auto flex w-full flex-col px-2 md:justify-center md:px-5 lg:max-w-[1000px]">
+            <h2 className="pb-4 font-bold text-l md:pb-4 md:text-2xl">
+              맞춤 공고
+            </h2>
             {(() => {
               if (token) {
                 if (hasAddress) {

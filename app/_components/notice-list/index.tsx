@@ -1,5 +1,5 @@
 "use client";
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef, useState, useCallback } from "react";
 import Pagination from "@/app/_components/pagination";
 import NoticeCard from "../notice-card";
 import { GetNotices } from "../../_apis/type/index";
@@ -46,18 +46,18 @@ export default function AllNoticeList({
     setShowFilter(false);
   };
 
-  const handleSortSubmit = (sortValue: string) => {
+  const handleSortSubmit = useCallback((sortValue: string) => {
     const searchParams = new URLSearchParams(window.location.search);
     searchParams.set("sort", sortValue);
     router.push(`?${searchParams.toString()}`);
-  };
+  }, []);
 
   return (
     <div>
       <section className="mx-auto flex w-full flex-col px-4 md:justify-center lg:max-w-[964px]">
         <div className="flex justify-between">
           <h2
-            className="pb-4 font-bold text-l md:pb-8 md:text-2xl"
+            className="pb-4 font-bold text-l md:pb-4 md:text-2xl"
             id={ALL_LIST_SECTION_ID}
           >
             {searchKeyword ? (
@@ -71,10 +71,7 @@ export default function AllNoticeList({
           </h2>
 
           <div className="flex gap-4">
-            <SortDropDown
-              onSelect={handleSortSubmit}
-              defaultValue="time"
-            />
+            <SortDropDown onSelect={handleSortSubmit} defaultValue="time" />
 
             {/* 상세필터 버튼입니다 */}
             <div className="relative">

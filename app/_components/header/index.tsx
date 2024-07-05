@@ -3,6 +3,7 @@ import Link from "next/link";
 import { HeaderNotLogin } from "./_component/header-not-login";
 import HeaderLogin from "./_component/header-login";
 import { getCookie } from "@/app/_util/cookie";
+import SearchBar from "./_component/search";
 
 export default async function Header() {
   const type = await getCookie("type");
@@ -38,12 +39,7 @@ export default async function Header() {
               sizes="100% 100%"
             />
           </section>
-          <input
-            type="search"
-            name="keyword"
-            className="h-9 w-full rounded-[10px] bg-gray-10 px-2 py-[10px] indent-[30px] text-s focus:outline-[0.5px] focus:outline-primary md:h-10 md:max-w-[450px] md:px-[10px] md:text-m lg:w-full lg:max-w-[450px]"
-            placeholder="가게 이름으로 찾아보세요"
-          />
+          <SearchBar />
         </form>
         <nav className="col-start-2 row-start-1 flex items-start gap-4 justify-self-end font-bold text-m md:items-center md:text-base">
           {!type ? <HeaderNotLogin /> : <HeaderLogin />}
