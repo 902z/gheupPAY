@@ -41,6 +41,18 @@ export default function Filter({ onClose, keyword }: FilterProps) {
     setWage(savedWage);
   }, []);
 
+  useEffect(() => {
+    const keyword = searchParams.get("keyword");
+  
+    if (keyword) {
+      localStorage.removeItem("selectedAddresses");
+      localStorage.removeItem("startDate");
+      localStorage.removeItem("wage");
+    }
+  }, [searchParams.get("keyword")]);
+  
+  
+
   const handleAddressClick = (address: string) => {
     setSelectedAddresses((prev) => {
       const updatedAddresses = prev.includes(address)
