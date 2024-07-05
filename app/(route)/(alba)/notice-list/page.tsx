@@ -3,11 +3,9 @@ import CustomizedNoticeList from "./_components/customized-notice";
 import { getAllNotices, getCustomizedNotices } from "@/app/_apis/notice";
 import AllNoticeList from "@/app/_components/notice-list";
 import { getCookie } from "@/app/_util/cookie";
-import Image from "next/image";
-import bluredCustomeDesktop from "@/public/images/blured-custome-desktop.png";
-import bluredCustomeMobile from "@/public/images/blured-custome-mobile.png";
-import { LinkButton } from "@/app/_components/button";
 import { GetNotices } from "@/app/_apis/type";
+import NeedLoginSection from "./_components/need-login-section";
+import NeedProfileSection from "./_components/need-profile-section";
 
 interface SearchParamsProps {
   searchParams: {
@@ -58,77 +56,11 @@ export default async function page({ searchParams }: SearchParamsProps) {
 
   const renderCustomizedNoticesSection = () => {
     if (!token) {
-      return (
-        <div className="relative">
-          <div className="md:hidden">
-            <Image
-              src={bluredCustomeMobile}
-              alt="로그인시 사용 가능한 서비스입니다."
-              priority
-              sizes="100% 100%"
-              className="rounded-2xl"
-            />
-          </div>
-          <div className="hidden md:block">
-            <Image
-              src={bluredCustomeDesktop}
-              alt="로그인시 사용 가능한 서비스입니다."
-              priority
-              sizes="100% 100%"
-              className="rounded-2xl"
-            />
-          </div>
-          <p className="absolute bottom-[50%] right-[50%] translate-x-1/2 text-center font-bold text-l text-gray-5 md:pb-12 md:text-xl">
-            로그인 후 이용 가능한
-            <br />
-            사용자 맞춤 서비스입니다!
-          </p>
-          <div className="absolute right-[50%] top-[50%] w-60 translate-x-1/2">
-            <LinkButton href="/login" className="w-10 text-l" btnColor="orange">
-              로그인 하러 가기
-            </LinkButton>
-          </div>
-        </div>
-      );
+      return <NeedLoginSection />;
     }
 
     if (!hasAddress) {
-      return (
-        <div className="relative">
-          <div className="md:hidden">
-            <Image
-              src={bluredCustomeMobile}
-              alt="프로필 등록시 사용 가능한 서비스입니다."
-              priority
-              sizes="100% 100%"
-              className="rounded-2xl"
-            />
-          </div>
-          <div className="hidden md:block">
-            <Image
-              src={bluredCustomeDesktop}
-              alt="프로필 등록시 사용 가능한 서비스입니다."
-              priority
-              sizes="100% 100%"
-              className="rounded-2xl"
-            />
-          </div>
-          <p className="absolute bottom-[50%] right-[50%] translate-x-1/2 text-center font-bold text-l text-gray-5 md:pb-12 md:text-xl">
-            프로필 등록 후 이용 가능한
-            <br />
-            알바님 맞춤 서비스입니다!
-          </p>
-          <div className="absolute right-[50%] top-[50%] w-60 translate-x-1/2">
-            <LinkButton
-              href={"/profile-register"}
-              className="w-10 text-l"
-              btnColor="orange"
-            >
-              프로필 등록 하러 가기
-            </LinkButton>
-          </div>
-        </div>
-      );
+      return <NeedProfileSection />;
     }
 
     if (customizedNotices && customizedNotices.items.length > 0) {
