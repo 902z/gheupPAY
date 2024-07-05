@@ -28,7 +28,7 @@ export default function AlertButton({
   );
   const [alertConfig, setAlertConfig] = useState<InfiniteScrollProps>({
     hasNext: initialAlerts.hasNext,
-    offset: initialAlerts.offset,
+    offset: initialAlerts.offset + 10,
   });
   const alertRef = useRef<HTMLDivElement>(null);
   // 모바일 : 모달 열리면 > 스크롤 제거, 모달 닫히면 > 스크롤 생성

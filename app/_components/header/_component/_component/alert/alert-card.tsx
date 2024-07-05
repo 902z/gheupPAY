@@ -5,6 +5,7 @@ import "swiper/css";
 import timeDifferenceFromNow from "@/app/_util/time-difference-from-now";
 import { useRouter } from "next/navigation";
 import { Navigation } from "swiper/modules";
+import { putAlerts } from "@/app/_apis/alert";
 
 interface AlertCardProps {
   item: getUsersUserIdAlerts["items"][0];
@@ -20,7 +21,7 @@ export default function AlertCard({ item, onDelete }: AlertCardProps) {
   };
 
   const handleRemove = async () => {
-    // await putAlerts(item.item.id);
+    await putAlerts(item.item.id);
     onDelete(item.item.id);
   };
 
