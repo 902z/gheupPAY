@@ -1,12 +1,12 @@
-import { UserProfileData } from "@/app/_apis/type";
-import Button, { LinkButton } from "@/app/_components/button";
+import { GetUsersUserId } from "@/app/_apis/type";
+import { LinkButton } from "@/app/_components/button";
 import Image from "next/image";
 import React from "react";
 import mapPin from "@/public/icons/map-pin.png";
 import phone from "@/public/icons/phone.png";
 
 type UserProfileProps = {
-  userProfile: UserProfileData;
+  userProfile: GetUsersUserId;
 };
 
 export default function UserProfile({ userProfile }: UserProfileProps) {

@@ -195,15 +195,15 @@ export interface GetUsersUserId {
     type: "employee" | "employer";
     name: string;
     phone: string;
-    address: string;
+    address: AddressType;
     bio: string;
-    shop: {
+    shop?: {
       item: {
         id: string;
         name: string;
         category: string;
-        address1: string;
-        address2: string;
+        address1: AddressType;
+        address2: AddressType;
         description: string;
         imageUrl: string;
         originalHourlyPay: number;
