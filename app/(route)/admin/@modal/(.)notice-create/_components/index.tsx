@@ -75,6 +75,7 @@ export default function CreateNoticeForm({
                 displayRequiredMarker={true}
                 register={register("hourlyPay")}
                 errorMessage={errors.hourlyPay?.message}
+                initialValue={initialForm?.hourlyPay}
               />
               <CustomDateInput
                 label="시작일시"
