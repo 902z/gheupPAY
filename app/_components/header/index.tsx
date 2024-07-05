@@ -26,8 +26,7 @@ export default async function Header() {
             sizes="100% 100%"
           />
         </Link>
-        <form
-          action="/notice-list"
+        <div
           className={"relative col-span-full md:ml-8 md:mr-[22px] md:flex-1"}
         >
           <section className="absolute left-[10px] top-[10px] h-4 w-4 md:h-5 md:w-5">
@@ -40,7 +39,7 @@ export default async function Header() {
             />
           </section>
           <SearchBar />
-        </form>
+        </div>
         <nav className="col-start-2 row-start-1 flex items-start gap-4 justify-self-end font-bold text-m md:items-center md:text-base">
           {!type ? <HeaderNotLogin /> : <HeaderLogin />}
         </nav>
