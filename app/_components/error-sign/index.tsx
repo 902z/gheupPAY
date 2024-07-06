@@ -1,5 +1,5 @@
 import { LinkButton } from "@/app/_components/button";
-import errorImage from "@/public/images/404.png";
+import errorImage from "@/public/images/warning.png";
 import Image from "next/image";
 
 function ErrorSign() {
