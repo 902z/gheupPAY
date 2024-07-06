@@ -20,14 +20,17 @@ export default function Home() {
   useEffect(() => {
     if (typeof window === "undefined") return;
     AOS.init({ duration: 1000 });
-    document.querySelector<HTMLDivElement>("#header")!.style.display = "none";
-    document.querySelector<HTMLDivElement>("#footer")!.style.display = "none";
-    document.querySelector<HTMLDivElement>("#loading")!.style.display = "none";
+    const header = document.querySelector<HTMLDivElement>("#header");
+    const footer = document.querySelector<HTMLDivElement>("#footer");
+    const loading = document.querySelector<HTMLDivElement>("#loading");
+    if (!header || !footer || !loading) return;
+    header.style.display = "none";
+    footer.style.display = "none";
+    loading.style.display = "none";
     return () => {
-      document.querySelector<HTMLDivElement>("#header")!.style.display =
-        "block";
-      document.querySelector<HTMLDivElement>("#footer")!.style.display =
-        "block";
+      header.style.display = "block";
+      footer.style.display = "block";
+      loading.style.display = "block";
     };
   }, []);
 
