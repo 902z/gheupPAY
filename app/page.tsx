@@ -30,6 +30,7 @@ export default function Home() {
     return () => {
       header.style.display = "block";
       footer.style.display = "block";
+      loading.style.display = "block";
     };
   }, []);
 
