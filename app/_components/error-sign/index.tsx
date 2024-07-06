@@ -8,13 +8,11 @@ function ErrorSign() {
       <Image alt="404" src={errorImage} width={600} />
       <h1 className="pt-4 font-bold text-2xl">오류가 발생했어요</h1>
       <p className="pb-4">다시 시도해주세요</p>
-      <LinkButton
-        href="/notice-list"
-        btnColor="orange"
-        className="w-fit px-12 md:px-20"
-      >
-        홈으로 가기
-      </LinkButton>
+      <div className="w-[350px] px-12 md:px-20">
+        <LinkButton href="/notice-list" btnColor="orange" className="">
+          홈으로 가기
+        </LinkButton>
+      </div>
     </div>
   );
 }
