@@ -27,6 +27,9 @@ export default async function NoticeDetailCard({
   noticeId,
 }: NoticeDetailCardProps) {
   const noticeDetail = await getShopNoticeDetail(shopId, noticeId);
+  const type = await getCookie("type");
+  const address = await getCookie("address");
+  const userId = await getCookie("userId");
 
   const hourlyWage = calculateWagePercentage(noticeDetail.item.hourlyPay);
   const date = dateFormat(noticeDetail.item.startsAt);
@@ -34,22 +37,20 @@ export default async function NoticeDetailCard({
     noticeDetail.item.startsAt,
     noticeDetail.item.workhour,
   );
-  const type = await getCookie("type");
-  const address = await getCookie("address");
-  const userId = await getCookie("userId");
+
   const userApplication =
-    typeof userId === "string"
+    typeof userId === "string" && type === "employee"
       ? await getUsersUserIdApplications(userId)
       : null;
-  const userDetail = typeof userId === "string" ? await getUser(userId) : null;
+  const userDetail =
+    typeof userId === "string" && type === "employer"
+      ? await getUser(userId)
+      : null;
 
-  if (!userDetail || !userDetail.item) {
-    return null;
-  }
   const isOwner =
-    type === "employer" &&
-    userDetail.item.shop &&
+    userDetail?.item.shop &&
     noticeDetail.item.shop.item.id === userDetail.item.shop.item.id;
+
   return (
     <>
       <div>
