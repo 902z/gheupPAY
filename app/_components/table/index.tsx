@@ -38,8 +38,8 @@ export default function Table({
   }, []);
   return (
     <div id={APPLICATION_LIST_ID} className="rounded-xl shadow-md">
-      <div className="overflow-auto">
-        <table className="w-full table-auto border-collapse border-spacing-0 border-gray-20">
+      <div className="overflow-auto rounded-t-xl">
+        <table className="w-full table-auto border-collapse border-spacing-0 rounded-xl border-gray-20">
           <thead>
             <tr className="border bg-red-10 text-left">
               {columns.map((column, index) => (

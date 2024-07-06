@@ -18,6 +18,9 @@ export default function SearchBar({ className }: SearchBarProps) {
     if (inputValue) {
       router.push(`/notice-list?keyword=${inputValue}`);
       setInputValue("");
+      localStorage.removeItem("selectedAddresses");
+      localStorage.removeItem("startDate");
+      localStorage.removeItem("wage");
     }
   };
 

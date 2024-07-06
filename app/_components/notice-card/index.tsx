@@ -9,10 +9,10 @@ import LabelHourlyRate from "@/app/_components/label-hourly-rate";
 import { calculateWagePercentage } from "@/app/_util/calculate-wage-percentage ";
 import { dateFormat } from "@/app/_util/date-format";
 import { GetNotices } from "@/app/_apis/type";
+import { useRouter } from "next/navigation";
+import compareWorkingDateDiffFromNow from "@/app/_util/calculate-date-diff";
 import postNoticeAction from "@/app/actions/post-notice-action";
 import { BlindComponent } from "../blind-component";
-import compareWorkingDateDiffFromNow from "@/app/_util/calculate-date-diff";
-import { redirectAction } from "@/app/_actions";
 
 type NoticeCardProps = {
   noticeId: string;
@@ -25,6 +25,7 @@ type NoticeCardProps = {
   imageUrl: string;
   content?: GetNotices["items"][0]["item"];
   closed: boolean;
+  isEmployer?: boolean;
 };
 
 export default function NoticeCard({
@@ -38,19 +39,21 @@ export default function NoticeCard({
   address1,
   content,
   closed,
+  isEmployer,
 }: NoticeCardProps) {
-  // shop.item.imageUrl, shop.item.name, shop.item.address1
   const hourlyWage = calculateWagePercentage(hourlyPay);
   const date = dateFormat(startsAt);
   const isLater: boolean = compareWorkingDateDiffFromNow(startsAt, workhour);
+  const router = useRouter();
+
   const handleClick = async () => {
     if (content) {
       await postNoticeAction(content);
-    } else {
-      await redirectAction(`/admin/notice-detail/${shopId}/${noticeId}`);
+      if (isEmployer) router.push(`/admin/notice-detail/${shopId}/${noticeId}`);
+      else router.push(`/notice-detail/${shopId}/${noticeId}`);
     }
   };
-  // async () => await postNoticeAction(cardContents)
+
   return (
     <article className="cursor-pointer duration-150 hover:scale-105 active:scale-95">
       <div

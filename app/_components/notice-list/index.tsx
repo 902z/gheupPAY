@@ -1,17 +1,20 @@
 "use client";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState, useCallback } from "react";
 import Pagination from "@/app/_components/pagination";
 import NoticeCard from "../notice-card";
 import { GetNotices } from "../../_apis/type/index";
 import { NoticeCardSkeleton } from "../notice-card/_component/skeleton";
 import Filter from "@/app/(route)/(alba)/notice-list/_components/filter";
-import { useSearchParams } from "next/navigation";
+import { useSearchParams, useRouter } from "next/navigation";
+import SortDropDown from "./_component/sort-drop-down";
 
 type AllNoticeListProps = {
   notices: GetNotices;
   activePage: number;
   itemsCountPerPage: number;
   keyword?: string;
+  sort: string;
+  isEmployer: boolean;
 };
 
 const ALL_LIST_SECTION_ID = "all-list-section";
@@ -20,11 +23,16 @@ export default function AllNoticeList({
   notices,
   activePage,
   itemsCountPerPage,
+  isEmployer,
 }: AllNoticeListProps) {
   const noticeList = notices.items;
   const totalItemsCount = notices.count;
   const [showFilter, setShowFilter] = useState(false);
   const searchKeyword = useSearchParams().get("keyword");
+  const searchParams = useSearchParams();
+  const currentSort = useSearchParams().get("sort") || "time";
+  const [sortValue, setSortValue] = useState("time");
+  const router = useRouter();
 
   useEffect(() => {
     if (window.location.hash) {
@@ -43,12 +51,23 @@ export default function AllNoticeList({
     setShowFilter(false);
   };
 
+  const handleSortSubmit = useCallback((sortValue: string) => {
+    const searchParams = new URLSearchParams(window.location.search);
+    searchParams.set("sort", sortValue);
+    router.push(`?${searchParams.toString()}`);
+    setSortValue(sortValue);
+  }, []);
+
+  useEffect(() => {
+    setSortValue("time");
+  }, [searchParams.get("keyword")]);
+
   return (
     <div>
       <section className="mx-auto flex w-full flex-col px-4 md:justify-center lg:max-w-[964px]">
-        <div className="flex justify-between">
+        <div className="justify-between md:flex">
           <h2
-            className="pb-4 font-bold text-l md:pb-8 md:text-2xl"
+            className="pb-2 font-bold text-l md:pb-4 md:text-2xl"
             id={ALL_LIST_SECTION_ID}
           >
             {searchKeyword ? (
@@ -60,16 +79,21 @@ export default function AllNoticeList({
               "전체 공고"
             )}
           </h2>
-          {/* 상세필터 버튼입니다 */}
-          <div className="relative">
-            <button
-              className="h-[30px] rounded-[5px] bg-red-30 px-[12px] font-bold text-m text-white"
-              onClick={handleOpenFilter}
-            >
-              <p>상세필터</p>
-            </button>
-            {showFilter && <Filter onClose={handleCloseFilter} />}
+
+          <div className="flex gap-4">
+            <SortDropDown onSelect={handleSortSubmit} defaultValue="time" />
+
             {/* 상세필터 버튼입니다 */}
+            <div className="relative">
+              <button
+                className="h-[30px] rounded-[5px] bg-red-30 px-[12px] font-bold text-m text-white"
+                onClick={handleOpenFilter}
+              >
+                <p>상세필터</p>
+              </button>
+              {showFilter && <Filter onClose={handleCloseFilter} />}
+              {/* 상세필터 버튼입니다 */}
+            </div>
           </div>
         </div>
         <div className="lg grid grid-cols-2 gap-4 lg:grid-cols-3">
@@ -88,6 +112,7 @@ export default function AllNoticeList({
                     startsAt={cardContents.item.startsAt}
                     workhour={cardContents.item.workhour}
                     key={cardContents.item.id}
+                    isEmployer={isEmployer}
                   />
                 );
               })

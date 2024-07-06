@@ -1,8 +1,8 @@
 import { getShopNoticeDetail } from "@/app/_apis/shop";
 import NoticeCard from "@/app/_components/notice-card";
 import { NoticeCardSkeleton } from "@/app/_components/notice-card/_component/skeleton";
+import { getCookie } from "@/app/_util/cookie";
 import { getNotices, NoticeIds } from "@/app/_util/notice";
-import postNoticeAction from "@/app/actions/post-notice-action";
 import { Suspense } from "react";
 
 const fetchNotices = async ({ id, shopId }: NoticeIds) => {
@@ -10,6 +10,8 @@ const fetchNotices = async ({ id, shopId }: NoticeIds) => {
 };
 
 export default async function RecentNotices() {
+  const type = await getCookie("type");
+
   const notices = await getNotices();
 
   return (

@@ -7,19 +7,14 @@ import Image from "next/image";
 import React from "react";
 import clock from "@/public/icons/clock.png";
 import mapPin from "@/public/icons/map-pin.png";
-import Button from "@/app/_components/button";
+import Button, { LinkButton } from "@/app/_components/button";
 import OnlyLabelHourlyRate from "../only-label-hourly-rate";
 import { getShopNoticeDetail } from "@/app/_apis/shop";
 import compareWorkingDateDiffFromNow from "@/app/_util/calculate-date-diff";
 import { BlindComponent } from "../blind-component";
 import RegisterButton from "./_component/register-button";
 import { getCookie } from "@/app/_util/cookie";
-import { getUsersUserIdApplications } from "@/app/_apis/user";
-import { putShopsShopIdNoticesNoticeIdApplicationsApplicationId } from "@/app/_apis/application";
-import {
-  GetUsersUserIdApplications,
-  UserApplication,
-} from "../../_apis/type/index";
+import { getUser, getUsersUserIdApplications } from "@/app/_apis/user";
 
 interface NoticeDetailCardProps {
   shopId: string;
@@ -32,6 +27,7 @@ export default async function NoticeDetailCard({
   noticeId,
 }: NoticeDetailCardProps) {
   const noticeDetail = await getShopNoticeDetail(shopId, noticeId);
+
   const hourlyWage = calculateWagePercentage(noticeDetail.item.hourlyPay);
   const date = dateFormat(noticeDetail.item.startsAt);
   const isLater: boolean = compareWorkingDateDiffFromNow(
@@ -45,11 +41,21 @@ export default async function NoticeDetailCard({
     typeof userId === "string"
       ? await getUsersUserIdApplications(userId)
       : null;
+  const userDetail = typeof userId === "string" ? await getUser(userId) : null;
 
+  if (!userDetail || !userDetail.item) {
+    return null;
+  }
+  const isOwner =
+    type === "employer" &&
+    userDetail.item.shop &&
+    noticeDetail.item.shop.item.id === userDetail.item.shop.item.id;
   return (
     <>
       <div>
-        <h3 className="font-bold text-m text-primary">식당</h3>
+        <h3 className="font-bold text-m text-primary">
+          {noticeDetail.item.shop.item.category}
+        </h3>
         <data className="font-bold text-l">
           {noticeDetail.item.shop.item.name}
         </data>
@@ -71,7 +77,9 @@ export default async function NoticeDetailCard({
         </div>
         <div className="relative flex-1 px-1 lg:flex lg:flex-col lg:items-stretch lg:py-3">
           <div className="lg:flex-1">
-            <h3 className="font-bold text-m text-primary">식당</h3>
+            <h3 className="font-bold text-m text-primary">
+              {noticeDetail.item.shop.item.category}
+            </h3>
             <div className="flex gap-2 py-2">
               <data className="pt-1 font-bold text-ml md:text-l">
                 {formattedNumber(noticeDetail.item.hourlyPay)}원
@@ -99,11 +107,19 @@ export default async function NoticeDetailCard({
               <p>{noticeDetail.item.shop.item.description}</p>
             </div>
           </div>
-          {noticeDetail.item.closed || isLater ? (
+          {isOwner ? (
+            <LinkButton
+              href={`/admin/shop-edit?shopId=${shopId}`}
+              btnColor="white"
+              className="font-bold"
+            >
+              편집하기
+            </LinkButton>
+          ) : noticeDetail.item.closed || isLater ? (
             <Button btnColor="orange" className="font-bold" disabled>
               신청 불가
             </Button>
-          ) : type === "employer" ? (
+          ) : type === "employer" && !isOwner ? (
             <Button btnColor="orange" className="font-bold" disabled>
               알바생만 신청 가능합니다
             </Button>
