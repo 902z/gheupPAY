@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import Image from "next/image";
 
 import close from "@/public/icons/close.png";
@@ -23,10 +23,23 @@ export default function Filter({ onClose }: FilterProps) {
   const [wage, setWage] = useState<string>("");
   const searchParams = useSearchParams();
   const router = useRouter();
+  const filterRef = useRef<HTMLFormElement>(null);
 
   useEffect(() => {
     setMinDate(getNow());
-  }, []);
+
+    const handleClickOutside = (event: MouseEvent) => {
+      if (filterRef.current && !filterRef.current.contains(event.target as Node)) {
+        setSelectedAddresses([]);
+        onClose();
+      }
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [onClose]);
 
   useEffect(() => {
     const savedSelectedAddresses = JSON.parse(
@@ -45,10 +58,6 @@ export default function Filter({ onClose }: FilterProps) {
       const updatedAddresses = prev.includes(address)
         ? prev.filter((item) => item !== address)
         : [...prev, address];
-      localStorage.setItem(
-        "selectedAddresses",
-        JSON.stringify(updatedAddresses),
-      );
       return updatedAddresses;
     });
   };
@@ -56,10 +65,6 @@ export default function Filter({ onClose }: FilterProps) {
   const handleRemoveAddressClick = (address: string) => {
     setSelectedAddresses((prev) => {
       const updatedAddresses = prev.filter((item) => item !== address);
-      localStorage.setItem(
-        "selectedAddresses",
-        JSON.stringify(updatedAddresses),
-      );
       return updatedAddresses;
     });
   };
@@ -70,7 +75,6 @@ export default function Filter({ onClose }: FilterProps) {
   const handleDateChange = (e: React.FormEvent<HTMLInputElement>) => {
     const value = e.currentTarget.value;
     setStartDate(value);
-    localStorage.setItem("startDate", value);
   };
 
   const handleWageChange = (e: React.FormEvent<HTMLInputElement>) => {
@@ -80,16 +84,12 @@ export default function Filter({ onClose }: FilterProps) {
     const formattedWage =
       numericValue > 999999 ? "999,999" : numberWithCommas(numericValue);
     setWage(formattedWage);
-    localStorage.setItem("wage", formattedWage);
   };
 
   const handleReset = () => {
     setSelectedAddresses([]);
     setStartDate("");
     setWage("");
-    localStorage.removeItem("selectedAddresses");
-    localStorage.removeItem("startDate");
-    localStorage.removeItem("wage");
   };
 
   const handleApply = () => {
@@ -109,13 +109,18 @@ export default function Filter({ onClose }: FilterProps) {
     const keywordParam = searchParams.get("keyword");
     if (keywordParam) query.append("keyword", keywordParam);
 
+    // 로컬스토리지에 저장
+    localStorage.setItem("selectedAddresses", JSON.stringify(selectedAddresses));
+    localStorage.setItem("startDate", startDate);
+    localStorage.setItem("wage", wage);
+
     router.push(`/notice-list?${query.toString()}`);
     onClose();
   };
 
   return (
     <>
-      <form className="fixed inset-0 z-50 md:absolute md:left-[-315px] md:top-[37px] md:z-20">
+      <form ref={filterRef} className="fixed inset-0 z-50 md:absolute md:left-[-315px] md:top-[37px] md:z-20">
         <div className="rounded-[10px] border border-gray-20 bg-white px-[20px] py-[24px] shadow">
           <div className="mb-[24px] flex justify-between bg-white font-bold text-l">
             <h2>상세 필터</h2>

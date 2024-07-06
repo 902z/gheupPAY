@@ -27,6 +27,7 @@ export default function AllNoticeList({
   const noticeList = notices.items;
   const totalItemsCount = notices.count;
   const [showFilter, setShowFilter] = useState(false);
+  const filterRef = useRef<HTMLDivElement | null>(null);
   const searchKeyword = useSearchParams().get("keyword");
   const searchParams = useSearchParams();
   const [sortValue, setSortValue] = useState("time");
@@ -60,6 +61,24 @@ export default function AllNoticeList({
     setSortValue("time");
   }, [searchParams.get("keyword")]);
 
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (filterRef.current && !filterRef.current.contains(event.target as Node)) {
+        setShowFilter(false);
+      }
+    };
+
+    if (showFilter) {
+      document.addEventListener("mousedown", handleClickOutside);
+    } else {
+      document.removeEventListener("mousedown", handleClickOutside);
+    }
+
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [showFilter]);
+
   return (
     <div>
       <section className="mx-auto flex w-full flex-col px-4 md:justify-center lg:max-w-[964px]">
@@ -82,7 +101,7 @@ export default function AllNoticeList({
             <SortDropDown onSelect={handleSortSubmit} defaultValue="time" />
 
             {/* 상세필터 버튼입니다 */}
-            <div className="relative">
+            <div className="relative" ref={filterRef}>
               <button
                 className="h-[30px] rounded-[5px] bg-red-30 px-[12px] font-bold text-m text-white"
                 onClick={handleOpenFilter}
