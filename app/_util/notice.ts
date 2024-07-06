@@ -23,6 +23,7 @@ export async function postNotice(
 ): Promise<void> {
   const currentNotice: NoticeIds[] = await getNotices();
   const newNoticeId = { id: notice.id, shopId: notice.shop.item.id };
+
   const isDuplicated = currentNotice.some((n) => n.id === notice.id);
   if (isDuplicated) {
     await setNotices([

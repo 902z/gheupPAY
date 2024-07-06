@@ -7,6 +7,7 @@ import { NoticeCardSkeleton } from "../notice-card/_component/skeleton";
 import Filter from "@/app/(route)/(alba)/notice-list/_components/filter";
 import { useSearchParams, useRouter } from "next/navigation";
 import SortDropDown from "./_component/sort-drop-down";
+import { NoticeDetailedButton } from "../action-button";
 
 type AllNoticeListProps = {
   notices: GetNotices;
@@ -14,7 +15,6 @@ type AllNoticeListProps = {
   itemsCountPerPage: number;
   keyword?: string;
   sort: string;
-  isEmployer: boolean;
 };
 
 const ALL_LIST_SECTION_ID = "all-list-section";
@@ -23,7 +23,6 @@ export default function AllNoticeList({
   notices,
   activePage,
   itemsCountPerPage,
-  isEmployer,
 }: AllNoticeListProps) {
   const noticeList = notices.items;
   const totalItemsCount = notices.count;
@@ -100,20 +99,23 @@ export default function AllNoticeList({
           {noticeList
             ? noticeList.map((cardContents) => {
                 return (
-                  <NoticeCard
-                    address1={cardContents.item.shop.item.address1}
-                    closed={cardContents.item.closed}
-                    hourlyPay={cardContents.item.hourlyPay}
+                  <NoticeDetailedButton
                     noticeId={cardContents.item.id}
                     shopId={cardContents.item.shop.item.id}
-                    content={cardContents.item}
-                    imageUrl={cardContents.item.shop.item.imageUrl}
-                    name={cardContents.item.shop.item.name}
-                    startsAt={cardContents.item.startsAt}
-                    workhour={cardContents.item.workhour}
                     key={cardContents.item.id}
-                    isEmployer={isEmployer}
-                  />
+                  >
+                    <NoticeCard
+                      address1={cardContents.item.shop.item.address1}
+                      closed={cardContents.item.closed}
+                      hourlyPay={cardContents.item.hourlyPay}
+                      noticeId={cardContents.item.id}
+                      content={cardContents.item}
+                      imageUrl={cardContents.item.shop.item.imageUrl}
+                      name={cardContents.item.shop.item.name}
+                      startsAt={cardContents.item.startsAt}
+                      workhour={cardContents.item.workhour}
+                    />
+                  </NoticeDetailedButton>
                 );
               })
             : [1, 2, 3, 4, 5, 6].map((index) => {

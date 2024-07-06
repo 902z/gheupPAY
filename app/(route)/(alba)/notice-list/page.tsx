@@ -104,7 +104,6 @@ export default async function page({ searchParams }: SearchParamsProps) {
           itemsCountPerPage={limit}
           keyword={keyword}
           sort={sort}
-          isEmployer={isEmployer}
         />
       </div>
     </div>
