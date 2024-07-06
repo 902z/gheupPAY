@@ -41,15 +41,15 @@ export default async function NoticeDetailCard({
     typeof userId === "string"
       ? await getUsersUserIdApplications(userId)
       : null;
-
   const userDetail = typeof userId === "string" ? await getUser(userId) : null;
-  if (!userDetail || !userDetail.item || !userDetail.item.shop) {
+
+  if (!userDetail || !userDetail.item) {
     return null;
   }
   const isOwner =
     type === "employer" &&
+    userDetail.item.shop &&
     noticeDetail.item.shop.item.id === userDetail.item.shop.item.id;
-
   return (
     <>
       <div>

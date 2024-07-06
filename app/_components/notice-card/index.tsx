@@ -47,7 +47,6 @@ export default function NoticeCard({
   const router = useRouter();
 
   const handleClick = async () => {
-    console.log(content);
     if (content) {
       await postNoticeAction(content);
       if (isEmployer) router.push(`/admin/notice-detail/${shopId}/${noticeId}`);
