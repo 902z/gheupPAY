@@ -1,7 +1,5 @@
 import React, { Suspense } from "react";
-import { getShopNoticeDetail } from "@/app/_apis/shop";
 import NoticeDetailCard from "@/app/_components/notice-detail-card";
-import { getNotices } from "@/app/_util/notice";
 import RecentNotices from "../../_components/recent-notices";
 import { NoticeCardSkeleton } from "@/app/_components/notice-card/_component/skeleton";
 import NoticeDetailCardSkeleton from "@/app/_components/notice-detail-card/_component/notice-detail-card-skeleton";
@@ -11,15 +9,13 @@ export const metadata = {
 };
 
 type PageProps = {
-  params?: {
+  params: {
     shop_id: string;
     notice_id: string;
   };
 };
 
-export default async function page({ params }: PageProps, isEmployer: boolean) {
-  if (!params || !params.shop_id || !params.notice_id) return;
-
+export default async function page({ params }: PageProps) {
   return (
     <div className="base-container">
       <Suspense fallback={<NoticeDetailCardSkeleton />}>
@@ -33,7 +29,10 @@ export default async function page({ params }: PageProps, isEmployer: boolean) {
               <NoticeCardSkeleton key={value} />
             ))}
           >
-            <RecentNotices />
+            <RecentNotices
+              shopId={params.shop_id}
+              noticeId={params.notice_id}
+            />
           </Suspense>
         </div>
       </div>
