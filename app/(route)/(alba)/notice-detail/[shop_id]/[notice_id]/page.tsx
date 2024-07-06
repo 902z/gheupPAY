@@ -17,7 +17,7 @@ type PageProps = {
   };
 };
 
-export default async function page({ params }: PageProps) {
+export default async function page({ params }: PageProps, isEmployer: boolean) {
   if (!params || !params.shop_id || !params.notice_id) return;
 
   return (
