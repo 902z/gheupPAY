@@ -1,10 +1,13 @@
 import instance from "@/app/_lib/axios";
 import { getCookie } from "@/app/_util/cookie";
+import { getTomorrowMidnight } from '@/app/_util/get-tomorrow-midnight';
 import {
   GetNotices,
   GetShopsShopIdNotices,
+  GetShopsShopIdNoticesNoticeId,
   GetUsersUserId,
   PostShopsShopIdNotices,
+  PutShopsShopIdNoticesNoticeId,
 } from "../type";
 import { isAxiosError } from "axios";
 import notification from "@/app/_util/notification";
@@ -61,6 +64,9 @@ export async function getAllNotices({
     }
     if (startsAtGte) {
       params.append("startsAtGte", startsAtGte);
+    }
+    if (sort === "time") {
+      params.set("startsAtGte", getTomorrowMidnight());
     }
 
     const res = await instance.get(`/notices?${params.toString()}`);
@@ -154,5 +160,52 @@ export async function postCreateNotice(params: postCreateNoticeParams) {
       notification(`${API_ERROR_MESSAGE}`, "error");
     }
     throw new Error(API_ERROR_MESSAGE);
+  }
+}
+
+export async function getNoticeInfo(shopId: string, noticeId: string) {
+  try {
+    const res = await instance.get<GetShopsShopIdNoticesNoticeId>(
+      `/shops/${shopId}/notices/${noticeId}`,
+    );
+    return res.data;
+  } catch (error) {
+    if (isAxiosError(error)) {
+      if (error.response?.status === 404) {
+        const message = error.response.data.message;
+        notification(`${message ?? ""}`, "error");
+      } else {
+        notification(`${API_ERROR_MESSAGE}`, "error");
+      }
+    }
+    throw error;
+  }
+}
+
+export async function putNoticeEdit(
+  params: postCreateNoticeParams,
+  shopId: string,
+  noticeId: string,
+) {
+  try {
+    const res = await instance.put<PutShopsShopIdNoticesNoticeId>(
+      `/shops/${shopId}/notices/${noticeId}`,
+      params,
+    );
+    return res.data;
+  } catch (error) {
+    if (isAxiosError(error)) {
+      if (
+        error.response?.status === 400 ||
+        error.response?.status === 403 ||
+        error.response?.status === 404
+      ) {
+        const message = error.response.data.message;
+        notification(`${message ?? ""}`, "error");
+      }
+    } else {
+      notification(`${API_ERROR_MESSAGE}`, "error");
+    }
+    throw error;
   }
 }
