@@ -25,7 +25,7 @@ type NoticeCardProps = {
   imageUrl: string;
   content?: GetNotices["items"][0]["item"];
   closed: boolean;
-  isEmployer: boolean;
+  isEmployer?: boolean;
 };
 
 export default function NoticeCard({
