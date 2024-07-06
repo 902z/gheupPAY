@@ -1,6 +1,6 @@
 import instance from "@/app/_lib/axios";
 import { getCookie } from "@/app/_util/cookie";
-import { getTomorrowMidnight } from '@/app/_util/get-tomorrow-midnight';
+import { getThirtyMinutesLater } from '@/app/_util/get-thirty-minutes-later';
 import {
   GetNotices,
   GetShopsShopIdNotices,
@@ -66,7 +66,7 @@ export async function getAllNotices({
       params.append("startsAtGte", startsAtGte);
     }
     if (sort === "time") {
-      params.set("startsAtGte", getTomorrowMidnight());
+      params.set("startsAtGte", getThirtyMinutesLater());
     }
 
     const res = await instance.get(`/notices?${params.toString()}`);

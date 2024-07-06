@@ -29,7 +29,6 @@ export default function AllNoticeList({
   const [showFilter, setShowFilter] = useState(false);
   const searchKeyword = useSearchParams().get("keyword");
   const searchParams = useSearchParams();
-  const currentSort = useSearchParams().get("sort") || "time";
   const [sortValue, setSortValue] = useState("time");
   const router = useRouter();
 
