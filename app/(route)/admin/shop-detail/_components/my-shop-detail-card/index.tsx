@@ -6,6 +6,7 @@ import Button, { LinkButton } from "@/app/_components/button";
 interface MyShopDetailCardProps {
   imageUrl: string;
   name: string;
+  category: string;
   address1: string;
   description: string;
   shopId: string;
@@ -14,6 +15,7 @@ interface MyShopDetailCardProps {
 export default function MyShopDetailCard({
   imageUrl,
   name,
+  category,
   address1,
   description,
   shopId,
@@ -32,7 +34,7 @@ export default function MyShopDetailCard({
         </div>
         <div className="relative flex-1 px-1 lg:flex lg:flex-col lg:items-stretch lg:py-3">
           <div className="lg:flex-1">
-            <h3 className="font-bold text-m text-primary">식당</h3>
+            <h3 className="font-bold text-m text-primary">{category}</h3>
             <data className="font-bold text-xl">{name}</data>
             <div className="flex items-center gap-1">
               <Image src={mapPin} alt="장소" width={20} height={20} />

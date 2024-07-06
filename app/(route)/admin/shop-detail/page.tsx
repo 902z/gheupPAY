@@ -29,6 +29,7 @@ async function ShopDetail() {
       <MyShopDetailCard
         imageUrl={userProfileDetail.item.shop.item.imageUrl}
         name={userProfileDetail.item.shop.item.name}
+        category={userProfileDetail.item.shop.item.category}
         address1={userProfileDetail.item.shop.item.address1}
         description={userProfileDetail.item.shop.item.description}
         shopId={userProfileDetail.item.shop.item.id}

@@ -34,7 +34,6 @@ export default function NoticeCard({
   address1,
   closed,
 }: NoticeCardProps) {
-  // shop.item.imageUrl, shop.item.name, shop.item.address1
   const hourlyWage = calculateWagePercentage(hourlyPay);
   const date = dateFormat(startsAt);
   const isLater: boolean = compareWorkingDateDiffFromNow(startsAt, workhour);

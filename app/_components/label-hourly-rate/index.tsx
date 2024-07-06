@@ -17,7 +17,7 @@ export default function LabelHourlyRate({ percent }: { percent: number }) {
       className={`flex items-center bg-white text-s text-primary ${bgColor} md:h-[36px] md:w-[150px] md:justify-center md:rounded-3xl md:text-white`}
     >
       <p className="text-center md:font-bold md:text-s">
-        기존 시급보다 {percent}%
+        최저시급보다 {percent}%
       </p>
       <picture>
         <source
