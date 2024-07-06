@@ -25,7 +25,8 @@ export default async function RecentNotices({
       <PostNoticesButton shopId={shopId} noticeId={noticeId} />
       {notices &&
         notices.length > 1 &&
-        notices.slice(1).map(async (notice) => {
+        notices.map(async (notice) => {
+          if (notice.id === noticeId) return null;
           const cardContents = await fetchNotices(notice);
           return (
             <NoticeDetailedButton
