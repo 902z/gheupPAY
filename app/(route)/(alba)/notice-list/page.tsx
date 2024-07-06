@@ -20,8 +20,11 @@ interface SearchParamsProps {
 export default async function page({ searchParams }: SearchParamsProps) {
   const token = await getCookie("accessToken");
   const hasAddress = await getCookie("address");
+  const type = await getCookie("type");
+
   const customizedNotices =
     token && hasAddress ? await getCustomizedNotices(hasAddress) : null;
+
   const hourlyPayGte = parseInt((searchParams.wage ?? "0").replace(/,/g, ""));
   const startsAtGte =
     searchParams.startDate && new Date(searchParams.startDate).toISOString();
@@ -40,6 +43,8 @@ export default async function page({ searchParams }: SearchParamsProps) {
     startsAtGte,
     keyword,
   });
+
+  const isEmployer = type === "employer";
 
   let payNotices: GetNotices;
   // 맞춤 공고가 없을 경우 시급 높은 순으로 정렬된 공고를 가져오기
@@ -94,6 +99,7 @@ export default async function page({ searchParams }: SearchParamsProps) {
           activePage={page}
           itemsCountPerPage={limit}
           keyword={keyword}
+          isEmployer={isEmployer}
         />
       </div>
     </div>

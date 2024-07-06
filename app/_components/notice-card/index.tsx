@@ -25,6 +25,7 @@ type NoticeCardProps = {
   imageUrl: string;
   content?: GetNotices["items"][0]["item"];
   closed: boolean;
+  isEmployer: boolean;
 };
 
 export default function NoticeCard({
@@ -38,6 +39,7 @@ export default function NoticeCard({
   address1,
   content,
   closed,
+  isEmployer,
 }: NoticeCardProps) {
   const hourlyWage = calculateWagePercentage(hourlyPay);
   const date = dateFormat(startsAt);
@@ -45,10 +47,11 @@ export default function NoticeCard({
   const router = useRouter();
 
   const handleClick = async () => {
+    console.log(content);
     if (content) {
       await postNoticeAction(content);
-    } else {
-      router.push(`/admin/notice-detail/${shopId}/${noticeId}`);
+      if (isEmployer) router.push(`/admin/notice-detail/${shopId}/${noticeId}`);
+      else router.push(`/notice-detail/${shopId}/${noticeId}`);
     }
   };
 

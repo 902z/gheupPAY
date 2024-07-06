@@ -12,6 +12,7 @@ type AllNoticeListProps = {
   activePage: number;
   itemsCountPerPage: number;
   keyword?: string;
+  isEmployer: boolean;
 };
 
 const ALL_LIST_SECTION_ID = "all-list-section";
@@ -20,6 +21,7 @@ export default function AllNoticeList({
   notices,
   activePage,
   itemsCountPerPage,
+  isEmployer,
 }: AllNoticeListProps) {
   const noticeList = notices.items;
   const totalItemsCount = notices.count;
@@ -88,6 +90,7 @@ export default function AllNoticeList({
                     startsAt={cardContents.item.startsAt}
                     workhour={cardContents.item.workhour}
                     key={cardContents.item.id}
+                    isEmployer={isEmployer}
                   />
                 );
               })
