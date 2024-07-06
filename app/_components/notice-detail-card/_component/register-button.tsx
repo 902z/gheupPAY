@@ -1,5 +1,4 @@
 "use client";
-import Link from "next/link";
 import { GetUsersUserIdApplications } from "@/app/_apis/type";
 import {
   postShopsShopIdNoticesNoticeIdApplications,
@@ -7,7 +6,6 @@ import {
 } from "@/app/_apis/application";
 import OpenModal from "../../modals";
 import Button, { LinkButton } from "../../button";
-import { redirect } from "next/navigation";
 import { redirectAction } from "@/app/_actions";
 import notification from "@/app/_util/notification";
 
@@ -20,7 +18,6 @@ interface RegisterButtonProps {
 }
 
 export default function RegisterButton({
-  type,
   address,
   userApplication,
   shopId,
@@ -48,6 +45,7 @@ export default function RegisterButton({
       "canceled",
     );
     if (result) notification("신청이 취소되었습니다.", "info");
+    await redirectAction(`/notice-detail/${shopId}/${noticeId}`);
   };
 
   const handleRegister = async () => {
@@ -73,14 +71,6 @@ export default function RegisterButton({
           </Button>
         </OpenModal>
       </>
-    );
-  }
-
-  if (type === "employer") {
-    return (
-      <Button className="font-bold" disabled>
-        신청 불가
-      </Button>
     );
   }
 
