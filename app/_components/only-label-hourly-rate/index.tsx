@@ -15,7 +15,7 @@ export default function OnlyLabelHourlyRate({ percent }: { percent: number }) {
     <div
       className={`flex items-center ${bgColor} h-[36px] w-[150px] justify-center rounded-3xl text-white`}
     >
-      <p className="text-center font-bold text-s">기존 시급보다 {percent}%</p>
+      <p className="text-center font-bold text-s">최저시급보다 {percent}%</p>
       <Image src={arrowUpWhite} alt="" width={20} height={20} />
     </div>
   );

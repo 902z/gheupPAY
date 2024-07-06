@@ -21,8 +21,11 @@ interface SearchParamsProps {
 export default async function page({ searchParams }: SearchParamsProps) {
   const token = await getCookie("accessToken");
   const hasAddress = await getCookie("address");
+  const type = await getCookie("type");
+
   const customizedNotices =
     token && hasAddress ? await getCustomizedNotices(hasAddress) : null;
+
   const hourlyPayGte = parseInt((searchParams.wage ?? "0").replace(/,/g, ""));
   const startsAtGte =
     searchParams.startDate && new Date(searchParams.startDate).toISOString();
@@ -44,6 +47,8 @@ export default async function page({ searchParams }: SearchParamsProps) {
     keyword,
     sort,
   });
+
+  const isEmployer = type === "employer";
 
   let payNotices: GetNotices;
   // 맞춤 공고가 없을 경우 시급 높은 순으로 정렬된 공고를 가져오기
@@ -85,7 +90,7 @@ export default async function page({ searchParams }: SearchParamsProps) {
       {!keyword && (
         <section className={`mb-10 ${bgClass} px-4 py-10`}>
           <div className="mx-auto flex w-full flex-col px-2 md:justify-center lg:max-w-[1000px]">
-            <h2 className="md:px-3 font-bold text-l md:pb-2 md:text-2xl">
+            <h2 className="font-bold text-l md:px-3 md:pb-2 md:text-2xl">
               맞춤 공고
             </h2>
             {renderCustomizedNoticesSection()}
@@ -99,6 +104,7 @@ export default async function page({ searchParams }: SearchParamsProps) {
           itemsCountPerPage={limit}
           keyword={keyword}
           sort={sort}
+          isEmployer={isEmployer}
         />
       </div>
     </div>

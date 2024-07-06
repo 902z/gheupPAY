@@ -14,6 +14,7 @@ type AllNoticeListProps = {
   itemsCountPerPage: number;
   keyword?: string;
   sort: string;
+  isEmployer: boolean;
 };
 
 const ALL_LIST_SECTION_ID = "all-list-section";
@@ -22,6 +23,7 @@ export default function AllNoticeList({
   notices,
   activePage,
   itemsCountPerPage,
+  isEmployer,
 }: AllNoticeListProps) {
   const noticeList = notices.items;
   const totalItemsCount = notices.count;
@@ -63,9 +65,9 @@ export default function AllNoticeList({
   return (
     <div>
       <section className="mx-auto flex w-full flex-col px-4 md:justify-center lg:max-w-[964px]">
-        <div className="md:flex justify-between">
+        <div className="justify-between md:flex">
           <h2
-            className="pb-2 md:pb-4 font-bold text-l md:text-2xl"
+            className="pb-2 font-bold text-l md:pb-4 md:text-2xl"
             id={ALL_LIST_SECTION_ID}
           >
             {searchKeyword ? (
@@ -110,6 +112,7 @@ export default function AllNoticeList({
                     startsAt={cardContents.item.startsAt}
                     workhour={cardContents.item.workhour}
                     key={cardContents.item.id}
+                    isEmployer={isEmployer}
                   />
                 );
               })

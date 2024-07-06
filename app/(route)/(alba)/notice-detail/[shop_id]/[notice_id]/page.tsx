@@ -10,11 +10,16 @@ export const metadata = {
   title: "공고 상세",
 };
 
-export default async function page({
-  params,
-}: {
-  params: { shop_id: string; notice_id: string };
-}) {
+type PageProps = {
+  params?: {
+    shop_id: string;
+    notice_id: string;
+  };
+};
+
+export default async function page({ params }: PageProps, isEmployer: boolean) {
+  if (!params || !params.shop_id || !params.notice_id) return;
+
   return (
     <div className="base-container">
       <Suspense fallback={<NoticeDetailCardSkeleton />}>
