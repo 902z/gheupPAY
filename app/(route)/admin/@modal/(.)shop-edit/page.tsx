@@ -1,11 +1,8 @@
-"use client";
 import { getShopDetail } from "@/app/_apis/shop";
 import { AddressType } from "@/app/_constants/address";
 import { CategoryType } from "@/app/_constants/category";
-import { useSearchParams } from "next/navigation";
-import { useEffect, useState } from "react";
-import { numberWithCommas } from "@/app/_util/number-with-comma";
 import ShopEditForm from "../../shop-edit/shop-edit-form";
+import { numberWithCommas } from "@/app/_util/number-with-comma";
 
 interface InitialData {
   name: string;
@@ -16,44 +13,24 @@ interface InitialData {
   imageUrl: string;
   originalHourlyPay: string;
 }
-
-function ShopEdit() {
-  const searchParams = useSearchParams();
-  const shopId = searchParams.get("shopId");
-  const [initialData, setInitialData] = useState<InitialData>();
-
-
-  useEffect(() => {
-    const getShopInfo = async () => {
-      try {
-        if (shopId) {
-          const shopDetail = await getShopDetail(shopId);
-          const formValue: InitialData = {
-            name: shopDetail.item.name,
-            category: shopDetail.item.category,
-            address1: shopDetail.item.address1,
-            address2: shopDetail.item.address2,
-            description: shopDetail.item.description,
-            imageUrl: shopDetail.item.imageUrl,
-            originalHourlyPay: numberWithCommas(
-              shopDetail.item.originalHourlyPay,
-            ),
-          };
-          setInitialData(formValue);
-        } else {
-          throw new Error("가게를 찾지 못했습니다.");
-        }
-      } catch (error) {
-        if (error instanceof Error) {
-          throw new Error("기존의 데이터를 불러올 수 없습니다.");
-        }
-      }
-    };
-    getShopInfo();
-  }, []);
-  return (
-    initialData && <ShopEditForm shopId={shopId!} initialData={initialData} />
-  );
+interface SearchParamsProps {
+  searchParams: {
+    shopId: string;
+  };
 }
 
-export default ShopEdit;
+export default async function ShopEdit({ searchParams }: SearchParamsProps) {
+  const shopId = searchParams.shopId;
+  const shopDetail = await getShopDetail(shopId);
+  const formValue: InitialData = {
+    name: shopDetail.item.name,
+    category: shopDetail.item.category,
+    address1: shopDetail.item.address1,
+    address2: shopDetail.item.address2,
+    description: shopDetail.item.description,
+    imageUrl: shopDetail.item.imageUrl,
+    originalHourlyPay: numberWithCommas(shopDetail.item.originalHourlyPay),
+  };
+
+  return <ShopEditForm shopId={shopId} initialData={formValue} />;
+}
