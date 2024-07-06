@@ -11,7 +11,6 @@ const fetchNotices = async ({ id, shopId }: NoticeIds) => {
 
 export default async function RecentNotices() {
   const type = await getCookie("type");
-  const isEmployer = type === "employer";
 
   const notices = await getNotices();
 
@@ -34,7 +33,6 @@ export default async function RecentNotices() {
                 startsAt={cardContents.startsAt}
                 workhour={cardContents.workhour}
                 key={cardContents.id}
-                isEmployer={isEmployer}
               />
             </Suspense>
           );
