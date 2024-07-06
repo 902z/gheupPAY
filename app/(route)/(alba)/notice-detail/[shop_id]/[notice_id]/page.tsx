@@ -9,15 +9,13 @@ export const metadata = {
 };
 
 type PageProps = {
-  params?: {
+  params: {
     shop_id: string;
     notice_id: string;
   };
 };
 
-export default async function page({ params }: PageProps, isEmployer: boolean) {
-  if (!params || !params.shop_id || !params.notice_id) return;
-
+export default async function page({ params }: PageProps) {
   return (
     <div className="base-container">
       <Suspense fallback={<NoticeDetailCardSkeleton />}>
