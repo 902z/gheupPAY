@@ -57,6 +57,7 @@ input:-webkit-autofill {
   src: url("../public/fonts/SpoqaHanSansNeo-Regular.ttf") format("woff");
   font-weight: 400;
   font-style: normal;
+  font-display: swap;
 }
 
 @font-face {
@@ -64,6 +65,7 @@ input:-webkit-autofill {
   src: url("../public/fonts/SpoqaHanSansNeo-Bold.ttf") format("woff");
   font-weight: 700;
   font-style: normal;
+  font-display: swap;
 }
 
 @layer base {
