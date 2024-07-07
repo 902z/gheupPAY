@@ -1,6 +1,6 @@
 import instance from "@/app/_lib/axios";
 import { getCookie } from "@/app/_util/cookie";
-import { getTomorrowMidnight } from '@/app/_util/get-tomorrow-midnight';
+import { getTomorrowMidnight } from "@/app/_util/get-tomorrow-midnight";
 import {
   GetNotices,
   GetShopsShopIdNotices,
@@ -148,8 +148,9 @@ export async function postCreateNotice(params: postCreateNoticeParams) {
     return res.data;
   } catch (error) {
     if (isAxiosError(error)) {
-      if (
-        error.response?.status === 400 ||
+      if (error.response?.status === 400) {
+        notification(`지난 시간은 입력할 수 없습니다`, "error");
+      } else if (
         error.response?.status === 403 ||
         error.response?.status === 404
       ) {
@@ -195,8 +196,9 @@ export async function putNoticeEdit(
     return res.data;
   } catch (error) {
     if (isAxiosError(error)) {
-      if (
-        error.response?.status === 400 ||
+      if (error.response?.status === 400) {
+        notification(`지난 시간은 입력할 수 없습니다`, "error");
+      } else if (
         error.response?.status === 403 ||
         error.response?.status === 404
       ) {
