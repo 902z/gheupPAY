@@ -122,6 +122,7 @@ function CustomFormDropdown<T extends string>({
           value={getValues() || ""}
           onClick={handleDropdown}
           placeholder={placeholder}
+          {...(displayRequiredMarker && { required: true })}
           readOnly
         />
         <Image

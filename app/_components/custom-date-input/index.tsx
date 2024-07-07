@@ -56,6 +56,7 @@ function CustomDateInput({
         id={register.name}
         type="datetime-local"
         {...register}
+        {...(displayRequiredMarker && { required: true })}
         {...rest}
       />
       {errorMessage && (
