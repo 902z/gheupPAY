@@ -59,7 +59,7 @@ export default function AlertButton({
   const fetchData = useCallback(async () => {
     if (!alertConfig.hasNext) return;
     try {
-      const { items, hasNext } = await getAlerts();
+      const { items, hasNext } = await getAlerts(alertConfig.offset);
       setAlerts((prev) => [...prev, ...items]);
       setAlertConfig((prev) => ({
         hasNext,

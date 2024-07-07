@@ -1,7 +1,3 @@
-import type { Metadata } from "next";
-import Image from "next/image";
-import logo from "@/public/images/logo.png";
-import Link from "next/link";
 import { Suspense } from "react";
 import Loading from "@/app/_components/loading/loading";
 

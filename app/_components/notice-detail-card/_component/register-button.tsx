@@ -33,7 +33,13 @@ export default function RegisterButton({
 
   const isRegister = userApplication.items.some((obj) => {
     return (
-      obj.item.notice.item.id === noticeId && obj.item.status !== "canceled"
+      obj.item.notice.item.id === noticeId && obj.item.status === "pending"
+    );
+  });
+
+  const isRejected = userApplication.items.some((obj) => {
+    return (
+      obj.item.notice.item.id === noticeId && obj.item.status === "rejected"
     );
   });
 
@@ -71,6 +77,14 @@ export default function RegisterButton({
           </Button>
         </OpenModal>
       </>
+    );
+  }
+
+  if (isRejected) {
+    return (
+      <Button className="font-bold" btnColor="white" disabled>
+        거절된 신청입니다.
+      </Button>
     );
   }
 

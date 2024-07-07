@@ -1,3 +1,4 @@
+"use client";
 import {
   MAXIMUM_HOURLY_WAGE,
   MINIMUM_HOURLY_WAGE,
