@@ -1,30 +1,18 @@
-name: Deploy
-
+# vercel-merge.yml
+name: Deploy to vercel on merge
 on:
   push:
-    branches: ["main"]
-
+    branches:
+      - main
 jobs:
-  build:
+  build_and_deploy:
     runs-on: ubuntu-latest
-    container: pandoc/latex
     steps:
-      - uses: actions/checkout@v4
-      - name: Install mustache (to update the date)
-        run: apk add ruby && gem install mustache
-      - name: creates output
-        run: sh ./build.sh
-      - name: Pushes to another repository
-        id: push_directory
-        uses: cpina/github-action-push-to-another-repository@main
-        env:
-          API_TOKEN_GITHUB: ${{ secrets.API_TOKEN_GITHUB }}
+      - uses: actions/checkout@v2
+      - uses: amondnet/vercel-action@v20
         with:
-          source-directory: "output"
-          destination-github-username: "codefug"
-          destination-repository-name: "gheupPAY"
-          user-email: "robot9917@naver.com"
-          commit-message: ${{ github.event.commits[0].message }}
-          target-branch: "main"
-      - name: Test get variable exported by push-to-another-repository
-        run: echo $DESTINATION_CLONED_DIRECTORY
+          vercel-token: ${{ secrets.VERCEL_TOKEN }}
+          github-token: ${{ secrets.API_TOKEN_GITHUB }}
+          vercel-args: "--prod"
+          vercel-org-id: ${{ secrets.VERCEL_ORG_ID}}
+          vercel-project-id: ${{ secrets.VERCEL_PROJECT_ID}}
