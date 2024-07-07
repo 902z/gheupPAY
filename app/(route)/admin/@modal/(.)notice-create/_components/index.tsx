@@ -1,5 +1,5 @@
+"use client";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { useParams, useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
 import { storeNoticeRegisterSchema } from "./schema";
 import CustomPriceInput from "@/app/_components/custom-price-input";

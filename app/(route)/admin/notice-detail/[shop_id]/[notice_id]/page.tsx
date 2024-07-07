@@ -6,9 +6,6 @@ import NoticeDetailCardSkeleton from "@/app/_components/notice-detail-card/_comp
 import { getCookie } from "@/app/_util/cookie";
 import { getUser } from "@/app/_apis/user";
 
-export const metadata = {
-  title: "공고 상세",
-};
 
 type PageProps = {
   searchParams: {
