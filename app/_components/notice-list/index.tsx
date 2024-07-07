@@ -8,6 +8,7 @@ import Filter from "@/app/(route)/(alba)/notice-list/_components/filter";
 import { useSearchParams, useRouter } from "next/navigation";
 import SortDropDown from "./_component/sort-drop-down";
 import { NoticeDetailedButton } from "../action-button";
+import useOutsideClick from '@/app/_hooks/use-outside-click';
 
 type AllNoticeListProps = {
   notices: GetNotices;
@@ -27,9 +28,9 @@ export default function AllNoticeList({
   const noticeList = notices.items;
   const totalItemsCount = notices.count;
   const [showFilter, setShowFilter] = useState(false);
+  const filterRef = useRef<HTMLDivElement | null>(null);
   const searchKeyword = useSearchParams().get("keyword");
   const searchParams = useSearchParams();
-  const currentSort = useSearchParams().get("sort") || "time";
   const [sortValue, setSortValue] = useState("time");
   const router = useRouter();
 
@@ -61,6 +62,10 @@ export default function AllNoticeList({
     setSortValue("time");
   }, [searchParams.get("keyword")]);
 
+  useEffect(() => {
+    useOutsideClick;
+  }, [showFilter]);
+
   return (
     <div>
       <section className="mx-auto flex w-full flex-col px-4 md:justify-center lg:max-w-[964px]">
@@ -83,7 +88,7 @@ export default function AllNoticeList({
             <SortDropDown onSelect={handleSortSubmit} defaultValue="time" />
 
             {/* 상세필터 버튼입니다 */}
-            <div className="relative">
+            <div className="relative" ref={filterRef}>
               <button
                 className="h-[30px] rounded-[5px] bg-red-30 px-[12px] font-bold text-m text-white"
                 onClick={handleOpenFilter}
