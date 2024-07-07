@@ -36,9 +36,9 @@ function PageModal({ children, title }: PageModalProp) {
   return createPortal(
     <div className="fixed inset-0 z-50 flex justify-center bg-black bg-opacity-50 md:pt-[188px]">
       <motion.div
-        initial={{ y: 400, opacity: 1 }}
+        initial={{ y: 800, opacity: 1 }}
         animate={{ y: 0, opacity: 1 }}
-        transition={{ duration: 0.6, ease: "easeOut" }}
+        transition={{ duration: 0.3, ease: "easeOut" }}
         className="relative w-full max-w-[985px] rounded-t-lg bg-white pt-[35px]"
       >
         <section className="h-full w-full overflow-scroll px-10 pb-[40px]">
