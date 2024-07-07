@@ -13,6 +13,7 @@ import { useRef, useState } from "react";
 import useCheckLoginStatus from "@/app/_hooks/use-check-login-status";
 import useModal from "@/app/_hooks/use-modal";
 import ConfirmModal from "@/app/_components/modals/_components/confirm-modal";
+import loading from "@/public/images/loading.gif";
 
 interface FormValues {
   email: string;
@@ -78,7 +79,7 @@ function LoginForm() {
         />
 
         {waiting ? (
-          <Image src={pulse} alt="처리 중" width={48} height={48} />
+          <Image src={loading} alt="처리 중" width={60} height={60} />
         ) : (
           <Button btnColor="orange" color="submit" className="h-[48px]">
             로그인 하기

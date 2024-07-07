@@ -9,11 +9,11 @@ import Button from "@/app/_components/button";
 import { postSignUp } from "@/app/_apis/user";
 import { useRouter } from "next/navigation";
 import { useRef, useState } from "react";
-import pulse from "@/public/icons/pulse.svg";
 import Image from "next/image";
 import useCheckLoginStatus from "@/app/_hooks/use-check-login-status";
 import useModal from "@/app/_hooks/use-modal";
 import ConfirmModal from "@/app/_components/modals/_components/confirm-modal";
+import loading from "@/public/images/loading.gif";
 
 interface FormValues {
   email: string;
@@ -103,10 +103,10 @@ function SignUpForm() {
 
         {waiting ? (
           <Image
-            src={pulse}
+            src={loading}
             alt="처리 중"
-            width={48}
-            height={48}
+            width={60}
+            height={60}
             className="mx-auto my-0"
           />
         ) : (

@@ -16,8 +16,8 @@ import React, { useEffect, useRef, useState } from "react";
 import { putEditShop } from "@/app/_apis/shop";
 import useModal from "@/app/_hooks/use-modal";
 import ConfirmModal from "@/app/_components/modals/_components/confirm-modal";
-import pulse from "@/public/icons/pulse.svg";
-import { numberWithCommas } from "@/app/_util/number-with-comma";
+import loading from "@/public/images/loading.gif";
+
 
 interface InitialData {
   name: string;
@@ -218,10 +218,10 @@ function ShopEditForm({ initialData, shopId }: ShopEditFormProps) {
         <div className="mx-auto my-0 mt-6 w-[321px] text-base md:mt-8">
           {waiting ? (
             <Image
-              src={pulse}
+              src={loading}
               alt="처리 중"
-              width={48}
-              height={48}
+              width={60}
+              height={60}
               className="mx-auto my-0"
             />
           ) : (
