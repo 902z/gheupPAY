@@ -1,3 +1,4 @@
+"use client";
 import {
   MAXIMUM_HOURLY_WAGE,
   MINIMUM_HOURLY_WAGE,
@@ -95,6 +96,7 @@ function CustomPriceInput({
           value={stringValue}
           onChange={handleChange}
           onBlur={handleBlur}
+          {...(displayRequiredMarker && { required: true })}
           {...rest}
           className="h-[58px] w-full rounded-md border border-solid border-gray-30 bg-white pl-5 text-base font-normal leading-[26px] text-black placeholder:text-gray-40 focus:outline-primary"
         />

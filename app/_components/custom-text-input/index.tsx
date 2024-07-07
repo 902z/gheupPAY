@@ -65,6 +65,7 @@ function CustomTextInput({
         placeholder={placeholder}
         type={type}
         {...register}
+        {...(displayRequiredMarker && { required: true })}
         {...rest}
         className={`h-[58px] rounded-md border border-solid border-gray-30 bg-white pl-5 text-base font-normal leading-[26px] text-black placeholder:text-gray-40 focus:outline-primary`}
       />
