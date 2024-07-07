@@ -58,7 +58,7 @@ export default function StatusLabel({
         <OpenModal
           select
           selectType="approve"
-          modalContents="거절하시겠습니까?"
+          modalContents="승인하시겠습니까?"
           onClickYes={handleAcceptClick}
         >
           <motion.button
