@@ -10,8 +10,8 @@ interface ToastProviderProps {
 
 export default function ToastProvider({ children }: ToastProviderProps) {
   const contextClass = {
-    success: "bg-green-200",
-    error: "bg-red-40",
+    success: "bg-green-20",
+    error: "bg-red-30",
     info: "bg-blue-20",
     warning: "bg-kakao",
     default: "bg-gray-20",
@@ -23,9 +23,9 @@ export default function ToastProvider({ children }: ToastProviderProps) {
       <ToastContainer
         toastClassName={(context) =>
           contextClass[context?.type || "default"] +
-          " relative flex p-1 min-h-[46px] rounded-md justify-between overflow-hidden cursor-pointer "
+          " relative flex min-h-5 rounded-md justify-between overflow-hidden cursor-pointer p-2 "
         }
-        bodyClassName={() => "text-sm font-white font-med block p-3"}
+        bodyClassName={() => "flex font-white block p-3 items-center"}
       />
     </>
   );

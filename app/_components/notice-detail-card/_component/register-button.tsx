@@ -44,7 +44,7 @@ export default function RegisterButton({
       userApplication.items[0].item.id,
       "canceled",
     );
-    if (result) notification("신청이 취소되었습니다.", "info");
+    if (result) notification("신청이 취소되었습니다.", "error");
     await redirectAction(`/notice-detail/${shopId}/${noticeId}`);
   };
 
@@ -53,7 +53,7 @@ export default function RegisterButton({
       shopId,
       noticeId,
     );
-    if (result) notification("신청이 완료되었습니다.", "info");
+    if (result) notification("신청이 완료되었습니다.", "success");
     await redirectAction(`/notice-detail/${shopId}/${noticeId}`);
   };
 
