@@ -8,6 +8,7 @@ import Filter from "@/app/(route)/(alba)/notice-list/_components/filter";
 import { useSearchParams, useRouter } from "next/navigation";
 import SortDropDown from "./_component/sort-drop-down";
 import { NoticeDetailedButton } from "../action-button";
+import useOutsideClick from '@/app/_hooks/use-outside-click';
 
 type AllNoticeListProps = {
   notices: GetNotices;
@@ -62,21 +63,7 @@ export default function AllNoticeList({
   }, [searchParams.get("keyword")]);
 
   useEffect(() => {
-    const handleClickOutside = (event: MouseEvent) => {
-      if (filterRef.current && !filterRef.current.contains(event.target as Node)) {
-        setShowFilter(false);
-      }
-    };
-
-    if (showFilter) {
-      document.addEventListener("mousedown", handleClickOutside);
-    } else {
-      document.removeEventListener("mousedown", handleClickOutside);
-    }
-
-    return () => {
-      document.removeEventListener("mousedown", handleClickOutside);
-    };
+    useOutsideClick;
   }, [showFilter]);
 
   return (

@@ -30,7 +30,6 @@ export default function Filter({ onClose }: FilterProps) {
 
     const handleClickOutside = (event: MouseEvent) => {
       if (filterRef.current && !filterRef.current.contains(event.target as Node)) {
-        setSelectedAddresses([]);
         onClose();
       }
     };
@@ -109,7 +108,6 @@ export default function Filter({ onClose }: FilterProps) {
     const keywordParam = searchParams.get("keyword");
     if (keywordParam) query.append("keyword", keywordParam);
 
-    // 로컬스토리지에 저장
     localStorage.setItem("selectedAddresses", JSON.stringify(selectedAddresses));
     localStorage.setItem("startDate", startDate);
     localStorage.setItem("wage", wage);
