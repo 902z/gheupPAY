@@ -3,7 +3,7 @@ name: Deploy to vercel on merge
 on:
   push:
     branches:
-      - refactor/181
+      - main
 jobs:
   build_and_deploy:
     runs-on: ubuntu-latest
