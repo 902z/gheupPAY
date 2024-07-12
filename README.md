@@ -1,6 +1,7 @@
 ## ✨급PAY
 
-![image](https://cdn.discordapp.com/attachments/1242764721351032912/1259774480339832843/20240708_163312.gif?ex=668ce7e9&is=668b9669&hm=cfea0c8eca309e6244b3eff5a313b230fc629a7934fc467b21aeace700da5ffc&)
+![readme-title](https://github.com/user-attachments/assets/e0642e4b-6d5f-4129-bd27-81d13dd597fd)
+
 
 급하게 일손이 필요한 자리에 더 많은 시급을 제공해서 아르바이트생을 구할 수 있는 서비스
 
