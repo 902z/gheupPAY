@@ -14,16 +14,12 @@ const options = [
 
 type SortDropDownProps = {
   onSelect: (value: string) => void;
-  defaultValue?: string;
 };
 
-const SortDropDown: React.FC<SortDropDownProps> = ({
-  onSelect,
-  defaultValue,
-}) => {
+const SortDropDown: React.FC<SortDropDownProps> = ({ onSelect }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [selectedOption, setSelectedOption] = useState<string | undefined>(
-    defaultValue,
+    "마감임박순",
   );
   const dropdownRef = useRef<HTMLDivElement>(null);
   const searchParams = useSearchParams();
@@ -44,24 +40,14 @@ const SortDropDown: React.FC<SortDropDownProps> = ({
   });
 
   useEffect(() => {
-    const sort = searchParams.get("sort") || defaultValue;
+    const sort = searchParams.get("sort") || "time";
     const selected = options.find((option) => option.value === sort);
     setSelectedOption(selected?.label);
-  }, [searchParams, defaultValue]);
+  }, [searchParams]);
 
   useEffect(() => {
-    if (defaultValue) {
-      const defaultOption = options.find(
-        (option) => option.value === defaultValue,
-      );
-      if (defaultOption) {
-        setSelectedOption(defaultOption.label);
-        onSelect(defaultOption.value);
-      }
-    } else {
-      setSelectedOption(options[0]?.label);
-    }
-  }, [defaultValue, onSelect]);
+    setSelectedOption(options[0].label);
+  }, [onSelect]);
 
   return (
     <div ref={dropdownRef} className="relative w-[105px]">
