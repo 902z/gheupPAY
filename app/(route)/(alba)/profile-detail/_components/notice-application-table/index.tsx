@@ -44,6 +44,7 @@ const columns: Column[] = [
     header: "상태",
     tds: (application) => (
       <AlbaStatusLabel
+        key={application.item.id}
         status={application.item.status}
         applicationId={application.item.id}
         shopId={application.item.shop.item.id}

@@ -8,7 +8,7 @@ import Filter from "@/app/(route)/(alba)/notice-list/_components/filter";
 import { useSearchParams, useRouter } from "next/navigation";
 import SortDropDown from "./_component/sort-drop-down";
 import { NoticeDetailedButton } from "../action-button";
-import useOutsideClick from '@/app/_hooks/use-outside-click';
+import useOutsideClick from "@/app/_hooks/use-outside-click";
 
 type AllNoticeListProps = {
   notices: GetNotices;
@@ -85,7 +85,7 @@ export default function AllNoticeList({
           </h2>
 
           <div className="flex gap-4">
-            <SortDropDown onSelect={handleSortSubmit} defaultValue="time" />
+            <SortDropDown onSelect={handleSortSubmit} />
 
             {/* 상세필터 버튼입니다 */}
             <div className="relative" ref={filterRef}>

@@ -29,7 +29,10 @@ export default function Filter({ onClose }: FilterProps) {
     setMinDate(getNow());
 
     const handleClickOutside = (event: MouseEvent) => {
-      if (filterRef.current && !filterRef.current.contains(event.target as Node)) {
+      if (
+        filterRef.current &&
+        !filterRef.current.contains(event.target as Node)
+      ) {
         onClose();
       }
     };
@@ -107,8 +110,13 @@ export default function Filter({ onClose }: FilterProps) {
 
     const keywordParam = searchParams.get("keyword");
     if (keywordParam) query.append("keyword", keywordParam);
+    const sortParam = searchParams.get("sort");
+    if (sortParam) query.append("sort", sortParam);
 
-    localStorage.setItem("selectedAddresses", JSON.stringify(selectedAddresses));
+    localStorage.setItem(
+      "selectedAddresses",
+      JSON.stringify(selectedAddresses),
+    );
     localStorage.setItem("startDate", startDate);
     localStorage.setItem("wage", wage);
 
@@ -118,7 +126,10 @@ export default function Filter({ onClose }: FilterProps) {
 
   return (
     <>
-      <form ref={filterRef} className="fixed inset-0 z-50 md:absolute md:left-[-315px] md:top-[37px] md:z-20">
+      <form
+        ref={filterRef}
+        className="fixed inset-0 z-50 md:absolute md:left-[-315px] md:top-[37px] md:z-20"
+      >
         <div className="rounded-[10px] border border-gray-20 bg-white px-[20px] py-[24px] shadow">
           <div className="mb-[24px] flex justify-between bg-white font-bold text-l">
             <h2>상세 필터</h2>
