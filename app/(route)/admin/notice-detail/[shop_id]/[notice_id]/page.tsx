@@ -6,7 +6,6 @@ import NoticeDetailCardSkeleton from "@/app/_components/notice-detail-card/_comp
 import { getCookie } from "@/app/_util/cookie";
 import { getUser } from "@/app/_apis/user";
 
-
 type PageProps = {
   searchParams: {
     page?: string;
@@ -18,7 +17,7 @@ type PageProps = {
 };
 
 export default async function page({ searchParams, params }: PageProps) {
-  const page = parseInt(searchParams.page || "1", 5);
+  const page = parseInt(searchParams.page || "1", 10);
   const limit = 5;
   const offset = (page - 1) * limit;
 

@@ -22,10 +22,10 @@ export default async function Page({ searchParams }: PageProps) {
   const userAddress = await getCookie("address");
 
   if (!userId) {
-    return null;
+    throw new Error("로그인이 필요합니다.");
   }
 
-  const page = parseInt(searchParams.page || "1", 5);
+  const page = parseInt(searchParams.page || "1", 10);
   const limit = 5;
   const offset = (page - 1) * limit;
 
