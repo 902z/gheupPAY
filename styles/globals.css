@@ -52,6 +52,10 @@ input:-webkit-autofill {
   -webkit-text-fill-color: #111322;
 }
 
+#search-bar:-webkit-autofill {
+  -webkit-box-shadow: 0 0 0px 1000px #f2f2f3 inset;
+}
+
 @font-face {
   font-family: "SpoqaHanSansNeo-Regular";
   src: url("../public/fonts/SpoqaHanSansNeo-Regular.ttf") format("woff");
@@ -96,18 +100,6 @@ input::-webkit-inner-spin-button {
 /* Firefox  */
 input[type="number"] {
   -moz-appearance: textfield;
-}
-
-input::-webkit-outer-spin-button,
-input::-webkit-inner-spin-button {
-  -webkit-appearance: none;
-  margin: 0;
-}
-
-input::-webkit-outer-spin-button,
-input::-webkit-inner-spin-button {
-  -webkit-appearance: none;
-  margin: 0;
 }
 
 .scroll-locked {
