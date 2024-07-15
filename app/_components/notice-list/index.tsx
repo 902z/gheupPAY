@@ -44,10 +44,12 @@ export default function AllNoticeList({
   }, []);
 
   const handleOpenFilter = () => {
+    document.body.className = "overflow-hidden md:overflow-auto";
     setShowFilter((prevShowFilter) => !prevShowFilter);
   };
 
   const handleCloseFilter = () => {
+    document.body.className = "overflow-auto";
     setShowFilter(false);
   };
 
@@ -84,7 +86,7 @@ export default function AllNoticeList({
             )}
           </h2>
 
-          <div className="flex gap-4">
+          <div className="mb-4 flex gap-4">
             <SortDropDown onSelect={handleSortSubmit} />
 
             {/* 상세필터 버튼입니다 */}

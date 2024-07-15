@@ -126,11 +126,8 @@ export default function Filter({ onClose }: FilterProps) {
 
   return (
     <>
-      <form
-        ref={filterRef}
-        className="fixed inset-0 z-50 md:absolute md:left-[-315px] md:top-[37px] md:z-20"
-      >
-        <div className="rounded-[10px] border border-gray-20 bg-white px-[20px] py-[24px] shadow">
+      <form ref={filterRef}>
+        <div className="fixed inset-0 z-50 overflow-auto rounded-[10px] border border-gray-20 bg-white px-[13px] py-[24px] shadow md:absolute md:left-[-315px] md:top-[37px] md:z-20 md:h-fit md:overflow-x-hidden md:px-[20px]">
           <div className="mb-[24px] flex justify-between bg-white font-bold text-l">
             <h2>상세 필터</h2>
             <div className="h-[24px] w-[24px]">
@@ -184,10 +181,10 @@ export default function Filter({ onClose }: FilterProps) {
               </ul>
             </div>
           </div>
-          <div className="relative mt-[24px] h-[92px] w-[350px]">
+          <div className="relative mt-[24px] h-[92px] w-full md:w-[350px]">
             <p className="mb-[8px]">시작일</p>
             <input
-              className="h-[58px] w-[350px] rounded-[6px] border border-gray-30 px-[20px] py-[16px] focus:outline-primary"
+              className="h-[58px] w-full rounded-[6px] border border-gray-30 px-[20px] py-[16px] focus:outline-primary md:w-[350px]"
               type={isFocused || startDate ? "datetime-local" : "text"}
               placeholder="입력"
               value={startDate}
@@ -200,38 +197,44 @@ export default function Filter({ onClose }: FilterProps) {
               style={{ color: startDate ? "black" : "transparent" }}
             />
           </div>
-          <div className="mt-[24px] h-[92px] w-[350px] border-t-2 border-gray-10">
+          <div className="mt-[24px] h-[92px] w-full border-t-2 border-gray-10 md:w-[350px]">
             <p className="mb-[8px] mt-[24px]">금액</p>
-            <div className="relative flex">
-              <input
-                className="h-[58px] w-[169px] rounded-[6px] border border-gray-30 px-[20px] py-[16px] focus:outline-primary"
-                placeholder="입력"
-                id="hourlyPayGte"
-                name="wage"
-                type="text"
-                value={wage}
-                onInput={handleWageChange}
-              />
-              <p className="mx-[12px] my-[16px]">이상부터</p>
-              <p className="absolute left-[134px] top-[16px]">원</p>
+            <div className="flex">
+              <div className="relative">
+                <input
+                  className="h-[58px] w-full rounded-[6px] border border-gray-30 px-[20px] py-[16px] focus:outline-primary md:w-[169px]"
+                  placeholder="입력"
+                  id="hourlyPayGte"
+                  name="wage"
+                  type="text"
+                  value={wage}
+                  onInput={handleWageChange}
+                />
+                <p className="absolute right-[20px] top-[17px]">원</p>
+              </div>
+              <p className="mx-[12px] my-[17px]">이상부터</p>
             </div>
           </div>
-          <div className="mt-[56px] flex h-[48px] justify-between gap-[8px]">
-            <Button
-              type="button"
-              className="w-[82px]"
-              btnColor="white"
-              onClick={handleReset}
-            >
-              초기화
-            </Button>
-            <Button
-              className="w-[260px]"
-              btnColor="orange"
-              onClick={handleApply}
-            >
-              적용하기
-            </Button>
+          <div className="mt-[56px] flex h-[48px] justify-center gap-[8px]">
+            <div className="w-[82px]">
+              <Button
+                type="button"
+                className="h-12 !w-[82px]"
+                btnColor="white"
+                onClick={handleReset}
+              >
+                초기화
+              </Button>
+            </div>
+            <div className="w-full md:w-[260px]">
+              <Button
+                className="h-12 w-[260px]"
+                btnColor="orange"
+                onClick={handleApply}
+              >
+                적용하기
+              </Button>
+            </div>
           </div>
         </div>
       </form>

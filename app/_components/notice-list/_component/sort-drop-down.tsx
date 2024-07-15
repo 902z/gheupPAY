@@ -73,7 +73,7 @@ const SortDropDown: React.FC<SortDropDownProps> = ({ onSelect }) => {
         />
       </form>
       <ul
-        className={`absolute left-0 z-30 mt-2 max-h-[230px] w-full overflow-y-auto rounded-[6px] border border-gray-30 bg-white p-0 text-m shadow-md ${
+        className={`absolute left-0 z-30 mt-2 max-h-[230px] w-[110px] overflow-y-auto rounded-[6px] border border-gray-30 bg-white p-0 text-m shadow-md ${
           isOpen ? "block" : "hidden"
         }`}
       >
